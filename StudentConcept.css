@@ -1,0 +1,38 @@
+body {
+    padding-top: 70px;
+    height: 100%;
+}
+
+#contained {
+    padding-bottom: 20%;
+    text-align: center;
+}
+
+#asked{
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    float: left;
+}
+
+#answered {
+    text-align: left;
+    float: left;
+}
+
+#morediagram{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    text-align: center;
+}
+
+#plus{
+    width: 3%;
+    height: 3%;
+}
+
+#diagram{
+    margin: 3%;
+}
