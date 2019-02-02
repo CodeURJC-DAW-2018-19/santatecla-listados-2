@@ -1,17 +1,32 @@
-@import "compass/css3";
+
 
 /* Essential Structure For the Searching Box */
-
+.bodyP.card{
+	width: 50%;
+	background: lightgray;
+}
+.card .card-body {
+	padding: 0.9375rem 20px;
+	position: relative;
+	left: 10%;
+}
 .flexsearch--wrapper {
 	height: auto;
 	width: auto;
-	max-width: 70%;
+	max-width: 50%;
 	overflow: hidden;
 	background: transparent;
 	margin: 0;
 	position: static;
-	margin-left: 8%;
+
 }
+.btn.btn-primary.dg {
+	position: relative;
+	left: 85%;
+	top:-70px;
+
+}
+
 	
 .flexsearch--form {
 	overflow: hidden;
@@ -90,29 +105,4 @@
 
 input:-moz-placeholder {
   	color: #888
-}
-
-.button {
-  display: inline-block;
-  padding: 25px 55px;
-  font-size: 25px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #333;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-  margin-bottom: 30px;
-  margin-left: 1012px;
-}
-
-.button:hover {background-color: #334}
-
-.button:active {
-  background-color: #333;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
 }
