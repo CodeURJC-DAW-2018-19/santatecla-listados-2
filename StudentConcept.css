@@ -38,3 +38,8 @@ body {
 #diagram{
     margin: 3%;
 }
+
+.tick{
+    width: 3%;
+    height: 3%;
+}
