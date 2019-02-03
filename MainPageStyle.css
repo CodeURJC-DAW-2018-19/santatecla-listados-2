@@ -10,6 +10,13 @@
 	position: relative;
 	left: 10%;
 }
+
+.card .card-body .card-body-concept{
+	float: right;
+	position: relative;
+	right: 10%;
+}
+
 .flexsearch--wrapper {
 	height: auto;
 	width: auto;
