@@ -1,116 +1,116 @@
-
-
 /* Essential Structure For the Searching Box */
-.bodyP.card{
-	width: 50%;
-	background: lightgray;
-}
-.card .card-body {
-	padding: 0.9375rem 20px;
-	position: relative;
-	left: 10%;
+.bodyP.card {
+    width: 50%;
+    background: lightgray;
 }
 
-.card .card-body .card-body-concept{
-	float: right;
-	position: relative;
-	right: -38%;
-	top:7px;
+.card .card-body {
+    padding: 0.9375rem 20px;
+    position: relative;
+    left: 10%;
+}
+
+.card .card-body .card-body-concept {
+    float: right;
+    position: relative;
+    right: -38%;
+    top: 7px;
 }
 
 .flexsearch--wrapper {
-	height: auto;
-	width: auto;
-	max-width: 50%;
-	overflow: hidden;
-	background: transparent;
-	margin: 0;
-	position: static;
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    overflow: hidden;
+    background: transparent;
+    margin: 0;
+    position: static;
 
 }
+
 .btn.btn-primary.dg {
-	position: relative;
-	left: 85%;
-	top:-70px;
+    position: relative;
+    left: 85%;
+    top: -70px;
 
 }
 
-	
+
 .flexsearch--form {
-	overflow: hidden;
-	position: relative;
+    overflow: hidden;
+    position: relative;
 }
-	
+
 .flexsearch--input-wrapper {
-	padding: 0 66px 0 0; /* Right padding for submit button width */
-	overflow: hidden;
+    padding: 0 66px 0 0; /* Right padding for submit button width */
+    overflow: hidden;
 }
 
 .flexsearch--input {
- 	width: 100%;
+    width: 100%;
 }
 
 
- /* Configurable Styles For the Searching Box */
+/* Configurable Styles For the Searching Box */
 
 .flexsearch {
-  	padding: 0 25px 0 20px; /* Padding for other horizontal elements */
+    padding: 0 25px 0 20px; /* Padding for other horizontal elements */
 }
 
 .flexsearch--input {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
- 	height: 45px;
-  	padding: 0 46px 0 10px;
-	border-color: #888;
-  	border-radius: 35px; /* (height/2) + border-width */
-	border-style: solid;
-	border-width: 5px;
-	margin-top: 15px;
-  	color: #333;
-  	font-family: 'Helvetica', sans-serif;
-	font-size: 26px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 45px;
+    padding: 0 46px 0 10px;
+    border-color: #888;
+    border-radius: 35px; /* (height/2) + border-width */
+    border-style: solid;
+    border-width: 5px;
+    margin-top: 15px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 26px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
-	
+
 .flexsearch--submit {
-	position: absolute;
-	right: 0;
-	top: 0;
-	display: block;
-	width: 60px;
-	height: 60px;
-	padding: 0;
-	border: none;
-	margin-top: 10px; /* margin-top + border-width */
-  	margin-right: 5px; /* border-width */
-	background: transparent;
-  	color: #888;
-  	font-family: 'Helvetica', sans-serif;
-  	font-size: 45px;
-  	line-height: 60px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    margin-top: 10px; /* margin-top + border-width */
+    margin-right: 5px; /* border-width */
+    background: transparent;
+    color: #888;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 45px;
+    line-height: 60px;
 }
 
 .flexsearch--input:focus {
-  	outline: none;
-  	border-color: #333;
+    outline: none;
+    border-color: #333;
 }
 
 .flexsearch--input:focus.flexsearch--submit {
- 	color: #333; 
+    color: #333;
 }
 
 .flexsearch--submit:hover {
-  	color: #333;
-  	cursor: pointer;
+    color: #333;
+    cursor: pointer;
 }
 
 ::-webkit-input-placeholder {
-	color: #888;  
+    color: #888;
 }
 
 input:-moz-placeholder {
-  	color: #888
+    color: #888
 }

@@ -7,7 +7,7 @@ body {
     text-align: center;
 }
 
-#asked{
+#asked {
     text-align: left;
     width: 30%;
     margin-left: 10%;
@@ -22,23 +22,23 @@ body {
     float: left;
 }
 
-#morediagram{
+#morediagram {
     position: fixed;
     bottom: 5%;
     left: 45%;
     text-align: center;
 }
 
-#plus{
+#plus {
     width: 3%;
     height: 3%;
 }
 
-#diagram{
+#diagram {
     margin: 3%;
 }
 
-.tick{
+.tick {
     width: 3%;
     height: 3%;
 }
