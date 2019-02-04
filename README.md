@@ -1,5 +1,5 @@
 # santatecla-listados-2
-##Phase 0
+## Phase 0
 ### Equipo Técnico
 El equipo técnico es el siguiente:
 
