@@ -14,7 +14,8 @@
 .card .card-body .card-body-concept{
 	float: right;
 	position: relative;
-	right: 10%;
+	right: -38%;
+	top:7px;
 }
 
 .flexsearch--wrapper {
