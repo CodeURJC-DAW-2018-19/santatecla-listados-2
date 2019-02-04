@@ -37,7 +37,7 @@ Aqui podemos ver el diagrama arriba mencionado.
 
 ![DiagramaResultados](/Screenshots/DiagramaInicio.png "Diagrama global del alumno")
 
-####Pantalla conceptos Alumno
+#### Pantalla conceptos Alumno
 ![ConceptosAlumno](/Screenshots/conceptos.png "Pantalla conceptos alumno")
 
 En esta imagen podemos ver como sería la página de cada concepto del alumno, en la que podemos ver las respuestas que ya están corregidas y las que estánn pendientes todavía,
@@ -45,7 +45,7 @@ En esta imagen podemos ver como sería la página de cada concepto del alumno, e
 
 ![DiagramaResultados](/Screenshots/DiagramaConcepto.png "Diagrama resultado del concepto")
 
-####Pantalla Inicio Invitados
+#### Pantalla Inicio Invitados
 
 ![InicioInvitado](/Screenshots/guestMainPage.png "Pantalla Inicio Invitado")
 
