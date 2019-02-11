@@ -1,0 +1,44 @@
+body {
+    height: 100%;
+}
+
+#contained {
+    padding-bottom: 20%;
+    text-align: center;
+}
+
+#asked {
+    text-align: left;
+    width: 30%;
+    margin-left: 10%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    float: left;
+}
+
+#answered {
+    width: 30%;
+    text-align: left;
+    float: left;
+}
+
+#morediagram {
+    position: fixed;
+    bottom: 5%;
+    left: 45%;
+    text-align: center;
+}
+
+#plus {
+    width: 3%;
+    height: 3%;
+}
+
+#diagram {
+    margin: 3%;
+}
+
+.tick {
+    width: 3%;
+    height: 3%;
+}
