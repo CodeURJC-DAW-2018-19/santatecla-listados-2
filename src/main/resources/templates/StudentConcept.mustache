@@ -103,22 +103,8 @@
 </style>
 
 <body>
-<header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
-    <li class="navbar-brand mr-0 mr-md-2" target="_blank">
-        URJC
-    </li>
-    <a class="navbar-brand mr-0 mr-md-2" href = "MainPage.mustache" target="_blank">
-        Inicio
-    </a>
-    <div class="navbar-nav-scroll ml-md-auto ">
-        <ul class="navbar-nav bd-navbar-nav flex-row">
-            <li class="nav-item">
-                <a class="btn btn-secondary my-2 my-sm-0" href="Index.mustache" rel="noopener"> Log out</a>
-            </li>
-        </ul>
-    </div>
 
-</header>
+{{> header}}
 
 <div id="contained">
     <div id="asked">
@@ -191,99 +177,7 @@
         </button>
     </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="card card-plain" align="center">
-                <div class="modal-header card-header card-header-primary">
-                    <h4 class="card-title">Diagrama</h4>
-                </div>
-            </div>
-            <div class="modal-body">
-                <!-- prepare a DOM container with width and height -->
-                <div id="main" style="width: 468px;height:360px;"></div>
-                <script type="text/javascript">
-                    // based on prepared DOM, initialize echarts instance
-                    var myChart = echarts.init(document.getElementById("main"));
-
-                    // specify chart configuration item and data
-                    option = {
-                        tooltip: {
-                            trigger: "axis",
-                            axisPointer: {
-                                
-                                type: "shadow" // by default is line, optional：'line' | 'shadow'
-                            }
-                        },
-                        legend: {
-                            data: ["Aciertos", "Sin contestar", "Fallos"]
-                        },
-                        grid: {
-                            left: "3%",
-                            right: "4%",
-                            bottom: "3%",
-                            containLabel: true
-                        },
-                        xAxis: {
-                            type: "value"
-                        },
-                        yAxis: {
-                            type: "category",
-                            data: ["Concepto 4", "Concepto 3", "Concepto 2", "Concepto 1"]
-                        },
-                        series: [
-                            {
-                                name: "Aciertos",
-                                type: "bar",
-                                stack: "default",
-                                color: "#329B49",
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: "insideRight"
-                                    }
-                                },
-                                data: [5, 2, 1, 7]
-                            },
-                            {
-                                name: "Sin contestar",
-                                type: "bar",
-                                stack: "default",
-                                color: "#95928E",
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: "insideRight"
-                                    }
-                                },
-                                data: [3, 5, 1, 1]
-                            },
-                            {
-                                name: "Fallos",
-                                type: "bar",
-                                stack: "default",
-                                color: "#DC3522",
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: "insideRight"
-                                    }
-                                },
-                                data: [2, 3, 8, 2]
-                            }
-                        ]
-                    };
-
-                    // use configuration item and data specified to show chart
-                    myChart.setOption(option);
-                </script>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+{{> diagram}}
 <div class="modal fade" id="modalPAType0" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType0"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
@@ -490,6 +384,6 @@
         </div>
     </div>
 </div>
-
+{{> footer}}
 </body>
 </html>
