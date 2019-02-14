@@ -1,11 +1,30 @@
 package com.example.demo;
 
+import org.hibernate.annotations.IndexColumn;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="Concepts")
 public class Concept {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="Id")
+    private int id;
+    @Column(name="Name")
     private String name;
+    @Column(name="html")
     private String html;
+    @Column(name="Errors")
     private int errors;
+    @Column(name="Hits")
     private int hits;
+    @Column(name = "Pendings")
     private int pendings;
+    @ManyToOne
+    private Topic topic;
+
+    public Concept(){}
 
     public Concept(String name, String html) {
         this.name = name;
@@ -56,4 +75,19 @@ public class Concept {
         return this.getErrors()+this.getHits()+this.getPendings();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
 }
