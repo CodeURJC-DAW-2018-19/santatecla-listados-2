@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -71,12 +72,17 @@ public class Controler {
     public String mainPage(Model model){
 
         List<Topic> topics=topicRepository.findAll();
-        List<Concept> concepts=conceptRepository.findAll();
         model.addAttribute("student", true);
-        model.addAttribute("concepts",concepts);
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
         model.addAttribute("inOut","out");
+        List<Topic> topicsWithoutLastPosition=new ArrayList<>();
+        if (topics.size()>1){
+            topicsWithoutLastPosition=topics.subList(0,topics.size()-1);
+        }
+        Topic lastTopic=topics.get(topics.size()-1);
+        model.addAttribute("Elements",topicsWithoutLastPosition);
+        model.addAttribute("LastElement",lastTopic);
         return "MainPage";
     }
 

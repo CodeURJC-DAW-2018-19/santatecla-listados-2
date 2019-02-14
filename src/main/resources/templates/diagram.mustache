@@ -47,7 +47,7 @@
                         },
                         yAxis: {
                             type: "category",
-                            data: ["Concepto 4", "Concepto 3", "Concepto 2", "Concepto 1"]
+                            data: [{{#Elements}}"{{name}}",{{/Elements}}{{#LastElement}}"{{name}}"{{/LastElement}}]
                         },
                         series: [
                             {
@@ -61,20 +61,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [5, 2, 1, 7]
-                            },
-                            {
-                                name: "Sin contestar",
-                                type: "bar",
-                                stack: "default",
-                                color: "#95928E",
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: "insideRight"
-                                    }
-                                },
-                                data: [3, 5, 1, 1]
+                                data: [{{#Elements}}{{hits}},{{/Elements}}{{#LastElement}}{{hits}}{{/LastElement}}]
                             },
                             {
                                 name: "Fallos",
@@ -87,7 +74,21 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [2, 3, 8, 2]
+                                data: [{{#Elements}}{{errors}},{{/Elements}}{{#LastElement}}{{errors}}{{/LastElement}}]
+
+                            },
+                            {
+                                name: "Sin contestar",
+                                type: "bar",
+                                stack: "default",
+                                color: "#95928E",
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "insideRight"
+                                    }
+                                },
+                                data: [{{#Elements}}{{pendings}},{{/Elements}}{{#LastElement}}{{pendings}}{{/LastElement}}]
                             }
                         ]
                     };
