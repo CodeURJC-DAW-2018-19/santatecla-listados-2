@@ -73,6 +73,7 @@ public class Controler {
 
         List<Topic> topics=topicRepository.findAll();
         model.addAttribute("student", true);
+        model.addAttribute("teacher", false);
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
         model.addAttribute("inOut","out");
