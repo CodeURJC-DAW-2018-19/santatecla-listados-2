@@ -93,4 +93,13 @@ public class Controler {
         model.addAttribute("LogIn",false);
         return "LogIn";
     }
+    @GetMapping (path = "/teacher")
+    public String teacher(Model model) {
+        model.addAttribute("inOut","out");
+        model.addAttribute("LogIn",true);
+        /*Aqui hay que hacer un findall de todos los items de un determinado concepto y pasarselos como atributo al modelo y deberia funcionar la nueva pagina
+        model.addAttribute("items",i);
+           */
+        return "TeacherConcept";
+    }
 }
