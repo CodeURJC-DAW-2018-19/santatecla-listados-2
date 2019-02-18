@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -71,7 +75,7 @@ public class Controler {
         c1.setQuestion(q1);
         c1.setQuestion(q2);
         q1.setConcept(c1);
-        q2.setConcept(c2);
+        q2.setConcept(c1);
 
         q1.setAnswer(a1);
         q2.setAnswer(a2);
@@ -139,5 +143,16 @@ public class Controler {
         List<Item> i = itemRepository.findAll();
         model.addAttribute("items",i);
         return "TeacherConcept";
+    }
+    @RequestMapping("/MainPage/{name}")
+    public String conceptPage(Model model, @PathVariable String name) {
+        Concept concept = conceptRepository.findByName(name);
+        if (concept == null)
+            return null;
+        Set<Question> q = concept.getQuestions();
+        model.addAttribute("questions", q);
+        model.addAttribute("LogIn", true);
+        model.addAttribute("inOut", "out");
+        return "StudentConcept";
     }
 }
