@@ -3,15 +3,11 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -105,16 +101,37 @@ public class Controler {
 
     }
 
-    @GetMapping(path = "/MainPage")
-    public String mainPage(Model model) {
-
+    @GetMapping(path = "/MainPage/Student")
+    public String mainPageStudent(Model model) {
         List<Topic> topics=topicRepository.findAll();
         model.addAttribute("student", true);
         model.addAttribute("teacher", false);
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
+        model.addAttribute("guest", false);
         model.addAttribute("inOut","out");
-        model.addAttribute("Elements",topics);
+        return "MainPage";
+    }
+    @GetMapping(path = "/MainPage/Guest")
+    public String mainPageVisitor(Model model) {
+        List<Topic> topics=topicRepository.findAll();
+        model.addAttribute("student", false);
+        model.addAttribute("teacher", false);
+        model.addAttribute("guest", true);
+        model.addAttribute("topics",topics);
+        model.addAttribute("LogIn",false);
+        model.addAttribute("inOut","in");
+        return "MainPage";
+    }
+    @GetMapping(path = "/MainPage/Teacher")
+    public String mainPage(Model model) {
+        List<Topic> topics=topicRepository.findAll();
+        model.addAttribute("student", false);
+        model.addAttribute("teacher", true);
+        model.addAttribute("guest", false);
+        model.addAttribute("topics",topics);
+        model.addAttribute("LogIn",true);
+        model.addAttribute("inOut","out");
         return "MainPage";
     }
 
@@ -144,8 +161,8 @@ public class Controler {
         model.addAttribute("items",i);
         return "TeacherConcept";
     }
-    @RequestMapping("/MainPage/{name}")
-    public String conceptPage(Model model, @PathVariable String name) {
+    @GetMapping("/MainPage/{name}")
+    public String concept(Model model, @PathVariable String name) {
         Concept concept = conceptRepository.findByName(name);
         if (concept == null)
             return null;
@@ -154,5 +171,20 @@ public class Controler {
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
         return "StudentConcept";
+    }
+    @RequestMapping(value = "/MainPage/search", method =  RequestMethod.POST)
+    public String search(Model model, @RequestParam String searchText) {
+        List<Concept> concepts=conceptRepository.findByNameContainingOrTopicNameContaining(searchText,searchText);
+        HashSet<Topic> t=new HashSet<>();
+        for (Concept c:concepts) {
+            t.add(c.getTopic());
+        }
+        model.addAttribute("student", true);
+        model.addAttribute("teacher", false);
+        model.addAttribute("topics",t);
+        model.addAttribute("LogIn",true);
+        model.addAttribute("inOut","out");
+        model.addAttribute("Elements",t);
+        return "MainPage";
     }
 }

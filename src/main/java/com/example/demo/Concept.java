@@ -39,6 +39,11 @@ public class Concept {
         this.questions = new HashSet<>();
         this.items = new HashSet<>();
     }
+    public Concept(String name) {
+        this.name = name;
+        this.questions = new HashSet<>();
+        this.items = new HashSet<>();
+    }
 
     public String getName() {
         return name;
