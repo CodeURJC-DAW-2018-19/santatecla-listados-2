@@ -47,7 +47,7 @@
                         },
                         yAxis: {
                             type: "category",
-                            data: [{{#Elements}}"{{name}}",{{/Elements}}{{#LastElement}}"{{name}}"{{/LastElement}}]
+                            data: [{{#Elements}}{{^-first}},{{/-first}}"{{name}}"{{/Elements}}]
                         },
                         series: [
                             {
@@ -61,7 +61,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#Elements}}{{hits}},{{/Elements}}{{#LastElement}}{{hits}}{{/LastElement}}]
+                                data: [{{#Elements}}{{^-first}},{{/-first}}"{{hits}}"{{/Elements}}]
                             },
                             {
                                 name: "Fallos",
@@ -74,7 +74,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#Elements}}{{errors}},{{/Elements}}{{#LastElement}}{{errors}}{{/LastElement}}]
+                                data: [{{#Elements}}{{^-first}},{{/-first}}"{{errors}}"{{/Elements}}]
 
                             },
                             {
@@ -88,7 +88,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#Elements}}{{pendings}},{{/Elements}}{{#LastElement}}{{pendings}}{{/LastElement}}]
+                                data: [{{#Elements}}{{^-first}},{{/-first}}"{{pendings}}"{{/Elements}}]
                             }
                         ]
                     };

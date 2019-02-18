@@ -19,20 +19,34 @@ public class Controler {
     private TopicRepository topicRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
+    private AnswerRepository answerRepository;
+    @Autowired
+    private ItemRepository itemRepository;
+
     @PostConstruct
     public void init() {
-        Topic t1=new Topic("Introducción");
-        Topic t2=new Topic("Árboles");
-        Topic t3=new Topic("Mapas");
-        Concept c1=new Concept("Generics","StudentConcept.mustache");
-        Concept c2=new Concept("Iteradores","StudentConcept.mustache");
-        Concept c3=new Concept("JUNIT","StudentConcept.mustache");
-        Concept c4=new Concept("Árboles LCRS","StudentConcept.mustache");
-        Concept c5=new Concept("Árboles N-Arios","StudentConcept.mustache");
-        Concept c6=new Concept("Árboles Binarios","StudentConcept.mustache");
-        Concept c7=new Concept("Doble Hashing","StudentConcept.mustache");
-        Concept c8=new Concept("Prueba Lineal","StudentConcept.mustache");
-        Concept c9=new Concept("Prueba Cuadrátic","StudentConcept.mustache");
+        Topic t1 = new Topic("Introducción");
+        Topic t2 = new Topic("Árboles");
+        Topic t3 = new Topic("Mapas");
+        Concept c1 = new Concept("Generics", "StudentConcept.mustache");
+        Concept c2 = new Concept("Iteradores", "StudentConcept.mustache");
+        Concept c3 = new Concept("JUNIT", "StudentConcept.mustache");
+        Concept c4 = new Concept("Árboles LCRS", "StudentConcept.mustache");
+        Concept c5 = new Concept("Árboles N-Arios", "StudentConcept.mustache");
+        Concept c6 = new Concept("Árboles Binarios", "StudentConcept.mustache");
+        Concept c7 = new Concept("Doble Hashing", "StudentConcept.mustache");
+        Concept c8 = new Concept("Prueba Lineal", "StudentConcept.mustache");
+        Concept c9 = new Concept("Prueba Cuadrátic", "StudentConcept.mustache");
+        Question q1 = new Question("¿Que es un tipo generico?", "PType0", false);
+        Question q2 = new Question("¿Donde hay que usar los tipos genericos?", "PType3", true);
+        Answer a1 = new Answer("Respuesta Abierta 0", false);
+        Answer a2 = new Answer("Respuesta Cerrada 1", true);
+        Item i1 = new Item("Patron Singleton",false);
+        Item i2 = new Item ("No tengo muy claro que poner",true);
+
         t1.setConcept(c1);
         t1.setConcept(c2);
         t1.setConcept(c3);
@@ -54,6 +68,19 @@ public class Controler {
         c8.setTopic(t3);
         c9.setTopic(t3);
 
+        c1.setQuestion(q1);
+        c1.setQuestion(q2);
+        q1.setConcept(c1);
+        q2.setConcept(c2);
+
+        q1.setAnswer(a1);
+        q2.setAnswer(a2);
+        a1.setQuestion(q1);
+        a2.setQuestion(q2);
+
+        c1.setItem(i1);
+        c1.setItem(i2);
+
         topicRepository.save(t1);
         topicRepository.save(t2);
         topicRepository.save(t3);
@@ -66,10 +93,16 @@ public class Controler {
         conceptRepository.save(c7);
         conceptRepository.save(c8);
         conceptRepository.save(c9);
+        questionRepository.save(q1);
+        questionRepository.save(q2);
+        answerRepository.save(a1);
+        answerRepository.save(a2);
+
 
     }
-    @GetMapping (path = "/MainPage")
-    public String mainPage(Model model){
+
+    @GetMapping(path = "/MainPage")
+    public String mainPage(Model model) {
 
         List<Topic> topics=topicRepository.findAll();
         model.addAttribute("student", true);
@@ -77,29 +110,34 @@ public class Controler {
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
         model.addAttribute("inOut","out");
-        List<Topic> topicsWithoutLastPosition=new ArrayList<>();
-        if (topics.size()>1){
-            topicsWithoutLastPosition=topics.subList(0,topics.size()-1);
-        }
-        Topic lastTopic=topics.get(topics.size()-1);
-        model.addAttribute("Elements",topicsWithoutLastPosition);
-        model.addAttribute("LastElement",lastTopic);
+        model.addAttribute("Elements",topics);
         return "MainPage";
     }
 
-    @GetMapping (path = "/logIn")
+    @GetMapping(path = "/logIn")
     public String login(Model model) {
-        model.addAttribute("inOut","out");
-        model.addAttribute("LogIn",false);
+        model.addAttribute("inOut", "out");
+        model.addAttribute("LogIn", false);
         return "LogIn";
     }
-    @GetMapping (path = "/teacher")
+
+    @GetMapping(path = "/student")
+    public String student(Model model) {
+        List<Question> q = questionRepository.findAll();
+        model.addAttribute("questions", q);
+        model.addAttribute("LogIn", true);
+        model.addAttribute("inOut", "out");
+        return "StudentConcept";
+    }
+
+    @GetMapping(path = "/teacher")
     public String teacher(Model model) {
-        model.addAttribute("inOut","out");
-        model.addAttribute("LogIn",true);
-        /*Aqui hay que hacer un findall de todos los items de un determinado concepto y pasarselos como atributo al modelo y deberia funcionar la nueva pagina
+        model.addAttribute("inOut", "out");
+        model.addAttribute("LogIn", true);
+        List<Question> q = questionRepository.findAll();
+        model.addAttribute("questions", q);
+        List<Item> i = itemRepository.findAll();
         model.addAttribute("items",i);
-           */
         return "TeacherConcept";
     }
 }

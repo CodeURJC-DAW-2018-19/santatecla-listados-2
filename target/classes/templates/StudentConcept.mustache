@@ -15,10 +15,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <!-- CSS propio-->
-    <link rel="stylesheet" href="../static/css/StudentConcept.css">
+    <link rel="stylesheet" href="/css/StudentConcept.css">
     <!--     Fonts and icons     -->
-    <!-- including ECharts file -->
-    <script src="/js"></script>
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -106,79 +104,35 @@
 
 {{> header}}
 
-<div id="contained">
-    <div id="asked">
-        <h3>PREGUNTAS CORREGIDAS</h3>
 
+<div id="contained">
+    <div id="tobeseen">
+        <h3>PREGUNTAS CORREGIDAS</h3>
         <table border="0" cellspacing="20" id="corrected">
+             {{#questions}}
+                 {{#corrected}}
             <tr>
-                <td>PREGUNTA1: <a href="#" data-toggle="modal" data-target="#modalPAType0">RESPUESTA
-                    ABIERTA 1  </a></td>
-                <td></td>
+                <td>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}" > {{#answer}}{{answerTest}} {{/answer}}</a></td>
                 <td><i class="material-icons" style="color:green">check</i></td>
             </tr>
-            <tr>
-                <td>PREGUNTA2: <a href="#" data-toggle="modal" data-target="#modalPAType2">RESPUESTA
-                    ABIERTA 2  </a></td>
-                <td></td>
-                <td><i class="material-icons" style="color:green">check</i></td>
-            </tr>
-            <tr>
-                <td>PREGUNTA3: <a href="#" data-toggle="modal" data-target="#modalPCType1">RESPUESTA
-                    CERRADA 3  </a></td>
-                <td></td>
-                <td><i class="material-icons" style="color:red">close</i></td>
-            </tr>
-            <tr>
-                <td>PREGUNTA4: <a href="#" data-toggle="modal" data-target="#modalPAType3">RESPUESTA
-                    ABIERTA 4  </a></td>
-                <td></td>
-                <td><i class="material-icons" style="color:green">check</i></td>
-            </tr>
-            <tr>
-                <td>PREGUNTA5: <a href="#" data-toggle="modal" data-target="#modalPCType1">RESPUESTA
-                    CERRADA 5  </a></td>
-                <td></td>
-                <td><i class="material-icons" style="color:red">close</i></td>
-            </tr>
-            <tr>
-                <td>PREGUNTA5: <a href="#" data-toggle="modal" data-target="#modalPCType1">RESPUESTA
-                    CERRADA 6  </a></td>
-                <td></td>
-                <td><i class="material-icons" style="color:green">check</i></td>
-            </tr>
+                 {{/corrected}}
+             {{/questions}}
         </table>
     </div>
 
     <div id="answered">
         <h3>PREGUNTAS POR CORREGIR</h3>
-        <ul class="list-group">
-            <li class="list-group-item">PREGUNTA7: <a href="#" data-toggle="modal" data-target="#modalPAType0">
-                RESPUESTA ABIERTA 7</a></li>
-            <li class="list-group-item">PREGUNTA8: <a href="#" data-toggle="modal" data-target="#modalPAType2">
-                RESPUESTA ABIERTA 8</a></li>
-            <li class="list-group-item">PREGUNTA9: <a href="#" data-toggle="modal" data-target="#modalPAType4">
-                RESPUESTA ABIERTA 9</a></li>
+        {{#questions}}
+            {{^corrected}}
+        <ul class="list-group" style="list-style: none;">
+            <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}}{{answerTest}} {{/answer}}</a></li>
         </ul>
-    </div>
-    <div id="morediagram">
-        <div class="button-container">
-            <button class="btn btn-primary btn-fab btn-fab-mini btn-round">
-                <i class="material-icons">add</i>
-            </button>
-        </div>
-        <button
-                type="button"
-                class="btn btn-primary"
-                data-toggle="modal"
-                data-target="#exampleModal"
-        >
-            DIAGRAMA
-        </button>
+            {{/corrected}}
+        {{/questions}}
     </div>
 </div>
-{{> diagram}}
-<div class="modal fade" id="modalPAType0" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType0"
+
+<div class="modal fade" id="modalPType0" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType0"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -192,7 +146,7 @@
                     <div class="row">
                         <div class="col-md-10">
                             <div class="form-group bmd-form-group">
-                                <textarea name="answer" rows="3" cols="49" placeholder="Respuesta"></textarea>
+                                <textarea name="answerTest" rows="3" cols="49" placeholder="Respuesta"></textarea>
                             </div>
                         </div>
                     </div>
@@ -210,7 +164,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPCType1" tabindex="-1" role="dialog" aria-labelledby="exampleModalPCType1"
+<div class="modal fade" id="modalPType1" tabindex="-1" role="dialog" aria-labelledby="exampleModalPCType1"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -248,7 +202,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPAType2" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType2"
+<div class="modal fade" id="modalPType2" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType2"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -262,7 +216,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group bmd-form-group">
-                                <textarea name="answer" rows="3" cols="49" placeholder="Respuesta"></textarea>
+                                <textarea name="answerTest" rows="3" cols="49" placeholder="Respuesta"></textarea>
                             </div>
                         </div>
                     </div>
@@ -274,7 +228,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPAType3" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType3"
+<div class="modal fade" id="modalPType3" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType3"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -327,7 +281,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPAType4" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType4"
+<div class="modal fade" id="modalPType4" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType4"
      aria-hidden="true" align="center">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -384,6 +338,7 @@
         </div>
     </div>
 </div>
+
+{{> plus}}
+{{> diagram}}
 {{> footer}}
-</body>
-</html>

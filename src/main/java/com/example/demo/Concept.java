@@ -1,8 +1,9 @@
 package com.example.demo;
 
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Concepts")
@@ -23,12 +24,20 @@ public class Concept {
     private int pendings;
     @ManyToOne
     private Topic topic;
+    @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    private Set<Question> questions;
+    @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    private Set<Item> items;
 
-    public Concept(){}
+    public Concept(){
+        this.questions = new HashSet<>();
+    }
 
     public Concept(String name, String html) {
         this.name = name;
         this.html = html;
+        this.questions = new HashSet<>();
+        this.items = new HashSet<>();
     }
 
     public String getName() {
@@ -89,5 +98,29 @@ public class Concept {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
+    public void setQuestion (Question question){
+        this.questions.add(question);
+    }
+
+    public void setItem (Item item){
+        this.items.add(item);
     }
 }

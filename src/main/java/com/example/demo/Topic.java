@@ -21,6 +21,7 @@ public class Topic {
     private int pendings;
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "topic")
     private Set<Concept> concepts;
+
     public Topic(String name) {
         this.name = name;
         concepts=new HashSet<>();
