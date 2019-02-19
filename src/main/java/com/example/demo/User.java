@@ -1,9 +1,11 @@
 package com.example.demo;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
@@ -15,11 +17,18 @@ public abstract class User {
     @Column(name="UserName")
     private String username;
     @Column(name="Password")
-    private String pasword;
+    private String password;
+    @Column(name="Rol")
+    private String rol;
 
     public User() {
     }
-
+    public User(String name, String password, String userName, String userType) {
+        this.name = name;
+        this.password = new BCryptPasswordEncoder().encode(password);
+        this.username = userName;
+        this.rol= userType;
+    }
     public int getId() {
         return id;
     }
@@ -52,11 +61,21 @@ public abstract class User {
         this.username = username;
     }
 
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String password) {
+        this.password =  new BCryptPasswordEncoder().encode(password);
+    }
+
+
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
