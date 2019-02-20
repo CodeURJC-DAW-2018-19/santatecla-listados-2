@@ -1,8 +1,9 @@
-package com.example.demo;
+package com.example.demo.Topic;
+
+import com.example.demo.Concept.Concept;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

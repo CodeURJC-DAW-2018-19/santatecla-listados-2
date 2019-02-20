@@ -1,7 +1,7 @@
-package com.example.demo;
+package com.example.demo.Topic;
 
+import com.example.demo.Topic.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

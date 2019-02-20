@@ -1,5 +1,9 @@
-package com.example.demo;
+package com.example.demo.Concept;
 
+
+import com.example.demo.Item.Item;
+import com.example.demo.Question.Question;
+import com.example.demo.Topic.Topic;
 
 import javax.persistence.*;
 import java.util.HashSet;

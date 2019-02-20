@@ -1,7 +1,7 @@
 {{#topics}}
     <div class="card">
         <div class="card-header">
-            <a class="card-link" data-toggle="collapse" href="#collapse{{name}}">
+            <a class="card-link" data-toggle="collapse" href="#collapse{{name}}{{id}}">
                 <font size="5"><b>{{name}}
                     {{#student}}
                         <div style="float: right;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
@@ -15,7 +15,7 @@
             {{/teacher}}
         </div>
 
-        <div id="collapse{{name}}" class="collapse" data-parent="#accordion">
+        <div id="collapse{{name}}{{id}}" class="collapse" data-parent="#accordion">
             {{#concepts}}
                 <div class="card-body">
                     <div class="row">

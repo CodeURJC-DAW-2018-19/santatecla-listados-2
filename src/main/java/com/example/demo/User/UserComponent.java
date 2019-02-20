@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.User;
 
+import com.example.demo.User.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
