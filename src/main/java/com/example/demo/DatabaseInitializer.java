@@ -99,6 +99,8 @@ public class DatabaseInitializer {
 
 		c1.setItem(i1);
 		c1.setItem(i2);
+		i1.setConcept(c1);
+		i2.setConcept(c1);
 
 		topicRepository.save(t1);
 		topicRepository.save(t2);
@@ -116,7 +118,8 @@ public class DatabaseInitializer {
 		questionRepository.save(q2);
 		answerRepository.save(a1);
 		answerRepository.save(a2);
-
+		itemRepository.save(i1);
+		itemRepository.save(i2);
 
 	}
 
