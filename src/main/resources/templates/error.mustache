@@ -1,7 +1,8 @@
-<!doctype html>
-<html lang="en" xmlns:style="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Gestor de listas</title>
+    <title>Error</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -10,7 +11,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/CustomErrorStyle.css">
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -93,103 +94,36 @@
 
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
-
-
-
 </head>
-<style>
-    .card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
-        border-radius: 3px;
-        margin-top: -50px;
-        padding: 15px;
-        width: 94%;
-    }
-</style>
 <body>
 
-{{> header}}
 
-<!--   Search Box   -->
-
-<div class="search_box_padding">
-    <div class="search_box">
-        <form class="search_box--form" action="/MainPage/search" method="post">
-            <div class="row">
-                <div class="col-md-11">
-                    <div class="form-group bmd-form-group">
-                        <div class="input-group-prepend">
-                            <input type="text" name=searchText id=searchText class="form-control" placeholder="Search" style="padding: 0px 10px">
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    404 Página no encontrada</h2>
+                <div class="error-details">
+                    Hemos tenido problemas para encontrar la página que solicitas
+                </div>
+                <div class="error-actions">
+                    <a href="javascript:history.back()" class="btn btn-primary btn-lg">
+                        Go Back </a>
+                    <a href="/logIn" class="btn btn-default btn-lg">
+                        Take Me To The Login </a>
                 </div>
             </div>
-            <input class="search_box_icon--submit" name=result type="submit" value=" &#9906;"
-                   style="-webkit-transform: rotate(45deg);"/>
-        </form>
-    </div>
-</div>
-
-
-<div class="bodyP card">
-    <!--   Temary (Table)   -->
-    <div class="container">
-        <div id="accordion">
-            {{#topics}}
-                <div class="card">
-                    <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#collapse{{-index}}">
-                            <font size="5"><b>TEMA {{-index}}: {{name}}
-                                {{#student}}
-                                    <div style="float: right;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
-                                {{/student}}
-                            </b></font>
-                        </a>
-                        {{#teacher}}
-                            <a href="/MainPage" style="position:relative;float:right ;right: 15%;">
-                                <i class="material-icons">delete</i>
-                            </a>
-                        {{/teacher}}
-                    </div>
-
-                    <div id="collapse{{-index}}" class="collapse" data-parent="#accordion">
-                        {{#concepts}}
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <a class="nav-link" {{#student}}href="/MainPage/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
-                                    </div>
-                                    {{#teacher}}
-                                        <a href="/MainPage" style="position: relative;left: 42.8%;">
-                                            <i class="material-icons">delete</i>
-                                        </a>
-                                    {{/teacher}}
-                                    {{#student}}
-                                        <div style="position: relative;right: -35%;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
-                                    {{/student}}
-                                </div>
-                            </div>
-                        {{/concepts}}
-                        {{#teacher}}
-                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" style="position: relative;left: 15%">
-                                <i class="material-icons">add</i>
-                            </button>
-                        {{/teacher}}
-                    </div>
-
-                </div>
-            {{/topics}}
-            {{#teacher}}
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" style="position: relative;left: 2%">
-                    <i class="material-icons">add</i>
-                </button>
-            {{/teacher}}
         </div>
     </div>
-
 </div>
 
-<!--   Diagram Botton   -->
-{{^guest}}
-{{> diagram}}
-{{/guest}}
-{{> footer}}
+
+
+
+
+</body>
+
+</html>
