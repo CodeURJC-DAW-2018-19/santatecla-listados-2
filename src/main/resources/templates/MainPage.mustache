@@ -125,6 +125,7 @@
             </div>
             <input class="search_box_icon--submit" name=result type="submit" value=" &#9906;"
                    style="-webkit-transform: rotate(45deg);"/>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
         </form>
     </div>
 </div>
@@ -156,7 +157,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <a class="nav-link" {{#student}}href="/MainPage/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                                        <a class="nav-link" {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
                                     </div>
                                     {{#teacher}}
                                         <a href="/MainPage" style="position: relative;left: 42.8%;">

@@ -160,37 +160,16 @@ public class Controler {
         model.addAttribute("LogIn", false);
         return "loginerror";
     }
-    @RequestMapping("/logOut")
+    @GetMapping("/logOut")
     public String logOut(HttpSession session,Model model) {
         model.addAttribute("inOut", "out");
         model.addAttribute("LogIn", false);
         session.invalidate();
-        return "/logIn";
+        return "redirect:/logIn";
 
     }
 
-    @GetMapping(path = "/student")
-    public String student(Model model) {
-        List<Question> q = questionRepository.findAll();
-        model.addAttribute("questions", q);
-        model.addAttribute("LogIn", true);
-        model.addAttribute("inOut", "out");
-        model.addAttribute("urlLog","/logOut");
-        return "StudentConcept";
-    }
-
-    @GetMapping(path = "/teacher")
-    public String teacher(Model model) {
-        model.addAttribute("inOut", "out");
-        model.addAttribute("LogIn", true);
-        List<Question> q = questionRepository.findAll();
-        model.addAttribute("questions", q);
-        List<Item> i = itemRepository.findAll();
-        model.addAttribute("items",i);
-        model.addAttribute("urlLog","/logOut");
-        return "TeacherConcept";
-    }
-    @GetMapping("/MainPage/{name}")
+    @GetMapping("/MainPage/Student/{name}")
     public String concept(Model model, @PathVariable String name) {
         Concept concept = conceptRepository.findByName(name);
         if (concept == null)
