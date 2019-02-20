@@ -1,0 +1,46 @@
+{{#topics}}
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapse{{name}}">
+                <font size="5"><b>{{name}}
+                    {{#student}}
+                        <div style="float: right;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
+                    {{/student}}
+                </b></font>
+            </a>
+            {{#teacher}}
+                <a href="/MainPage" style="position:relative;float:right ;right: 15%;">
+                    <i class="material-icons">delete</i>
+                </a>
+            {{/teacher}}
+        </div>
+
+        <div id="collapse{{name}}" class="collapse" data-parent="#accordion">
+            {{#concepts}}
+                <div class="card-body">
+                    <div class="row">
+                        <div cassetslass="col-md-5">
+                            <a class="nav-link" {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                        </div>
+                        {{#teacher}}
+                            <a href="/MainPage" style="position: relative;left: 42.8%;">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        {{/teacher}}
+                        {{#student}}
+                            <div style="position: relative;right: -35%;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
+                        {{/student}}
+                    </div>
+                </div>
+            {{/concepts}}
+            {{#teacher}}
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" style="position: relative;left: 15%">
+                    <i class="material-icons">add</i>
+                </button>
+            {{/teacher}}
+        </div>
+    </div>
+{{/topics}}
+{{#NoMore}}
+    <span id = "noTopic"style="float: right;top:-20px">No existen más temas</span>
+{{/NoMore}}

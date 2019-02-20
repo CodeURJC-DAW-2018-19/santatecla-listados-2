@@ -1,6 +1,10 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,11 @@ import java.util.*;
 
 @Controller
 public class Controler {
+    private static int numTopic; //en add de profesor debe de incrementarse
+    private static int i = 0;
+    private static boolean search;
+    private static boolean noMore;
+    private static String text;
     @Autowired
     private UserComponent userComponent;
     @Autowired
@@ -31,9 +40,9 @@ public class Controler {
 
     @PostConstruct
     public void init() {
-        Topic t1 = new Topic("Introducción");
-        Topic t2 = new Topic("Árboles");
-        Topic t3 = new Topic("Mapas");
+        Topic t1 = new Topic("Introducción",numTopic++);
+        Topic t2 = new Topic("Árboles",numTopic++);
+        Topic t3 = new Topic("Mapas",numTopic++);
         Concept c1 = new Concept("Generics", "StudentConcept.mustache");
         Concept c2 = new Concept("Iteradores", "StudentConcept.mustache");
         Concept c3 = new Concept("JUNIT", "StudentConcept.mustache");
@@ -129,6 +138,8 @@ public class Controler {
     public String mainP(Model model) {
         List<Topic> topics=topicRepository.findAll();
         User u = userComponent.getLoggedUser();
+        noMore = false;
+        search = false;
         if (u.getRol().equals("ROLE_TEACHER")){
             model.addAttribute("student", false);
             model.addAttribute("teacher", true);
@@ -196,20 +207,64 @@ public class Controler {
         model.addAttribute("urlLog","/logOut");
         return "TeacherConcept";
     }
+    @GetMapping (path = "/TopicMoreButton")
+    public String topicMoreButton(Model model, @PageableDefault(size = 2) Pageable pageable){
+        i++;
+        model.addAttribute("numero",i);
+        Page<Topic> topics;
+        if (!search || text.equals("")) {
+            search = false;
+            topics = topicRepository.findAll(pageable);
+        }else{
+            List<Concept> concepts=conceptRepository.findByNameContainingOrTopicNameContaining(text,text);
+            List<Topic> t=new ArrayList<>();
+            for (Concept c:concepts) {
+                if (!t.contains(c.getTopic()))
+                    t.add(c.getTopic());
+
+            }
+            long start = pageable.getOffset();
+            long end = (start + pageable.getPageSize()) > t.size() ? t.size() : (start + pageable.getPageSize());
+            if (end<start){
+                topics = new PageImpl<>(new ArrayList<>());
+            }else {
+                topics = new PageImpl<>(t.subList((int) start, (int) end), pageable, t.size());
+            }
+        }
+        User u = userComponent.getLoggedUser();
+        if (u.getRol().equals("ROLE_TEACHER")){
+            model.addAttribute("student", false);
+            model.addAttribute("teacher", true);
+        }else if (u.getRol().equals("ROLE_STUDENT")){
+            model.addAttribute("student", true);
+            model.addAttribute("teacher", false);
+        }
+        model.addAttribute("topics",topics);
+        model.addAttribute("LogIn",true);
+        model.addAttribute("guest", false);
+        model.addAttribute("inOut","out");
+        model.addAttribute("urlLog","/logOut");
+        if (topics.isEmpty() && !noMore){
+            noMore=true;
+            model.addAttribute("NoMore",true);
+        }
+        return "TopicMore";
+    }
     @RequestMapping(value = "/MainPage/search", method =  RequestMethod.POST)
     public String search(Model model, @RequestParam String searchText) {
-        List<Concept> concepts=conceptRepository.findByNameContainingOrTopicNameContaining(searchText,searchText);
-        HashSet<Topic> t=new HashSet<>();
-        for (Concept c:concepts) {
-            t.add(c.getTopic());
-        }
+        noMore = false;
+        search = false;
+        text = searchText;
+        model.addAttribute("numero",i);
         model.addAttribute("student", true);
         model.addAttribute("teacher", false);
-        model.addAttribute("topics",t);
+        List<Topic> topics = topicRepository.findAll();
+        model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
         model.addAttribute("inOut","out");
-        model.addAttribute("Elements",t);
+        model.addAttribute("Elements",topics);
         model.addAttribute("urlLog","/logOut");
+        search = true;
         return "MainPage";
     }
 }
