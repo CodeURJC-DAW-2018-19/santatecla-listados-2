@@ -51,8 +51,11 @@ public class Controler {
         Item i2 = new Item ("No tengo muy claro que poner",true);
         User u1= new User("Alberto","123456789","Albertocalib_8","ROLE_STUDENT");
         User u2= new User("Alberto","123456789","a.canal.2016","ROLE_TEACHER");
+        User u3= new User("Haritz","123456789","yo","ROLE_TEACHER");
         userRepository.save(u1);
         userRepository.save(u2);
+        userRepository.save(u3);
+
 
         t1.setConcept(c1);
         t1.setConcept(c2);
