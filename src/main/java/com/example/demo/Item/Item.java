@@ -49,4 +49,11 @@ public class Item {
         this.correct = correct;
     }
 
+    public Concept getConcept() {
+        return concept;
+    }
+
+    public void setConcept(Concept concept) {
+        this.concept = concept;
+    }
 }

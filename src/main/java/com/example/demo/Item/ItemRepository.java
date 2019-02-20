@@ -7,4 +7,5 @@ import java.util.List;
 
 public  interface  ItemRepository extends JpaRepository<Item,Integer> {
     List<Item> findByName(String name);
+    List<Item> findByConceptName(String name);
 }

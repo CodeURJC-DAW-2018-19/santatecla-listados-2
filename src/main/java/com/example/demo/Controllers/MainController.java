@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Concept.Concept;
 import com.example.demo.Concept.ConceptRepository;
+import com.example.demo.Item.Item;
 import com.example.demo.Item.ItemRepository;
 import com.example.demo.Question.Question;
 import com.example.demo.Question.QuestionRepository;
@@ -97,6 +98,8 @@ public class MainController {
         if (concept == null)
             return null;
         Set<Question> q = concept.getQuestions();
+        List <Item> i = itemRepository.findByConceptName(name);
+        model.addAttribute("items",i);
         model.addAttribute("questions", q);
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
