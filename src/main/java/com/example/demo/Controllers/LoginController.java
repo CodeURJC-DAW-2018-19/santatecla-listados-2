@@ -13,13 +13,15 @@ public class LoginController {
     public String logIn(Model model) {
         model.addAttribute("inOut", "out");
         model.addAttribute("LogIn", false);
+        model.addAttribute("errorPassword", false);
         return "LogIn";
     }
-    @RequestMapping("/loginerror")
+    @RequestMapping("/loginError")
     public String logError(Model model) {
         model.addAttribute("inOut", "out");
         model.addAttribute("LogIn", false);
-        return "loginerror";
+        model.addAttribute("errorPassword", true);
+        return "LogIn";
     }
     @GetMapping("/logOut")
     public String logOut(HttpSession session, Model model) {

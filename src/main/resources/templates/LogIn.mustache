@@ -99,6 +99,9 @@
                         </div>
                         <div class="card-body" style="margin-left:-10%">
                             <form action="/logIn" method="post">
+                                {{#errorPassword}}
+                                    <span style="color: red"> We cannot find an account with that email address or that password </span>
+                                {{/errorPassword}}
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="form-group bmd-form-group">

@@ -95,7 +95,7 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 </head>
-<body>
+<body  style="overflow-x:hidden">
 
 
 <div class="container">
@@ -104,10 +104,9 @@
             <div class="error-template">
                 <h1>
                     Oops!</h1>
-                <h2>
-                    404 Página no encontrada</h2>
+                <h2>{{errorCode}}</h2>
                 <div class="error-details">
-                    Hemos tenido problemas para encontrar la página que solicitas
+                    {{exception}}
                 </div>
                 <div class="error-actions">
                     <a href="javascript:history.back()" class="btn btn-primary btn-lg">

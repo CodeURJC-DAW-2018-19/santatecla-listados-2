@@ -19,16 +19,19 @@
             {{#concepts}}
                 <div class="card-body">
                     <div class="row">
-                        <div cassetslass="col-md-5">
-                            <a class="nav-link" {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                        <div class="col-md-10">
+                            <a class="nav-link"
+                               {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
                         </div>
                         {{#teacher}}
-                            <a href="/MainPage" style="position: relative;left: 42.8%;">
-                                <i class="material-icons">delete</i>
-                            </a>
+                            <div class="col-md-1">
+                                <a href="/MainPage">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </div>
                         {{/teacher}}
                         {{#student}}
-                            <div style="position: relative;right: -35%;">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
+                            <div class="col-md-2" style="right: 2.5%">({{hits}},{{pendings}},{{errors}}):{{total}}</div>
                         {{/student}}
                     </div>
                 </div>
@@ -42,5 +45,5 @@
     </div>
 {{/topics}}
 {{#NoMore}}
-    <span id = "noTopic"style="float: right;top:-20px">No existen más temas</span>
+    <span id="noTopic" style="float: right;top:-20px">No existen más temas</span>
 {{/NoMore}}

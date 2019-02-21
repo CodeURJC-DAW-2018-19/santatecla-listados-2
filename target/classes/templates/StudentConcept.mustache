@@ -100,7 +100,7 @@
     }
 </style>
 
-<body>
+<body  style="overflow-x:hidden">
 
 {{> header}}
 
@@ -112,8 +112,15 @@
              {{#questions}}
                  {{#corrected}}
             <tr>
-                <td>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}" > {{#answer}}{{answerTest}} {{/answer}}</a></td>
-                <td><i class="material-icons" style="color:green">check</i></td>
+                <td>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}" > {{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></td>
+                {{#answer}}
+                    {{#mark}}
+                        <td><i class="material-icons" style="color:green">check</i></td>
+                    {{/mark}}
+                    {{^mark}}
+                        <td><i class="material-icons" style="color:red">clear</i></td>
+                    {{/mark}}
+                {{/answer}}
             </tr>
                  {{/corrected}}
              {{/questions}}
@@ -125,7 +132,7 @@
         {{#questions}}
             {{^corrected}}
         <ul class="list-group" style="list-style: none;">
-            <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}}{{answerTest}} {{/answer}}</a></li>
+            <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></li>
         </ul>
             {{/corrected}}
         {{/questions}}
