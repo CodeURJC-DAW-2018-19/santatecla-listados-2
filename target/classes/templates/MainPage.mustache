@@ -104,6 +104,9 @@
         padding: 15px;
         width: 94%;
     }
+    .modal-backdrop{
+        z-index: 0 !important ;
+    }
 </style>
 <body>
 
@@ -147,7 +150,7 @@
         </div>
         <div style="float: bottom">
             {{#teacher}}
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" style="position: relative;left: 2%">
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="modal" data-target="#addTopics" name="addTopics">
                     <i class="material-icons">add</i>
                 </button>
             {{/teacher}}
@@ -157,7 +160,35 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="addTopics" tabindex="-1" role="dialog" aria-labelledby="addTopics "
+     aria-hidden="true" align="center">
+    <form action="/mainPage/addTopic" method="post">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="card card-plain">
+                    <div class="modal-header card-header card-header-primary">
+                        <h4 class="card-title">Introduzca nuevo tema</h4>
+                    </div>
+                </div>
+                <div class="modal-body" align="left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group">
+                                <label class="bmd-label-floating" >Añadir nuevo tema</label>
+                                <input name="topicName" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" id="submit" value="Accept" class="btn btn-primary" />
+                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                </div>
+            </div>
+        </div>
 
+    </form>
+</div>
 <!--   Diagram Botton   -->
 
 {{^guest}}

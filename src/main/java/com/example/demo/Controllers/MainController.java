@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -45,7 +46,6 @@ public class MainController {
     private AnswerRepository answerRepository;
     @Autowired
     private ItemRepository itemRepository;
-
     @GetMapping(path = "/MainPage/Guest")
     public String mainPageVisitor(Model model) {
         noMore = false;
@@ -125,6 +125,38 @@ public class MainController {
         search = true;
         return "MainPage";
     }
+    @RequestMapping(value = "/mainPage/addTo{name}", method =  RequestMethod.POST)
+    public String addConcept(Model model, @RequestParam String conceptName,@PathVariable String name) {
+        Topic t=topicRepository.findByName(name);
+        Concept c=new Concept(conceptName);
+        c.setTopic(t);
+        t.setConcept(c);
+        conceptRepository.save(c);
+        return "redirect:/MainPage";
+    }
+    @RequestMapping(value = "/mainPage/addTopic", method =  RequestMethod.POST)
+    public String addTopic(Model model, @RequestParam String topicName) {
+        Topic t=new Topic(topicName,topicRepository.findAll().size()+1);
+        topicRepository.save(t);
+        return "redirect:/MainPage";
+    }
+    @RequestMapping(value="/MainPage/deleteConcept{name}", method =  RequestMethod.POST)
+    public String deleteConcept(Model model,@PathVariable String name) {
+        Concept c=conceptRepository.findByName(name);
+        c.getTopic().removeConcept(c);
+        conceptRepository.delete(c);
+        return "redirect:/MainPage";
+    }
+    @RequestMapping(value="/MainPage/deleteTopic{name}", method =  RequestMethod.POST)
+    public String deleteTopic(Model model,@PathVariable String name) {
+        Topic t=topicRepository.findByName(name);
+        t.removeConcepts();
+        topicRepository.delete(t);
+        return "redirect:/MainPage";
+    }
+
+
+
     @GetMapping (path = "/TopicMoreButton")
     public String topicMoreButton(Model model, @PageableDefault(size = 2) Pageable pageable){
         i++;
