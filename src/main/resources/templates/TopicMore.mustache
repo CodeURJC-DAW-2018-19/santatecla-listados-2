@@ -9,9 +9,33 @@
                 </b></font>
             </a>
             {{#teacher}}
-                <a href="/MainPage" style="position:relative;float:right ;right: 15%;">
+                <a href="#deleteT{{name}}" data-toggle="modal" name="delete{{name}}"
+                   style="position: relative;float: right;right: 15%">
                     <i class="material-icons">delete</i>
                 </a>
+
+                <div class="modal fade" id="deleteT{{name}}" tabindex="-1" role="dialog" aria-labelledby="deleteTopic{{name}}"
+                     aria-hidden="true" align="center">
+                    <form action="/MainPage/deleteTopic{{name}}" method="post">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="card card-plain">
+                                    <div class="modal-header card-header card-header-primary">
+                                        <h4 class="card-title">Confirmar eliminación</h4>
+                                    </div>
+                                </div>
+                                <div class="modal-body" align="left">
+                                    <p> ¿Está seguro de eliminar el {{name}} y sus conceptos asociados?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" id="submit" value="Accept" class="btn btn-primary"/>
+                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             {{/teacher}}
         </div>
 
@@ -21,13 +45,38 @@
                     <div class="row">
                         <div class="col-md-10">
                             <a class="nav-link"
-                               {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                               {{#student}}href="/MainPage/Student/{{name}}" {{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
                         </div>
                         {{#teacher}}
                             <div class="col-md-1">
-                                <a href="/MainPage">
+                                <a href="#deleteC{{name}}" data-toggle="modal" name="delete{{name}}"
+                                   style="position: relative;left: 15%">
                                     <i class="material-icons">delete</i>
                                 </a>
+                            </div>
+                            <div class="modal fade" id="deleteC{{name}}" tabindex="-1" role="dialog"
+                                 aria-labelledby="deleteConceptTo{{Name}}"
+                                 aria-hidden="true" align="center">
+                                <form action="/MainPage/deleteConcept{{name}}" method="post">
+                                    <div class="modal-dialog " role="document">
+                                        <div class="modal-content">
+                                            <div class="card card-plain">
+                                                <div class="modal-header card-header card-header-primary">
+                                                    <h4 class="card-title">Confirmar eliminación</h4>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body" align="left">
+                                                <p> ¿Está seguro de eliminar el concepto {{name}}?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" id="submit" value="Accept"
+                                                       class="btn btn-primary"/>
+                                                <input type="hidden" name="_csrf" value="{{token}}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         {{/teacher}}
                         {{#student}}
@@ -37,9 +86,40 @@
                 </div>
             {{/concepts}}
             {{#teacher}}
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" style="position: relative;left: 15%">
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="modal"
+                        data-target="#addConcept{{name}}" name="add{{name}}" style="position: relative;left: 15%">
                     <i class="material-icons">add</i>
                 </button>
+                <div class="modal fade" id="addConcept{{name}}" tabindex="-1" role="dialog"
+                     aria-labelledby="addConceptTo{{Name}}"
+                     aria-hidden="true" align="center">
+                    <form action="/mainPage/addTo{{name}}" method="post">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="card card-plain">
+                                    <div class="modal-header card-header card-header-primary">
+                                        <h4 class="card-title">Introduzca nuevo tema</h4>
+                                    </div>
+                                </div>
+                                <div class="modal-body" align="left">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating">Añadir concepto {{name}}</label>
+                                                <input name="conceptName" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" id="submit" value="Accept" class="btn btn-primary"/>
+                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             {{/teacher}}
         </div>
     </div>
@@ -47,3 +127,4 @@
 {{#NoMore}}
     <span id="noTopic" style="float: right;top:-20px">No existen más temas</span>
 {{/NoMore}}
+

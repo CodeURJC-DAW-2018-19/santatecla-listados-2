@@ -81,5 +81,11 @@ public class Topic {
     public void setConcept(Concept c){
         concepts.add(c);
     }
+    public void removeConcept(Concept c){
+        concepts.remove(c);
+    }
+    public void removeConcepts(){
+        concepts=new HashSet<>();
+    }
 
 }
