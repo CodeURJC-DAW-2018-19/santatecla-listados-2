@@ -48,6 +48,8 @@ public class MainController {
 
     @GetMapping(path = "/MainPage/Guest")
     public String mainPageVisitor(Model model) {
+        noMore = false;
+        search = false;
         List<Topic> topics=topicRepository.findAll();
         model.addAttribute("student", false);
         model.addAttribute("teacher", false);
@@ -77,7 +79,7 @@ public class MainController {
         model.addAttribute("guest", false);
         model.addAttribute("inOut","out");
         model.addAttribute("urlLog","/logOut");
-        return "/MainPage";
+        return "MainPage";
     }
 
     @GetMapping("/MainPage/Student/{name}")
@@ -148,18 +150,28 @@ public class MainController {
             }
         }
         User u = userComponent.getLoggedUser();
-        if (u.getRol().equals("ROLE_TEACHER")){
+        if (u == null){
+            model.addAttribute("student", false);
+            model.addAttribute("teacher", false);
+            model.addAttribute("guest", true);
+            model.addAttribute("topics",topics);
+            model.addAttribute("inOut","in");
+            model.addAttribute("urlLog","/logIn");
+        }else if (u.getRol().equals("ROLE_TEACHER")){
             model.addAttribute("student", false);
             model.addAttribute("teacher", true);
+            model.addAttribute("guest", false);
+            model.addAttribute("inOut","out");
+            model.addAttribute("urlLog","/logOut");
         }else if (u.getRol().equals("ROLE_STUDENT")){
             model.addAttribute("student", true);
             model.addAttribute("teacher", false);
+            model.addAttribute("guest", false);
+            model.addAttribute("inOut","out");
+            model.addAttribute("urlLog","/logOut");
         }
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
-        model.addAttribute("guest", false);
-        model.addAttribute("inOut","out");
-        model.addAttribute("urlLog","/logOut");
         if (topics.isEmpty() && !noMore){
             noMore=true;
             model.addAttribute("NoMore",true);

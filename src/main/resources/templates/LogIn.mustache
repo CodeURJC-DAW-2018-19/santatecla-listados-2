@@ -85,7 +85,7 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 </head>
-<body class="" style="overflow-x:hidden">
+<body class="" style="overflow-x:hidden; overflow-y:hidden">
 
 {{> header}}
 <div class="wrapper ">
@@ -100,7 +100,7 @@
                         <div class="card-body" style="margin-left:-10%">
                             <form action="/logIn" method="post">
                                 {{#errorPassword}}
-                                    <span style="color: red"> We cannot find an account with that email address or that password </span>
+                                    <span style="color: red;left: -2%;position: relative;"> We cannot find an account with that email address or that password </span>
                                 {{/errorPassword}}
                                 <div class="row">
                                     <div class="col-md-11">

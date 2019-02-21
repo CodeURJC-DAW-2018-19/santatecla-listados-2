@@ -21,7 +21,7 @@
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
     <link rel="stylesheet" href="/css/MainPageStyle.css">
-
+    <link rel="stylesheet" href="/css/commonCss.css">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
@@ -105,7 +105,7 @@
         width: 94%;
     }
 </style>
-<body  style="overflow-x:hidden">
+<body>
 
 {{> header}}
 
@@ -159,7 +159,12 @@
 </div>
 
 <!--   Diagram Botton   -->
+
 {{^guest}}
 {{> diagram}}
+{{/guest}}
+{{#guest}}
+    </br>
+    </br>
 {{/guest}}
 {{> footer}}
