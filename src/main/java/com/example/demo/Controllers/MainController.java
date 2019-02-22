@@ -154,6 +154,12 @@ public class MainController {
         topicRepository.delete(t);
         return "redirect:/MainPage";
     }
+    @RequestMapping(value="/MainPage/deleteItem", method =  RequestMethod.POST)
+    public String deleteItem(Model model,@RequestParam String itemName) {
+        Item i=itemRepository.findByName(itemName);
+        itemRepository.delete(i);
+        return "redirect:/MainPage/Teacher/"+i.getConcept().getName();
+    }
 
 
 
