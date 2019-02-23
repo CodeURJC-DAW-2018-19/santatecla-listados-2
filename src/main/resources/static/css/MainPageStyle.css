@@ -23,6 +23,12 @@
     top: -70px;
 }
 
+.btn.btn-primary2.dg {
+    position: relative;
+    background: #9c27b0;
+    font-size: 20px;
+}
+
 /* Searching box settings */
 
 .search_box_padding {
