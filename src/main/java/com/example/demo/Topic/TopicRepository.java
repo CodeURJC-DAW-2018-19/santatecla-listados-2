@@ -10,5 +10,6 @@ import java.util.List;
 public  interface  TopicRepository extends JpaRepository<Topic,Integer> {
     Topic findByName(String name);
     Topic findByConcepts(Concept concept);
+    List<Topic> findByNameContaining(String name);
 }
 

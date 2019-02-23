@@ -94,8 +94,6 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 
-
-
 </head>
 <style>
     .card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
@@ -104,13 +102,24 @@
         padding: 15px;
         width: 94%;
     }
-    .modal-backdrop{
-        z-index: 0 !important ;
+
+    .modal-backdrop {
+        z-index: 0 !important;
     }
 </style>
-<body>
 
-{{> header}}
+<body onload="callHeader()">
+<script>
+    function callHeader() {
+        $.ajax({
+            url: "/MainPage/HeaderConcept"
+        }).done(function (data) {
+            $("#header").append(data);
+        })
+    }
+</script>
+<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+</header>
 
 <!--   Search Box   -->
 
@@ -121,7 +130,8 @@
                 <div class="col-md-11">
                     <div class="form-group bmd-form-group">
                         <div class="input-group-prepend">
-                            <input type="text" name=searchText id=searchText class="form-control" placeholder="Search" style="padding: 0px 10px">
+                            <input type="text" name=searchText id=searchText class="form-control" placeholder="Search"
+                                   style="padding: 0px 10px">
                         </div>
                     </div>
                 </div>
@@ -150,7 +160,8 @@
         </div>
         <div style="float: bottom">
             {{#teacher}}
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="modal" data-target="#addTopics" name="addTopics">
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="modal"
+                        data-target="#addTopics" name="addTopics">
                     <i class="material-icons">add</i>
                 </button>
             {{/teacher}}
@@ -174,25 +185,24 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
-                                <label class="bmd-label-floating" >Añadir nuevo tema</label>
+                                <label class="bmd-label-floating">Añadir nuevo tema</label>
                                 <input name="topicName" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" id="submit" value="Accept" class="btn btn-primary" />
+                    <input type="submit" id="submit" value="Accept" class="btn btn-primary"/>
                     <input type="hidden" name="_csrf" value="{{token}}"/>
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 <!--   Diagram Botton   -->
 
 {{^guest}}
-{{> diagram}}
+    {{> diagram}}
 {{/guest}}
 {{#guest}}
     </br>

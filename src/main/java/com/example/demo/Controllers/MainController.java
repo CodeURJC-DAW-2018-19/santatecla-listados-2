@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Concept.Concept;
 import com.example.demo.Concept.ConceptRepository;
+import com.example.demo.ConceptHeader.ConceptHeader;
 import com.example.demo.Item.Item;
 import com.example.demo.Item.ItemRepository;
 import com.example.demo.Question.Question;
@@ -32,6 +33,7 @@ public class MainController {
     private static boolean search;
     private static boolean noMore;
     private static String text;
+    private static LogOutController logOutController = new LogOutController();
     @Autowired
     private UserComponent userComponent;
     @Autowired
@@ -140,7 +142,7 @@ public class MainController {
         topicRepository.save(t);
         return "redirect:/MainPage";
     }
-    @RequestMapping(value="/MainPage/deleteConcept{name}", method =  RequestMethod.POST)
+    @RequestMapping(value="/MainPage/de{{/teacher}}leteConcept{name}", method =  RequestMethod.POST)
     public String deleteConcept(Model model,@PathVariable String name) {
         Concept c=conceptRepository.findByName(name);
         c.getTopic().removeConcept(c);
@@ -158,7 +160,7 @@ public class MainController {
 
 
     @GetMapping (path = "/TopicMoreButton")
-    public String topicMoreButton(Model model, @PageableDefault(size = 2) Pageable pageable){
+    public String topicMoreButton(Model model, @PageableDefault(size = 10) Pageable pageable){
         i++;
         model.addAttribute("numero",i);
         Page<Topic> topics;
@@ -166,12 +168,16 @@ public class MainController {
             search = false;
             topics = topicRepository.findAll(pageable);
         }else{
-            List<Concept> concepts=conceptRepository.findByNameContainingOrTopicNameContaining(text,text);
+            List<Concept> concepts=conceptRepository.findByNameContaining(text);
+            List<Topic> listaTopic = topicRepository.findByNameContaining(text);
             List<Topic> t=new ArrayList<>();
             for (Concept c:concepts) {
                 if (!t.contains(c.getTopic()))
                     t.add(c.getTopic());
-
+            }
+            for (Topic topic: listaTopic){
+                if (!t.contains(topic))
+                    t.add(topic);
             }
             long start = pageable.getOffset();
             long end = (start + pageable.getPageSize()) > t.size() ? t.size() : (start + pageable.getPageSize());
@@ -210,4 +216,49 @@ public class MainController {
         }
         return "TopicMore";
     }
+
+    @GetMapping("/MainPage/DeleteHeaderConcept/{name}")
+    public void deleteHeaderConcept(Model model,@PathVariable String name) {
+        logOutController.deleteConceptHeader(new ConceptHeader(name));
+        for (ConceptHeader c : logOutController.getArray()){
+            System.out.println(c.getName());
+        }
+    }
+    @GetMapping("/MainPage/HeaderConcept/{name}")
+    public void addHeaderConcept(Model model,@PathVariable String name) {
+        if (!logOutController.conceptContains(new ConceptHeader(name)) && logOutController.size()<11) {
+            ConceptHeader conceptHeaderV = new ConceptHeader(name);
+            logOutController.addConceptHeader(conceptHeaderV);
+        }
+    }
+    @GetMapping("/MainPage/logOut")
+    public String logout(Model model, HttpSession session) {
+        logOutController.empty();
+        return "redirect:/logOut";
+    }
+    @GetMapping("/MainPage/HeaderConcept")
+    public String addHeaderConcept(Model model) {
+        User u = userComponent.getLoggedUser();
+        if (u == null){
+            model.addAttribute("login",true);
+            model.addAttribute("urlLog","/logIn");
+            model.addAttribute("inOut","in");
+        }else if (u.getRol().equals("ROLE_TEACHER")){
+            model.addAttribute("student", false);
+            model.addAttribute("teacher", true);
+            model.addAttribute("login",false);
+            model.addAttribute("inOut","out");
+            model.addAttribute("urlLog","/MainPage/logOut");
+        }else if (u.getRol().equals("ROLE_STUDENT")) {
+            model.addAttribute("student", true);
+            model.addAttribute("teacher", false);
+            model.addAttribute("login",false);
+            model.addAttribute("inOut","out");
+            model.addAttribute("urlLog","/MainPage/logOut");
+        }
+        model.addAttribute("conceptHeader",logOutController.getArray());
+        model.addAttribute("LogIn",true);
+        return "header";
+    }
+
 }

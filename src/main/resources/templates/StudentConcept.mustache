@@ -101,10 +101,18 @@
     }
 </style>
 
-<body  style="overflow-x:hidden">
-
-{{> header}}
-
+<body  style="overflow-x:hidden" onload="callHeader()">
+<script>
+    function callHeader() {
+        $.ajax({
+            url: "/MainPage/HeaderConcept"
+        }).done(function (data) {
+            $("#header").append(data);
+        })
+    }
+</script>
+<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+</header>
 
 <div id="contained" style="margin: 2%">
     <div id="tobeseen">

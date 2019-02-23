@@ -85,9 +85,18 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 </head>
-<body class="" style="overflow-x:hidden; overflow-y:hidden">
-
-{{> header}}
+<body class="" style="overflow-x:hidden; overflow-y:hidden" onload="callHeader()">
+<script>
+    function callHeader() {
+        $.ajax({
+            url: "MainPage/HeaderConcept"
+        }).done(function (data) {
+            $("#header").append(data);
+        })
+    }
+</script>
+<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+</header>
 <div class="wrapper ">
     <div class="main-panel">
         <div class="align-content-center">

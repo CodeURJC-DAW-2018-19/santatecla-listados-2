@@ -44,8 +44,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-10">
-                            <a class="nav-link"
-                               {{#student}}href="/MainPage/Student/{{name}}" {{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                            <a class="nav-link" id = "headerConcept"
+                               {{#student}}onclick="addHeaderConcept('{{name}}')" href = "/MainPage/Student/{{name}}" {{/student}}{{#teacher}} onclick="addHeaderConcept('{{name}}')" href = "/MainPage/Teacher/{{name}}" {{/teacher}}>{{name}}</a>
+                            <script>
+                                function addHeaderConcept(nombre) {
+                                    $.ajax({
+                                        url : "/MainPage/HeaderConcept/"+nombre
+                                    })
+                                }
+                            </script>
                         </div>
                         {{#teacher}}
                             <div class="col-md-1">
