@@ -5,23 +5,23 @@ import com.example.demo.Concept.Concept;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 public class Image {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name="PrimaryKey")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="PrimaryKey")
     private int pk;
-    //@Column(name="Id")
+    @Column(name="Id")
     private int id;
-    //@Column(name="Title")
+    @Column(name="Title")
     private String title;
 
-    //@Column(name="Concept")
+    @Column(name="Concept")
     private String concept;
 
-    //@OneToOne
-    //private Concept relatedconcept;
+    @OneToOne
+    private Concept relatedconcept;
 
 
 
@@ -52,9 +52,9 @@ public class Image {
 
     public void setConcept(String concept) { this.concept = concept; }
 
-    //public Concept getRelatedconcept(){ return relatedconcept; }
+    public Concept getRelatedconcept(){ return relatedconcept; }
 
-    //public void setRelatedconcept(Concept concept){ this.relatedconcept = concept; }
+    public void setRelatedconcept(Concept concept){ this.relatedconcept = concept; }
 
     @Override
     public String toString() {
