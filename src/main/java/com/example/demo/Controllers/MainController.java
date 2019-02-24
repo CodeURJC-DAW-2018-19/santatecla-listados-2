@@ -420,6 +420,14 @@ public class MainController {
         model.addAttribute("showSubmit", true);
         return "newAccount";
     }
+    @GetMapping ("/MainPage/Teacher/{conceptName}/save/{text}/{checked}")
+    public String addItem(Model model,@PathVariable String conceptName,@PathVariable String text, @PathVariable boolean checked){
+        Item i=new Item(text,checked);
+        Concept c=this.conceptService.findOne(conceptName);
+        i.setConcept(c);
+        this.itemService.save(i);
+        return "redirect:/MainPage/Teacher/"+conceptName;
+    }
 
     @RequestMapping("/logIn/newAccount/try")
     public String newAccountTry(Model model, @RequestParam String username, @RequestParam String rol,
