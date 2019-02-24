@@ -117,34 +117,35 @@
 <div id="contained" style="margin: 2%">
     <div id="tobeseen">
         <h3>PREGUNTAS CORREGIDAS</h3>
-        <table border="0" cellspacing="20" id="corrected">
-             {{#questions}}
-                 {{#corrected}}
-            <tr>
-                <td>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}" > {{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></td>
-                {{#answer}}
-                    {{#mark}}
-                        <td><i class="material-icons" style="color:green">check</i></td>
-                    {{/mark}}
-                    {{^mark}}
-                        <td><i class="material-icons" style="color:red">clear</i></td>
-                    {{/mark}}
-                {{/answer}}
-            </tr>
-                 {{/corrected}}
-             {{/questions}}
+        <table id = "questionTable" border="0" cellspacing="20" id="corrected">
+            <script src="/js/moreCorrectWord.js"></script>
+            <script>moreCorrectWord('{{name}}')</script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#loadMoreCorrectWord').click(function () {
+                        moreCorrectWord('{{name}}');
+                    });
+                });
+            </script>
         </table>
+        <button type="button" id="loadMoreCorrectWord" class="btn btn-primary" style="float:right;top: 16px;right: 44px"> Ver más </button>
     </div>
 
     <div id="answered">
         <h3>PREGUNTAS POR CORREGIR</h3>
-        {{#questions}}
-            {{^corrected}}
-        <ul class="list-group" style="list-style: none;">
-            <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></li>
-        </ul>
-            {{/corrected}}
-        {{/questions}}
+        <div id = "noCorrectContainer">
+
+        </div>
+        <script src="/js/noCorrectMoreQuestions.js"></script>
+        <script>moreNoCorrectWord('{{name}}')</script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#loadMoreNoCorrect').click(function () {
+                    moreNoCorrectWord('{{name}}');
+                });
+            });
+        </script>
+        <button type="button" id="loadMoreNoCorrect" class="btn btn-primary" style="float:right;top: 16px;right: 44px"> Ver más </button>
     </div>
 </div>
 

@@ -6,7 +6,6 @@ import com.example.demo.Answer.Answer;
 import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Concept.Concept;
 import com.example.demo.Concept.ConceptRepository;
-import com.example.demo.Controllers.MainController;
 import com.example.demo.Item.Item;
 import com.example.demo.Item.ItemRepository;
 import com.example.demo.Question.Question;
@@ -23,9 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseInitializer {
 
-	private static int numTopic =1; //en add de profesor debe de incrementarse
-	@Autowired
-	private UserComponent userComponent;
+	private static int numTopic =1;
 	@Autowired
 	private ConceptRepository conceptRepository;
 	@Autowired

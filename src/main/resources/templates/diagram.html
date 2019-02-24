@@ -16,15 +16,11 @@
                 <!-- prepare a DOM container with width and height -->
                 <div id="main" style="width: 468px;height:360px;"></div>
                 <script type="text/javascript">
-                    // based on prepared DOM, initialize echarts instance
                     var myChart = echarts.init(document.getElementById("main"));
-
-                    // specify chart configuration item and data
                     option = {
                         tooltip: {
                             trigger: "axis",
                             axisPointer: {
-
                                 type: "shadow" // by default is line, optional：'line' | 'shadow'
                             }
                         },

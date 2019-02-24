@@ -1,0 +1,16 @@
+{{#questions}}
+<tr>
+    <td>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}" > {{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></td>
+    {{#answer}}
+    {{#mark}}
+    <td><i class="material-icons" style="color:green">check</i></td>
+    {{/mark}}
+    {{^mark}}
+    <td><i class="material-icons" style="color:red">clear</i></td>
+    {{/mark}}
+    {{/answer}}
+</tr>
+{{/questions}}
+{{#noMore}}
+    <p style="float: right">no existen mas elementos</p>
+{{/noMore}}

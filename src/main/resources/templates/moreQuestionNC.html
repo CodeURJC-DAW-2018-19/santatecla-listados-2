@@ -1,0 +1,25 @@
+{{#questions}}
+<li class="list-inline">{{question}}: {{#answer}}{{answerTest}}{{/answer}}
+    <div class="form-check-inline" style="position:relative;left: 4%">
+        <div class="form-check-inline form-check-radio">
+            <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
+                       id="exampleRadios1{{-index}}" value="option1"> CORRECTO<span class="circle">
+                                                <span class="check"></span></span>
+            </label>
+        </div>
+        <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
+            <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
+                       id="exampleRadios2{{-index}}"
+                       value="option2">
+                INCORRECTO
+                <span class="circle"><span class="check"></span></span>
+            </label>
+        </div>
+    </div>
+</li>
+{{/questions}}
+{{#noMore}}
+    <p style="margin-left: 57%;margin-top: 2%">No existen mas elementos</p>
+{{/noMore}}

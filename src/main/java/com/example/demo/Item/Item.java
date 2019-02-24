@@ -1,7 +1,6 @@
 package com.example.demo.Item;
 
 import com.example.demo.Concept.Concept;
-
 import javax.persistence.*;
 
 @Entity

@@ -109,7 +109,7 @@
                         <div class="card-body" style="margin-left:-10%">
                             <form action="/logIn" method="post">
                                 {{#errorPassword}}
-                                    <span style="color: red;left: -2%;position: relative;"> We cannot find an account with that email address or that password </span>
+                                    <span style="color: red;left: -2%;position: relative;"> Correo o contraseña incorrectos. Por favor vuelva a intentarlo </span>
                                 {{/errorPassword}}
                                 <div class="row">
                                     <div class="col-md-11">
@@ -150,9 +150,9 @@
                                 </div>
                                 <input type="submit"  value="Submit" class="btn btn-primary" style="width: 44.5%"/>
                                 <input type="hidden" name="_csrf" value="{{token}}"/>
-                                <a href="/MainPage/Guest" class="btn btn-secondary" style="width: 44.5%">Guest</a>
+                                <a href="/MainPage/Guest" class="btn btn-secondary" style="width: 44.5%">Invitado</a>
                                 <br>
-                                <a class="links-horizontal" href="#"><u>Forgot your password?</u></a>
+                                <a class="links-horizontal" href="#"><u>¿Olvido su contraseña?</u></a>
                             </form>
                         </div>
                     </div>

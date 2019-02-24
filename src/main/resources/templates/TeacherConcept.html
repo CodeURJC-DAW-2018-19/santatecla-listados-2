@@ -111,39 +111,22 @@
     <div id="Items">
         <h1>ITEMS</h1>
         <ul id="list" class="list-group">
-            {{#items}}
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group bmd-form-group">
-                            <input type="text" id=input{{-index}}}value="{{name}}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6" style="position: relative;top: 27px ;left: 40px; ">
-                        <div class="form-check-inline form-check-radio">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
-                                       id="exampleRadio1{{-index}}" value="option1" {{#correct}}checked{{/correct}} >
-                                CORRECTO<span class="circle">
-                                                <span class="check"></span></span>
-                            </label>
-                        </div>
-                        <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
-                                       id="exampleRadio2{{-index}}"
-                                       value="option2" {{^correct}}checked{{/correct}}>
-                                INCORRECTO
-                                <span class="circle"><span class="check"></span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            {{/items}}
+            <script src="/js/MoreItems.js"></script>
+            <script>loadMoreItems('{{name}}')</script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#loadMoreItems').click(function () {
+                        loadMoreItems('{{name}}');
+                    });
+                });
+            </script>
+            </table>
+        </ul>
+        <ul class="list-group">
+        <button type="button" id="loadMoreItems" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
         </ul>
         <div class="buttonsAddAndRemove" style="position: relative;left: 1%">
-            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick="addTextItem()">>
+            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick="addTextItem()">
                 <i class="material-icons">add</i>
             </button>
             <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-target="#deleteI" data-toggle="modal" name="delete{{name}}"
@@ -152,33 +135,21 @@
             </button>
         </div>
     </div>
-    <div id="pendingQuestions">
+    <div id="pendingQuestions" style="margin-top: 2%">
         <h1>PREGUNTAS POR CORREGIR </h1>
+        <ul  id = "list-group" class="list-group">
+            <script src="/js/loadMoreQuestionsNC.js"></script>
+            <script>loadMoreQuestions('{{name}}')</script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#loadMoreQuestionsNC').click(function () {
+                        loadMoreQuestions('{{name}}');
+                    });
+                });
+            </script>
+        </ul>
         <ul class="list-group">
-            {{#questions}}
-            {{^corrected}}
-            <li class="list-inline">{{question}}: {{#answer}}{{answerTest}}{{/answer}}
-                <div class="form-check-inline" style="position:relative;left: 4%">
-                    <div class="form-check-inline form-check-radio">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
-                                   id="exampleRadios1{{-index}}" value="option1"> CORRECTO<span class="circle">
-                                                <span class="check"></span></span>
-                        </label>
-                    </div>
-                    <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
-                                   id="exampleRadios2{{-index}}"
-                                   value="option2">
-                            INCORRECTO
-                            <span class="circle"><span class="check"></span></span>
-                        </label>
-                    </div>
-                </div>
-            </li>
-            {{/corrected}}
-            {{/questions}}
+            <button type="button" id="loadMoreQuestionsNC" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
         </ul>
     </div>
 </div>

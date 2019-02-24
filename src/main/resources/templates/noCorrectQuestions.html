@@ -1,0 +1,8 @@
+{{#questions}}
+<ul class="list-group" style="list-style: none;">
+    <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}}{{answerTest}} {{/answer}} {{-index}}</a></li>
+</ul>
+{{/questions}}
+{{#noMore}}
+<p style="right: -60%;position: relative"> no hay más elementos</p>
+{{/noMore}}
