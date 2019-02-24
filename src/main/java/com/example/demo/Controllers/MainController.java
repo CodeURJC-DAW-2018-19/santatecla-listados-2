@@ -162,7 +162,7 @@ public class MainController {
         return "redirect:/MainPage";
     }
 
-    @RequestMapping(value = "/MainPage/de{{/teacher}}leteConcept{name}", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainPage/deleteConcept{name}", method = RequestMethod.POST)
     public String deleteConcept(Model model, @PathVariable String name) {
         Concept c = conceptRepository.findByName(name);
         c.getTopic().removeConcept(c);
@@ -170,7 +170,7 @@ public class MainController {
         return "redirect:/MainPage";
     }
 
-    @RequestMapping(value = "/MainPage/deleteTopic{namTema1: Introdue}", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainPage/deleteTopic{name}", method = RequestMethod.POST)
     public String deleteTopic(Model model, @PathVariable String name) {
         Topic t = topicRepository.findByName(name);
         t.removeConcepts();

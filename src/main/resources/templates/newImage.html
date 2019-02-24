@@ -117,14 +117,14 @@
     <form action="/image/upload" method="post"
           enctype="multipart/form-data">
         <p>
-            <label>Title:</label> <input type='text' name='imageTitle' />
+            <label>Title:</label> <input type='text' required name='imageTitle' />
         </p>
         <p>
-            <label>Related Concept:</label> <input type='text' name='imageConcept' />
+            <label>Related Concept:</label> <input type='text' required name='imageConcept' />
         </p>
 
         <p>
-            <label>Image file:</label><input type="file" name="file" />
+            <label>Image file:</label><input type="file" required name="file" />
         </p>
         <input type='submit' class="btn btn-primary btn-lg" name='enviar' value='Enviar' />
         <input type="hidden" name="_csrf" value="{{token}}"/>
