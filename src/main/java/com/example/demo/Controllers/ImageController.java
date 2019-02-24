@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Concept.ConceptRepository;
 import com.example.demo.Concept.Concept;
+import com.example.demo.Concept.ConceptService;
 import com.example.demo.UploadImages.Image;
 //import com.example.demo.UploadImages.ImageRepository;
 import com.example.demo.User.User;
@@ -30,7 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ImageController {
 
     @Autowired
-    private ConceptRepository conceptRepository;
+    private ConceptService conceptService;
 
     @Autowired
     private UserComponent userComponent;
@@ -132,7 +133,7 @@ public class ImageController {
             model.addAttribute("urlLog","/logIn");
         }
 
-        Concept conceptName =  conceptRepository.findByName(imageConcept);
+        Concept conceptName =  conceptService.findOne(imageConcept);
 
         if (conceptName == null){
             model.addAttribute("error", "El concepto relacionado no existe");

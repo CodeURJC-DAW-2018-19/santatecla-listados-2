@@ -157,7 +157,7 @@
 
 <div class="modal fade" id="deleteI" tabindex="-1" role="dialog"
      aria-labelledby="deleteItem"
-     aria-hidden="true" align="center">
+     aria-hidden="true" align="center" data-backdrop="static" data-keyboard="true">
     <form action="/MainPage/deleteItem" method="post">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
@@ -171,7 +171,7 @@
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
                                 <label class="bmd-label-floating">Añada el nombre del item a eliminar</label>
-                                <input name="itemName" type="text" class="form-control">
+                                <input name="itemName" required type="text" class="form-control">
                             </div>
                         </div>
                     </div>

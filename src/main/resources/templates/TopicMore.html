@@ -15,7 +15,7 @@
                 </a>
 
                 <div class="modal fade" id="deleteT{{name}}" tabindex="-1" role="dialog" aria-labelledby="deleteTopic{{name}}"
-                     aria-hidden="true" align="center">
+                     aria-hidden="true" align="center" data-backdrop="static" data-keyboard="true">
                     <form action="/MainPage/deleteTopic{{name}}" method="post">
                         <div class="modal-dialog " role="document">
                             <div class="modal-content">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="modal fade" id="deleteC{{name}}" tabindex="-1" role="dialog"
                                  aria-labelledby="deleteConceptTo{{Name}}"
-                                 aria-hidden="true" align="center">
+                                 aria-hidden="true" align="center" data-backdrop="static" data-keyboard="true">
                                 <form action="/MainPage/deleteConcept{{name}}" method="post">
                                     <div class="modal-dialog " role="document">
                                         <div class="modal-content">
@@ -102,7 +102,7 @@
                 </button>
                 <div class="modal fade" id="addConcept{{name}}" tabindex="-1" role="dialog"
                      aria-labelledby="addConceptTo{{Name}}"
-                     aria-hidden="true" align="center">
+                     aria-hidden="true" align="center" data-backdrop="static" data-keyboard="true">
                     <form action="/mainPage/addTo{{name}}" method="post">
                         <div class="modal-dialog " role="document">
                             <div class="modal-content">
@@ -116,7 +116,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating">Añadir concepto {{name}}</label>
-                                                <input name="conceptName" type="text" class="form-control">
+                                                <input name="conceptName" required type="text" class="form-control">
                                             </div>
                                         </div>
                                     </div>

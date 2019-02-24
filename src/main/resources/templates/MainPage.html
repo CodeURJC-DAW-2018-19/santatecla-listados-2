@@ -100,6 +100,7 @@
 
     .modal-backdrop {
         z-index: 0 !important;
+
     }
 </style>
 
@@ -167,7 +168,7 @@
     </div>
 </div>
 <div class="modal fade" id="addTopics" tabindex="-1" role="dialog" aria-labelledby="addTopics "
-     aria-hidden="true" align="center">
+     aria-hidden="true" align="center" >
     <form action="/mainPage/addTopic" method="post">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
@@ -181,7 +182,7 @@
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
                                 <label class="bmd-label-floating">Añadir nuevo tema</label>
-                                <input name="topicName" type="text" class="form-control">
+                                <input name="topicName" required type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -199,13 +200,13 @@
 <center>
     <div style="margin-bottom: 20px">
     {{# teacher}}
-    <a href="/image"><input type="button" class="btn btn-primary2 dg" value="IMAGES"></a>
+    <a href="/image"><input type="button" class="btn btn-primary" value="IMAGES"></a>
     {{/ teacher}}
     {{# student}}
-    <a href="/image"><input type="button" class="btn btn-primary2 dg" value="IMAGES"></a>
+    <a href="/image"><input type="button" class="btn btn-primary" value="IMAGES"></a>
     {{/ student}}
     {{# guest}}
-    <a href="/image/Guest"><input type="button" class="btn btn-primary2 dg" value="IMAGES"></a>
+    <a href="/image/Guest"><input type="button" class="btn btn-primary" value="IMAGES"></a>
     {{/guest}}
 </div>
 </center>

@@ -1,15 +1,20 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Answer.AnswerRepository;
+import com.example.demo.Answer.AnswerService;
 import com.example.demo.Concept.Concept;
 import com.example.demo.Concept.ConceptRepository;
+import com.example.demo.Concept.ConceptService;
 import com.example.demo.ConceptHeader.ConceptHeader;
 import com.example.demo.Item.Item;
 import com.example.demo.Item.ItemRepository;
+import com.example.demo.Item.ItemService;
 import com.example.demo.Question.Question;
 import com.example.demo.Question.QuestionRepository;
+import com.example.demo.Question.QuestionService;
 import com.example.demo.Topic.Topic;
 import com.example.demo.Topic.TopicRepository;
+import com.example.demo.Topic.TopicService;
 import com.example.demo.User.User;
 import com.example.demo.User.UserComponent;
 import com.example.demo.User.UserRepository;
@@ -23,7 +28,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -40,17 +48,17 @@ public class MainController {
     @Autowired
     private UserComponent userComponent;
     @Autowired
-    private ConceptRepository conceptRepository;
+    private ConceptService conceptService;
     @Autowired
-    private TopicRepository topicRepository;
+    private TopicService topicService;
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
     @Autowired
-    private AnswerRepository answerRepository;
+    private AnswerService answerService;
     @Autowired
-    private ItemRepository itemRepository;
+    private ItemService itemService;
 
 
 
@@ -61,7 +69,7 @@ public class MainController {
         noMoreItems = false;
         noMoreQuesNC = false;
         search = false;
-        List<Topic> topics = topicRepository.findAll();
+        List<Topic> topics = topicService.findAll();
         model.addAttribute("student", false);
         model.addAttribute("teacher", false);
         model.addAttribute("guest", true);
@@ -74,7 +82,7 @@ public class MainController {
 
     @GetMapping(path = "/MainPage")
     public String mainP(Model model) {
-        List<Topic> topics = topicRepository.findAll();
+        List<Topic> topics = topicService.findAll();
         User u = userComponent.getLoggedUser();
         noMore = false;
         noMoreQues = false;
@@ -98,7 +106,7 @@ public class MainController {
 
     @GetMapping("/MainPage/Student/{name}")
     public String concept(Model model, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
         Set<Question> q = concept.getQuestions();
@@ -111,11 +119,11 @@ public class MainController {
     }
     @GetMapping("/MainPage/Teacher/{name}")
     public String teacherConcept(Model model, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
         Set<Question> q = concept.getQuestions();
-        List<Item> i = itemRepository.findByConceptName(name);
+        List<Item> i = itemService.findByConceptName(name);
         model.addAttribute("name", name);
         model.addAttribute("items", i);
         model.addAttribute("questions", q);
@@ -135,7 +143,7 @@ public class MainController {
         model.addAttribute("numero",i);
         model.addAttribute("student", true);
         model.addAttribute("teacher", false);
-        List<Topic> topics = topicRepository.findAll();
+        List<Topic> topics = topicService.findAll();
         model.addAttribute("topics",topics);
         model.addAttribute("LogIn",true);
         model.addAttribute("inOut","out");
@@ -146,52 +154,71 @@ public class MainController {
     }
 
     @RequestMapping(value = "/mainPage/addTo{name}", method = RequestMethod.POST)
-    public String addConcept(Model model, @RequestParam String conceptName, @PathVariable String name) {
-        Topic t = topicRepository.findByName(name);
+    public String addConcept(Model model, HttpServletResponse res, @RequestParam String conceptName, @PathVariable String name) throws IOException {
+        Optional<Topic> t = topicService.findOne(name);
         Concept c = new Concept(conceptName);
-        c.setTopic(t);
-        t.setConcept(c);
-        conceptRepository.save(c);
-        return "redirect:/MainPage";
+        if (t.isPresent()){
+            c.setTopic(t.get());
+            t.get().setConcept(c);
+            conceptService.save(c);
+            return "redirect:/MainPage";
+        }else{
+            res.sendError(404, "Topic with this concept asociated to does not exist");
+            return "/error";
+
+        }
+
     }
 
     @RequestMapping(value = "/mainPage/addTopic", method = RequestMethod.POST)
     public String addTopic(Model model, @RequestParam String topicName) {
-        Topic t = new Topic(topicName, topicRepository.findAll().size() + 1);
-        topicRepository.save(t);
+        Topic t = new Topic(topicName, topicService.findAll().size() + 1);
+        topicService.save(t);
         return "redirect:/MainPage";
     }
 
-    @RequestMapping(value = "/MainPage/de{{/teacher}}leteConcept{name}", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainPage/deleteConcept{name}", method = RequestMethod.POST)
     public String deleteConcept(Model model, @PathVariable String name) {
-        Concept c = conceptRepository.findByName(name);
+        Concept c = conceptService.findOne(name);
         c.getTopic().removeConcept(c);
-        conceptRepository.delete(c);
+        conceptService.delete(c);
         return "redirect:/MainPage";
     }
 
-    @RequestMapping(value = "/MainPage/deleteTopic{namTema1: Introdue}", method = RequestMethod.POST)
-    public String deleteTopic(Model model, @PathVariable String name) {
-        Topic t = topicRepository.findByName(name);
-        t.removeConcepts();
-        topicRepository.delete(t);
-        return "redirect:/MainPage";
+    @RequestMapping(value = "/MainPage/deleteTopic{name}", method = RequestMethod.POST)
+    public String deleteTopic(Model model, @PathVariable String name,HttpServletResponse res)throws IOException {
+        Optional<Topic> t = topicService.findOne(name);
+        if (t.isPresent()){
+            t.get().removeConcepts();
+            topicService.delete(t.get());
+            return "redirect:/MainPage";
+        }else{
+            res.sendError(404, "Topic to delete does not exist");
+            return "/error";
+        }
+
     }
 
     @RequestMapping(value = "/MainPage/deleteItem", method = RequestMethod.POST)
-    public String deleteItem(Model model, @RequestParam String itemName) {
-        Item i = itemRepository.findByName(itemName);
-        itemRepository.delete(i);
-        return "redirect:/MainPage/Teacher/" + i.getConcept().getName();
+    public String deleteItem(Model model, @RequestParam String itemName,HttpServletResponse res) throws IOException {
+        Optional<Item> i = itemService.findOne(itemName);
+        if (i.isPresent()){
+            itemService.delete(i.get());
+            return "redirect:/MainPage/Teacher/" + i.get().getConcept().getName();
+        }else{
+            res.sendError(404, "Item to delete does not exist");
+            return "/error";
+        }
+
     }
 
 
     @GetMapping(path = "/MoreQuestions/{name}")
     public String moreQuestionButton(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
-        List<Question> q = questionRepository.findByConceptAndCorrected(concept, true);
+        List<Question> q = questionService.findByConceptAndCorrected(concept, true);
         Page<Question> questions;
         long start = pageable.getOffset();
         long end = (start + pageable.getPageSize()) > q.size() ? q.size() : (start + pageable.getPageSize());
@@ -215,10 +242,10 @@ public class MainController {
 
     @GetMapping(path = "/MoreQuestionsNo/{name}")
     public String moreQuestionButtonNo(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
-        List<Question> q = questionRepository.findByConceptAndCorrected(concept, false);
+        List<Question> q = questionService.findByConceptAndCorrected(concept, false);
         Page<Question> questions;
         long start = pageable.getOffset();
         long end = (start + pageable.getPageSize()) > q.size() ? q.size() : (start + pageable.getPageSize());
@@ -247,10 +274,10 @@ public class MainController {
         Page<Topic> topics;
         if (!search || text.equals("")) {
             search = false;
-            topics = topicRepository.findAll(pageable);
+            topics = topicService.findAll(pageable);
         }else{
-            List<Concept> concepts=conceptRepository.findByNameContaining(text);
-            List<Topic> listaTopic = topicRepository.findByNameContaining(text);
+            List<Concept> concepts=conceptService.findByNameContaining(text);
+            List<Topic> listaTopic = topicService.findByNameContaining(text);
             List<Topic> t=new ArrayList<>();
             for (Concept c:concepts) {
                 if (!t.contains(c.getTopic()))
@@ -344,10 +371,10 @@ public class MainController {
 
     @GetMapping("/loadMoreItems/{name}")
     public String loadMoreItems(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
-        List<Item> i = itemRepository.findByConceptName(name);
+        List<Item> i = itemService.findByConceptName(name);
         System.out.println(i.size());
         Page topics;
         long start = pageable.getOffset();
@@ -366,10 +393,10 @@ public class MainController {
     }
     @GetMapping("/loadMoreQuestionsNC/{name}")
     public String loadMoreQuestionsNC(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptRepository.findByName(name);
+        Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
-        List<Question> q = questionRepository.findByConceptAndCorrected(concept, false);
+        List<Question> q = questionService.findByConceptAndCorrected(concept, false);
         Page<Question> questions;
         System.out.println("AQUI");
         long start = pageable.getOffset();
@@ -392,6 +419,14 @@ public class MainController {
         model.addAttribute("show", true);
         model.addAttribute("showSubmit", true);
         return "newAccount";
+    }
+    @GetMapping ("/MainPage/Teacher/{conceptName}/save/{text}/{checked}")
+    public String addItem(Model model,@PathVariable String conceptName,@PathVariable String text, @PathVariable boolean checked){
+        Item i=new Item(text,checked);
+        Concept c=this.conceptService.findOne(conceptName);
+        i.setConcept(c);
+        this.itemService.save(i);
+        return "redirect:/MainPage/Teacher/"+conceptName;
     }
 
     @RequestMapping("/logIn/newAccount/try")
