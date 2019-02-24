@@ -48,6 +48,9 @@ public class MainController {
     private AnswerRepository answerRepository;
     @Autowired
     private ItemRepository itemRepository;
+    //@Autowired
+    //private ImageRepository imageRepository;
+
     @GetMapping(path = "/MainPage/Guest")
     public String mainPageVisitor(Model model) {
         noMore = false;
@@ -96,6 +99,7 @@ public class MainController {
         model.addAttribute("urlLog","/logOut");
         return "StudentConcept";
     }
+
     @GetMapping("/MainPage/Teacher/{name}")
     public String teacherConcept(Model model, @PathVariable String name) {
         Concept concept = conceptRepository.findByName(name);
@@ -267,4 +271,135 @@ public class MainController {
         return "header";
     }
 
+    @RequestMapping("logIn/newAccount")
+    public String newAccount(Model model){
+        model.addAttribute("show", true);
+        model.addAttribute("showSubmit", true);
+        return "newAccount";
+    }
+
+    @RequestMapping("/logIn/newAccount/try")
+    public String newAccountTry(Model model, @RequestParam String username, @RequestParam String rol,
+                                @RequestParam String name, @RequestParam String password) {
+
+        if (username.equals("")) {
+
+            model.addAttribute("show", true);
+            model.addAttribute("emptyUserName", true);
+            model.addAttribute("errorUserName", false);
+            model.addAttribute("success", false);
+            model.addAttribute("showSubmit", true);
+            model.addAttribute("rolError", false);
+            model.addAttribute("emptyName", false);
+            model.addAttribute("emptyPassword", false);
+
+            return "newAccount";
+        } else if(name.equals("")){
+
+            model.addAttribute("show", true);
+            model.addAttribute("emptyUserName", false);
+            model.addAttribute("errorUserName", false);
+            model.addAttribute("success", false);
+            model.addAttribute("showSubmit", true);
+            model.addAttribute("rolError", false);
+            model.addAttribute("emptyName", true);
+            model.addAttribute("emptyPassword", false);
+
+            return "newAccount";
+
+        }else if(password.equals("")){
+            model.addAttribute("show", true);
+            model.addAttribute("emptyUserName", false);
+            model.addAttribute("errorUserName", false);
+            model.addAttribute("success", false);
+            model.addAttribute("showSubmit", true);
+            model.addAttribute("rolError", false);
+            model.addAttribute("emptyName", false);
+            model.addAttribute("emptyPassword", true);
+
+            return "newAccount";
+        }else {
+
+            User user = userRepository.findByUsername(username);
+            if (user != null) {
+                model.addAttribute("show", true);
+                model.addAttribute("errorUserName", true);
+                model.addAttribute("success", false);
+                model.addAttribute("showSubmit", true);
+                model.addAttribute("rolError", false);
+
+                return "newAccount";
+            } else {
+                model.addAttribute("errorUserName", false);
+
+
+                if (rol.equals("TEACHER")) {
+                    model.addAttribute("success", true);
+                    model.addAttribute("show", false);
+                    model.addAttribute("showSubmit", false);
+                    model.addAttribute("rolError", false);
+                    User newUser = new User(name, password, username, "ROLE_TEACHER");
+                    userRepository.save(newUser);
+
+                    return "newAccount";
+                } else if (rol.equals("STUDENT")) {
+                    model.addAttribute("success", true);
+                    model.addAttribute("show", false);
+                    model.addAttribute("showSubmit", false);
+                    model.addAttribute("rolError", false);
+                    User newUser = new User(name, password, username, "ROLE_STUDENT");
+                    userRepository.save(newUser);
+
+                    return "newAccount";
+                } else {
+                    model.addAttribute("show", true);
+                    model.addAttribute("showSubmit", true);
+                    model.addAttribute("rolError", true);
+                    model.addAttribute("success", false);
+
+                    return "newAccount";
+                }
+
+
+            }
+
+
+            //@RequestParam("rol") String rol, @RequestParam("username") String username, @RequestParam("name") String name, @RequestParam("password") String password) {
+
+            //User User = userRepository.findByUsername(username);
+
+        /*if (rol == "TEACHER") {
+            if (User.getRol().equals("ROLE_TEACHER")) {
+
+                model.addAttribute("errorUserName", true);
+
+                return "newAccount";
+
+            } else {
+                User newUser = new User("name", "password", "username", "ROLE_TEACHER");
+                userRepository.save(newUser);
+
+                model.addAttribute("success", true);
+
+                return "newAccount";
+            }
+        } else if (rol == "STUDENT") {
+            if (User.getRol() == "STUDENT") {
+
+                model.addAttribute("errorUserName", true);
+
+                return "newAccount";
+
+            } else {
+                User newUser = new User("name", "password", "username", "ROLE_STUDENT");
+                userRepository.save(newUser);
+
+                model.addAttribute("success", true);
+
+                return "newAccount";
+            }
+        }*/
+
+        }
+    }
 }

@@ -13,6 +13,7 @@ import com.example.demo.Question.Question;
 import com.example.demo.Question.QuestionRepository;
 import com.example.demo.Topic.Topic;
 import com.example.demo.Topic.TopicRepository;
+import com.example.demo.UploadImages.Image;
 import com.example.demo.User.User;
 import com.example.demo.User.UserComponent;
 import com.example.demo.User.UserRepository;
@@ -121,6 +122,8 @@ public class DatabaseInitializer {
 		answerRepository.save(a2);
 		itemRepository.save(i1);
 		itemRepository.save(i2);
+
+
 
 	}
 

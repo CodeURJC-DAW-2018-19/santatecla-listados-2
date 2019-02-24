@@ -4,6 +4,7 @@ package com.example.demo.Concept;
 import com.example.demo.Item.Item;
 import com.example.demo.Question.Question;
 import com.example.demo.Topic.Topic;
+import com.example.demo.UploadImages.Image;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,12 +27,17 @@ public class Concept {
     private int hits;
     @Column(name = "Pendings")
     private int pendings;
+
     @ManyToOne
     private Topic topic;
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
     private Set<Question> questions;
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
     private Set<Item> items;
+
+    //@OneToMany
+    //private Image image;
+
 
     public Concept(){
         this.questions = new HashSet<>();
@@ -132,4 +138,8 @@ public class Concept {
     public void setItem (Item item){
         this.items.add(item);
     }
+
+    //public Image getImage(){ return image; }
+
+    //public void setImage(Image image){ this.image = image; }
 }

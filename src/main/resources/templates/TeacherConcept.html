@@ -123,7 +123,7 @@
                         <div class="form-check-inline form-check-radio">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
-                                       id="exampleRadio1{{-index}}" value="option1" {{#correct}}checked{{/correct}} >
+                                       id="exampleRadio1{{-index}}" value="option1" {{#correct}} checked {{/correct}} >
                                 CORRECTO<span class="circle">
                                                 <span class="check"></span></span>
                             </label>
@@ -132,7 +132,7 @@
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
                                        id="exampleRadio2{{-index}}"
-                                       value="option2" {{^correct}}checked{{/correct}}>
+                                       value="option2" {{^correct}} checked {{/correct}}>
                                 INCORRECTO
                                 <span class="circle"><span class="check"></span></span>
                             </label>
@@ -212,4 +212,7 @@
         </div>
     </form>
 </div>
+
 {{> footer}}
+</body>
+</html>

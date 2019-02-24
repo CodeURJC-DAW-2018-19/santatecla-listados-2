@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Concept.ConceptRepository;
 import com.example.demo.Concept.Concept;
 import com.example.demo.UploadImages.Image;
+//import com.example.demo.UploadImages.ImageRepository;
 import com.example.demo.User.User;
 import com.example.demo.User.UserComponent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -34,20 +32,26 @@ public class ImageController {
     @Autowired
     private ConceptRepository conceptRepository;
 
+    @Autowired
+    private UserComponent userComponent;
+
+    //@Autowired
+    //private ImageRepository imageRepository;
+
     private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 
     private AtomicInteger imageId = new AtomicInteger();
     private Map<Integer, Image> images = new ConcurrentHashMap<>();
 
-    @Autowired
-    private UserComponent userComponent;
-
     @PostConstruct
     public void init() throws IOException {
+
 
         if (!Files.exists(FILES_FOLDER)) {
             Files.createDirectories(FILES_FOLDER);
         }
+
+
     }
 
     @RequestMapping("/image")
@@ -96,12 +100,12 @@ public class ImageController {
             model.addAttribute("inOut", "out");
             model.addAttribute("urlLog", "/logOut");
         }
-
-        return "index";
+        return "newImage";
     }
 
+
     @RequestMapping(value = "/image/upload", method = RequestMethod.POST)
-    public String handleFileUpload(Model model, Authentication authentication, @RequestParam("imageTitle") String imageTitle,
+    public String handleFileUpload(Model model, @RequestParam("imageTitle") String imageTitle,
                                    @RequestParam("file") MultipartFile file, @RequestParam("imageConcept") String imageConcept){
 
         User user = userComponent.getLoggedUser();
@@ -143,6 +147,12 @@ public class ImageController {
 
                 images.put(id, new Image(id, imageTitle, imageConcept));
 
+                //Attempt to save images in our database
+                //Image image = new Image(id, imageTitle, imageConcept);
+                //imageRepository.save(image);
+                //conceptName.setImage(image);
+                //image.setRelatedconcept(conceptName);
+
                 return "uploaded";
 
             } catch (Exception e) {
@@ -176,5 +186,30 @@ public class ImageController {
             res.sendError(404, "File" + fileName + "(" + image.toAbsolutePath() + ") does not exist");
         }
     }
+
+
+
+    /* View concepts images method
+    @GetMapping("/MainPage/Student/{name}/image")
+    public String showConceptImages(Model model, @PathVariable String name){
+
+        User user = userComponent.getLoggedUser();
+        model.addAttribute("student", true);
+
+        Concept wantedConcept =  conceptRepository.findByName(name);
+        Integer identificador = wantedConcept.getId();
+
+        if (identificador == null){
+            model.addAttribute("error", true);
+            model.addAttribute("mensajeError", "este concepto no tiene imagenes");
+            model.addAttribute("conceptImage", false);
+            return"ConceptImages";
+        }else {
+            model.addAttribute("conceptImage", true);
+            model.addAttribute("error", false);
+            model.addAttribute("id", i);
+            return"ConceptImages";
+        }
+    }*/
 
 }

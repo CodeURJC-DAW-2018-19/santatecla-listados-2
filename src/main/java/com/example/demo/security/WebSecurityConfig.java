@@ -23,6 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/TopicMoreButton").permitAll();
         http.authorizeRequests().antMatchers("/image").permitAll();
         http.authorizeRequests().antMatchers("/image/Guest").permitAll();
+        http.authorizeRequests().antMatchers("/logIn/newAccount").permitAll();
+        http.authorizeRequests().antMatchers("/logIn/newAccount/try").permitAll();
 
 
 

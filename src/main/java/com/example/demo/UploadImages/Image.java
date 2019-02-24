@@ -1,10 +1,29 @@
 package com.example.demo.UploadImages;
 
+
+import com.example.demo.Concept.Concept;
+
+import javax.persistence.*;
+
+//@Entity
 public class Image {
 
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name="PrimaryKey")
+    private int pk;
+    //@Column(name="Id")
     private int id;
+    //@Column(name="Title")
     private String title;
+
+    //@Column(name="Concept")
     private String concept;
+
+    //@OneToOne
+    //private Concept relatedconcept;
+
+
 
 
     public Image(int id, String title, String concept) {
@@ -32,6 +51,10 @@ public class Image {
     public String getConcept() { return concept; }
 
     public void setConcept(String concept) { this.concept = concept; }
+
+    //public Concept getRelatedconcept(){ return relatedconcept; }
+
+    //public void setRelatedconcept(Concept concept){ this.relatedconcept = concept; }
 
     @Override
     public String toString() {
