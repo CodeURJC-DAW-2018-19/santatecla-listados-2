@@ -55,6 +55,7 @@ public class DatabaseInitializer {
 		Question q2 = new Question("¿Donde hay que usar los tipos genericos?", "PType3", true);
 		Answer a1 = new Answer("Respuesta Abierta 0", false);
 		Answer a2 = new Answer("Respuesta Cerrada 1", true);
+
 		Item i1 = new Item("Patron Singleton",false);
 		Item i2 = new Item ("No tengo muy claro que poner",true);
 		User u1= new User("Alberto","123456789","Albertocalib_8","ROLE_STUDENT");
@@ -100,6 +101,10 @@ public class DatabaseInitializer {
 		c1.setItem(i2);
 		i1.setConcept(c1);
 		i2.setConcept(c1);
+		c1.setPendings(c1.getPendings()+1);
+		c1.setHits(c1.getHits()+1);
+		c1.getTopic().setPendings(c1.getTopic().getPendings()+1);
+		c1.getTopic().setHits(c1.getTopic().getHits()+1);
 
 		topicRepository.save(t1);
 		topicRepository.save(t2);

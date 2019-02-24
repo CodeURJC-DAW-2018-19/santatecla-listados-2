@@ -14,6 +14,9 @@ public class AnswerService {
     public Optional<Answer> findOne(int id) {
         return repository.findById(id);
     }
+    public Answer findOne(String name) {
+        return repository.findByOpenAnswer(name);
+    }
 
     public List<Answer> findAll() {
         return repository.findAll();

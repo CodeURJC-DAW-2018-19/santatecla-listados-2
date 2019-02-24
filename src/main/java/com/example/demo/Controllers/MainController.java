@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Answer.Answer;
 import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Answer.AnswerService;
 import com.example.demo.Concept.Concept;
@@ -126,6 +127,7 @@ public class MainController {
         List<Item> i = itemService.findByConceptName(name);
         model.addAttribute("name", name);
         model.addAttribute("items", i);
+        model.addAttribute("topics", i);
         model.addAttribute("questions", q);
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
@@ -428,7 +430,23 @@ public class MainController {
         this.itemService.save(i);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
-
+    @GetMapping ("/MainPage/Teacher/{conceptName}/{questionName}/{answerName}/{mark}")
+    public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable String questionName,@PathVariable String answerName, @PathVariable boolean mark){
+        Concept c=conceptService.findOne(conceptName);
+        Answer a=answerService.findOne(answerName);
+        a.getQuestion().setCorrected(mark);
+        a.setMark(true);
+        c.setPendings(c.getPendings()-1);
+        c.getTopic().setPendings(c.getTopic().getPendings()-1);
+        if (mark){
+            c.setHits(c.getHits()+1);
+            c.getTopic().setHits(c.getTopic().getHits()+1);
+        }else{
+            c.setErrors(c.getErrors()+1);
+            c.getTopic().setErrors(c.getTopic().getErrors()+1);
+        }
+        return "redirect:/MainPage/Teacher/"+conceptName;
+    }
     @RequestMapping("/logIn/newAccount/try")
     public String newAccountTry(Model model, @RequestParam String username, @RequestParam String rol,
                                 @RequestParam String name, @RequestParam String password) {

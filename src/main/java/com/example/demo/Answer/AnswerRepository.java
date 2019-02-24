@@ -7,4 +7,5 @@ import java.util.List;
 
 public  interface  AnswerRepository extends JpaRepository<Answer,Integer> {
     List<Answer> findByQuestion(Question question);
+    Answer findByOpenAnswer(String name);
 }
