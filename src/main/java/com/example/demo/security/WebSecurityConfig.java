@@ -21,11 +21,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/MainPage/Guest").permitAll();
         http.authorizeRequests().antMatchers("/MainPage/search").permitAll();
         http.authorizeRequests().antMatchers("/TopicMoreButton").permitAll();
-
+        http.authorizeRequests().antMatchers("/image").permitAll();
+        http.authorizeRequests().antMatchers("/image/Guest").permitAll();
+        http.authorizeRequests().antMatchers("/logIn/newAccount").permitAll();
+        http.authorizeRequests().antMatchers("/logIn/newAccount/try").permitAll();
 
 
 
         // Private pages (all other pages)
+        http.authorizeRequests().antMatchers("/newImage").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers("/image/upload").hasAnyRole("TEACHER");
         http.authorizeRequests().antMatchers("/MainPage").hasAnyRole("STUDENT","TEACHER");
         http.authorizeRequests().antMatchers("/MainPage/Teacher/**").hasAnyRole("TEACHER");
         http.authorizeRequests().antMatchers("/MainPage/Student/**").hasAnyRole("STUDENT");

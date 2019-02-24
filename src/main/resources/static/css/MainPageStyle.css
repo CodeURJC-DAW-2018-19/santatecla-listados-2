@@ -1,3 +1,4 @@
+/* Temary settings */
 .bodyP.card {
     width: 50%;
     background: lightgray;
@@ -22,8 +23,16 @@
     top: -70px;
 }
 
+.btn.btn-primary2.dg {
+    position: relative;
+    background: #9c27b0;
+    font-size: 20px;
+}
+
+/* Searching box settings */
+
 .search_box_padding {
-    padding: 0 20px 0 20px;
+    padding: 0 20px 0 20px; /* Padding for other horizontal elements */
 }
 
 .search_box {
@@ -50,7 +59,7 @@
     background: transparent;
     color: #888;
     font-family: 'Helvetica', sans-serif;
-    font-size: 40px;
+    font-size: 40px;  /* icon size */
 }
 
 .search_box_icon--submit:hover {

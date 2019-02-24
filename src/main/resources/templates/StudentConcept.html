@@ -356,6 +356,21 @@
     </div>
 </div>
 
+<!--   button to see the images of a cocnept
+<div class="col-md-10">
+<a class="nav-link" id = "headerConcept" {{#student}}onclick="addHeaderConcept('{{name}}')" href = "/MainPage/Student/{{name}}/image" {{/ student}}</a>
+<script>
+    function addHeaderConcept(nombre) {
+        $.ajax({
+            url : "/MainPage/HeaderConcept/"+nombre+"/image"
+        })
+    }
+</script>
+</div>
+<a href="/MainPage/Student/{{name}}/image"><input type="button" class="btn btn-primary2 dg" value="IMAGES"></a>
+-->
 {{> plus}}
 {{> diagram}}
 {{> footer}}
+</body>
+</html>

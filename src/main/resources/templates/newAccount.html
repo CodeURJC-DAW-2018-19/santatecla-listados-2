@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>New Account</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <!-- including ECharts file -->
-    <script src="../static/js"></script>
+    <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
     <link rel="stylesheet" href="/css/MainPageStyle.css">
 
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+    <!-- including ECharts file -->
+    <script src="/js/echarts.min.js"></script>
+    <!-- CSS Files  -->
+    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/commonCss.css">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
@@ -85,32 +95,62 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 </head>
-<body class="" style="overflow-x:hidden; overflow-y:hidden" onload="callHeader()">
+<body onload="callHeader()">
 <script>
     function callHeader() {
         $.ajax({
-            url: "MainPage/HeaderConcept"
+            url: "/MainPage/HeaderConcept"
         }).done(function (data) {
             $("#header").append(data);
         })
     }
 </script>
+
 <header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
 </header>
+
 <div class="wrapper ">
     <div class="main-panel">
         <div class="align-content-center">
             <div class="row">
-                <div class="col-md-3" style="margin-left: 30%; margin-top: 10%">
+                <div class="col-md-3" style="margin-left: 30%; margin-top: 5%; margin-bottom: 10%;">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title">Login</h4>
+                            <h4 class="card-title">New Account</h4>
                         </div>
                         <div class="card-body" style="margin-left:-10%">
-                            <form action="/logIn" method="post">
-                                {{#errorPassword}}
-                                    <span style="color: red;left: -2%;position: relative;"> Correo o contraseña incorrectos. Por favor vuelva a intentarlo </span>
-                                {{/errorPassword}}
+                            <form action="/logIn/newAccount/try" method="post">
+                                {{#emptyUserName}}
+                                <center>
+                                    <span style="color: red;position: relative;"> Please enter a valid user name </span>
+                                </center>
+                                {{/emptyUserName}}
+                                {{#emptyName}}
+                                <center>
+                                    <span style="color: red;position: relative;"> Please enter a valid name </span>
+                                </center>
+                                {{/emptyName}}
+                                {{#emptyPassword}}
+                                <center>
+                                    <span style="color: red;position: relative;"> Please enter a valid password </span>
+                                </center>
+                                {{/emptyPassword}}
+                                {{#errorUserName}}
+                                <center>
+                                <span style="color: red;position: relative;"> This user already exists </span>
+                                </center>
+                                {{/errorUserName}}
+                                {{#rolError}}
+                                <center>
+                                    <span style="color: red;position: relative;"> Please select a user type </span>
+                                </center>
+                                {{/rolError}}
+                                {{#success}}
+                                <center>
+                                    <span style="color: lawngreen;position: relative;"><b>Success register </b></span>
+                                </center>
+                                {{/success}}
+                                {{# show}}
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="form-group bmd-form-group">
@@ -118,7 +158,46 @@
                                                 <div class="input-group-text">
                                                     <i class="material-icons">account_box</i>
                                                 </div>
-                                                <input type="text" id="username" name="username" class="form-control" placeholder="Email"
+                                                <input type="text"  name="username" class="form-control" placeholder="Insert your UserName"
+                                                       style="padding: 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="form-group bmd-form-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="material-icons">account_circle</i>
+                                                </div>
+                                                <input type="text" name="rol" class="form-control" placeholder="TEACHER or STUDENT"
+                                                       style="padding: 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="form-group bmd-form-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="material-icons">face</i>
+                                                </div>
+                                                <input type="text" name="name" class="form-control" placeholder="Name"
+                                                       style="padding: 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="form-group bmd-form-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="material-icons">face</i>
+                                                </div>
+                                                <input type="text" name="surname" class="form-control" placeholder="Surname"
                                                        style="padding: 0px 10px">
                                             </div>
                                         </div>
@@ -132,31 +211,22 @@
                                                 <div class="input-group-text">
                                                     <i class="material-icons">vpn_key</i>
                                                 </div>
-                                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                                                <input type="text" name="password" class="form-control" placeholder="Password"
                                                        style="padding: 0px 10px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-check" data-toggle="tooltip" data-placement="top"
-                                     title="check to remember your password">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        Remember my password
-                                        <span class="form-check-sign">
-                                                <span class="check"></span>
-                                            </span>
-                                    </label>
-                                </div>
+                                {{/show}}
+                                {{#showSubmit}}
                                 <input type="submit"  value="Submit" class="btn btn-primary" style="width: 44.5%"/>
                                 <input type="hidden" name="_csrf" value="{{token}}"/>
-                                <a href="/MainPage/Guest" class="btn btn-secondary" style="width: 44.5%">Guest</a>
-                                <br>
-                                <a class="links-horizontal" href="#"><u>¿Olvidó su contraseña?</u></a>
-                                <br/>
+                                {{/showSubmit}}
+                                {{#success}}
                                 <center>
-                                <a class="links-horizontal" align="center" href="/logIn/newAccount"><u>Registrarse</u></a>
+                                <a href="/logIn"><input type="button" class="btn btn-primary" value="Volver al LogIn"></a>
                                 </center>
+                                {{/success}}
                             </form>
                         </div>
                     </div>
@@ -167,3 +237,6 @@
 </div>
 
 {{>footer}}
+
+</body>
+</html>

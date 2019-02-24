@@ -1,7 +1,9 @@
-<!doctype html>
-<html lang="en" xmlns:style="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Gestor de listas</title>
+    <meta charset="UTF-8" />
+    <title>New Image</title>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -95,19 +97,6 @@
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
 
 </head>
-<style>
-    .card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
-        border-radius: 3px;
-        margin-top: -50px;
-        padding: 15px;
-        width: 94%;
-    }
-
-    .modal-backdrop {
-        z-index: 0 !important;
-    }
-</style>
-
 <body onload="callHeader()">
 <script>
     function callHeader() {
@@ -118,94 +107,30 @@
         })
     }
 </script>
+
 <header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
 </header>
 
-<!--   Search Box   -->
+<div style="margin-left: 5%">
+    <h1>New Image</h1>
 
-<div class="search_box_padding">
-    <div class="search_box">
-        <form class="search_box--form" action="/MainPage/search" method="post">
-            <div class="row">
-                <div class="col-md-11">
-                    <div class="form-group bmd-form-group">
-                        <div class="input-group-prepend">
-                            <input type="text" name=searchText id=searchText class="form-control" placeholder="Search"
-                                   style="padding: 0px 10px">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <input class="search_box_icon--submit" name=result type="submit" value=" &#9906;"
-                   style="-webkit-transform: rotate(45deg);"/>
-            <input type="hidden" name="_csrf" value="{{token}}"/>
-        </form>
-    </div>
-</div>
+    <form action="/image/upload" method="post"
+          enctype="multipart/form-data">
+        <p>
+            <label>Title:</label> <input type='text' name='imageTitle' />
+        </p>
+        <p>
+            <label>Related Concept:</label> <input type='text' name='imageConcept' />
+        </p>
 
-
-<div class="bodyP card">
-    <!--   Temary (Table)   -->
-    <div class="container">
-        <div id="accordion">
-            <script src="/js/loadMoreButton.js"></script>
-            <script>loadMoreTopic()</script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#loadMore').click(function () {
-                        loadMoreTopic();
-                    });
-                });
-            </script>
-        </div>
-        <div style="float: bottom">
-            {{#teacher}}
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="modal"
-                        data-target="#addTopics" name="addTopics">
-                    <i class="material-icons">add</i>
-                </button>
-            {{/teacher}}
-            <div id="loadGif"></div>
-            <button type="button" id="loadMore" class="btn btn-primary" style="float:right;top:-10px"> Load More
-            </button>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="addTopics" tabindex="-1" role="dialog" aria-labelledby="addTopics "
-     aria-hidden="true" align="center">
-    <form action="/mainPage/addTopic" method="post">
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="card card-plain">
-                    <div class="modal-header card-header card-header-primary">
-                        <h4 class="card-title">Introduzca nuevo tema</h4>
-                    </div>
-                </div>
-                <div class="modal-body" align="left">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group bmd-form-group">
-                                <label class="bmd-label-floating">Añadir nuevo tema</label>
-                                <input name="topicName" type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" id="submit" value="Accept" class="btn btn-primary"/>
-                    <input type="hidden" name="_csrf" value="{{token}}"/>
-                </div>
-            </div>
-        </div>
+        <p>
+            <label>Image file:</label><input type="file" name="file" />
+        </p>
+        <input type='submit' class="btn btn-primary btn-lg" name='enviar' value='Enviar' />
+        <input type="hidden" name="_csrf" value="{{token}}"/>
     </form>
 </div>
-<!--   Diagram Botton   -->
-
-{{^guest}}
-    {{> diagram}}
-{{/guest}}
-{{#guest}}
-    </br>
-    </br>
-{{/guest}}
 {{> footer}}
+
+</body>
+</html>
