@@ -149,30 +149,7 @@
             </script>
         </ul>
         <ul class="list-group">
-            {{#questions}}
-            {{^corrected}}
-            <li class="list-inline">{{question}}: {{#answer}}{{answerTest}}{{/answer}}
-                <div class="form-check-inline" style="position:relative;left: 4%">
-                    <div class="form-check-inline form-check-radio">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
-                                   id="exampleRadios1{{-index}}" value="option1"> CORRECTO<span class="circle">
-                                                <span class="check"></span></span>
-                        </label>
-                    </div>
-                    <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
-                                   id="exampleRadios2{{-index}}"
-                                   value="option2">
-                            INCORRECTO
-                            <span class="circle"><span class="check"></span></span>
-                        </label>
-                    </div>
-                </div>
-            </li>
-            {{/corrected}}
-            {{/questions}}
+            <button type="button" id="loadMoreQuestionsNC" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
         </ul>
     </div>
 </div>
