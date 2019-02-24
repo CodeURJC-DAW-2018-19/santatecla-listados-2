@@ -38,7 +38,7 @@
                         },
                         yAxis: {
                             type: "category",
-                            data: [{{#topics}}{{^-first}},{{/-first}}"{{name}}"{{/topics}}]
+                            data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{name}}"{{/topics}}]
                         },
                         series: [
                             {
@@ -52,7 +52,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#topics}}{{^-first}},{{/-first}}"{{hits}}"{{/topics}}]
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{hits}}"{{/topics}}]
                             },
                             {
                                 name: "Fallos",
@@ -65,7 +65,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#topics}}{{^-first}},{{/-first}}"{{errors}}"{{/topics}}]
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{errors}}"{{/topics}}]
 
                             },
                             {
@@ -79,7 +79,7 @@
                                         position: "insideRight"
                                     }
                                 },
-                                data: [{{#topics}}{{^-first}},{{/-first}}"{{pendings}}"{{/topics}}]
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{pendings}}"{{/topics}}]
                             }
                         ]
                     };

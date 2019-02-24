@@ -102,6 +102,7 @@ public class MainController {
         model.addAttribute("guest", false);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
+        model.addAttribute("moreThanOne",topics.size()>1);
         return "MainPage";
     }
 
@@ -116,6 +117,8 @@ public class MainController {
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
+        model.addAttribute("topics",concept);
+        model.addAttribute("moreThanOne",false);
         return "StudentConcept";
     }
     @GetMapping("/MainPage/Teacher/{name}")
@@ -132,6 +135,8 @@ public class MainController {
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog","/logOut");
+
+
         return "TeacherConcept";
     }
     @RequestMapping(value = "/MainPage/search", method =  RequestMethod.POST)
@@ -151,6 +156,7 @@ public class MainController {
         model.addAttribute("inOut","out");
         model.addAttribute("Elements",topics);
         model.addAttribute("urlLog","/logOut");
+        model.addAttribute("moreThanOne",topics.size()>1);
         search = true;
         return "MainPage";
     }
@@ -427,6 +433,7 @@ public class MainController {
         Item i=new Item(text,checked);
         Concept c=this.conceptService.findOne(conceptName);
         i.setConcept(c);
+        System.out.println("Hola que tal");
         this.itemService.save(i);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
