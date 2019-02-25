@@ -93,12 +93,12 @@ Esta es la página principal del estudiante, como podemos ver es muy similar a l
 
 ![StudentDiagram](/Screenshots/Phase2/StudentDiagram.png "StudentDiagram")
 
-####Imagenes para Estudiante
+#### Imagenes para Estudiante
 ![ImagesStudent](/Screenshots/Phase2/ImagesStudent.png "ImagesStudent")
 
 Esta es una nueva pantalla en la cual el alumno puede ver las imagenes (que solo el profesor puede subir como ya veremos acontinuación). Cada imagen tiene un enlace al concepto con el que esta relacionado y al pulsar sobre el te redirecciona alli.
 
-####Pantalla de conceptos para el Estudiante
+#### Pantalla de conceptos para el Estudiante
 ![StudentConcept](/Screenshots/Phase2/StudentConcept.png "StudentConcept")
 
 La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su dialogo para el diagrama y para los diferentes tipos de pregunta.
@@ -152,7 +152,7 @@ Esta es la pantalla de concepto del profesor, muy similar a la que podemos encon
 
 Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy similar a la de las imagenes de estudiante e invitado. Como pasa con estudiante, las imagenes tienen un enlace al concepto con el que estan relacionadas. Esta pantalla también tiene un botón para añadir imagenes ya que el profesor es el único usuario al que se le permite dicha acción. Una vez pulsado el botón de añadir imagen se nos redirecciona a una pagina donde tenemos que rellenar un formulario (Pantalla de Nueva Imágen) y una vez enviada la imágen, la web nos indica que se ha realizado con exito (Pantalla de imagen subida) o si ha habido algun error. 
 ##### Nueva Imágen
-![NewImage](/Screenshots/Phase2/INewImage.png "NewImage")
+![NewImage](/Screenshots/Phase2/NewImage.png "NewImage")
 ##### Imagen Subida
 ![ImageUploaded](/Screenshots/Phase2/ImageUploaded.png "ImageUploaded")
 
@@ -164,4 +164,18 @@ En esta segunda fase hemos personalizado un error propio, para sustituir al erro
 ### Diagrama de navegación
 La siguiente imagen muestra el diagrama de navegación de nuestra página web:
 
-![CustomError](/Screenshots/Phase2/CustomError.png "CustomError")
+
+
+Para esta fase se nos requiere realizar una explicación para poder compilar y ejecutar nuestra aplicación, asi como un Diagrama de Entidades de la base de datos y un Diagrama de Clases Java de la aplicación.
+
+### Entorno de desarrollo
+
+ENTORNO DE DESARROLLO
+
+### Diagrama de Entidades
+Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparecen en este diagrama son @Entity y mostramos las relaciones entre ellas y sus cardinalidades. Subrayado en negro esta el atributo que sirve para identificar al objeto (claves primarias); y subrayado en azul estan las claves que sirven para referenciar a objetos relacionados (claves ajenas).
+
+![DiagramaEntidades](/Screenshots/Phase2/DiagramaEntidades.png "DiagramaEntidades")
+
+### Diagrama de Clases
+
