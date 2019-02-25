@@ -1,5 +1,5 @@
 package com.example.demo.Controllers;
-import com.example.demo.ConceptHeader.ConceptHeader;
+import com.example.demo.conceptHeader.ConceptHeader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ public class LogOutController {
     @GetMapping("/logOut")
     public String logOut(HttpSession session, Model model) {
         model.addAttribute("inOut", "out");
-        model.addAttribute("LogIn", false);
+        model.addAttribute("logIn", false);
         session.invalidate();
         return "redirect:/logIn";
     }

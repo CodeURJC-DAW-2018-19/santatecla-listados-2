@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Concept.ConceptRepository;
 import com.example.demo.Concept.Concept;
 import com.example.demo.Concept.ConceptService;
 import com.example.demo.UploadImages.Image;
@@ -8,7 +7,6 @@ import com.example.demo.UploadImages.Image;
 import com.example.demo.User.User;
 import com.example.demo.User.UserComponent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -67,12 +65,12 @@ public class ImageController {
             model.addAttribute("student", true);
         }
 
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
         model.addAttribute("images", images.values());
 
-        return "images";
+        return "Images";
     }
 
     @RequestMapping("/image/Guest")
@@ -81,13 +79,13 @@ public class ImageController {
         model.addAttribute("student", false);
         model.addAttribute("teacher", false);
         model.addAttribute("guest", true);
-        model.addAttribute("LogIn",true);
+        model.addAttribute("logIn",true);
         model.addAttribute("inOut","in");
         model.addAttribute("urlLog","/logIn");
 
         model.addAttribute("images", images.values());
 
-        return "images";
+        return "Images";
     }
 
     @RequestMapping("/newImage")
@@ -97,11 +95,11 @@ public class ImageController {
         if (user.getRol().equals("ROLE_TEACHER")){
             model.addAttribute("student", false);
             model.addAttribute("teacher", true);
-            model.addAttribute("LogIn", true);
+            model.addAttribute("logIn", true);
             model.addAttribute("inOut", "out");
             model.addAttribute("urlLog", "/logOut");
         }
-        return "newImage";
+        return "NewImage";
     }
 
 
@@ -117,18 +115,18 @@ public class ImageController {
         if (user.getRol().equals("ROLE_TEACHER")){
             model.addAttribute("student", false);
             model.addAttribute("teacher", true);
-            model.addAttribute("LogIn", true);
+            model.addAttribute("logIn", true);
             model.addAttribute("inOut", "out");
             model.addAttribute("urlLog", "/logOut");
         } else if (user.getRol().equals("ROLE_STUDENT")){
             model.addAttribute("student", true);
             model.addAttribute("teacher", false);
-            model.addAttribute("LogIn", true);
+            model.addAttribute("logIn", true);
             model.addAttribute("inOut", "out");
             model.addAttribute("urlLog", "/logOut");
         } else {
             model.addAttribute("guest", true);
-            model.addAttribute("LogIn",true);
+            model.addAttribute("logIn",true);
             model.addAttribute("inOut","in");
             model.addAttribute("urlLog","/logIn");
         }
@@ -138,7 +136,7 @@ public class ImageController {
         if (conceptName == null){
             model.addAttribute("error", "El concepto relacionado no existe");
 
-            return "uploaded";
+            return "Uploaded";
 
         } else if (!file.isEmpty()) {
             try {
@@ -154,7 +152,7 @@ public class ImageController {
                 //conceptName.setImage(image);
                 //image.setRelatedconcept(conceptName);
 
-                return "uploaded";
+                return "Uploaded";
 
             } catch (Exception e) {
 
@@ -166,7 +164,7 @@ public class ImageController {
 
             model.addAttribute("error", "The file is empty");
 
-            return "uploaded";
+            return "Uploaded";
         }
     }
 

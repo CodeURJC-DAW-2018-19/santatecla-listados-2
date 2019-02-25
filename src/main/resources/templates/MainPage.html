@@ -10,7 +10,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -20,7 +20,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
     <link rel="stylesheet" href="/css/commonCss.css">
     <!-- Material Dashboard CSS -->
 
@@ -169,7 +169,7 @@
 </div>
 <div class="modal fade" id="addTopics" tabindex="-1" role="dialog" aria-labelledby="addTopics "
      aria-hidden="true" align="center" >
-    <form action="/mainPage/addTopic" method="post">
+    <form action="/MainPage/addTopic" method="post">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="card card-plain">
@@ -214,12 +214,12 @@
 <!--   Diagram Botton   -->
 
 {{^guest}}
-    {{> diagram}}
+{{> Diagram}}
 {{/guest}}
 {{#guest}}
     </br>
     </br>
 {{/guest}}
-{{> footer}}
+{{> Footer}}
 </body>
 </html>

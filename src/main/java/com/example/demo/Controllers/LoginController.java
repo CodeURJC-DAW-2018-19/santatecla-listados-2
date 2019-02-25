@@ -9,14 +9,14 @@ public class LoginController {
     @RequestMapping("/logIn")
     public String logIn(Model model) {
         model.addAttribute("inOut", "out");
-        model.addAttribute("LogIn", false);
+        model.addAttribute("logIn", false);
         model.addAttribute("errorPassword", false);
         return "LogIn";
     }
     @RequestMapping("/loginError")
     public String logError(Model model) {
         model.addAttribute("inOut", "out");
-        model.addAttribute("LogIn", false);
+        model.addAttribute("logIn", false);
         model.addAttribute("errorPassword", true);
         return "LogIn";
     }

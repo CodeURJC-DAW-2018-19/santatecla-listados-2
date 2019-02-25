@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Error</title>
+    <meta charset="UTF-8">
+    <title>Uploaded</title>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -11,7 +12,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/CustomErrorStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -21,7 +22,12 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
+    <link rel="stylesheet" href="/css/commonCss.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 
     <!-- Material Dashboard CSS -->
 
@@ -89,34 +95,38 @@
 
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
+
 </head>
-<body  style="overflow-x:hidden">
+<body onload="callHeader()">
+<script>
+    function callHeader() {
+        $.ajax({
+            url: "/MainPage/HeaderConcept"
+        }).done(function (data) {
+            $("#header").append(data);
+        })
+    }
+</script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="error-template">
-                <h1>
-                    Oops!</h1>
-                <h2>{{errorCode}}</h2>
-                <div class="error-details">
-                    {{exception}}
-                </div>
-                <div class="error-actions">
-                    <a href="javascript:history.back()" class="btn btn-primary btn-lg">
-                        Ir a la página anterior </a>
-                    <a href="/logIn" class="btn btn-default btn-lg">
-                        Ir al LogIn </a>
-                </div>
-            </div>
-        </div>
+<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+</header>
+
+<center>
+    <div style="font-size: 20px; padding-top: 10%;" >
+
+        {{#error}}
+        <p>Error: {{.}}</p>
+        {{/error}}
+
+        {{^error}}
+        <p>Image uploaded</p>
+        {{/error}}
+        <a href='/image' class="btn btn-primary btn-lg"><u>Back to images</u></a>
     </div>
-</div>
 
+</center>
 
-
-
+{{> Footer}}
 
 </body>
-
 </html>

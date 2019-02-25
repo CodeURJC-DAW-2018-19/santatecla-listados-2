@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Uploaded</title>
+    <meta charset="UTF-8" />
+    <title>New Image</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -22,7 +22,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
     <link rel="stylesheet" href="/css/commonCss.css">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -111,22 +111,26 @@
 <header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
 </header>
 
-<center>
-    <div style="font-size: 20px; padding-top: 10%;" >
+<div style="margin-left: 5%">
+    <h1>New Image</h1>
 
-        {{#error}}
-        <p>Error: {{.}}</p>
-        {{/error}}
+    <form action="/image/upload" method="post"
+          enctype="multipart/form-data">
+        <p>
+            <label>Title:</label> <input type='text' required name='imageTitle' />
+        </p>
+        <p>
+            <label>Related Concept:</label> <input type='text' required name='imageConcept' />
+        </p>
 
-        {{^error}}
-        <p>Image uploaded</p>
-        {{/error}}
-        <a href='/image' class="btn btn-primary btn-lg"><u>Back to images</u></a>
-    </div>
-
-</center>
-
-{{> footer}}
+        <p>
+            <label>Image file:</label><input type="file" required name="file" />
+        </p>
+        <input type='submit' class="btn btn-primary btn-lg" name='enviar' value='Enviar' />
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+    </form>
+</div>
+{{> Footer}}
 
 </body>
 </html>
