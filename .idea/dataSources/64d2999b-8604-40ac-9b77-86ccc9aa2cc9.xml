@@ -918,243 +918,300 @@
     <table id="230" parent="2" name="concepts">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="231" parent="2" name="hibernate_sequence">
+    <table id="231" parent="2" name="concepts_header">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="232" parent="2" name="items">
+    <table id="232" parent="2" name="hibernate_sequence">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="233" parent="2" name="questions">
+    <table id="233" parent="2" name="image">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="234" parent="2" name="topic">
+    <table id="234" parent="2" name="items">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="235" parent="2" name="user">
+    <table id="235" parent="2" name="questions">
       <Engine>MyISAM</Engine>
     </table>
-    <column id="236" parent="229" name="id">
+    <table id="236" parent="2" name="topic">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="237" parent="2" name="user">
+      <Engine>MyISAM</Engine>
+    </table>
+    <column id="238" parent="229" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="237" parent="229" name="answers_test">
+    <column id="239" parent="229" name="answers_test">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="238" parent="229" name="marks">
+    <column id="240" parent="229" name="marks">
       <Position>3</Position>
       <DataType>bit(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="229" name="open_answer">
+    <column id="241" parent="229" name="open_answer">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="229" name="question_id">
+    <column id="242" parent="229" name="question_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="241" parent="229" name="FK3erw1a3t0r78st8ty27x6v3g1">
+    <index id="243" parent="229" name="FK3erw1a3t0r78st8ty27x6v3g1">
       <ColNames>question_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="242" parent="229" name="PRIMARY">
+    <key id="244" parent="229" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="243" parent="230" name="id">
+    <column id="245" parent="230" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="230" name="errors">
+    <column id="246" parent="230" name="errors">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="230" name="hits">
+    <column id="247" parent="230" name="hits">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="230" name="html">
+    <column id="248" parent="230" name="html">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="230" name="name">
+    <column id="249" parent="230" name="name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="230" name="pendings">
+    <column id="250" parent="230" name="pendings">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="230" name="topic_id">
+    <column id="251" parent="230" name="topic_id">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="250" parent="230" name="FK9bspj70t36adpcj35tc9vm1st">
+    <index id="252" parent="230" name="FK9bspj70t36adpcj35tc9vm1st">
       <ColNames>topic_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="251" parent="230" name="PRIMARY">
+    <key id="253" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="252" parent="231" name="next_val">
+    <column id="254" parent="231" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="255" parent="231" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="256" parent="231" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="257" parent="232" name="next_val">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="232" name="id">
+    <column id="258" parent="233" name="primary_key">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="254" parent="232" name="correct">
+    <column id="259" parent="233" name="concept">
       <Position>2</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="255" parent="232" name="name">
-      <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="232" name="concept_id">
-      <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="257" parent="232" name="FKdpep3qnpv9p66lc9mbe5hnnf5">
-      <ColNames>concept_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="258" parent="232" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="259" parent="233" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="260" parent="233" name="corrected">
-      <Position>2</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="261" parent="233" name="questions">
+    <column id="260" parent="233" name="id">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="233" name="type">
+    <column id="261" parent="233" name="title">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="233" name="answer_id">
+    <column id="262" parent="233" name="relatedconcept_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="233" name="concept_id">
+    <index id="263" parent="233" name="FKby0gwfhmf1hbtsofyk49tx7jp">
+      <ColNames>relatedconcept_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="264" parent="233" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>primary_key</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="265" parent="234" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="266" parent="234" name="correct">
+      <Position>2</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="267" parent="234" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="268" parent="234" name="concept_id">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="269" parent="234" name="FKdpep3qnpv9p66lc9mbe5hnnf5">
+      <ColNames>concept_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="270" parent="234" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="271" parent="235" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="272" parent="235" name="corrected">
+      <Position>2</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="273" parent="235" name="questions">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="274" parent="235" name="type">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="275" parent="235" name="answer_id">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="276" parent="235" name="concept_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="265" parent="233" name="FKi9m5qugsha5u5335en1f998h1">
+    <index id="277" parent="235" name="FKi9m5qugsha5u5335en1f998h1">
       <ColNames>answer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="266" parent="233" name="FKb9wse18uiv95yqcew3clxv2tk">
+    <index id="278" parent="235" name="FKb9wse18uiv95yqcew3clxv2tk">
       <ColNames>concept_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="267" parent="233" name="PRIMARY">
+    <key id="279" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="268" parent="234" name="id">
+    <column id="280" parent="236" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="234" name="errors">
+    <column id="281" parent="236" name="errors">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="234" name="hits">
+    <column id="282" parent="236" name="hits">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="234" name="name">
+    <column id="283" parent="236" name="name">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="234" name="pendings">
+    <column id="284" parent="236" name="pendings">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="273" parent="234" name="PRIMARY">
+    <key id="285" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="274" parent="235" name="id">
+    <column id="286" parent="237" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="235" name="name">
+    <column id="287" parent="237" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="235" name="password">
+    <column id="288" parent="237" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="235" name="rol">
+    <column id="289" parent="237" name="rol">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="235" name="surname">
+    <column id="290" parent="237" name="surname">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="235" name="user_name">
+    <column id="291" parent="237" name="user_name">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="280" parent="235" name="PRIMARY">
+    <key id="292" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

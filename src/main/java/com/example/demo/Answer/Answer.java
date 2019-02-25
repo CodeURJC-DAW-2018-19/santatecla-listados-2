@@ -38,6 +38,14 @@ public class Answer {
         return answerTest;
     }
 
+    public String getOpenAnswer() {
+        return openAnswer;
+    }
+
+    public void setOpenAnswer(String openAnswer) {
+        this.openAnswer = openAnswer;
+    }
+
     public void setAnswerTest(String answerTest) {
         this.answerTest = answerTest;
     }

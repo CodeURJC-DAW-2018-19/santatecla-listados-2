@@ -3,13 +3,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group bmd-form-group">
-                <input type="text" id=input{{-index}}} value="{{name}}" class="form-control">
+                <input type="text" id=input{{-index}} value="{{name}}" class="form-control">
             </div>
         </div>
         <div class="col-md-6" style="position: relative;top: 27px ;left: 40px; ">
             <div class="form-check-inline form-check-radio">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
+                    <input onclick="createItem(true,'input{{-index}}','{{name}}')" class="form-check-input" type="radio" name="exampleRadios{{-index}}"
                            id="exampleRadio1{{-index}}" value="option1" {{#correct}}checked{{/correct}} >
                     CORRECTO<span class="circle">
                                                 <span class="check"></span></span>
@@ -17,7 +17,7 @@
             </div>
             <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios{{-index}}"
+                    <input onclick="createItem(false,'input{{-index}}','{{name}}')" class="form-check-input" type="radio" name="exampleRadios{{-index}}"
                            id="exampleRadio2{{-index}}"
                            value="option2" {{^correct}}checked{{/correct}}>
                     INCORRECTO

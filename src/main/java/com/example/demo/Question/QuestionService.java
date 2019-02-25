@@ -17,6 +17,9 @@ public class QuestionService {
     public Optional<Question> findOne(int id) {
         return repository.findById(id);
     }
+    public Question findOne(String name) {
+        return repository.findByQuestion(name);
+    }
     public List<Question> findByConceptAndCorrected (Concept concept, boolean corrected){
         return repository.findByConceptAndCorrected(concept,corrected);
     }

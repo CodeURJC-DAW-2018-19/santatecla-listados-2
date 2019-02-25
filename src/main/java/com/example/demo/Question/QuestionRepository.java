@@ -7,4 +7,5 @@ import java.util.List;
 
 public  interface  QuestionRepository extends JpaRepository<Question,Integer> {
     List<Question> findByConceptAndCorrected(Concept concept, boolean corrected);
+    Question findByQuestion(String name);
 }
