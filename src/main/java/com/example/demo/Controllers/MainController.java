@@ -102,6 +102,7 @@ public class MainController {
         model.addAttribute("guest", false);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
+        model.addAttribute("moreThanOne",topics.size()>1);
         return "MainPage";
     }
 
@@ -116,6 +117,8 @@ public class MainController {
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
+        model.addAttribute("topics",concept);
+        model.addAttribute("moreThanOne",false);
         return "StudentConcept";
     }
     @GetMapping("/MainPage/Teacher/{name}")
@@ -132,6 +135,8 @@ public class MainController {
         model.addAttribute("LogIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog","/logOut");
+
+
         return "TeacherConcept";
     }
     @RequestMapping(value = "/MainPage/search", method =  RequestMethod.POST)
@@ -151,6 +156,7 @@ public class MainController {
         model.addAttribute("inOut","out");
         model.addAttribute("Elements",topics);
         model.addAttribute("urlLog","/logOut");
+        model.addAttribute("moreThanOne",topics.size()>1);
         search = true;
         return "MainPage";
     }
@@ -435,14 +441,17 @@ public class MainController {
             this.itemService.save(i);
         }
 
+        Item i=new Item(text,checked);
+        Concept c=this.conceptService.findOne(conceptName);
+        i.setConcept(c);
+        System.out.println("Hola que tal");
+        this.itemService.save(i);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
-    @RequestMapping ("/MainPage/Teacher/{conceptName}/{answerName}/{mark}")
+    @GetMapping ("/MainPage/Teacher/{conceptName}/{answerName}/{mark}")
     public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable String answerName, @PathVariable boolean mark){
         Concept c=conceptService.findOne(conceptName);
-        System.out.println(answerName);
         Answer a=answerService.findOne(answerName);
-        System.out.println(a.getQuestion().getQuestion());
         Question q = questionService.findOne(a.getQuestion().getQuestion());
         q.setCorrected(true);
         a.getQuestion().setCorrected(true);
@@ -456,7 +465,7 @@ public class MainController {
             c.setErrors(c.getErrors()+1);
             c.getTopic().setErrors(c.getTopic().getErrors()+1);
         }
-        System.out.println("HOLA AQUI");
+
         conceptService.save(c);
         answerService.save(a);
         questionService.save(q);
@@ -546,44 +555,6 @@ public class MainController {
 
 
             }
-
-
-            //@RequestParam("rol") String rol, @RequestParam("username") String username, @RequestParam("name") String name, @RequestParam("password") String password) {
-
-            //User User = userRepository.findByUsername(username);
-
-        /*if (rol == "TEACHER") {
-            if (User.getRol().equals("ROLE_TEACHER")) {
-
-                model.addAttribute("errorUserName", true);
-
-                return "newAccount";
-
-            } else {
-                User newUser = new User("name", "password", "username", "ROLE_TEACHER");
-                userRepository.save(newUser);
-
-                model.addAttribute("success", true);
-
-                return "newAccount";
-            }
-        } else if (rol == "STUDENT") {
-            if (User.getRol() == "STUDENT") {
-
-                model.addAttribute("errorUserName", true);
-
-                return "newAccount";
-
-            } else {
-                User newUser = new User("name", "password", "username", "ROLE_STUDENT");
-                userRepository.save(newUser);
-
-                model.addAttribute("success", true);
-
-                return "newAccount";
-            }
-        }*/
-
         }
     }
 }
