@@ -19,7 +19,6 @@ public class ItemService {
     public Optional<Item> findOne(String name) {
         return repository.findByName(name);
     }
-
     public List<Item> findAll() {
         return repository.findAll();
     }
@@ -37,4 +36,5 @@ public class ItemService {
     public void delete(Item i) {
         repository.delete(i);
     }
+
 }

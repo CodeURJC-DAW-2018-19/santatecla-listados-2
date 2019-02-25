@@ -424,18 +424,29 @@ public class MainController {
     }
     @GetMapping ("/MainPage/Teacher/{conceptName}/save/{text}/{checked}")
     public String addItem(Model model,@PathVariable String conceptName,@PathVariable String text, @PathVariable boolean checked){
-        Item i=new Item(text,checked);
-        Concept c=this.conceptService.findOne(conceptName);
-        i.setConcept(c);
-        this.itemService.save(i);
+        Optional<Item> o = itemService.findOne(text);
+        if (o.isPresent()){
+            o.get().setCorrect(checked);
+            this.itemService.save(o.get());
+        }else{
+            Item i=new Item(text,checked);
+            Concept c=this.conceptService.findOne(conceptName);
+            i.setConcept(c);
+            this.itemService.save(i);
+        }
+
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
-    @GetMapping ("/MainPage/Teacher/{conceptName}/{questionName}/{answerName}/{mark}")
-    public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable String questionName,@PathVariable String answerName, @PathVariable boolean mark){
+    @RequestMapping ("/MainPage/Teacher/{conceptName}/{answerName}/{mark}")
+    public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable String answerName, @PathVariable boolean mark){
         Concept c=conceptService.findOne(conceptName);
+        System.out.println(answerName);
         Answer a=answerService.findOne(answerName);
-        a.getQuestion().setCorrected(mark);
-        a.setMark(true);
+        System.out.println(a.getQuestion().getQuestion());
+        Question q = questionService.findOne(a.getQuestion().getQuestion());
+        q.setCorrected(true);
+        a.getQuestion().setCorrected(true);
+        a.setMark(mark);
         c.setPendings(c.getPendings()-1);
         c.getTopic().setPendings(c.getTopic().getPendings()-1);
         if (mark){
@@ -445,7 +456,11 @@ public class MainController {
             c.setErrors(c.getErrors()+1);
             c.getTopic().setErrors(c.getTopic().getErrors()+1);
         }
-        return "redirect:/MainPage/Teacher/"+conceptName;
+        System.out.println("HOLA AQUI");
+        conceptService.save(c);
+        answerService.save(a);
+        questionService.save(q);
+        return "redirect: MainPage/Teacher/"+conceptName;
     }
     @RequestMapping("/logIn/newAccount/try")
     public String newAccountTry(Model model, @RequestParam String username, @RequestParam String rol,

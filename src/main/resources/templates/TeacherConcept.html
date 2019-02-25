@@ -91,6 +91,8 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
     <script src="/js/sendNewItem.js"></script>
+    <script src="/js/addTextItem.js"></script>
+    <script src="/js/sendAnswerCorrection.js"></script>
 
 </head>
 
@@ -127,7 +129,7 @@
         <button type="button" id="loadMoreItems" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
         </ul>
         <div class="buttonsAddAndRemove" style="position: relative;left: 1%">
-            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick="addTextItem()">
+            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick="addTextItem('{{name}}')">
                 <i class="material-icons">add</i>
             </button>
             <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-target="#deleteI" data-toggle="modal" name="delete{{name}}"

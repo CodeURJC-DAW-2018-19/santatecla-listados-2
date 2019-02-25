@@ -95,6 +95,7 @@ public class DatabaseInitializer {
 		q1.setAnswer(a1);
 		q2.setAnswer(a2);
 		a1.setQuestion(q1);
+		a1.setOpenAnswer("respuesta");
 		a2.setQuestion(q2);
 
 		c1.setItem(i1);
