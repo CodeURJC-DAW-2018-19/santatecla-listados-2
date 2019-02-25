@@ -170,7 +170,28 @@ Para esta fase se nos requiere realizar una explicación para poder compilar y e
 
 ### Entorno de desarrollo
 
-ENTORNO DE DESARROLLO
+Para poder compilar y ejecutar la aplicación será necesario seguir los siguientes pasos:
+- Comenzaremos descargando y configurando lo referente a la base de datos. Usamos MySQL . Será necesario descargar MySQL Installer para poder instalar el Server de MySQL.
+
+- Una vez teniendo el server, descargamos MySQL Workbench. Una vez en Workbench iremos a la parte izquierda de la pantalla y pulsaremos sobre “+” en MySQL Connections. Configuramos el nombre de conexión y nuestra contraseña de root.
+
+- Con una conexión creada, clicamos sobre ella  y para poder acceder  se necesita un nombre de login y una contraseña.
+
+Login name: Grupo10
+
+Contraseña: DAWGrupo10
+
+- A continuación necesitamos un entorno de desarrollo de Java que soporte aplicaciones Spring. En la actualidad los IDEs de Java más utilizados tienen dicho soporte. Nosotros hemos estado desarrollando utilizando Intellj, pero se pueden utilizar otros como Eclipse o NetBeans.
+
+- IMPORTANTE: descargar el SDK 11.0.2.
+Para poder establecer (set up) este SDK seguimos los siguientes pasos: File > Project Structure > Platform Setting > SDKs > y seleccionamos el que nos hemos descargado, el SDK 11.0.2. Finalmente pulsamos OK.
+
+- Dado que es un proyecto Maven, debemos importar todos los cambios que se requieran para que la aplicación funcione correctamente.
+
+- Cuando hayamos finalizado todo esto vamos a la carpeta src del proyecto > main > java > com.example.demo > y pinchamos sobre Application. Vamos a la parte superior, a Run… y seleccionamos aquel que tenga el símbolo de Spring (una hojita verde). Así el proyecto comienza a compilarse.
+
+- Una vez se ha completado la compilación sin errores (aparece Started Application…), vamos a un navegador y ponemos la dirección https://localhost:8443/logIn. De esta forma ya podrá interactuar con la aplicación.
+
 
 ### Diagrama de Entidades
 Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparecen en este diagrama son @Entity y mostramos las relaciones entre ellas y sus cardinalidades. Subrayado en negro esta el atributo que sirve para identificar al objeto (claves primarias); y subrayado en azul estan las claves que sirven para referenciar a objetos relacionados (claves ajenas).
