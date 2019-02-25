@@ -162,13 +162,14 @@ Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy
 En esta segunda fase hemos personalizado un error propio, para sustituir al error por defecto. Este error personalizado muestra el codigo del error http y su mensaje asociado.
 
 ### Diagrama de navegación
-La siguiente imagen muestra el diagrama de navegación de nuestra página web:
+La siguiente imagen muestra el nuevo diagrama de navegación de nuestra página web resultante tras concluir esta segunda fase:
 
+![DiagramaNavegacionFase2](/Screenshots/Phase2/DiagramaNavegacionFase2.png "DiagramaNavegacionFase2")
 
-
-Para esta fase se nos requiere realizar una explicación para poder compilar y ejecutar nuestra aplicación, asi como un Diagrama de Entidades de la base de datos y un Diagrama de Clases Java de la aplicación.
 
 ### Entorno de desarrollo
+
+Para esta fase se nos requiere realizar una explicación para poder compilar y ejecutar nuestra aplicación, asi como un Diagrama de Entidades de la base de datos y un Diagrama de Clases Java de la aplicación.
 
 Para poder compilar y ejecutar la aplicación será necesario seguir los siguientes pasos:
 - Comenzaremos descargando y configurando lo referente a la base de datos. Usamos MySQL . Será necesario descargar MySQL Installer para poder instalar el Server de MySQL.
@@ -177,9 +178,9 @@ Para poder compilar y ejecutar la aplicación será necesario seguir los siguien
 
 - Con una conexión creada, clicamos sobre ella  y para poder acceder  se necesita un nombre de login y una contraseña.
 
-Login name: Grupo10
+    Login name: Grupo10
 
-Contraseña: DAWGrupo10
+    Contraseña: DAWGrupo10
 
 - A continuación necesitamos un entorno de desarrollo de Java que soporte aplicaciones Spring. En la actualidad los IDEs de Java más utilizados tienen dicho soporte. Nosotros hemos estado desarrollando utilizando Intellj, pero se pueden utilizar otros como Eclipse o NetBeans.
 
