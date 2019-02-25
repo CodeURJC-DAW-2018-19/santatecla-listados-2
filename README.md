@@ -89,19 +89,19 @@ Aqui podemos ver una nueva pantalla en la que el usuario podrá registrarse (cre
 #### Pantalla Inicio Estudiante
 ![Pantalla Estudiante](/Screenshots/Phase2/StudentScreen.png "Pantalla Estudiante")
 
-Esta es la página principal del estudiante, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More) y un botón que redirige a la página de las imagenes (Images). Se mantiene el botón para mostrar el cuadro de diálogo Diagrama como podemos ver acontinuación.
+Esta es la página principal del estudiante, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More) y un botón que redirige a la página de las imágenes (Images). Se mantiene el botón para mostrar el cuadro de diálogo Diagrama como podemos ver acontinuación.
 
 ![StudentDiagram](/Screenshots/Phase2/StudentDiagram.png "StudentDiagram")
 
-#### Imagenes para Estudiante
+#### Imágenes para Estudiante
 ![ImagesStudent](/Screenshots/Phase2/ImagesStudent.png "ImagesStudent")
 
-Esta es una nueva pantalla en la cual el alumno puede ver las imagenes (que solo el profesor puede subir como ya veremos acontinuación). Cada imagen tiene un enlace al concepto con el que esta relacionado y al pulsar sobre el te redirecciona alli.
+Esta es una nueva pantalla en la cual el alumno puede ver las imágenes (que solo el profesor puede subir como ya veremos a continuación). Cada imagen tiene un enlace al concepto con el que esta relacionado y al pulsar sobre él te redirecciona allí.
 
 #### Pantalla de conceptos para el Estudiante
 ![StudentConcept](/Screenshots/Phase2/StudentConcept.png "StudentConcept")
 
-La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su dialogo para el diagrama y para los diferentes tipos de pregunta.
+La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su diálogo para el diagrama y para los diferentes tipos de pregunta.
 #### Diálogos
 ##### Diagrama de Concepto
 ![StudentConceptDiagram](/Screenshots/Phase2/StudentConceptDiagram.png "StudentConceptDiagram")
@@ -119,14 +119,14 @@ La pantalla de conceptos para el alumno es prácticamente igual a la de la fase 
 #### Pantalla Inicio Invitado
 ![GuestScreen](/Screenshots/Phase2/GuestScreen.png "GuestScreen")
 
-Esta pantalla también es muy similar a la de la fase anterior. los cambios mas significativos son una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More) y un botón que redirige a la página de las imagenes (Images). Esta última pagina de imagenes solo permite al invitado ver las imagenes y el concepto con el que estan relacionadas pero no permite acceder al concepto para ello hay que registrarse.
-#### Imagenes para Invitado
+Esta pantalla también es muy similar a la de la fase anterior. los cambios mas significativos son una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More) y un botón que redirige a la página de las imágenes (Images). Esta última pagina de imágenes solo permite al invitado ver las imágenes y el concepto con el que estan relacionadas pero no permite acceder al concepto, para ello hay que registrarse.
+#### Imágenes para Invitado
 ![ImagesGuest](/Screenshots/Phase2/ImagesGuest.png "ImagesGuest")
 
 #### Pantalla para Profesor
 ![TeacherScreen](/Screenshots/Phase2/TeacherScreen.png "TeacherScreen")
 
-Esta es la página principal del profesor, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More), un botón que redirige a la página de las imagenes (Images) y que se ha añadido funcionalidad a los botones de añadir tema, añadir concpeto, eliminar tema y eliminar concepto. Estos últimos botones abren una serie de dialogoss como podemos ver a continuación.
+Esta es la página principal del profesor, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More), un botón que redirige a la página de las imágenes (Images) y que se ha añadido funcionalidad a los botones de añadir tema, añadir concpeto, eliminar tema y eliminar concepto. Estos últimos botones abren una serie de diálogos como podemos ver a continuación.
 #### Diálogos
 ##### Añadir Tema
 ![addTopic](/Screenshots/Phase2/addTopic.png "addTopic")
@@ -144,13 +144,13 @@ Como en el caso de las pantallas de estudiante, el bóton con el diálogo del di
 #### Pantalla de conceptos para el profesor
 ![TeacherConcept](/Screenshots/Phase2/TeacherConcept.png "TeacherConcept")
 
-Esta es la pantalla de concepto del profesor, muy similar a la que podemos encontrar en la fase 1. Aqui cabe destacar el header de la pagina el cual en función del concepto accedido abre una pestaña que podemos cerrar en cualquier momento en la x, redirigiendonos asi a la pagina principal del profesor (Este header no solo esta aqui, sino que se repite en toda la aplicación).
+Esta es la pantalla de concepto del profesor, muy similar a la que podemos encontrar en la fase 1. Aquí cabe destacar el header de la página el cual en función del concepto accedido abre una pestaña que podemos cerrar en cualquier momento en la x, redirigiendonos así a la página principal del profesor (Este header no solo esta aquí, sino que se repite en toda la aplicación).
 
 
-#### Imagenes para Profesor
+#### Imágenes para Profesor
 ![ImagesTeacher](/Screenshots/Phase2/ImagesTeacher.png "ImagesTeacher")
 
-Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy similar a la de las imagenes de estudiante e invitado. Como pasa con estudiante, las imagenes tienen un enlace al concepto con el que estan relacionadas. Esta pantalla también tiene un botón para añadir imagenes ya que el profesor es el único usuario al que se le permite dicha acción. Una vez pulsado el botón de añadir imagen se nos redirecciona a una pagina donde tenemos que rellenar un formulario (Pantalla de Nueva Imágen) y una vez enviada la imágen, la web nos indica que se ha realizado con exito (Pantalla de imagen subida) o si ha habido algun error. 
+Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy similar a la de las imágenes de estudiante e invitado. Como pasa con estudiante, las imágenes tienen un enlace al concepto con el que estan relacionadas. Esta pantalla también tiene un botón para añadir imágenes ya que el profesor es el único usuario al que se le permite dicha acción. Una vez pulsado el botón de añadir imagen se nos redirecciona a una página donde tenemos que rellenar un formulario (Pantalla de Nueva Imagen) y una vez enviada la imagen, la web nos indica que se ha realizado con exito (Pantalla de imagen subida) o si ha habido algún error. 
 ##### Nueva Imágen
 ![NewImage](/Screenshots/Phase2/NewImage.png "NewImage")
 ##### Imagen Subida
@@ -159,7 +159,7 @@ Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy
 #### Error Personalizado
 ![CustomError](/Screenshots/Phase2/CustomError.png "CustomError")
 
-En esta segunda fase hemos personalizado un error propio, para sustituir al error por defecto. Este error personalizado muestra el codigo del error http y su mensaje asociado.
+En esta segunda fase hemos personalizado un error propio, para sustituir al error por defecto. Este error personalizado muestra el código del error http y su mensaje asociado.
 
 ### Diagrama de navegación
 La siguiente imagen muestra el nuevo diagrama de navegación de nuestra página web resultante tras concluir esta segunda fase:
@@ -167,9 +167,11 @@ La siguiente imagen muestra el nuevo diagrama de navegación de nuestra página 
 ![DiagramaNavegacionFase2](/Screenshots/Phase2/DiagramaNavegacionFase2.png "DiagramaNavegacionFase2")
 
 
-### Entorno de desarrollo
+### Phase 2: continuación
 
-Para esta fase se nos requiere realizar una explicación para poder compilar y ejecutar nuestra aplicación, asi como un Diagrama de Entidades de la base de datos y un Diagrama de Clases Java de la aplicación.
+Para esta fase se nos requiere realizar una explicación para poder compilar y ejecutar nuestra aplicación, así como un Diagrama de Entidades de la base de datos y un Diagrama de Clases Java de la aplicación.
+
+### Entorno de desarrollo
 
 Para poder compilar y ejecutar la aplicación será necesario seguir los siguientes pasos:
 - Comenzaremos descargando y configurando lo referente a la base de datos. Usamos MySQL . Será necesario descargar MySQL Installer para poder instalar el Server de MySQL.
@@ -195,14 +197,16 @@ Para poder establecer (set up) este SDK seguimos los siguientes pasos: File > Pr
 
 
 ### Diagrama de Entidades
-Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparecen en este diagrama son @Entity y mostramos las relaciones entre ellas y sus cardinalidades. Subrayado en negro esta el atributo que sirve para identificar al objeto (claves primarias); y subrayado en azul estan las claves que sirven para referenciar a objetos relacionados (claves ajenas).
+Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparecen en este diagrama son @Entity y mostramos las relaciones entre ellas y sus cardinalidades. Subrayado en negro está el atributo que sirve para identificar al objeto (claves primarias); y subrayado en azul están las claves que sirven para referenciar a objetos relacionados (claves ajenas).
 
 ![DiagramaEntidades](/Screenshots/Phase2/DiagramaEntidades.png "DiagramaEntidades")
 
 ### Diagrama de Clases
 A continuación se expone el Diagrama de Clases de nuestra aplicación. Por motivos de claridad visual hemos partido este diagrama en dos, haciendo una primera parte en la que se muestran las relaciones entre los controladores ImageController, loginController, logoutController y CustomErrorController con el resto de las clases; y una segunda parte en la que se muestra el controlador MainController y sus relaciones con el resto de clases.
 
-En estediagrma hemos seguido un codigo de colores para diferenciar entre sus componentes. En verde tenemos los @Controller, en rojo tenemos los @Service, en azul tenemos los Repository y en morado los templates (.html).  
+En este diagrma hemos seguido un código de colores para diferenciar entre sus componentes. En verde tenemos los @Controller, en rojo tenemos los @Service, en azul tenemos los Repository y en morado los templates (.html).  
+
+![DiagramColors](/Screenshots/Phase2/DiagramColors.png "DiagramColors")
 
 #### Diagrama de Clases (Parte 1)
 ![DiagramaClasesParte1](/Screenshots/Phase2/DiagramaClasesParte1.png "DiagramaClasesParte1")
