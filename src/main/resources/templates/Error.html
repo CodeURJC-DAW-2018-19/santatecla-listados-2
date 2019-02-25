@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>New Image</title>
 
+<head>
+    <title>Error</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -12,7 +11,7 @@
     <!-- including ECharts file -->
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
-    <link rel="stylesheet" href="/css/MainPageStyle.css">
+    <link rel="stylesheet" href="/css/CustomErrorStyle.css">
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -23,11 +22,6 @@
     <script src="/js/echarts.min.js"></script>
     <!-- CSS Files  -->
     <link rel="stylesheet" href="/css/MainPageStyle.css">
-    <link rel="stylesheet" href="/css/commonCss.css">
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 
     <!-- Material Dashboard CSS -->
 
@@ -95,42 +89,34 @@
 
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
-
 </head>
-<body onload="callHeader()">
-<script>
-    function callHeader() {
-        $.ajax({
-            url: "/MainPage/HeaderConcept"
-        }).done(function (data) {
-            $("#header").append(data);
-        })
-    }
-</script>
+<body  style="overflow-x:hidden">
 
-<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
-</header>
-
-<div style="margin-left: 5%">
-    <h1>New Image</h1>
-
-    <form action="/image/upload" method="post"
-          enctype="multipart/form-data">
-        <p>
-            <label>Title:</label> <input type='text' required name='imageTitle' />
-        </p>
-        <p>
-            <label>Related Concept:</label> <input type='text' required name='imageConcept' />
-        </p>
-
-        <p>
-            <label>Image file:</label><input type="file" required name="file" />
-        </p>
-        <input type='submit' class="btn btn-primary btn-lg" name='enviar' value='Enviar' />
-        <input type="hidden" name="_csrf" value="{{token}}"/>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>{{errorCode}}</h2>
+                <div class="error-details">
+                    {{exception}}
+                </div>
+                <div class="error-actions">
+                    <a href="javascript:history.back()" class="btn btn-primary btn-lg">
+                        Ir a la página anterior </a>
+                    <a href="/logIn" class="btn btn-default btn-lg">
+                        Ir al LogIn </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-{{> footer}}
+ {{>Footer}}
+
+
+
 
 </body>
+
 </html>

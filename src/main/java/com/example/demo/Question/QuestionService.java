@@ -1,7 +1,5 @@
 package com.example.demo.Question;
 
-import com.example.demo.Answer.Answer;
-import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Concept.Concept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

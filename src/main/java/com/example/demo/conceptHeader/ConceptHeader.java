@@ -1,4 +1,4 @@
-package com.example.demo.ConceptHeader;
+package com.example.demo.conceptHeader;
 
 
 import javax.persistence.*;

@@ -1,20 +1,15 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Answer.Answer;
-import com.example.demo.Answer.AnswerRepository;
-import com.example.demo.Answer.AnswerService;
+import com.example.demo.answer.Answer;
+import com.example.demo.answer.AnswerService;
 import com.example.demo.Concept.Concept;
-import com.example.demo.Concept.ConceptRepository;
 import com.example.demo.Concept.ConceptService;
-import com.example.demo.ConceptHeader.ConceptHeader;
+import com.example.demo.conceptHeader.ConceptHeader;
 import com.example.demo.Item.Item;
-import com.example.demo.Item.ItemRepository;
 import com.example.demo.Item.ItemService;
 import com.example.demo.Question.Question;
-import com.example.demo.Question.QuestionRepository;
 import com.example.demo.Question.QuestionService;
 import com.example.demo.Topic.Topic;
-import com.example.demo.Topic.TopicRepository;
 import com.example.demo.Topic.TopicService;
 import com.example.demo.User.User;
 import com.example.demo.User.UserComponent;
@@ -28,8 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -75,7 +68,7 @@ public class MainController {
         model.addAttribute("teacher", false);
         model.addAttribute("guest", true);
         model.addAttribute("topics", topics);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "in");
         model.addAttribute("urlLog", "/logIn");
         return "MainPage";
@@ -98,7 +91,7 @@ public class MainController {
             model.addAttribute("teacher", false);
         }
         model.addAttribute("topics", topics);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("guest", false);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
@@ -114,7 +107,7 @@ public class MainController {
         Set<Question> q = concept.getQuestions();
         model.addAttribute("name", name);
         model.addAttribute("questions", q);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
         model.addAttribute("topics",concept);
@@ -132,7 +125,7 @@ public class MainController {
         model.addAttribute("items", i);
         model.addAttribute("topics", i);
         model.addAttribute("questions", q);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog","/logOut");
 
@@ -152,7 +145,7 @@ public class MainController {
         model.addAttribute("teacher", false);
         List<Topic> topics = topicService.findAll();
         model.addAttribute("topics",topics);
-        model.addAttribute("LogIn",true);
+        model.addAttribute("logIn",true);
         model.addAttribute("inOut","out");
         model.addAttribute("Elements",topics);
         model.addAttribute("urlLog","/logOut");
@@ -161,7 +154,7 @@ public class MainController {
         return "MainPage";
     }
 
-    @RequestMapping(value = "/mainPage/addTo{name}", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainPage/addTo{name}", method = RequestMethod.POST)
     public String addConcept(Model model, HttpServletResponse res, @RequestParam String conceptName, @PathVariable String name) throws IOException {
         Optional<Topic> t = topicService.findOne(name);
         Concept c = new Concept(conceptName);
@@ -178,7 +171,7 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/mainPage/addTopic", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainPage/addTopic", method = RequestMethod.POST)
     public String addTopic(Model model, @RequestParam String topicName) {
         Topic t = new Topic(topicName, topicService.findAll().size() + 1);
         topicService.save(t);
@@ -236,7 +229,7 @@ public class MainController {
             questions = new PageImpl<>(q.subList((int) start, (int) end), pageable, q.size());
         }
         model.addAttribute("questions", questions);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
         boolean noMore2 = false;
@@ -263,7 +256,7 @@ public class MainController {
             questions = new PageImpl<>(q.subList((int) start, (int) end), pageable, q.size());
         }
         model.addAttribute("questions", questions);
-        model.addAttribute("LogIn", true);
+        model.addAttribute("logIn", true);
         model.addAttribute("inOut", "out");
         model.addAttribute("urlLog", "/logOut");
         boolean noMore1 = false;
@@ -272,26 +265,26 @@ public class MainController {
             noMoreQuesNC = true;
         }
         model.addAttribute("noMore", noMore1);
-        return "noCorrectQuestions";
+        return "NoCorrectQuestions";
     }
 
     @GetMapping (path = "/TopicMoreButton")
     public String topicMoreButton(Model model, @PageableDefault(size = 10) Pageable pageable){
         i++;
-        model.addAttribute("numero",i);
+        model.addAttribute("number",i);
         Page<Topic> topics;
         if (!search || text.equals("")) {
             search = false;
             topics = topicService.findAll(pageable);
         }else{
             List<Concept> concepts=conceptService.findByNameContaining(text);
-            List<Topic> listaTopic = topicService.findByNameContaining(text);
+            List<Topic> topicList = topicService.findByNameContaining(text);
             List<Topic> t=new ArrayList<>();
             for (Concept c:concepts) {
                 if (!t.contains(c.getTopic()))
                     t.add(c.getTopic());
             }
-            for (Topic topic: listaTopic){
+            for (Topic topic: topicList){
                 if (!t.contains(topic))
                     t.add(topic);
             }
@@ -325,10 +318,10 @@ public class MainController {
             model.addAttribute("urlLog","/logOut");
         }
         model.addAttribute("topics",topics);
-        model.addAttribute("LogIn",true);
+        model.addAttribute("logIn",true);
         if (topics.isEmpty() && !noMore){
             noMore=true;
-            model.addAttribute("NoMore",true);
+            model.addAttribute("noMore",true);
         }
         return "TopicMore";
     }
@@ -373,8 +366,8 @@ public class MainController {
             model.addAttribute("urlLog","/MainPage/logOut");
         }
         model.addAttribute("conceptHeader",logOutController.getArray());
-        model.addAttribute("LogIn",true);
-        return "header";
+        model.addAttribute("logIn",true);
+        return "Header";
     }
 
     @GetMapping("/loadMoreItems/{name}")
@@ -383,7 +376,6 @@ public class MainController {
         if (concept == null)
             return null;
         List<Item> i = itemService.findByConceptName(name);
-        System.out.println(i.size());
         Page topics;
         long start = pageable.getOffset();
         long end = (start + pageable.getPageSize()) > i.size() ? i.size() : (start + pageable.getPageSize());
@@ -395,7 +387,7 @@ public class MainController {
         model.addAttribute("items", topics);
         if (topics.isEmpty() && !noMoreItems) {
             noMoreItems = true;
-            model.addAttribute("NoMore", true);
+            model.addAttribute("noMore", true);
         }
         return "MoreItems";
     }
@@ -406,7 +398,6 @@ public class MainController {
             return null;
         List<Question> q = questionService.findByConceptAndCorrected(concept, false);
         Page<Question> questions;
-        System.out.println("AQUI");
         long start = pageable.getOffset();
         long end = (start + pageable.getPageSize()) > q.size() ? q.size() : (start + pageable.getPageSize());
         if (end < start) {
@@ -419,14 +410,14 @@ public class MainController {
             noMoreQuestionsNC = true;
             model.addAttribute("noMore", true);
         }
-        return "moreQuestionNC";
+        return "MoreQuestionNC";
     }
 
     @RequestMapping("logIn/newAccount")
     public String newAccount(Model model){
         model.addAttribute("show", true);
         model.addAttribute("showSubmit", true);
-        return "newAccount";
+        return "NewAccount";
     }
     @GetMapping ("/MainPage/Teacher/{conceptName}/save/{text}/{checked}")
     public String addItem(Model model,@PathVariable String conceptName,@PathVariable String text, @PathVariable boolean checked){
@@ -444,7 +435,6 @@ public class MainController {
         Item i=new Item(text,checked);
         Concept c=this.conceptService.findOne(conceptName);
         i.setConcept(c);
-        System.out.println("Hola que tal");
         this.itemService.save(i);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
@@ -486,7 +476,7 @@ public class MainController {
             model.addAttribute("emptyName", false);
             model.addAttribute("emptyPassword", false);
 
-            return "newAccount";
+            return "NewAccount";
         } else if(name.equals("")){
 
             model.addAttribute("show", true);
@@ -498,7 +488,7 @@ public class MainController {
             model.addAttribute("emptyName", true);
             model.addAttribute("emptyPassword", false);
 
-            return "newAccount";
+            return "NewAccount";
 
         }else if(password.equals("")){
             model.addAttribute("show", true);
@@ -510,7 +500,7 @@ public class MainController {
             model.addAttribute("emptyName", false);
             model.addAttribute("emptyPassword", true);
 
-            return "newAccount";
+            return "NewAccount";
         }else {
 
             User user = userRepository.findByUsername(username);
@@ -521,7 +511,7 @@ public class MainController {
                 model.addAttribute("showSubmit", true);
                 model.addAttribute("rolError", false);
 
-                return "newAccount";
+                return "NewAccount";
             } else {
                 model.addAttribute("errorUserName", false);
 
@@ -534,7 +524,7 @@ public class MainController {
                     User newUser = new User(name, password, username, "ROLE_TEACHER");
                     userRepository.save(newUser);
 
-                    return "newAccount";
+                    return "NewAccount";
                 } else if (rol.equals("STUDENT")) {
                     model.addAttribute("success", true);
                     model.addAttribute("show", false);
@@ -543,14 +533,14 @@ public class MainController {
                     User newUser = new User(name, password, username, "ROLE_STUDENT");
                     userRepository.save(newUser);
 
-                    return "newAccount";
+                    return "NewAccount";
                 } else {
                     model.addAttribute("show", true);
                     model.addAttribute("showSubmit", true);
                     model.addAttribute("rolError", true);
                     model.addAttribute("success", false);
 
-                    return "newAccount";
+                    return "NewAccount";
                 }
 
 

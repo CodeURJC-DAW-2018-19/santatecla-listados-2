@@ -1,6 +1,6 @@
 package com.example.demo.Question;
 
-import com.example.demo.Answer.Answer;
+import com.example.demo.answer.Answer;
 import com.example.demo.Concept.Concept;
 import javax.persistence.*;
 

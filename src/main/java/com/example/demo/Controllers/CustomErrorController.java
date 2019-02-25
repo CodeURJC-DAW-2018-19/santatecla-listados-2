@@ -22,7 +22,7 @@ public class CustomErrorController implements ErrorController {
             model.addAttribute("exception",exception.getMessage());
        }
         model.addAttribute("errorCode",errorCode);
-        return "error";
+        return "Error";
     }
     @Override
     public String getErrorPath(){
