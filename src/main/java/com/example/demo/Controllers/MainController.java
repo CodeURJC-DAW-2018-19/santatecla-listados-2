@@ -554,20 +554,30 @@ public class MainController {
 
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
-        int typeQuestion = (int)(Math.random() * 3);
+        int typeQuestion = (int)(Math.random() * 4);
         Question question;
         String questionName ="";
+        System.out.println(typeQuestion);
         String modalType = "";
         if (typeQuestion == 0){
-            modalType = "modal0";
+            model.addAttribute("modal0",true);
+            model.addAttribute("modal1",false);
+            model.addAttribute("modal2",false);
+            model.addAttribute("modal3",false);
             questionName = "¿Cuáles son " + concept.getName() + " ?";
         }else if (typeQuestion == 1 ){
-            modalType = "modal1";
+            model.addAttribute("modal0",false);
+            model.addAttribute("modal1",true);
+            model.addAttribute("modal2",false);
+            model.addAttribute("modal3",false);
             List<Item> itemsList = itemService.findByConceptName(conceptName);
             typeItem = (int)(Math.random()*itemsList.size()-1);
             questionName = "¿"+ itemsList.get(typeItem).getName() + "es un elemento de " + concept.getName()+ " ?";
         }else if (typeQuestion ==2) {
-            modalType = "modal2";
+            model.addAttribute("modal0",false);
+            model.addAttribute("modal1",false);
+            model.addAttribute("modal2",true);
+            model.addAttribute("modal3",false);
             List<Item> itemsList = itemService.findCorrect(true);
             typeItem = (int) (Math.random() * itemsList.size() - 1);
             itemsList.remove(typeItem);
@@ -577,10 +587,16 @@ public class MainController {
             }
             questionName = "¿Qué elemento falta en " + otherItems + "para completar la lista de " + concept.getName() + " ?";
 
-        }/*}else if (typeQuestion == 3){
-            modalType = "modal3";
+        }else if (typeQuestion == 3){
+            model.addAttribute("modal0",false);
+            model.addAttribute("modal1",false);
+            model.addAttribute("modal2",false);
+            model.addAttribute("modal3",true);
             List<Item> itemsList = itemService.findByConceptName(conceptName);
-            int itemsN = (int) Math.floor(Math.random() * 3 + 3);
+            for (Item i: itemsList){
+                System.out.println(i.getName());
+            }
+            int itemsN = (int) Math.floor(Math.random() * (4)+2);
             String string = "";
             for (int i = 0; i<itemsN; i++){
                 typeItem = (int)(Math.random()*itemsList.size()-1);
@@ -589,7 +605,7 @@ public class MainController {
                 itemsList.remove(typeItem);
             }
             questionName = "¿Qué elementos de " + string + " no son parte de  " + concept.getName() + " ?";
-        }*/
+        }
 
         if (typeQuestion ==0 || typeQuestion == 1){
             question = new Question(questionName, "" +typeQuestion, false );

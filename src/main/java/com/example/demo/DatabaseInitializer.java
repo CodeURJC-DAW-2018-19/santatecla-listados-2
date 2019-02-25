@@ -54,8 +54,10 @@ public class DatabaseInitializer {
 		Answer a1 = new Answer("Respuesta Abierta 0", false);
 		Answer a2 = new Answer("Respuesta Cerrada 1", true);
 
-		Item i1 = new Item("Patron Singleton",false);
-		Item i2 = new Item ("No tengo muy claro que poner",true);
+		Item i1 = new Item("item1",false);
+		Item i2 = new Item ("item2",true);
+		Item i3 = new Item("itemskdfgisdufh3",false);
+		Item i4 = new Item ("item4",true);
 		User u1= new User("Alberto","123456789","Albertocalib_8","ROLE_STUDENT");
 		User u2= new User("Alberto","123456789","a.canal.2016","ROLE_TEACHER");
 		User u3= new User("Haritz","123456789","yo","ROLE_TEACHER");
@@ -98,8 +100,12 @@ public class DatabaseInitializer {
 
 		c1.setItem(i1);
 		c1.setItem(i2);
+		c1.setItem(i3);
+		c1.setItem(i4);
 		i1.setConcept(c1);
 		i2.setConcept(c1);
+		i3.setConcept(c1);
+		i4.setConcept(c1);
 		c1.setPendings(c1.getPendings()+1);
 		c1.setHits(c1.getHits()+1);
 		c1.getTopic().setPendings(c1.getTopic().getPendings()+1);
@@ -123,9 +129,8 @@ public class DatabaseInitializer {
 		answerRepository.save(a2);
 		itemRepository.save(i1);
 		itemRepository.save(i2);
-
-
-
+		itemRepository.save(i3);
+		itemRepository.save(i4);
 	}
 
 

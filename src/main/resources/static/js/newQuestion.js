@@ -4,6 +4,7 @@ function newQuestion(name) {
         url: urlPage
     }).done(function (data) {
         $('#contained').append(data);
-        $('#addQuestion').modal('show');
+        $('#modalQuestion').modal('show');
     })
+    //location.reload();
 }
