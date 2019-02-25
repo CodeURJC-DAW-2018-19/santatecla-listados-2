@@ -1,0 +1,127 @@
+{{#modal0}}
+<div class="modal fade" id="modalPType0" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType0"
+     aria-hidden="true" align="center">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="card card-plain">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title"> {{#question}}{{question}}{{/question}}</h4>
+                </div>
+            </div>
+            <div class="modal-body" align="left">
+                <form action="/MainPage/Student/saveAnswer/{{#question}}{{question}}{{/question}}" method="post">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group bmd-form-group">
+                                <input class="text" name="answerTest" rows="3" cols="49"
+                                       placeholder="Respuesta"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">aceptar</button>
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/modal0}}
+{{#modal1}}
+<div class="modal fade" id="modalPType1" tabindex="-1" role="dialog" aria-labelledby="exampleModalPCType1"
+     aria-hidden="true" align="center">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="card card-plain">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title">{{#question}}{{question}}{{/question}}</h4>
+                </div>
+            </div>
+            <div class="modal-body" align="left">
+                <div class="form-check form-check-radio">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                               value="option1">
+                        Verdadero
+                        <span class="circle">
+            <span class="check"></span>
+        </span>
+                    </label>
+                </div>
+                <div class="form-check form-check-radio">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                               value="option2">
+                        Falso
+                        <span class="circle">
+            <span class="check"></span>
+        </span>
+
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/modal1}}
+{{#modal2}}
+<div class="modal fade" id="modalPType2" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType2"
+     aria-hidden="true" align="center">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="card card-plain">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title">{{#question}}{{question}}{{/question}}</h4>
+                </div>
+            </div>
+            <div class="modal-body" align="left">
+                <form action="/MainPage/Student/saveAnswer/{{#question}}{{question}}{{/question}}">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group bmd-form-group">
+                                <textarea name="answerTest" rows="3" cols="49" placeholder="Respuesta"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">aceptar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
+            </div>
+        </div>
+    </div>
+</div>
+{{/modal2}}
+{{#modal3}}
+<div class="modal fade" id="modalPType3" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType3"
+     aria-hidden="true" align="center">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="card card-plain">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title"> {{#question}}{{question}}{{/question}}</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="textQuestion">
+                        {{#questions}}
+                        <input class="form-check-input" type="checkbox"
+                               name="{{info}}">{{name}}
+                        {{/questions}}
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/modal3}}

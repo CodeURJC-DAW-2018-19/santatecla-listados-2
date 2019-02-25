@@ -25,6 +25,9 @@ public class ItemService {
     public List<Item> findByConceptName(String name) {
         return repository.findByConceptName(name);
     }
+    public List<Item> findCorrect(boolean b) {
+        return repository.findByCorrect(b);
+    }
 
     public void save(Item item) {
         repository.save(item);

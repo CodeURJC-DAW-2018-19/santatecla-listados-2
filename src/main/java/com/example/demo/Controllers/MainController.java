@@ -557,4 +557,62 @@ public class MainController {
             }
         }
     }
+
+    @GetMapping (path = "/NewQuestion/{conceptName}")
+    public String newQuestion(Model model, @PathVariable String conceptName){
+        Concept concept = conceptService.findOne(conceptName);
+
+        int typeItem = 0;
+        List<Item> list = new ArrayList<>();
+        int typeQuestion = (int)(Math.random() * 3);
+        Question question;
+        String questionName ="";
+        String modalType = "";
+        if (typeQuestion == 0){
+            modalType = "modal0";
+            questionName = "¿Cuáles son " + concept.getName() + " ?";
+        }else if (typeQuestion == 1 ){
+            modalType = "modal1";
+            List<Item> itemsList = itemService.findByConceptName(conceptName);
+            typeItem = (int)(Math.random()*itemsList.size()-1);
+            questionName = "¿"+ itemsList.get(typeItem).getName() + "es un elemento de " + concept.getName()+ " ?";
+        }else if (typeQuestion ==2) {
+            modalType = "modal2";
+            List<Item> itemsList = itemService.findCorrect(true);
+            typeItem = (int) (Math.random() * itemsList.size() - 1);
+            itemsList.remove(typeItem);
+            String otherItems = "";
+            for (Item i : itemsList) {
+                otherItems += i.getName() + ", ";
+            }
+            questionName = "¿Qué elemento falta en " + otherItems + "para completar la lista de " + concept.getName() + " ?";
+
+        }/*}else if (typeQuestion == 3){
+            modalType = "modal3";
+            List<Item> itemsList = itemService.findByConceptName(conceptName);
+            int itemsN = (int) Math.floor(Math.random() * 3 + 3);
+            String string = "";
+            for (int i = 0; i<itemsN; i++){
+                typeItem = (int)(Math.random()*itemsList.size()-1);
+                list.add(itemsList.get(typeItem));
+                string += itemsList.get(typeItem).getName()+ ", ";
+                itemsList.remove(typeItem);
+            }
+            questionName = "¿Qué elementos de " + string + " no son parte de  " + concept.getName() + " ?";
+        }*/
+
+        if (typeQuestion ==0 || typeQuestion == 1){
+            question = new Question(questionName, "" +typeQuestion, false );
+        }else{
+            question = new Question(questionName, "" +typeQuestion, true );
+        }
+        model.addAttribute(modalType, true);
+        model.addAttribute("questions", list);
+        model.addAttribute("typeQuestion", question);
+        concept.setQuestion(question);
+        question.setConcept(concept);
+        questionService.save(question);
+        conceptService.save(concept);
+        return "NewQuestion";
+    }
 }

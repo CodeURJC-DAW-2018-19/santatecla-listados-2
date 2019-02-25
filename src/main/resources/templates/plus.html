@@ -1,7 +1,11 @@
-<button  style="position: relative;
+<button style="position: relative;
     text-align: center;
     top: 92px;
     right: 131px;"
-         class="btn btn-primary btn-fab btn-fab-mini btn-round">
+        class="btn btn-primary btn-fab btn-fab-mini btn-round"
+    onclick="newQuestion('{{name}}')"
+        data-toggle="modal"
+        data-target="#addQuestion"
+    >
     <i class="material-icons">add</i>
 </button>
