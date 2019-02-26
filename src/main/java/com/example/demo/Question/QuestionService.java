@@ -34,6 +34,6 @@ public class QuestionService {
         repository.delete(q);
     }
 
-    public Question findOne(int name) {return repository.findById(name);
-    }
+    public Question findOne(int id) {return repository.findById(id);}
+
 }

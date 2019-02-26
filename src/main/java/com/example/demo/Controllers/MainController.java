@@ -551,10 +551,9 @@ public class MainController {
     @GetMapping (path = "/NewQuestion/{conceptName}")
     public String newQuestion(Model model, @PathVariable String conceptName){
         Concept concept = conceptService.findOne(conceptName);
-
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
-        int typeQuestion = (int)(Math.random() * 4);
+        int typeQuestion =(int)(Math.random() * 4);
         Question question;
         String questionName ="";
         System.out.println(typeQuestion);
@@ -602,7 +601,7 @@ public class MainController {
             }
             int itemsN = (int) Math.floor(Math.random() * (3)+2);
             String string = "";
-            for (int i = 0; i<itemsN; i++){
+            for (int i = 0; i<2; i++){
                 typeItem = (int)(Math.random()*itemsList.size()-1);
                 list.add(itemsList.get(typeItem));
                 string += itemsList.get(typeItem).getName()+ ", ";
@@ -634,48 +633,69 @@ public class MainController {
         answer.setAnswerTest("Respuesta");
         question1.setCorrected(false);
         question1.setAnswer(answer);
+        Concept c = question1.getConcept();
+        Topic topic = c.getTopic();
+        c.setPendings(c.getPendings()+1);
+        topic.setPendings(topic.getPendings()+1);
+//        conceptService.save(c);
         questionService.save(question1);
         return "redirect:/MainPage/Student/"+question1.getConcept().getName();
     }
 
     @GetMapping(path = "/sendAnswer/{question}/{correct}")
-    public String sendAnswer(Model model, @PathVariable String question, @PathVariable boolean correct){
+    public String sendAnswer(Model model, @PathVariable int question, @PathVariable boolean correct){
         System.out.println("He entrado por la pregunta 1");
-        Answer answer = questionService.findOne(question).getAnswer();
-        Set<Item> itemSet = answer.getQuestion().getConcept().getItems();
+        Question question1 = questionService.findOne(question);
+        Answer answer = new Answer();
+        Concept c = question1.getConcept();
+        Topic topic = c.getTopic();
+        Set<Item> itemSet = question1.getConcept().getItems();
         Item selected = new Item();
         for (Item item:
              itemSet) {
-            if (question.contains(item.getName())){
+            if (question1.getQuestion().contains(item.getName())){
                 selected = item;
             }
         }
         if (selected.isCorrect() == correct ){
             answer.setMark(true);
+            answer.setOpenAnswer("Verdadero");
+            c.setHits(c.getHits()+1);
+            topic.setHits(topic.getHits()+1);
         }
         else {
             answer.setMark(false);
+            answer.setOpenAnswer("Falso");
+            c.setErrors(c.getErrors()+1);
+            topic.setErrors(topic.getErrors()+1);
         }
+        answer.setAnswerTest("Respuesta");
+        answer.setQuestion(question1);
+        question1.setAnswer(answer);
+     //   conceptService.save(c);
+        questionService.save(question1);
         return "redirect:/MainPage/Student/"+questionService.findOne(question).getConcept().getName();
     }
 
-    @GetMapping(path = "/optedItems/{name}/{ret}/{total}")
-    public String optedItems(Model model, @PathVariable String  name, @PathVariable String ret, @PathVariable String total) {
+    @GetMapping(path = "/optedItems/{id}/{ret}/{total}")
+    public String optedItems(Model model, @PathVariable int  id, @PathVariable String ret, @PathVariable String total) {
         System.out.println("He entrado por la pregunta 3");
         String[] items = ret.split("plus");
         String[] all = total.split("plus    ");
         ArrayList<String> items1= new ArrayList<>(Arrays.asList(items));
-        ArrayList<String> all1= new ArrayList<>(Arrays.asList(items));
-
+        ArrayList<String> all1= new ArrayList<>(Arrays.asList(all));
+        StringBuilder showed = new StringBuilder(" ");
+        for (String string: items) {
+            showed.append(string).append(", ");
+        }
         Answer answer = new Answer();
 
-        Question question = questionService.findOne(name);
-        answer.setQuestion(question);
-        answer.setAnswerTest("Respuesta");
-        question.setAnswer(answer);
-        question.setCorrected(true);
+        Question question = questionService.findOne(id);
+        Concept c = question.getConcept();
+        Topic topic = c.getTopic();
         int result = 0;
         int result1 = 0;
+
         for (String s: items1) {
             for (Item i: question.getConcept().getItems()) {
                 if(i.getName().equals(s) && i.isCorrect()){
@@ -693,18 +713,22 @@ public class MainController {
 
         if(result==result1){
             answer.setMark(true);
-        }else{
+            c.setHits(c.getHits()+1);
+            topic.setHits(topic.getHits()+1);
+        }else {
             answer.setMark(false);
+            c.setErrors(c.getErrors() + 1);
+            topic.setErrors(topic.getErrors() + 1);
         }
-        answerService.save(answer);
+        answer.setOpenAnswer(showed.toString());
+        answer.setQuestion(question);
+        answer.setAnswerTest("Respuesta");
+        question.setAnswer(answer);
+
+
+     //   conceptService.save(c);
         questionService.save(question);
-        Set<Item> itemSet = question.getConcept().getItems();
 
-
-
-
-        answerService.save(answer);
-
-        return "redirect:/MainPage/Student/"+questionService.findOne(name).getConcept().getName();
+        return "redirect:/MainPage/Student/"+questionService.findOne(id).getConcept().getName();
     }
 }

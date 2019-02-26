@@ -43,35 +43,32 @@
                 <div class="form-check form-check-radio">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                               value="option1"
-                               onclick="sendAnswer(true,{{#typeQuestion}}{{question}}{{/typeQuestion}})">
+                               value="true">
                         Verdadero
                         <span class="circle">
-            <span class="check"></span>
-        </span>
+                            <span class="check"></span>
+                        </span>
                     </label>
                 </div>
                 <div class="form-check form-check-radio">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                               value="option2"
-                               onclick="sendAnswer(false,{{#typeQuestion}}{{question}}{{/typeQuestion}})">
+                               value="false">
                         Falso
                         <span class="circle">
-            <span class="check"></span>
-        </span>
-
+                            <span class="check"></span>
+                        </span>
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.reload(true)">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendAnswer({{#typeQuestion}}{{id}}{{/typeQuestion}})">
                     Aceptar
                 </button>
                 <input type="hidden" name="_csrf" value="{{token}}"/>
             </div>
         </div>
-    </div>
+    </div>0
 </div>
 {{/modal1}}
 {{#modal2}}
@@ -118,24 +115,22 @@
                 </div>
 
             </div>
-            <div class="modal-body" align="left">
-                <form id="listq">
+            <div class="modal-body" align="left" style="position:relative; right: -34px;">
+                <form id="listpossibleanswers">
+
                     {{#questions}}
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
-                            {{name}}
-                            <span class="form-check-sign">
+                    <input class="form-check-input" type="checkbox"
+                           name="{{name}}">{{name}}
+                    <span class="circle">
                             <span class="check"></span>
-                        </span>
-                        </label>
-                    </div>
+                        <br>
+                    </span>
                     {{/questions}}
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="addAnswer({{#typeQuestion}}{{question}}{{/typeQuestion}})">Aceptar</button>
+                        onclick="addAnswer(({{#typeQuestion}}{{id}}{{/typeQuestion}}))">Aceptar</button>
                 <input type="hidden" name="_csrf" value="{{token}}"/>
 
             </div>
@@ -144,16 +139,18 @@
 </div>
 {{/modal3}}
 <script>
-    function addAnswer(question) {
+    function addAnswer(id) {
         var ret = "";
         var total = "";
-        $("#listq").children().each(function () {
+        $("#listpossibleanswers").children().each(function () {
             if ($(this).is(':checked')) {
                 ret = ret + "plus" + $(this).attr("name");
             }
             total = total + "plus" + $(this).attr("name");
         });
-        var urlPage = "/optedItems/" + question + "/" + ret + "/" + total;
+        console.log(ret);
+        console.log(total);
+        var urlPage = "/optedItems/" + id + "/" + ret + "/" + total;
         $.ajax({
             url: urlPage
         }).done(function (data) {
@@ -162,10 +159,17 @@
     }
 
 
-    function sendAnswer(correct, question) {
-        var urlPage = "/sendAnswer/" + question + "/" + correct;
+    function sendAnswer(id) {
+        if ($('#exampleRadios1').is(':checked')) {
+            var urlPage = "/sendAnswer/" + id + "/" + 'true';
+            console.log(urlPage);
+        }else if(document.getElementById('.exampleRadios2').is(':checked')){
+            var urlPage = "/sendAnswer/" + id + "/" + 'true';
+        }
         $.ajax({
             url: urlPage
+        }).done(function (data) {
+            location.reload(true);
         })
     }
 
