@@ -560,20 +560,23 @@ public class MainController {
         System.out.println(typeQuestion);
         String modalType = "";
         if (typeQuestion == 0){
+            modalType ="modal0";
             model.addAttribute("modal0",true);
             model.addAttribute("modal1",false);
             model.addAttribute("modal2",false);
             model.addAttribute("modal3",false);
             questionName = "¿Cuáles son " + concept.getName() + " ?";
         }else if (typeQuestion == 1 ){
+            modalType ="modal1";
             model.addAttribute("modal0",false);
             model.addAttribute("modal1",true);
             model.addAttribute("modal2",false);
             model.addAttribute("modal3",false);
             List<Item> itemsList = itemService.findByConceptName(conceptName);
             typeItem = (int)(Math.random()*itemsList.size()-1);
-            questionName = "¿"+ itemsList.get(typeItem).getName() + "es un elemento de " + concept.getName()+ " ?";
+            questionName = "¿"+ itemsList.get(typeItem).getName() + " es un elemento de " + concept.getName()+ " ?";
         }else if (typeQuestion ==2) {
+            modalType ="modal2";
             model.addAttribute("modal0",false);
             model.addAttribute("modal1",false);
             model.addAttribute("modal2",true);
@@ -585,9 +588,10 @@ public class MainController {
             for (Item i : itemsList) {
                 otherItems += i.getName() + ", ";
             }
-            questionName = "¿Qué elemento falta en " + otherItems + "para completar la lista de " + concept.getName() + " ?";
+            questionName = "¿Qué elemento falta en " + otherItems + " para completar la lista de " + concept.getName() + " ?";
 
         }else if (typeQuestion == 3){
+            modalType ="modal3";
             model.addAttribute("modal0",false);
             model.addAttribute("modal1",false);
             model.addAttribute("modal2",false);
@@ -596,7 +600,7 @@ public class MainController {
             for (Item i: itemsList){
                 System.out.println(i.getName());
             }
-            int itemsN = (int) Math.floor(Math.random() * (4)+2);
+            int itemsN = (int) Math.floor(Math.random() * (3)+2);
             String string = "";
             for (int i = 0; i<itemsN; i++){
                 typeItem = (int)(Math.random()*itemsList.size()-1);
@@ -604,10 +608,10 @@ public class MainController {
                 string += itemsList.get(typeItem).getName()+ ", ";
                 itemsList.remove(typeItem);
             }
-            questionName = "¿Qué elementos de " + string + " no son parte de  " + concept.getName() + " ?";
+            questionName = "¿Qué elementos de " + string + " no son parte de " + concept.getName() + " ?";
         }
 
-        if (typeQuestion ==0 || typeQuestion == 1){
+        if (typeQuestion ==0. || typeQuestion == 2){
             question = new Question(questionName, "" +typeQuestion, false );
         }else{
             question = new Question(questionName, "" +typeQuestion, true );
@@ -619,6 +623,88 @@ public class MainController {
         question.setConcept(concept);
         questionService.save(question);
         conceptService.save(concept);
-        return "NewQuestion";
+        return "NewQuestions";
+    }
+    @GetMapping(path = "/setAnswer/{id}")
+    public String addAnswer(Model model, Answer answer, @PathVariable int id) {
+        System.out.println("He entrado por la pregunta 0 o 2");
+        Question question1 = questionService.findOne(id);
+        answer.setQuestion(question1);
+        answer.setMark(false);
+        answer.setAnswerTest("Respuesta");
+        question1.setCorrected(false);
+        question1.setAnswer(answer);
+        questionService.save(question1);
+        return "redirect:/MainPage/Student/"+question1.getConcept().getName();
+    }
+
+    @GetMapping(path = "/sendAnswer/{question}/{correct}")
+    public String sendAnswer(Model model, @PathVariable String question, @PathVariable boolean correct){
+        System.out.println("He entrado por la pregunta 1");
+        Answer answer = questionService.findOne(question).getAnswer();
+        Set<Item> itemSet = answer.getQuestion().getConcept().getItems();
+        Item selected = new Item();
+        for (Item item:
+             itemSet) {
+            if (question.contains(item.getName())){
+                selected = item;
+            }
+        }
+        if (selected.isCorrect() == correct ){
+            answer.setMark(true);
+        }
+        else {
+            answer.setMark(false);
+        }
+        return "redirect:/MainPage/Student/"+questionService.findOne(question).getConcept().getName();
+    }
+
+    @GetMapping(path = "/optedItems/{name}/{ret}/{total}")
+    public String optedItems(Model model, @PathVariable String  name, @PathVariable String ret, @PathVariable String total) {
+        System.out.println("He entrado por la pregunta 3");
+        String[] items = ret.split("plus");
+        String[] all = total.split("plus    ");
+        ArrayList<String> items1= new ArrayList<>(Arrays.asList(items));
+        ArrayList<String> all1= new ArrayList<>(Arrays.asList(items));
+
+        Answer answer = new Answer();
+
+        Question question = questionService.findOne(name);
+        answer.setQuestion(question);
+        answer.setAnswerTest("Respuesta");
+        question.setAnswer(answer);
+        question.setCorrected(true);
+        int result = 0;
+        int result1 = 0;
+        for (String s: items1) {
+            for (Item i: question.getConcept().getItems()) {
+                if(i.getName().equals(s) && i.isCorrect()){
+                    result++;
+                }
+            }
+        }
+        for (String s: all1) {
+            for (Item i: question.getConcept().getItems()) {
+                if(i.getName().equals(s) && i.isCorrect()){
+                    result1++;
+                }
+            }
+        }
+
+        if(result==result1){
+            answer.setMark(true);
+        }else{
+            answer.setMark(false);
+        }
+        answerService.save(answer);
+        questionService.save(question);
+        Set<Item> itemSet = question.getConcept().getItems();
+
+
+
+
+        answerService.save(answer);
+
+        return "redirect:/MainPage/Student/"+questionService.findOne(name).getConcept().getName();
     }
 }

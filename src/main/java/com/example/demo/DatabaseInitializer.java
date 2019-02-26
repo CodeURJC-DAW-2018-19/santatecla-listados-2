@@ -51,12 +51,12 @@ public class DatabaseInitializer {
 		Concept c9 = new Concept("Prueba Cuadrátic", "StudentConcept.html");
 		Question q1 = new Question("¿Que es un tipo generico?", "PType0", false);
 		Question q2 = new Question("¿Donde hay que usar los tipos genericos?", "PType3", true);
-		Answer a1 = new Answer("Respuesta Abierta 0", false);
-		Answer a2 = new Answer("Respuesta Cerrada 1", true);
+		Answer a1 = new Answer("Respuesta ", false);
+		Answer a2 = new Answer("Respuesta ", true);
 
 		Item i1 = new Item("item1",false);
 		Item i2 = new Item ("item2",true);
-		Item i3 = new Item("itemskdfgisdufh3",false);
+		Item i3 = new Item("item3",false);
 		Item i4 = new Item ("item4",true);
 		User u1= new User("Alberto","123456789","Albertocalib_8","ROLE_STUDENT");
 		User u2= new User("Alberto","123456789","a.canal.2016","ROLE_TEACHER");
@@ -95,7 +95,6 @@ public class DatabaseInitializer {
 		q1.setAnswer(a1);
 		q2.setAnswer(a2);
 		a1.setQuestion(q1);
-		a1.setOpenAnswer("respuesta");
 		a2.setQuestion(q2);
 
 		c1.setItem(i1);

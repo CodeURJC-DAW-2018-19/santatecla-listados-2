@@ -12,9 +12,6 @@ public class QuestionService {
     @Autowired
     private QuestionRepository repository;
 
-    public Optional<Question> findOne(int id) {
-        return repository.findById(id);
-    }
     public Question findOne(String name) {
         return repository.findByQuestion(name);
     }
@@ -35,5 +32,8 @@ public class QuestionService {
     }
     public void delete(Question q) {
         repository.delete(q);
+    }
+
+    public Question findOne(int name) {return repository.findById(name);
     }
 }

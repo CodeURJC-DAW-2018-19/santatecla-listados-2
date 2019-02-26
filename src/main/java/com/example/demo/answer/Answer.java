@@ -24,6 +24,7 @@ public class Answer {
     public Answer(String answerTest, boolean mark) {
         this.answerTest = answerTest;
         this.mark = mark;
+        this.openAnswer="Pregunta de checkbox";
     }
 
     public int getId() {

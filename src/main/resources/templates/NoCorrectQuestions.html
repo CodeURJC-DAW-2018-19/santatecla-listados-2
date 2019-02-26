@@ -1,8 +1,22 @@
 {{#questions}}
 <ul class="list-group" style="list-style: none;">
-    <li>{{question}}: <a href="#" data-toggle="modal" data-target="#modal{{type}}">{{#answer}} {{answerTest}} {{/answer}} {{-index}}</a></li>
+    <li>{{question}}: <a href="#" data-toggle="modal" data-target="modal{{-index}}">{{#answer}} {{answerTest}} {{/answer}} {{-index}}</a></li>
 </ul>
+<div class="modal fade" id="modal{{-index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType0"
+     aria-hidden="true" align="center">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="card card-plain">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title">{{question}}</h4>
+                </div>
+            </div>
+            <p>{{#answer}}{{openAnswer}}{{/answer}}</p>
+        </div>
+    </div>
+</div>
 {{/questions}}
 {{#noMore}}
 <p style="right: -60%;position: relative"> no hay más elementos</p>
 {{/noMore}}
+
