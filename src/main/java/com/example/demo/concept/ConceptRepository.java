@@ -1,4 +1,4 @@
-package com.example.demo.Concept;
+package com.example.demo.concept;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.demo.answer;
 
-import com.example.demo.Question.Question;
+import com.example.demo.question.Question;
 import javax.persistence.*;
 
 @Entity

@@ -1,7 +1,7 @@
-package com.example.demo.Question;
+package com.example.demo.question;
 
 import com.example.demo.answer.Answer;
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 import javax.persistence.*;
 
 @Entity

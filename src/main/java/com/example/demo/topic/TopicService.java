@@ -1,4 +1,4 @@
-package com.example.demo.Topic;
+package com.example.demo.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

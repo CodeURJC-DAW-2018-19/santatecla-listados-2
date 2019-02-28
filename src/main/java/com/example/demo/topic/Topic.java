@@ -1,6 +1,6 @@
-package com.example.demo.Topic;
+package com.example.demo.topic;
 
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 
 import javax.persistence.*;
 import java.util.HashSet;

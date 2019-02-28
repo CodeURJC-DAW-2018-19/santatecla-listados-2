@@ -1,7 +1,5 @@
-package com.example.demo.Topic;
+package com.example.demo.topic;
 
-import com.example.demo.Concept.Concept;
-import com.example.demo.Topic.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

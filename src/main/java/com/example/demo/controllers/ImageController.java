@@ -1,11 +1,11 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
-import com.example.demo.Concept.Concept;
-import com.example.demo.Concept.ConceptService;
-import com.example.demo.UploadImages.Image;
+import com.example.demo.concept.Concept;
+import com.example.demo.concept.ConceptService;
+import com.example.demo.uploadImages.Image;
 //import com.example.demo.UploadImages.ImageRepository;
-import com.example.demo.User.User;
-import com.example.demo.User.UserComponent;
+import com.example.demo.user.User;
+import com.example.demo.user.UserComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

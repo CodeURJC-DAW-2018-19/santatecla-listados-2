@@ -1,7 +1,7 @@
-package com.example.demo.UploadImages;
+package com.example.demo.uploadImages;
 
 
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 
 import javax.persistence.*;
 

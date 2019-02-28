@@ -1,11 +1,10 @@
-package com.example.demo.Question;
+package com.example.demo.question;
 
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class QuestionService {

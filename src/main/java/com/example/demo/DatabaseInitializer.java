@@ -4,16 +4,16 @@ import javax.annotation.PostConstruct;
 
 import com.example.demo.answer.Answer;
 import com.example.demo.answer.AnswerRepository;
-import com.example.demo.Concept.Concept;
-import com.example.demo.Concept.ConceptRepository;
-import com.example.demo.Item.Item;
-import com.example.demo.Item.ItemRepository;
-import com.example.demo.Question.Question;
-import com.example.demo.Question.QuestionRepository;
-import com.example.demo.Topic.Topic;
-import com.example.demo.Topic.TopicRepository;
-import com.example.demo.User.User;
-import com.example.demo.User.UserRepository;
+import com.example.demo.concept.Concept;
+import com.example.demo.concept.ConceptRepository;
+import com.example.demo.item.Item;
+import com.example.demo.item.ItemRepository;
+import com.example.demo.question.Question;
+import com.example.demo.question.QuestionRepository;
+import com.example.demo.topic.Topic;
+import com.example.demo.topic.TopicRepository;
+import com.example.demo.user.User;
+import com.example.demo.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

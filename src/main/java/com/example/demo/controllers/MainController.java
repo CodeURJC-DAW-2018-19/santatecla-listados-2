@@ -1,19 +1,20 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.answer.Answer;
 import com.example.demo.answer.AnswerService;
-import com.example.demo.Concept.Concept;
-import com.example.demo.Concept.ConceptService;
+import com.example.demo.concept.Concept;
+import com.example.demo.concept.ConceptService;
 import com.example.demo.conceptHeader.ConceptHeader;
-import com.example.demo.Item.Item;
-import com.example.demo.Item.ItemService;
-import com.example.demo.Question.Question;
-import com.example.demo.Question.QuestionService;
-import com.example.demo.Topic.Topic;
-import com.example.demo.Topic.TopicService;
-import com.example.demo.User.User;
-import com.example.demo.User.UserComponent;
-import com.example.demo.User.UserRepository;
+import com.example.demo.item.Item;
+import com.example.demo.item.ItemService;
+import com.example.demo.question.Question;
+import com.example.demo.question.QuestionService;
+import com.example.demo.topic.Topic;
+import com.example.demo.topic.TopicService;
+import com.example.demo.user.User;
+import com.example.demo.user.UserComponent;
+import com.example.demo.user.UserRepository;
+import com.example.demo.conceptHeader.OpenTabs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -37,7 +38,6 @@ public class MainController {
     private static boolean noMoreQues, noMoreQuesNC;
     private static String text;
     private boolean noMoreItems;
-    private static LogOutController logOutController = new LogOutController();
     private boolean noMoreQuestionsNC;
     @Autowired
     private UserComponent userComponent;
@@ -53,6 +53,8 @@ public class MainController {
     private AnswerService answerService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private OpenTabs openTabs;
 
 
 
@@ -326,24 +328,27 @@ public class MainController {
         return "TopicMore";
     }
 
+
     @GetMapping("/MainPage/DeleteHeaderConcept/{name}")
     public void deleteHeaderConcept(Model model,@PathVariable String name) {
-        logOutController.deleteConceptHeader(new ConceptHeader(name));
-        for (ConceptHeader c : logOutController.getArray()){
+        openTabs.deleteConceptHeader(new ConceptHeader(name));
+        for (ConceptHeader c : openTabs.getOpenTabs()){
             System.out.println(c.getName());
         }
     }
     @GetMapping("/MainPage/HeaderConcept/{name}")
     public void addHeaderConcept(Model model,@PathVariable String name) {
-        if (!logOutController.conceptContains(new ConceptHeader(name)) && logOutController.size()<11) {
+        if (!openTabs.conceptContains(new ConceptHeader(name)) && openTabs.size()<11) {
             ConceptHeader conceptHeaderV = new ConceptHeader(name);
-            logOutController.addConceptHeader(conceptHeaderV);
+            openTabs.addTab(conceptHeaderV);
         }
     }
     @GetMapping("/MainPage/logOut")
     public String logout(Model model, HttpSession session) {
-        logOutController.empty();
-        return "redirect:/logOut";
+        model.addAttribute("inOut", "out");
+        model.addAttribute("logIn", false);
+        session.invalidate();
+        return "redirect:/logIn";
     }
     @GetMapping("/MainPage/HeaderConcept")
     public String addHeaderConcept(Model model) {
@@ -365,7 +370,7 @@ public class MainController {
             model.addAttribute("inOut","out");
             model.addAttribute("urlLog","/MainPage/logOut");
         }
-        model.addAttribute("conceptHeader",logOutController.getArray());
+        model.addAttribute("conceptHeader",openTabs.getOpenTabs());
         model.addAttribute("logIn",true);
         return "Header";
     }

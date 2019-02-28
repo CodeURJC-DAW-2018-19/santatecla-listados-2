@@ -1,6 +1,6 @@
-package com.example.demo.Item;
+package com.example.demo.item;
 
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 import javax.persistence.*;
 
 @Entity

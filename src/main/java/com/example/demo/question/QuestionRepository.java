@@ -1,6 +1,6 @@
-package com.example.demo.Question;
+package com.example.demo.question;
 
-import com.example.demo.Concept.Concept;
+import com.example.demo.concept.Concept;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

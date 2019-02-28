@@ -1,8 +1,8 @@
 package com.example.demo.security;
 
-import com.example.demo.User.User;
-import com.example.demo.User.UserComponent;
-import com.example.demo.User.UserRepository;
+import com.example.demo.user.User;
+import com.example.demo.user.UserComponent;
+import com.example.demo.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
