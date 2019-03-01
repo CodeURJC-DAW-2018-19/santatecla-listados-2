@@ -5,16 +5,19 @@ import com.example.demo.answer.AnswerService;
 import com.example.demo.concept.Concept;
 import com.example.demo.concept.ConceptService;
 import com.example.demo.conceptHeader.ConceptHeader;
+import com.example.demo.conceptHeader.OpenTabs;
 import com.example.demo.item.Item;
 import com.example.demo.item.ItemService;
 import com.example.demo.question.Question;
 import com.example.demo.question.QuestionService;
 import com.example.demo.topic.Topic;
 import com.example.demo.topic.TopicService;
+import com.example.demo.uploadImages.Image;
+import com.example.demo.uploadImages.ImageRepository;
 import com.example.demo.user.User;
 import com.example.demo.user.UserComponent;
 import com.example.demo.user.UserRepository;
-import com.example.demo.conceptHeader.OpenTabs;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -55,6 +58,8 @@ public class MainController {
     private ItemService itemService;
     @Autowired
     private OpenTabs openTabs;
+    @Autowired
+    private ImageRepository imageRepository;
 
 
 
@@ -106,7 +111,9 @@ public class MainController {
         Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
+        List<Image> imagesList = imageRepository.findByConcept(concept);
         Set<Question> q = concept.getQuestions();
+        model.addAttribute("images",imagesList);
         model.addAttribute("name", name);
         model.addAttribute("questions", q);
         model.addAttribute("logIn", true);
@@ -121,8 +128,11 @@ public class MainController {
         Concept concept = conceptService.findOne(name);
         if (concept == null)
             return null;
+        Concept wantedConcept = conceptService.findOne(name);
+        List<Image> imagesList = imageRepository.findByConcept(wantedConcept);
         Set<Question> q = concept.getQuestions();
         List<Item> i = itemService.findByConceptName(name);
+        model.addAttribute("images",imagesList);
         model.addAttribute("name", name);
         model.addAttribute("items", i);
         model.addAttribute("topics", i);
@@ -327,7 +337,6 @@ public class MainController {
         }
         return "TopicMore";
     }
-
 
     @GetMapping("/MainPage/DeleteHeaderConcept/{name}")
     public void deleteHeaderConcept(Model model,@PathVariable String name) {
@@ -561,7 +570,6 @@ public class MainController {
         int typeQuestion =(int)(Math.random() * 4);
         Question question;
         String questionName ="";
-        System.out.println(typeQuestion);
         String modalType = "";
         if (typeQuestion == 0){
             modalType ="modal0";
@@ -649,7 +657,6 @@ public class MainController {
 
     @GetMapping(path = "/sendAnswer/{question}/{correct}")
     public String sendAnswer(Model model, @PathVariable int question, @PathVariable boolean correct){
-        System.out.println("He entrado por la pregunta 1");
         Question question1 = questionService.findOne(question);
         Answer answer = new Answer();
         Concept c = question1.getConcept();
@@ -677,7 +684,6 @@ public class MainController {
         answer.setAnswerTest("Respuesta");
         answer.setQuestion(question1);
         question1.setAnswer(answer);
-     //   conceptService.save(c);
         questionService.save(question1);
         return "redirect:/MainPage/Student/"+questionService.findOne(question).getConcept().getName();
     }

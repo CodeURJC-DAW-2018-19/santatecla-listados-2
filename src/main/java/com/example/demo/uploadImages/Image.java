@@ -10,26 +10,21 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="PrimaryKey")
-    private int pk;
     @Column(name="Id")
     private int id;
     @Column(name="Title")
     private String title;
-
-    @Column(name="Concept")
-    private String concept;
-
+    @Column (name="Base64",columnDefinition="MEDIUMBLOB")
+    private String base64;
     @OneToOne
-    private Concept relatedconcept;
+    private Concept concept;
 
+    public Image() {
+    }
 
-
-
-    public Image(int id, String title, String concept) {
-        this.id = id;
+    public Image(String title, String imag) {
         this.title = title;
-        this.concept = concept;
+        this.base64=imag;
     }
 
     public String getTitle() {
@@ -48,13 +43,26 @@ public class Image {
         this.id = id;
     }
 
-    public String getConcept() { return concept; }
 
-    public void setConcept(String concept) { this.concept = concept; }
+    public String getBase64() {
+        return base64;
+    }
 
-    public Concept getRelatedconcept(){ return relatedconcept; }
+    public Concept getConcept() {
+        return concept;
+    }
 
-    public void setRelatedconcept(Concept concept){ this.relatedconcept = concept; }
+    public void setConcept(Concept concept) {
+        this.concept = concept;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
+
+    public Concept getRelatedconcept(){ return concept; }
+
+    public void setRelatedconcept(Concept concept){ this.concept = concept; }
 
     @Override
     public String toString() {

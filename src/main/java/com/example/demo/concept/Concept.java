@@ -4,9 +4,12 @@ package com.example.demo.concept;
 import com.example.demo.item.Item;
 import com.example.demo.question.Question;
 import com.example.demo.topic.Topic;
+import com.example.demo.uploadImages.Image;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,6 +35,8 @@ public class Concept {
     private Set<Question> questions;
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
     private Set<Item> items;
+    @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    private List<Image> images;
 
     public Concept(){
         this.questions = new HashSet<>();
@@ -42,11 +47,13 @@ public class Concept {
         this.html = html;
         this.questions = new HashSet<>();
         this.items = new HashSet<>();
+        this.images=new ArrayList<>();
     }
     public Concept(String name) {
         this.name = name;
         this.questions = new HashSet<>();
         this.items = new HashSet<>();
+        this.images=new ArrayList<>();
     }
 
     public String getName() {
@@ -131,5 +138,13 @@ public class Concept {
 
     public void setItem (Item item){
         this.items.add(item);
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImage(Image image) {
+        this.images.add(image);
     }
 }

@@ -100,7 +100,7 @@
     }
 </style>
 
-<body  style="overflow-x:hidden" onload="callHeader()">
+<body style="overflow-x:hidden" onload="callHeader()">
 <script>
     function callHeader() {
         $.ajax({
@@ -110,13 +110,13 @@
         })
     }
 </script>
-<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+<header id="header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
 </header>
 
 <div id="contained" style="margin: 2%">
     <div id="tobeseen">
         <h3>PREGUNTAS CORREGIDAS</h3>
-        <table id = "questionTable" border="0" cellspacing="20" id="corrected">
+        <table id="questionTable" border="0" cellspacing="20" id="corrected">
             <script src="/js/moreCorrectWord.js"></script>
             <script>moreCorrectWord('{{name}}')</script>
             <script type="text/javascript">
@@ -127,12 +127,14 @@
                 });
             </script>
         </table>
-        <button type="button" id="loadMoreCorrectWord" class="btn btn-primary" style="float:right;top: 16px;right: 44px"> Ver más </button>
+        <button type="button" id="loadMoreCorrectWord" class="btn btn-primary"
+                style="float:right;top: 16px;right: 44px"> Ver más
+        </button>
     </div>
 
     <div id="answered">
         <h3>PREGUNTAS POR CORREGIR</h3>
-        <div id = "noCorrectContainer">
+        <div id="noCorrectContainer">
 
         </div>
         <script src="/js/noCorrectMoreQuestions.js"></script>
@@ -144,7 +146,9 @@
                 });
             });
         </script>
-        <button type="button" id="loadMoreNoCorrect" class="btn btn-primary" style="float:right;top: 16px;right: 44px"> Ver más </button>
+        <button type="button" id="loadMoreNoCorrect" class="btn btn-primary" style="float:right;top: 16px;right: 44px">
+            Ver más
+        </button>
     </div>
 </div>
 <div class="modal fade" id="modalPType4" tabindex="-1" role="dialog" aria-labelledby="exampleModalPAType4"
@@ -204,20 +208,14 @@
         </div>
     </div>
 </div>
-
-<!--   button to see the images of a cocnept
-<div class="col-md-10">
-<a class="nav-link" id = "headerConcept" {{#student}}onclick="addHeaderConcept('{{name}}')" href = "/MainPage/Student/{{name}}/image" {{/ student}}</a>
-<script>
-    function addHeaderConcept(nombre) {
-        $.ajax({
-            url : "/MainPage/HeaderConcept/"+nombre+"/image"
-        })
-    }
-</script>
+<div id="images" >
+    <h1>IMÁGENES</h1>
+    {{#images}}
+    <p><span>{{title}}</span>
+    <p>
+        <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
+        {{/images}}
 </div>
-<a href="/MainPage/Student/{{name}}/image"><input type="button" class="btn btn-primary2 dg" value="IMAGES"></a>
--->
 {{> Plus}}
 {{> Diagram}}
 {{> Footer}}
