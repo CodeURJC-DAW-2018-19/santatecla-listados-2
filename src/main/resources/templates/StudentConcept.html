@@ -98,6 +98,10 @@
         padding: 15px;
         width: 94%;
     }
+    .footer{
+        position: relative!important;
+    }
+
 </style>
 
 <body style="overflow-x:hidden" onload="callHeader()">
@@ -208,16 +212,20 @@
         </div>
     </div>
 </div>
-<div id="images" >
-    <h1>IMÁGENES</h1>
-    {{#images}}
-    <p><span>{{title}}</span>
-    <p>
-        <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
-        {{/images}}
-</div>
 {{> Plus}}
 {{> Diagram}}
+{{#eImages}}
+<div id="images" style="margin-bottom: 5%; margin-top: 18% ; margin-left: 5%">
+    <h1>IMÁGENES</h1>
+    {{#images}}
+    <div style="float: left;margin-right: 2%">
+        <p><span>{{title}}</span></p>
+        <p>
+            <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
+    </div>
+    {{/images}}
+</div>
+{{/eImages}}
 {{> Footer}}
 </body>
 </html>

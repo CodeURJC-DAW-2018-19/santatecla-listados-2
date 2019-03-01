@@ -52,7 +52,6 @@
     <script src="/js/plugins/bootstrap-datetimepicker.min.js"></script>
 
 
-
     <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
     <script src="/js/plugins/bootstrap-tagsinput.js"></script>
 
@@ -102,30 +101,37 @@
         })
     }
 </script>
-<header id = "header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+<header id="header" class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row bd-navbar">
 </header>
 
-<div id="contained"  style="margin: 2%">
+<div id="contained" style="margin: 2%; margin-bottom: 5%">
     <h1>URL: </h1><a href="#"></a>
-    <div id="Images">
+    {{#eImages}}
+    <div id="Images" style="height:{{height}}">
         <h1>IMÁGENES</h1>
         {{#images}}
-        <p><span>{{title}}</span><p>
-        <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
-        {{/images}}
-        <form action="/{{name}}/image/upload" method="post" enctype='multipart/form-data'>
-            <h4>Subida de Imagenes</h4>
-            <p>
-                <label>Title:</label> <input type='text' required name='imageTitle' />
-            </p>
-            <p>
-                <label>Image file:</label><input type="file" required name="file" />
-            </p>
-            <input type='submit' class="btn btn-primary btn-lg" name='send' value='Enviar' />
-            <input type="hidden" name="_csrf" value="{{token}}"/>
-        </form>
-    </div>
 
+        <div style="float: left;margin-right: 3%;margin-top: 3%;  width: 500px; height: 325px">
+            <p><span>{{title}}</span></p>
+            <p>
+                <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
+        </div>
+        {{/images}}
+    </div>
+    {{/eImages}}
+    <div style="position: relative; margin-top: 10%">
+    <form action="/{{name}}/image/upload" method="post" enctype='multipart/form-data'>
+        <h4>Subida de Imagenes</h4>
+        <p>
+            <label>Title:</label> <input type='text' required name='imageTitle'/>
+        </p>
+        <p>
+            <label>Image file:</label><input type="file" required name="file"/>
+        </p>
+        <input type='submit' class="btn btn-primary btn-lg" name='send' value='Enviar'/>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+    </form>
+    </div>
     <div id="Items">
         <h1>ITEMS</h1>
         <ul id="list" class="list-group">
@@ -141,13 +147,17 @@
             </table>
         </ul>
         <ul class="list-group">
-        <button type="button" id="loadMoreItems" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
+            <button type="button" id="loadMoreItems" class="btn btn-primary"
+                    style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%">
+                Ver más
+            </button>
         </ul>
         <div class="buttonsAddAndRemove" style="position: relative;left: 1%">
             <button class="btn btn-primary btn-fab btn-fab-mini btn-round" onclick="addTextItem('{{name}}')">
                 <i class="material-icons">add</i>
             </button>
-            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-target="#deleteI" data-toggle="modal" name="delete{{name}}"
+            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-target="#deleteI" data-toggle="modal"
+                    name="delete{{name}}"
                     style="position: relative;left: 15%">
                 <i class="material-icons">remove</i>
             </button>
@@ -155,7 +165,7 @@
     </div>
     <div id="pendingQuestions" style="margin-top: 2%">
         <h1>PREGUNTAS POR CORREGIR </h1>
-        <ul  id = "list-group" class="list-group">
+        <ul id="list-group" class="list-group">
             <script src="/js/loadMoreQuestionsNC.js"></script>
             <script>loadMoreQuestions('{{name}}')</script>
             <script type="text/javascript">
@@ -167,7 +177,10 @@
             </script>
         </ul>
         <ul class="list-group">
-            <button type="button" id="loadMoreQuestionsNC" class="btn btn-primary" style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%"> Ver más </button>
+            <button type="button" id="loadMoreQuestionsNC" class="btn btn-primary"
+                    style="float:right; top: 16px; right: 44px; margin-bottom: 30px; margin-left: 2%; max-width: 68%">
+                Ver más
+            </button>
         </ul>
     </div>
 </div>

@@ -113,6 +113,11 @@ public class MainController {
             return null;
         List<Image> imagesList = imageRepository.findByConcept(concept);
         Set<Question> q = concept.getQuestions();
+        if (imagesList.isEmpty()){
+            model.addAttribute("eImages",false);
+        }else{
+            model.addAttribute("eImages", true);
+        }
         model.addAttribute("images",imagesList);
         model.addAttribute("name", name);
         model.addAttribute("questions", q);
@@ -132,6 +137,17 @@ public class MainController {
         List<Image> imagesList = imageRepository.findByConcept(wantedConcept);
         Set<Question> q = concept.getQuestions();
         List<Item> i = itemService.findByConceptName(name);
+        if (imagesList.isEmpty()){
+            model.addAttribute("eImages",false);
+        }else{
+            model.addAttribute("eImages", true);
+            int sizeL = imagesList.size();
+            double th = (double) sizeL/3;
+            int thInt = (int)Math.ceil(th);
+            int height = thInt * 350;
+            model.addAttribute("height", height + "px");
+        }
+
         model.addAttribute("images",imagesList);
         model.addAttribute("name", name);
         model.addAttribute("items", i);
