@@ -145,11 +145,11 @@ public class TeacherController {
         i.setConcept(c);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
-    @GetMapping ("/MainPage/Teacher/{conceptName}/{answerName}/{mark}")
-    public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable String answerName, @PathVariable boolean mark){
+    @GetMapping ("/MainPage/Teacher/{conceptName}/{id}/{mark}")
+    public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable int id, @PathVariable boolean mark){
         Concept c=conceptService.findOne(conceptName);
-        Answer a=answerService.findOne(answerName);
-        Question q = questionService.findOne(a.getQuestion().getQuestion());
+        Answer a=answerService.findOne(id);
+        Question q = questionService.findOne(a.getQuestion().getId());
         q.setCorrected(true);
         a.getQuestion().setCorrected(true);
         a.setMark(mark);
@@ -162,6 +162,9 @@ public class TeacherController {
             c.setErrors(c.getErrors()+1);
             c.getTopic().setErrors(c.getTopic().getErrors()+1);
         }
-        return "redirect: MainPage/Teacher/"+conceptName;
+        conceptService.save(c);
+        answerService.save(a);
+        questionService.save(q);
+        return "redirect:/MainPage/Teacher/"+conceptName;
     }
 }

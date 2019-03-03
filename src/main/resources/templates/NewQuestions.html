@@ -162,9 +162,8 @@
     function sendAnswer(id) {
         if ($('#exampleRadios1').is(':checked')) {
             var urlPage = "/sendAnswer/" + id + "/" + 'true';
-            console.log(urlPage);
-        }else if(document.getElementById('.exampleRadios2').is(':checked')){
-            var urlPage = "/sendAnswer/" + id + "/" + 'true';
+        }else if($('#exampleRadios2').is(':checked')){
+            var urlPage = "/sendAnswer/" + id + "/" + 'false';
         }
         $.ajax({
             url: urlPage

@@ -21,8 +21,8 @@ public class Answer {
 
     public Answer(){}
 
-    public Answer(String answerTest, boolean mark) {
-        this.answerTest = answerTest;
+    public Answer(String openAnswer, boolean mark) {
+        this.openAnswer = openAnswer;
         this.mark = mark;
     }
 

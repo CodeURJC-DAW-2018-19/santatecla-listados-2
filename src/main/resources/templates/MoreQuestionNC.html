@@ -4,14 +4,14 @@
     <div class="form-check-inline" style="position:relative;left: 4%">
         <div class="form-check-inline form-check-radio">
             <label class="form-check-label">
-                <input  onclick="sendAnswerCorrection(true,'{{#answer}}{{openAnswer}}{{/answer}}','{{name}}')" class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
+                <input  onclick="sendAnswerCorrection(true,{{#answer}}{{id}}{{/answer}},'{{name}}')" class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
                        id="exampleRadios1{{-index}}" value="option1"> CORRECTO<span class="circle">
                                                 <span class="check"></span></span>
             </label>
         </div>
         <div class="form-check-inline form-check-radio" style="position: relative;left: 40px;">
             <label class="form-check-label">
-                <input onclick="sendAnswerCorrection(true,'{{#answer}}{{openAnswer}}{{/answer}}','{{name}}')" class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
+                <input onclick="sendAnswerCorrection(false,{{#answer}}{{id}}{{/answer}},'{{name}}')" class="form-check-input" type="radio" name="exampleRadioPending{{-index}}"
                        id="exampleRadios2{{-index}}"
                        value="option2">
                 INCORRECTO

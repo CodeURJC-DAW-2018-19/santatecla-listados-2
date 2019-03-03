@@ -58,7 +58,7 @@ public class StudentController {
         Concept concept = conceptService.findOne(conceptName);
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
-        int typeQuestion =(int)(Math.random() * 4);
+        int typeQuestion =0;//(int)(Math.random() * 4);
         Question question;
         String questionName ="";
         String modalType = "";
@@ -134,7 +134,6 @@ public class StudentController {
         Question question1 = questionService.findOne(id);
         answer.setQuestion(question1);
         answer.setMark(false);
-        answer.setAnswerTest("Respuesta");
         question1.setCorrected(false);
         question1.setAnswer(answer);
         Concept c = question1.getConcept();
@@ -150,7 +149,7 @@ public class StudentController {
     public String optedItems(Model model, @PathVariable int  id, @PathVariable String ret, @PathVariable String total) {
         System.out.println("He entrado por la pregunta 3");
         String[] items = ret.split("plus");
-        String[] all = total.split("plus    ");
+        String[] all = total.split("plus");
         ArrayList<String> items1= new ArrayList<>(Arrays.asList(items));
         ArrayList<String> all1= new ArrayList<>(Arrays.asList(all));
         StringBuilder showed = new StringBuilder(" ");
@@ -191,11 +190,7 @@ public class StudentController {
         }
         answer.setOpenAnswer(showed.toString());
         answer.setQuestion(question);
-        answer.setAnswerTest("Respuesta");
         question.setAnswer(answer);
-
-
-        //   conceptService.save(c);
         questionService.save(question);
 
         return "redirect:/MainPage/Student/"+questionService.findOne(id).getConcept().getName();

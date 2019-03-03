@@ -51,8 +51,8 @@ public class DatabaseInitializer {
 		Concept c9 = new Concept("Prueba Cuadrátic", "StudentConcept.html");
 		Question q1 = new Question("¿Que es un tipo generico?", "PType0", false);
 		Question q2 = new Question("¿Donde hay que usar los tipos genericos?", "PType3", true);
-		Answer a1 = new Answer("Respuesta ", false);
-		Answer a2 = new Answer("Respuesta ", true);
+		Answer a1 = new Answer("Verdadero ", false);
+		Answer a2 = new Answer("Falseo ", true);
 
 		Item i1 = new Item("item1",false);
 		Item i2 = new Item ("item2",true);
