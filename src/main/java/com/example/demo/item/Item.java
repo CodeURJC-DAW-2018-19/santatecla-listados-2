@@ -1,20 +1,34 @@
 package com.example.demo.item;
 
 import com.example.demo.concept.Concept;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Items")
 public class Item {
+
+    public interface BasicInfo{}
+    public interface ItemConcept {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
+    @JsonView(BasicInfo.class)
     protected int id;
+
     @Column (name = "Name")
+    @JsonView(BasicInfo.class)
     private String name;
+
     @Column (name = "Correct")
+    @JsonView(BasicInfo.class)
     private boolean correct;
+
     @ManyToOne
+    @JsonView(ItemConcept.class)
     private Concept concept;
 
     public Item(){}
