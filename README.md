@@ -198,7 +198,7 @@ Para poder establecer (set up) este SDK seguimos los siguientes pasos: File > Pr
 ### Diagrama de Entidades
 Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparecen en este diagrama son @Entity y mostramos las relaciones entre ellas y sus cardinalidades. Subrayado en negro está el atributo que sirve para identificar al objeto (claves primarias); y subrayado en azul están las claves que sirven para referenciar a objetos relacionados (claves ajenas).
 
-![DiagramaEntidades](/Screenshots/Phase2/DiagramaEntidades.png "DiagramaEntidades")
+![DiagramaEntidades](/Screenshots/Phase2/EntityDiagram.png "DiagramaEntidades")
 
 ### Diagrama de Clases
 A continuación se expone el Diagrama de Clases de nuestra aplicación. Por motivos de claridad visual hemos partido este diagrama en dos, haciendo una primera parte en la que se muestran las relaciones entre los controladores ImageController, loginController, logoutController y CustomErrorController con el resto de las clases; y una segunda parte en la que se muestra el controlador MainController y sus relaciones con el resto de clases.
