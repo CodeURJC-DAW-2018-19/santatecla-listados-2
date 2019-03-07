@@ -201,14 +201,20 @@ Este es el Digrama de Entidades de nuestra base de datos. Las clases que aparece
 ![DiagramaEntidades](/Screenshots/Phase2/EntityDiagram.png "DiagramaEntidades")
 
 ### Diagrama de Clases
-A continuación se expone el Diagrama de Clases de nuestra aplicación. Por motivos de claridad visual hemos partido este diagrama en dos, haciendo una primera parte en la que se muestran las relaciones entre los controladores ImageController, loginController, logoutController y CustomErrorController con el resto de las clases; y una segunda parte en la que se muestra el controlador MainController y sus relaciones con el resto de clases.
+A continuación se expone el Diagrama de Clases de nuestra aplicación. Por motivos de claridad visual hemos partido este diagrama en cuatro partes, haciendo una primera parte en la que se muestran las relaciones entre los controladores ImageController, LoginController, NavMenuController y CustomErrorController con el resto de las clases; una segunda parte en la que se muestra el controlador MainController y sus relaciones con el resto de clases; una tercera, en la que se muestra el controlador StudentController y sus relaciones; y por último una cuarta, en la que se muestra el controlador TeacherController y sus relaciones.
 
 En este diagrma hemos seguido un código de colores para diferenciar entre sus componentes. En verde tenemos los @Controller, en rojo tenemos los @Service, en azul tenemos los Repository y en morado los templates (.html).  
 
 ![DiagramColors](/Screenshots/Phase2/DiagramColors.png "DiagramColors")
 
 #### Diagrama de Clases (Parte 1)
-![DiagramaClasesParte1](/Screenshots/Phase2/DiagramaClasesParte1.png "DiagramaClasesParte1")
+![DiagramaClasesParte1](/Screenshots/Phase2/ClassDiagramPart1.png "DiagramaClasesParte1")
 
 #### Diagrama de Clases (Parte 2)
-![DiagramaClasesParte2](/Screenshots/Phase2/DiagramaClasesParte2.png "DiagramaClasesParte2")
+![DiagramaClasesParte2](/Screenshots/Phase2/ClassDiagramPart2.png "DiagramaClasesParte2")
+
+#### Diagrama de Clases (Parte 3)
+![DiagramaClasesParte2](/Screenshots/Phase2/ClassDiagramPart3.png "DiagramaClasesParte3")
+
+#### Diagrama de Clases (Parte 4)
+![DiagramaClasesParte2](/Screenshots/Phase2/ClassDiagramPart4.png "DiagramaClasesParte4")
