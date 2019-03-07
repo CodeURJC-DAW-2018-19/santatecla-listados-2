@@ -97,7 +97,7 @@ Esta es la página principal del estudiante, como podemos ver es muy similar a l
 #### Pantalla de conceptos para el Estudiante
 ![StudentConcept](/Screenshots/Phase2/StudentConcept.png "StudentConcept")
 
-La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su diálogo para el diagrama y para los diferentes tipos de pregunta. Como diferencia principal podemos observar que esta pantalla contiene imágenes (a continuacion de las preguntas y de los botones de añadir pregunta y de diagrama). Estas imágenes son visibles para los alumnos y los úncios autorizados para subirlas son los profesores (como veremos más adelante). Los conceptos pueden tener desde nínguna hasta varias imágenes.
+La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su diálogo para el diagrama y para los diferentes tipos de pregunta. Como diferencia principal podemos observar que esta pantalla contiene imágenes (a continuacion de las preguntas y de los botones de añadir pregunta y de diagrama). Estas imágenes son visibles para los alumnos y los únicios autorizados para subirlas son los profesores (como veremos más adelante). Los conceptos pueden tener desde nínguna hasta varias imágenes.
 
 ##### Imágenes para Estudiante
 ![ImagesStudent](/Screenshots/Phase2/ImagesStudent.png "ImagesStudent")
@@ -163,7 +163,7 @@ En esta segunda fase hemos personalizado un error propio, para sustituir al erro
 ### Diagrama de navegación
 La siguiente imagen muestra el nuevo diagrama de navegación de nuestra página web resultante tras concluir esta segunda fase:
 
-![DiagramaNavegacionFase2](/Screenshots/Phase2/DiagramaNavegacionFase2.png "DiagramaNavegacionFase2")
+![DiagramaNavegacionFase2](/Screenshots/Phase2/NavigationDiagramPhase2.png "DiagramaNavegacionFase2")
 
 
 ### Phase 2: continuación
