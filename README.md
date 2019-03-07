@@ -93,40 +93,38 @@ Esta es la página principal del estudiante, como podemos ver es muy similar a l
 
 ![StudentDiagram](/Screenshots/Phase2/StudentDiagram.png "StudentDiagram")
 
-#### Imágenes para Estudiante
-![ImagesStudent](/Screenshots/Phase2/ImagesStudent.png "ImagesStudent")
-
-Esta es una nueva pantalla en la cual el alumno puede ver las imágenes (que solo el profesor puede subir como ya veremos a continuación). Cada imagen tiene un enlace al concepto con el que esta relacionado y al pulsar sobre él te redirecciona allí.
 
 #### Pantalla de conceptos para el Estudiante
 ![StudentConcept](/Screenshots/Phase2/StudentConcept.png "StudentConcept")
 
-La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su diálogo para el diagrama y para los diferentes tipos de pregunta.
+La pantalla de conceptos para el alumno es prácticamente igual a la de la fase anterior. Cuenta con su diálogo para el diagrama y para los diferentes tipos de pregunta. Como diferencia principal podemos observar que esta pantalla contiene imágenes (a continuacion de las preguntas y de los botones de añadir pregunta y de diagrama). Estas imágenes son visibles para los alumnos y los úncios autorizados para subirlas son los profesores (como veremos más adelante). Los conceptos pueden tener desde nínguna hasta varias imágenes.
+
+##### Imágenes para Estudiante
+![ImagesStudent](/Screenshots/Phase2/ImagesStudent.png "ImagesStudent")
+
 #### Diálogos
 ##### Diagrama de Concepto
 ![StudentConceptDiagram](/Screenshots/Phase2/StudentConceptDiagram.png "StudentConceptDiagram")
 ##### Pregunta Abierta (tipo 0)
-![PreguntaAbiertaTipo0](/Screenshots/Phase1/Tipo0.png "Diálogo Pregunta Abierta(Tipo 0)")
+![PreguntaAbiertaTipo0](/Screenshots/Phase2/Type0.png "Diálogo Pregunta Abierta(Tipo 0)")
 ##### Pregunta Cerrada (tipo 1)
-![PreguntaCerradaTipo1](/Screenshots/Phase1/Tipo1.png "Diálogo Pregunta Cerrada(Tipo 1)")
+![PreguntaCerradaTipo1](/Screenshots/Phase2/Type1.png "Diálogo Pregunta Cerrada(Tipo 1)")
 ##### Pregunta Abierta (tipo 2)
-![PreguntaAbiertaTipo2](/Screenshots/Phase1/Tipo2.png "Diálogo Pregunta Abierta(Tipo 2)")
+![PreguntaAbiertaTipo2](/Screenshots/Phase2/Type2.png "Diálogo Pregunta Abierta(Tipo 2)")
 ##### Pregunta Abierta (tipo 3)
-![PreguntaAbiertaTipo3](/Screenshots/Phase1/Tipo3.png "Diálogo Pregunta Abierta(Tipo 3)")
+![PreguntaAbiertaTipo3](/Screenshots/Phase2/Type3.png "Diálogo Pregunta Abierta(Tipo 3)")
 ##### Pregunta Abierta (tipo 4)
-![PreguntaAbiertaTipo4](/Screenshots/Phase1/DialogoTipo4.png "Diálogo Pregunta Abierta(Tipo 4)")
+![PreguntaAbiertaTipo4](/Screenshots/Phase2/Type4.png "Diálogo Pregunta Abierta(Tipo 4)")
 
 #### Pantalla Inicio Invitado
 ![GuestScreen](/Screenshots/Phase2/GuestScreen.png "GuestScreen")
 
-Esta pantalla también es muy similar a la de la fase anterior. los cambios mas significativos son una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More) y un botón que redirige a la página de las imágenes (Images). Esta última pagina de imágenes solo permite al invitado ver las imágenes y el concepto con el que estan relacionadas pero no permite acceder al concepto, para ello hay que registrarse.
-#### Imágenes para Invitado
-![ImagesGuest](/Screenshots/Phase2/ImagesGuest.png "ImagesGuest")
+Esta pantalla también es muy similar a la de la fase anterior. Los cambios más significativos son una barra de búsqueda funcional y un botón para cargar más conceptos funcional (Load More). El usuario invitado tan solo puede ver los temas y sus conceptos, pero no puede acceder a los conceptos ni ver sus contenidos ni sus imágenes, para ello tendrá que registrarse.
 
 #### Pantalla para Profesor
 ![TeacherScreen](/Screenshots/Phase2/TeacherScreen.png "TeacherScreen")
 
-Esta es la página principal del profesor, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More), un botón que redirige a la página de las imágenes (Images) y que se ha añadido funcionalidad a los botones de añadir tema, añadir concpeto, eliminar tema y eliminar concepto. Estos últimos botones abren una serie de diálogos como podemos ver a continuación.
+Esta es la página principal del profesor, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More), un botón que redirige a la página de las imágenes (Images) y que se ha añadido funcionalidad a los botones de añadir tema, añadir concpeto, eliminar tema y eliminar concepto. Estos últimos botones abren una serie de diálogos como podemos ver a continuación. 
 #### Diálogos
 ##### Añadir Tema
 ![addTopic](/Screenshots/Phase2/addTopic.png "addTopic")
@@ -147,14 +145,15 @@ Como en el caso de las pantallas de estudiante, el bóton con el diálogo del di
 Esta es la pantalla de concepto del profesor, muy similar a la que podemos encontrar en la fase 1. Aquí cabe destacar el header de la página el cual en función del concepto accedido abre una pestaña que podemos cerrar en cualquier momento en la x, redirigiendonos así a la página principal del profesor (Este header no solo esta aquí, sino que se repite en toda la aplicación).
 
 
-#### Imágenes para Profesor
+##### Imágenes para Profesor
 ![ImagesTeacher](/Screenshots/Phase2/ImagesTeacher.png "ImagesTeacher")
 
-Esta es la pantalla de las imágenes para el profesor. Es una pantalla nueva muy similar a la de las imágenes de estudiante e invitado. Como pasa con estudiante, las imágenes tienen un enlace al concepto con el que estan relacionadas. Esta pantalla también tiene un botón para añadir imágenes ya que el profesor es el único usuario al que se le permite dicha acción. Una vez pulsado el botón de añadir imagen se nos redirecciona a una página donde tenemos que rellenar un formulario (Pantalla de Nueva Imagen) y una vez enviada la imagen, la web nos indica que se ha realizado con exito (Pantalla de imagen subida) o si ha habido algún error. 
-##### Nueva Imágen
+Al igual que en la pantalla de conceptos para el estudiante, en la pantalla de profesor también encontramos una zona en la que se muestran las imágenes  que se han subido sobre ese concepto. Como ya hemos dicho el único usuario autorizado para subir imágenes es el profesor, por ello la pantalla de conceptos de profesor tiene una zona para subir imágenes, en la que el profesor puede seleccionarlas. El profesor puede subir tantas imágenes como quiera de un mismo concepto y después dichas imágenes aparecen en las pantallas de conceptos de los alumnos. 
+
+##### Subir Imágen
 ![NewImage](/Screenshots/Phase2/NewImage.png "NewImage")
-##### Imagen Subida
-![ImageUploaded](/Screenshots/Phase2/ImageUploaded.png "ImageUploaded")
+
+Aqui el profesor puede seleccionar la imagen que desee subir y ponerle el título con el que aparecera en la aplicación.
 
 #### Error Personalizado
 ![CustomError](/Screenshots/Phase2/CustomError.png "CustomError")
