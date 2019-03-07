@@ -23,7 +23,7 @@ En el siguiente enlace podéis encontrar el enlace con el documento donde se exp
 ## Phase 1
 ### Capturas de pantalla
 #### LogIn
-![LogIn](/Screenshots/Phase1/login.png "LogIn")
+![LogIn](/Screenshots/Phase1/LogIn.png "LogIn")
 
 En esta página encontramos el logIn de la página web en el que tenemos tres posibles modos de acceder al sistema, siendo profesor, alumno, o invitado. 
 Por defecto, al considerar que el usuario más habitual será el de alumno, es el que está por defecto.
@@ -35,19 +35,19 @@ En esta imagen podemos ver como sería la página principal del alumno, en la qu
 con los conceptos de cada tema que al pulsar sobre cada uno de ellos, iríamos a pantalla del concepto y un botón a un diagram en el que mostrará los aciertos y fallos globales sobre el temario.
 Aqui podemos ver el diagrama arriba mencionado.
 
-![DiagramaResultados](/Screenshots/Phase1/DiagramaInicio.png "Diagrama global del alumno")
+![DiagramaResultados](/Screenshots/Phase1/MainDiagram.png "Diagrama global del alumno")
 
 #### Pantalla conceptos Alumno
-![ConceptosAlumno](/Screenshots/Phase1/conceptos.png "Pantalla conceptos alumno")
+![ConceptosAlumno](/Screenshots/Phase1/Concepts.png "Pantalla conceptos alumno")
 
 En esta imagen podemos ver como sería la página de cada concepto del alumno, en la que podemos ver las respuestas que ya están corregidas y las que estánn pendientes todavía,
  un botón para responder una nueva pregunta y el siguiente diagrama con los resultados de ese concepto:
 
-![DiagramaResultados](/Screenshots/Phase1/DiagramaConcepto.png "Diagrama resultado del concepto")
+![DiagramaResultados](/Screenshots/Phase1/ConceptDiagram.png "Diagrama resultado del concepto")
 
 #### Pantalla Inicio Invitados
 
-![InicioInvitado](/Screenshots/Phase1/guestMainPage.png "Pantalla Inicio Invitado")
+![InicioInvitado](/Screenshots/Phase1/GuestMainPage.png "Pantalla Inicio Invitado")
 
 En esta imagen podemos ver como sería la página principal del invitado que es exactamente igual que la de alumno pero sin la posibilidad de ir a la página de los conceptos 
 y sin la posibilidad de ver el diagrama.
@@ -55,20 +55,20 @@ y sin la posibilidad de ver el diagrama.
 #### Diálogos Preguntas
 A continuación podréis ver los tipos de pregunta existentes en nuestro sistema:
 ##### Pregunta Abierta (tipo 0)
-![PreguntaAbiertaTipo0](/Screenshots/Phase1/Tipo0.png "Diálogo Pregunta Abierta(Tipo 0)")
+![PreguntaAbiertaTipo0](/Screenshots/Phase1/Type0.png "Diálogo Pregunta Abierta(Tipo 0)")
 ##### Pregunta Cerrada (tipo 1)
-![PreguntaCerradaTipo1](/Screenshots/Phase1/Tipo1.png "Diálogo Pregunta Cerrada(Tipo 1)")
+![PreguntaCerradaTipo1](/Screenshots/Phase1/Type1.png "Diálogo Pregunta Cerrada(Tipo 1)")
 ##### Pregunta Abierta (tipo 2)
-![PreguntaAbiertaTipo2](/Screenshots/Phase1/Tipo2.png "Diálogo Pregunta Abierta(Tipo 2)")
+![PreguntaAbiertaTipo2](/Screenshots/Phase1/Type2.png "Diálogo Pregunta Abierta(Tipo 2)")
 ##### Pregunta Abierta (tipo 3)
-![PreguntaAbiertaTipo3](/Screenshots/Phase1/Tipo3.png "Diálogo Pregunta Abierta(Tipo 3)")
+![PreguntaAbiertaTipo3](/Screenshots/Phase1/Type3.png "Diálogo Pregunta Abierta(Tipo 3)")
 ##### Pregunta Abierta (tipo 4)
-![PreguntaAbiertaTipo4](/Screenshots/Phase1/DialogoTipo4.png "Diálogo Pregunta Abierta(Tipo 4)")
+![PreguntaAbiertaTipo4](/Screenshots/Phase1/Type4.png "Diálogo Pregunta Abierta(Tipo 4)")
 
 ### Diagrama de navegación
 La siguiente imagen muestra el diagrama de navegación de nuestra página web:
 
-![DiagramaNavegación](/Screenshots/Phase1/Navigation_Diagram_Gestor_de_Listas.png "Diagrama de navegación de la página web")
+![DiagramaNavegación](/Screenshots/Phase1/NavigationDiagramPhase1.png "Diagrama de navegación de la página web")
 
 
 ## Phase 2
@@ -82,7 +82,7 @@ La navegación por nuestra página web ha variado desde la fase anterior, a cont
 Este es nuestro LogIn actual, es prácticamente igual que el de la fase anterior, sin embargo tenemos un nuevo enlace para poder registrarnos. El LogIn diferencia auntomáticamente el rol del usuario que accede buscando en la base de datos.
 
 #### Nueva Cuenta
-![Nueva Cuenta](/Screenshots/Phase2/newAccount.png "Nueva Cuenta")
+![Nueva Cuenta](/Screenshots/Phase2/NewAccount.png "Nueva Cuenta")
 
 Aqui podemos ver una nueva pantalla en la que el usuario podrá registrarse (crear una nueva cuenta). Esta cuenta se guarda automáticamente en la base de datos. La página cuenta con sistemas para detectar posibles errores (mismo nombre de ususario, falta de información, etc). 
 
@@ -111,8 +111,8 @@ La pantalla de conceptos para el alumno es prácticamente igual a la de la fase 
 ![PreguntaCerradaTipo1](/Screenshots/Phase2/Type1.png "Diálogo Pregunta Cerrada(Tipo 1)")
 ##### Pregunta Abierta (tipo 2)
 ![PreguntaAbiertaTipo2](/Screenshots/Phase2/Type2.png "Diálogo Pregunta Abierta(Tipo 2)")
-##### Pregunta Abierta (tipo 3)
-![PreguntaAbiertaTipo3](/Screenshots/Phase2/Type3.png "Diálogo Pregunta Abierta(Tipo 3)")
+##### Pregunta Cerrada (tipo 3)
+![PreguntaCerradaTipo3](/Screenshots/Phase2/Type3.png "Diálogo Pregunta Cerrada(Tipo 3)")
 ##### Pregunta Abierta (tipo 4)
 ![PreguntaAbiertaTipo4](/Screenshots/Phase2/Type4.png "Diálogo Pregunta Abierta(Tipo 4)")
 
@@ -127,13 +127,13 @@ Esta pantalla también es muy similar a la de la fase anterior. Los cambios más
 Esta es la página principal del profesor, como podemos ver es muy similar a la de la fase anterior. Los cambios mas significativos son la implementación de una barra de búsqueda funcional, un botón para cargar más conceptos funcional (Load More), un botón que redirige a la página de las imágenes (Images) y que se ha añadido funcionalidad a los botones de añadir tema, añadir concpeto, eliminar tema y eliminar concepto. Estos últimos botones abren una serie de diálogos como podemos ver a continuación. 
 #### Diálogos
 ##### Añadir Tema
-![addTopic](/Screenshots/Phase2/addTopic.png "addTopic")
+![addTopic](/Screenshots/Phase2/AddTopic.png "addTopic")
 ##### Añadir Concepto
-![addConcept](/Screenshots/Phase2/addConcept.png "addConcept")
+![addConcept](/Screenshots/Phase2/AddConcept.png "addConcept")
 ##### Eliminar Tema
-![deleteTopic](/Screenshots/Phase2/deleteTopic.png "deleteTopic")
+![deleteTopic](/Screenshots/Phase2/DeleteTopic.png "deleteTopic")
 ##### Eliminar Concepto
-![deleteConcept](/Screenshots/Phase2/deleteConcept.png "deleteConcept")
+![deleteConcept](/Screenshots/Phase2/DeleteConcept.png "deleteConcept")
 
 Como en el caso de las pantallas de estudiante, el bóton con el diálogo del diagrama se ha mantenido.
 
