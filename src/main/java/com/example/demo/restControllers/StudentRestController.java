@@ -89,7 +89,7 @@ public class StudentRestController {
     }
 
 
-        //New Question using UrRL parameters
+        //New Question using URL parameters
     @JsonView(QuestionDetails.class)
     @PostMapping("/{conceptName}/{questionText}/{questionType}/{corrected}")
     public ResponseEntity<Question> newConcreteQuestion(@PathVariable String conceptName, @PathVariable String questionText, @PathVariable String questionType, @PathVariable boolean corrected){
@@ -203,7 +203,7 @@ public class StudentRestController {
         }
     }
 
-        //New Answers using UrRL parameters
+        //New Answers using URL parameters
     @JsonView(AnswerDetails.class)
     @PostMapping("/question/{questionId}/newAnswer/{openAnswer}/{mark}")
     public ResponseEntity<Answer> newConcreteAnswer(@PathVariable int questionId, @PathVariable String openAnswer, @PathVariable boolean mark){
