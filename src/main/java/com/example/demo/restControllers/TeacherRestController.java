@@ -5,6 +5,7 @@ import com.example.demo.concept.Concept;
 import com.example.demo.concept.ConceptService;
 import com.example.demo.item.Item;
 import com.example.demo.item.ItemService;
+import com.example.demo.question.Question;
 import com.example.demo.question.QuestionService;
 import com.example.demo.topic.Topic;
 import com.example.demo.topic.TopicService;
@@ -36,9 +37,10 @@ public class TeacherRestController {
 
     interface TopicDetails extends Topic.BasicInfo, Topic.ConceptList, Concept.BasicInfo{}
 
-    interface ConceptDetails extends Concept.BasicInfo, Concept.ObjectLists, Topic.BasicInfo,Item.BasicInfo{}
+    interface ConceptDetails extends Concept.BasicInfo, Concept.ObjectLists, Topic.BasicInfo, Item.BasicInfo, Question.BasicInfo{}
 
     //region item
+
     @JsonView(ItemDetails.class)
     @PostMapping("/prueba/item/{conceptName}/{text}/{checked}")
     public Item newItem(@PathVariable String conceptName,@PathVariable String text,@PathVariable boolean checked ){
@@ -89,6 +91,7 @@ public class TeacherRestController {
         itemService.save(item);
         return item;
     }
+
     //endregion
 
     //region TOPICS

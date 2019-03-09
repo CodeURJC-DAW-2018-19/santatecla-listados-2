@@ -34,7 +34,6 @@ public class ImageController {
 
     @Autowired
     private ConceptService conceptService;
-
     @Autowired
     private ImageRepository imageRepository;
 

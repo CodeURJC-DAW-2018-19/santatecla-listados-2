@@ -52,8 +52,7 @@ public class Concept {
     private Topic topic;
 
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
-    //@JsonView(ObjectLists.class)
-    @JsonIgnore
+    @JsonView(ObjectLists.class)
     private Set<Question> questions;
 
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
