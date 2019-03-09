@@ -42,8 +42,8 @@ public class ImageRestController {
     public void postImage (@PathVariable String title,@PathVariable String concept, @RequestBody MultipartFile file,
                            HttpServletResponse response) throws IOException {
         Image i = new Image(title, "data:image/png;base64,"+ java.util.Base64.getEncoder().encodeToString(file.getBytes()));
-        i.setConcept(conceptRepository.findByName(concept));
-        conceptRepository.findByName(concept).setImage(i);
+        i.setConcept(conceptRepository.findByName(concept).get());
+        conceptRepository.findByName(concept).get().setImage(i);
 
         imageRepository.save(i);
 

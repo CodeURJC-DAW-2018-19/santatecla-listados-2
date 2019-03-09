@@ -86,7 +86,7 @@ public class QuestionRestController {
     @JsonView(QuestionDetails.class)
     @PostMapping("/newQuestion/{conceptName}/{questionText}/{questionType}/{corrected}")
     public ResponseEntity<Question> newConcreteQuestion(@PathVariable String conceptName, @PathVariable String questionText, @PathVariable String questionType, @PathVariable boolean corrected) {
-        Concept concept = conceptService.findOne(conceptName);
+        Concept concept = conceptService.findOne(conceptName).get();
 
         if (concept != null) {
             Question question = new Question();

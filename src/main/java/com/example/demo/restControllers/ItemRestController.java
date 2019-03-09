@@ -56,10 +56,9 @@ public class ItemRestController {
     @RequestMapping(value = "/updateItem/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item updatedItem) {
 
-        Item item = itemService.findOne(id).get();
+        if (itemService.findOne(id).isPresent()) {
 
-
-        if (item != null) {
+            Item item = itemService.findOne(id).get();
             updatedItem.setId(id);
             itemService.save(updatedItem);
             return new ResponseEntity<>(updatedItem, HttpStatus.OK);
@@ -84,7 +83,7 @@ public class ItemRestController {
     @PostMapping("/{conceptName}/{text}/{checked}")
     public ResponseEntity<Item> newConcreteItem(@PathVariable String conceptName, @PathVariable String text, @PathVariable boolean checked) {
         Item item = new Item();
-        Concept concept = conceptService.findOne(conceptName);
+        Concept concept = conceptService.findOne(conceptName).get();
         for (Item i :
                 concept.getItems()) {
             if (i.getName().equals(text)) {
