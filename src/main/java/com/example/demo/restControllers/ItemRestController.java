@@ -55,7 +55,7 @@ public class ItemRestController {
     @JsonView(ItemDetails.class)
     @RequestMapping(value = "/updateItem/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item updatedItem) {
-        
+
         if (itemService.findOne(id).isPresent()) {
 
             Item item = itemService.findOne(id).get();
