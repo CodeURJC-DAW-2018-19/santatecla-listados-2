@@ -130,6 +130,15 @@ public class StudentRestController {
         return answer;
     }
 
+    @JsonView(AnswerDetails.class)
+    @RequestMapping(value = "/question{questionId}/deleteAnswer/{id}", method = RequestMethod.DELETE)
+    public Answer deleteAnswer(@PathVariable int id, @PathVariable int questionId) {
+        Question question = questionService.findOne(questionId);
+        question.setAnswer(null);
+        Answer answer = answerService.findOne(id);
+        answerService.delete(id);
+        return answer;
+    }
     //end region
 
 }
