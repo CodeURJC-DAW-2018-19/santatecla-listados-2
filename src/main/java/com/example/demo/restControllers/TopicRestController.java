@@ -5,6 +5,9 @@ import com.example.demo.topic.Topic;
 import com.example.demo.topic.TopicService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,12 @@ public class TopicRestController {
     public ResponseEntity<List<Topic>> getTopics() {
         return new ResponseEntity<>(topicService.findAll(), HttpStatus.OK);
     }
+
+    /*      With this method we page th results of Showing all topics. It does not work properly
+    @GetMapping("/pag")
+    public Page<Topic> getTopics(Pageable page) {
+        return topicService.findAll(page);
+    }*/
 
     @JsonView(TopicDetails.class)
     @GetMapping("/{id}")
