@@ -41,7 +41,7 @@ public class ImageController {
     @RequestMapping(value= "/{name}/image/upload", method = {RequestMethod.GET,RequestMethod.POST})
     public String handleFileUpload(Model model, @RequestParam String imageTitle,
                                    @RequestParam MultipartFile file, @PathVariable String name) throws IOException {
-        Concept conceptName = conceptService.findOne(name);
+        Concept conceptName = conceptService.findOne(name).get();
         Image i = new Image(imageTitle, "data:image/png;base64,"+Base64.getEncoder().encodeToString(file.getBytes()));
         conceptName.setImage(i);
         i.setRelatedconcept(conceptName);

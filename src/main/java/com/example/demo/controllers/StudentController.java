@@ -35,7 +35,7 @@ public class StudentController {
 
     @GetMapping("/MainPage/Student/{name}")
     public String concept(Model model, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Image> imagesList = imageRepository.findByConcept(concept);
@@ -58,7 +58,7 @@ public class StudentController {
 
     @GetMapping (path = "/NewQuestion/{conceptName}")
     public String newQuestion(Model model, @PathVariable String conceptName){
-        Concept concept = conceptService.findOne(conceptName);
+        Concept concept = conceptService.findOne(conceptName).get();
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
         int typeQuestion =0;//(int)(Math.random() * 4);

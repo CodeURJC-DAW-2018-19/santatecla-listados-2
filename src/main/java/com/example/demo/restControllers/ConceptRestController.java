@@ -37,7 +37,7 @@ public class ConceptRestController {
     public ResponseEntity<Concept> getConcept(@PathVariable int id) {
        // if (!conceptService.findoptOne(id).isPresent())
          //   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(conceptService.findOne(id),HttpStatus.OK);
+        return new ResponseEntity<>(conceptService.findOne(id).get(),HttpStatus.OK);
     }
 
     @JsonView(ConceptDetails.class)
@@ -54,7 +54,7 @@ public class ConceptRestController {
     @RequestMapping(value = "/updateConcept/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConcept(@PathVariable int id, @RequestBody Concept updatedConcept){
 
-        Concept concept = conceptService.findOne(id);
+        Concept concept = conceptService.findOne(id).get();
 
         if(concept != null){
             updatedConcept.setId(id);
@@ -69,7 +69,7 @@ public class ConceptRestController {
     public ResponseEntity<Concept> deleteConcept(@PathVariable int id) {
        // if (!conceptService.findoptOne(id).isPresent())
          //   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Concept concept =conceptService.findOne(id);
+        Concept concept =conceptService.findOne(id).get();
         conceptService.delete(concept);
         return new ResponseEntity<>(concept,HttpStatus.OK);
     }
@@ -95,7 +95,7 @@ public class ConceptRestController {
     public ResponseEntity<Concept> updateConceptName(@PathVariable int id, @PathVariable String name) {
         /*if (!conceptService.findoptOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
-        Concept concept = conceptService.findOne(id);
+        Concept concept = conceptService.findOne(id).get();
         concept.setName(name);
         conceptService.save(concept);
         return new ResponseEntity<>(concept,HttpStatus.OK);
@@ -105,7 +105,7 @@ public class ConceptRestController {
     public ResponseEntity<Concept> updateConceptTopic(@PathVariable int id, @PathVariable String topic) {
         /*if (!conceptService.findoptOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
-        Concept concept = conceptService.findOne(id);
+        Concept concept = conceptService.findOne(id).get();
         concept.setTopic(topicService.findOne(topic).get());
         conceptService.save(concept);
         return new ResponseEntity<>(concept,HttpStatus.OK);
