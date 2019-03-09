@@ -44,13 +44,13 @@ public class TeacherRestController {
     //Region Item
 
     @JsonView(ItemDetails.class)
-    @GetMapping("/prueba/item/all")
+    @GetMapping("/items/all")
     public ResponseEntity<List<Item>> getItems() {
         return new ResponseEntity<> (itemService.findAll(),HttpStatus.OK);
     }
 
     @JsonView(ItemDetails.class)
-    @GetMapping("/prueba/item/{id}")
+    @GetMapping("/item/{id}")
     public ResponseEntity<Item> getItem(@PathVariable int id) {
         if (itemService.findOne(id).isPresent())
             return new ResponseEntity<>(itemService.findOne(id).get(), HttpStatus.OK);
@@ -72,19 +72,22 @@ public class TeacherRestController {
     @JsonView(ItemDetails.class)
     @RequestMapping(value = "/updateItem/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item updatedItem){
-        Optional<Item> item = itemService.findOne(id);
+
+        Item item = itemService.findOne(id).get();
+
 
         if(item != null){
             updatedItem.setId(id);
             itemService.save(updatedItem);
             return new ResponseEntity<>(updatedItem, HttpStatus.OK);
+
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/prueba/item/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/item/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Item> deleteItem(@PathVariable int id){
         if (!itemService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -95,7 +98,7 @@ public class TeacherRestController {
 
         //New Item using URL parameters
     @JsonView(ItemDetails.class)
-    @PostMapping("/prueba/item/{conceptName}/{text}/{checked}")
+    @PostMapping("/item/{conceptName}/{text}/{checked}")
     public ResponseEntity<Item> newConcreteItem(@PathVariable String conceptName, @PathVariable String text, @PathVariable boolean checked ){
         Item item = new Item();
         Concept concept = conceptService.findOne(conceptName);
@@ -115,7 +118,7 @@ public class TeacherRestController {
 
         //Update Item using  URL parameters
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/prueba/item/name/{id}/{newName}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/item/name/{id}/{newName}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItemName(@PathVariable int id, @PathVariable String newName){
         if (!itemService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -126,7 +129,7 @@ public class TeacherRestController {
     }
 
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/prueba/item/check/{id}/{checked}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/item/check/{id}/{checked}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItemChecked(@PathVariable int id, @PathVariable boolean checked){
         if (!itemService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -141,13 +144,13 @@ public class TeacherRestController {
     //region TOPICS
 
     @JsonView(TopicDetails.class)
-    @GetMapping("/prueba/topic/all")
+    @GetMapping("/topics/all")
     public ResponseEntity<List<Topic>> getTopics() {
         return new ResponseEntity<>(topicService.findAll(),HttpStatus.OK);
     }
 
     @JsonView(TopicDetails.class)
-    @GetMapping("/prueba/topic/{id}")
+    @GetMapping("/topic/{id}")
     public ResponseEntity<Topic> getTopic(@PathVariable int id) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -168,7 +171,7 @@ public class TeacherRestController {
     @RequestMapping(value = "/updateTopic/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updateTopic(@PathVariable int id, @RequestBody Topic updatedTopic){
 
-        Optional<Topic> topic = topicService.findOne(id);
+        Topic topic = topicService.findOne(id).get();
 
         if(topic != null){
             updatedTopic.setId(id);
@@ -180,7 +183,7 @@ public class TeacherRestController {
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/prueba/topic/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/topic/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Topic> deleteTopic(@PathVariable int id){
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -191,7 +194,7 @@ public class TeacherRestController {
 
         //New Topic using URL parameters
     @JsonView(TopicDetails.class)
-    @PostMapping("/prueba/topic/{topicName}")
+    @PostMapping("/topic/{topicName}")
     public ResponseEntity<Topic> newConcreteTopic(@PathVariable String topicName){
         if (topicService.findOne(topicName).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -207,7 +210,7 @@ public class TeacherRestController {
 
         //Update Topic using  URL parameters
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/prueba/topic/{id}/{newName}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/topic/{id}/{newName}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updateTopicName(@PathVariable int id, @PathVariable String newName){
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -218,7 +221,7 @@ public class TeacherRestController {
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/prueba/topic/error/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/topic/error/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updateErrorTopic(@PathVariable int id){
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -229,7 +232,7 @@ public class TeacherRestController {
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/prueba/topic/hit/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/topic/hit/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updateHitTopic(@PathVariable int id){
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -239,7 +242,7 @@ public class TeacherRestController {
         return new ResponseEntity<>(topic,HttpStatus.OK);
     }
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/prueba/topic/pending/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/topic/pending/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updatePendingTopic(@PathVariable int id){
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -254,12 +257,12 @@ public class TeacherRestController {
     //region CONCEPTS
 
     @JsonView(ConceptDetails.class)
-    @GetMapping("/prueba/concepts/all")
+    @GetMapping("/concepts/all")
     public ResponseEntity<List<Concept>> getConcepts() {
         return new ResponseEntity<>(conceptService.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping("/prueba/concepts/{id}")
+    @GetMapping("/concept/{id}")
     public ResponseEntity<Concept> getConcept(@PathVariable int id) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -291,7 +294,7 @@ public class TeacherRestController {
         }
     }
 
-    @RequestMapping(value = "/prueba/concepts/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/concept/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Concept> deleteConcept(@PathVariable int id) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -301,7 +304,7 @@ public class TeacherRestController {
     }
 
             //New Concept using URL parameters
-    @PostMapping("/prueba/concepts/{name}/{topicname}")
+    @PostMapping("/concept/{name}/{topicname}")
     public ResponseEntity<Concept> newConcreteConcept(@PathVariable String name, @PathVariable String topicname) {
         if (topicService.findOne(topicname).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -317,7 +320,7 @@ public class TeacherRestController {
     }
 
         //Update Concept using  URL parameters
-    @RequestMapping(value = "/prueba/concepts/{id}/newName/{name}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/concept/{id}/newName/{name}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptName(@PathVariable int id, @PathVariable String name) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -327,7 +330,7 @@ public class TeacherRestController {
         return new ResponseEntity<>(concept,HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/prueba/concepts/{id}/topic/{topic}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/concept/{id}/topic/{topic}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptTopic(@PathVariable int id, @PathVariable String topic) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -21,14 +21,22 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
 
         http.antMatcher("/api/**");
 
-
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/logIn").authenticated();
-
         // URLs that need authentication to access to it
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("STUDENT");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/logIn").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register/newUser");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/all").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/{userName}").hasAnyRole("TEACHER");
+
+
+
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/student/**").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/teacher/**").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/student/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/teacher/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/student/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/teacher/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/student/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/teacher/**").hasAnyRole("TEACHER");
 
         // Other URLs can be accessed without authentication
         http.authorizeRequests().anyRequest().permitAll();
