@@ -7,12 +7,12 @@ import java.util.Optional;
 
 public  interface  ConceptRepository extends JpaRepository<Concept,Integer> {
     Concept findByName(String name);
-    Optional <Concept> findByNameopt(String name);
+    //Optional <Concept> findByNameopt(String name);
 
     List<Concept> findByNameContaining(String name);
     Concept findById(int id);
 
-    Optional<Concept> findByIdopt(int id);
+    //Optional<Concept> findByIdopt(int id);
 
 
 }

@@ -11,13 +11,13 @@ public class ConceptService {
     @Autowired
     private ConceptRepository repository;
 
-    public Optional <Concept> findoptOne(int id) {
-        return repository.findByIdopt(id);
-    }
+    //public Optional <Concept> findoptOne(int id) {
+      //  return repository.findByIdopt(id);
+    //}
 
-    public Optional <Concept> findoptOne(String name) {
+    /*public Optional <Concept> findoptOne(String name) {
         return repository.findByNameopt(name);
-    }
+    }*/
 
 
     public Concept findOne(int id) {
