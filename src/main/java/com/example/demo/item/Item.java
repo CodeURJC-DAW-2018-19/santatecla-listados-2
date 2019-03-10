@@ -13,10 +13,10 @@ public class Item {
     public interface BasicInfo{}
     public interface ItemConcept {}
 
+    @JsonView(BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
-    @JsonView(BasicInfo.class)
     protected int id;
 
     @Column (name = "Name")

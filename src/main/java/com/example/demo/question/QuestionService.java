@@ -2,6 +2,8 @@ package com.example.demo.question;
 
 import com.example.demo.concept.Concept;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,4 +37,7 @@ public class QuestionService {
 
     public Question findOne(int id) {return repository.findById(id);}
 
+    public Page<Question> findAll(Pageable page) {
+        return repository.findAll(page);
+    }
 }

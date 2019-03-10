@@ -13,10 +13,10 @@ public class Question {
     public interface BasicInfo{}
     public interface ConceptAndAnswer {}
 
+    @JsonView (BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
-    @JsonView (BasicInfo.class)
     private int id;
 
     @Column(name = "Questions")

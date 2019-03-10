@@ -22,6 +22,8 @@ public class TopicRestController {
     @Autowired
     private TopicService topicService;
 
+    private final int DEFAULT_SIZE = 10;
+
     interface TopicDetails extends Topic.BasicInfo, Topic.ConceptList, Concept.BasicInfo {}
 
     //Region Topic
@@ -32,11 +34,12 @@ public class TopicRestController {
         return new ResponseEntity<>(topicService.findAll(), HttpStatus.OK);
     }
 
-    /*      With this method we page th results of Showing all topics. It does not work properly
-    @GetMapping("/pag")
-    public Page<Topic> getTopics(Pageable page) {
-        return topicService.findAll(page);
-    }*/
+    @JsonView(Topic.BasicInfo.class)
+    @GetMapping(value = "/all/pag")
+    public Page<Topic> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+        Page<Topic> topics = topicService.findAll(page);
+        return topics;
+    }
 
     @JsonView(TopicDetails.class)
     @GetMapping("/{id}")

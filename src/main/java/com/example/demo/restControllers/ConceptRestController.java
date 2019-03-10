@@ -8,6 +8,9 @@ import com.example.demo.topic.Topic;
 import com.example.demo.topic.TopicService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,8 @@ public class ConceptRestController {
     @Autowired
     private ConceptService conceptService;
 
+    private final int DEFAULT_SIZE = 10;
+
     interface ConceptDetails extends Concept.BasicInfo, Concept.ObjectLists, Topic.BasicInfo, Item.BasicInfo, Question.BasicInfo{}
 
 
@@ -31,6 +36,13 @@ public class ConceptRestController {
     @GetMapping("/all")
     public ResponseEntity<List<Concept>> getConcepts() {
         return new ResponseEntity<>(conceptService.findAll(), HttpStatus.OK);
+    }
+
+    @JsonView(Concept.BasicInfo.class)
+    @GetMapping(value = "/all/pag")
+    public Page<Concept> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+        Page<Concept> concepts = conceptService.findAll(page);
+        return concepts;
     }
 
     @GetMapping("/{id}")

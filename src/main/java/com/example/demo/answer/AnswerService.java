@@ -1,6 +1,8 @@
 package com.example.demo.answer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +30,9 @@ public class AnswerService {
 
     public void delete(int id) {
         repository.deleteById(id);
+    }
+
+    public Page<Answer> findAll(Pageable page) {
+        return repository.findAll(page);
     }
 }

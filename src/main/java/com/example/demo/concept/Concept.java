@@ -21,10 +21,10 @@ public class Concept {
     public interface BasicInfo{}
     public interface ObjectLists{}
 
+    @JsonView(BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
-    @JsonView(BasicInfo.class)
     private int id;
 
     @Column(name="Name")

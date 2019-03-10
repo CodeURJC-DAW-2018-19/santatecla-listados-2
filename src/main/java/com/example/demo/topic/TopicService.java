@@ -25,7 +25,7 @@ public class TopicService {
         return repository.findByNameContaining(name);
     }
 
-    public Page<Topic> findAll(@PageableDefault(size = 10)Pageable page) {
+    public Page<Topic> findAll(Pageable page) {
         return repository.findAll(page);
     }
 

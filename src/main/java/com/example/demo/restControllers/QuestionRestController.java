@@ -7,6 +7,9 @@ import com.example.demo.question.Question;
 import com.example.demo.question.QuestionService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,8 @@ public class QuestionRestController {
     @Autowired
     private QuestionService questionService;
 
+    private final int DEFAULT_SIZE = 10;
+
     interface QuestionDetails extends Question.BasicInfo, Question.ConceptAndAnswer, Concept.BasicInfo, Answer.BasicInfo {}
 
     //Region Question
@@ -29,6 +34,13 @@ public class QuestionRestController {
     @GetMapping("/all")
     public List<Question> getQuestions() {
         return questionService.findAll();
+    }
+
+    @JsonView(Question.BasicInfo.class)
+    @GetMapping(value = "/all/pag")
+    public Page<Question> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+        Page<Question> questions = questionService.findAll(page);
+        return questions;
     }
 
     @JsonView(QuestionDetails.class)
