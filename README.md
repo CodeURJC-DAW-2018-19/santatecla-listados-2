@@ -218,3 +218,44 @@ En este diagrma hemos seguido un código de colores para diferenciar entre sus c
 
 #### Diagrama de Clases (Parte 4)
 ![DiagramaClasesParte2](/Screenshots/Phase2/ClassDiagramPart4.png "DiagramaClasesParte4")
+
+## Phase 3
+En esta fase tenemos dos partes claramente difefenciadas:
+1. la creación de una API REST
+2. la ejecución de la app web y de la API REST de forma dockerizada
+
+### Instrucciones de ejecución de la aplicación dockerizada: Instrucciones de ejecución usando el docker-compose.yml.
+
+Para ejecutar nuestra aplicación de forma dockerizada hemos añadido una serie de archivos en la carpeta docker del proyecto.  
+
+Tenemos 5 archivos:
+1. **create_image.sh** : sirve para crear el jar del proyecto, crear la imagen y subirla a nuestro repositorio de Dockerhub con un login automático en nuestra cuenta
+2. **Dockerfile** : tiene el propósito de facilitar la creación de imágenes de nuestro proyecto, este archivo ejecuta el script **initApp.sh**
+3. **initApp.sh** : es un script que nos sirve para sincronizar la BBDD con la aplicación de manera que siempre se inicie antes la BBDD que la app.
+4. **archivo jar** : archivo jar que contiene la aplicación, este archivo es generado al ejecutar el **create_image.sh**
+5. **docker-compose.yml** : archivo que contiene dos servicios, uno el de la app y otro que es la BBDD y los enlaza entre sí.
+
+Como pre-requisito para poder ejecutar la app de manera dockerizada tenemos que tener instalado docker compose:
+
+En linux bastaría con ejecutar el siguiente comando   
+     sudo apt install docker-compose
+Para otros sistemas operativos buscar en el siguiente enlace:  
+[Instalar Docker Compose](https://docs.docker.com/compose/overview/)  
+
+Para ejecutar la aplicación vía terminal tendremos que hacer lo siguiente:
+1. Nos clonaremos el proyecto 
+2. Nos situaremos en la carpeta del proyecto 
+      cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
+3. Ahora ejecutaremos el docker-compose.yml de la siguiente manera:
+      docker-compose up    
+En el caso de que no queramos el log de la aplicación añadir un -d a la instrucción anterior.
+
+
+### Preparación del entorno de desarrollo:
+La aplicación se puede seguir iniciando de manera tradicional, pero si quisieramos ejecutarla de forma dockerizada desde el entorno de desarrollo tendremos que hacer lo siguiente:   
+
+- El entorno os reconocerá los archivos de la carpeta docker  
+- Si quisieramos crear la imagen y subirla al repositorio tendríamos que ejecutar el script create_image.sh desde la terminal del ordenador o desde la propia del entorno de desarrollo
+- Para ejecutarla, el propio entorno de desarrollo nos da la opción de ejecutar el archivo docker-compose.yml, por lo que bastará con darle a run desde el entorno de este archivo y se ejecutará la app dockerizada.
+- Por último bastará con abrir  [este enlace](https://localhost:8080/logIn) y a ¡disfrutar de la app!
+   
