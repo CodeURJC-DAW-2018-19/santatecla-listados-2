@@ -38,7 +38,7 @@ public class ImageRestController {
     }
 
 
-    @PostMapping("/{title}/{concept}")
+    @PostMapping("/newImage/{title}/{concept}")
     public void postImage (@PathVariable String title,@PathVariable String concept, @RequestBody MultipartFile file,
                            HttpServletResponse response) throws IOException {
         Image i = new Image(title, "data:image/png;base64,"+ java.util.Base64.getEncoder().encodeToString(file.getBytes()));
@@ -53,7 +53,7 @@ public class ImageRestController {
         IOUtils.copy(stream,response.getOutputStream());
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Image> deleteImage(@PathVariable int id,HttpServletResponse response) throws IOException {
         Image image = imageRepository.findById(id).get();
         imageRepository.delete(image);
@@ -61,7 +61,7 @@ public class ImageRestController {
 
     }
 
-    @RequestMapping(value = "/image/{id}/{name}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/updateImage/{name}", method = RequestMethod.PUT)
     public ResponseEntity<Image> updateConceptName(@PathVariable int id, @PathVariable String name,HttpServletResponse response ) throws IOException {
         if (!imageRepository.findById(id).isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
