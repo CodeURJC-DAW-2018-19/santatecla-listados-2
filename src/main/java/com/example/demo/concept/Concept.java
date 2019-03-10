@@ -147,4 +147,5 @@ public class Concept {
     public void setImage(Image image) {
         this.images.add(image);
     }
+
 }

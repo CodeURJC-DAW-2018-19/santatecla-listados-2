@@ -1,12 +1,16 @@
 package com.example.demo.topic;
 
 import com.example.demo.concept.Concept;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name="Topics")
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,11 +24,14 @@ public class Topic {
     private int hits;
     @Column(name="Pendings")
     private int pendings;
-    @OneToMany(cascade= CascadeType.ALL ,mappedBy = "topic")
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "topic")
     private Set<Concept> concepts;
+
     public Topic(String name,int number) {
         this.name = ("Tema"+ number + ": "+name);
-        concepts=new HashSet<>();
+        concepts=new LinkedHashSet<>();
     }
     public Topic(){}
     public String getName() {
@@ -75,7 +82,7 @@ public class Topic {
         return concepts;
     }
 
-    public void setConcepts(Set<Concept> concepts) {
+    public void setConcepts(LinkedHashSet<Concept> concepts) {
         this.concepts = concepts;
     }
     public void setConcept(Concept c){
@@ -85,7 +92,7 @@ public class Topic {
         concepts.remove(c);
     }
     public void removeConcepts(){
-        concepts=new HashSet<>();
+        concepts=new LinkedHashSet<>();
     }
 
 }

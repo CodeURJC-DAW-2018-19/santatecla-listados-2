@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class TeacherController {
         }else{
             model.addAttribute("eImages", true);
             int sizeL = imagesList.size();
-            double th = (double) sizeL/3;
+            double th = (double) sizeL/4;
             int thInt = (int)Math.ceil(th);
             int height = thInt * 350;
             model.addAttribute("height", height + "px");
@@ -104,7 +105,10 @@ public class TeacherController {
     public String deleteTopic(Model model, @PathVariable String name,HttpServletResponse res)throws IOException {
         Optional<Topic> t = topicService.findOne(name);
         if (t.isPresent()){
-            t.get().removeConcepts();
+            List<Concept> concepts = conceptService.findTopicName(name);
+            for (Concept c: concepts) {
+                conceptService.delete(c);
+            }
             topicService.delete(t.get());
             return "redirect:/MainPage";
         }else{

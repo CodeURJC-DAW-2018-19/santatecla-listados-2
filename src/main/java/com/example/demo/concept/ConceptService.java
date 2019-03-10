@@ -26,6 +26,8 @@ public class ConceptService {
         return repository.findAll();
     }
 
+    public List<Concept> findTopicName(String name){return repository.findByTopicName(name);}
+
     public void save(Concept concept) {
         repository.save(concept);
     }

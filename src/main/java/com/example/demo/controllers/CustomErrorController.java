@@ -24,6 +24,7 @@ public class CustomErrorController implements ErrorController {
         model.addAttribute("errorCode",errorCode);
         return "Error";
     }
+
     @Override
     public String getErrorPath(){
         return "/error";

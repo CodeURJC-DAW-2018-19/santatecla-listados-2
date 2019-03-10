@@ -8,5 +8,6 @@ public  interface  ConceptRepository extends JpaRepository<Concept,Integer> {
     Concept findByName(String name);
     List<Concept> findByNameContaining(String name);
     Concept findById(int id);
+    List<Concept> findByTopicName(String name);
 
 }
