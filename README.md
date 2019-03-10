@@ -224,7 +224,7 @@ En esta fase tenemos dos partes claramente difefenciadas:
 1. la creación de una API REST
 2. la ejecución de la app web y de la API REST de forma dockerizada
  
-###Implementación de la API REST
+### Implementación de la API REST
  
 Para comenzar, vamos a explicar el funcionamiento de la API REST que hemos implementado:
 		
@@ -258,25 +258,25 @@ Petición a la API REST  usando @PathVariable
 
 Diagramas de clases de los Rest Controllers:
 
- #####ITEM
+ ##### ITEM
  ![DiagItem](/Screenshots/Phase3/ItemRest.jpeg "Json3")
 
- #####CONCEPT
+ ##### CONCEPT
  ![DiagConcept](/Screenshots/Phase3/ConceptRest.jpeg "Json3")
 
- #####TOPIC
+ ##### TOPIC
  ![DiagTopic](/Screenshots/Phase3/TopicRest.jpeg "Json3")
 
- #####ANSWER
+ ##### ANSWER
  ![DiagAnswer](/Screenshots/Phase3/AnswerRest.jpeg "Json3")
 
- #####QUESTION
+ ##### QUESTION
  ![DiagQuestion](/Screenshots/Phase3/QuestionRest.jpeg "Json3")
 
- #####USER
+ ##### USER
  ![DiagUser](/Screenshots/Phase3/UserRest.jpeg "Json3")
 
- #####IMAGE
+ ##### IMAGE
  ![DiagImage](/Screenshots/Phase3/ImageRest.jpeg "Json3")
 
 
