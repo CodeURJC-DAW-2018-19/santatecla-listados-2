@@ -1,0 +1,26 @@
+version: "3"
+ 
+services:
+  DAWGrupo10:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=DAWGrupo10
+      - MYSQL_USER=Grupo10
+      - MYSQL_PASSWORD=DAWGrupo10
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  santatecla-listados-2:    
+    image: saal4/santatecla-listados-2
+    expose: 
+      - 8443
+    ports:
+      - 8080:8443
+    links: 
+      - DAWGrupo10
+    depends_on: 
+      - DAWGrupo10
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mysql://DAWGrupo10/DAWGrupo10?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: Grupo10
+      SPRING_DATASOURCE_PASSWORD: DAWGrupo10
+
