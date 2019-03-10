@@ -223,6 +223,62 @@ En este diagrma hemos seguido un código de colores para diferenciar entre sus c
 En esta fase tenemos dos partes claramente difefenciadas:
 1. la creación de una API REST
 2. la ejecución de la app web y de la API REST de forma dockerizada
+ 
+###Implementación de la API REST
+ 
+Para comenzar, vamos a explicar el funcionamiento de la API REST que hemos implementado:
+		
+- Se ha creado una clase controller nueva por cada tipo de entidad que posee la aplicación, llama (NombreEntidad)RestController. En cada de una de estas clases, hemos implementado las 4 funcionalidades principales: pedir un objeto (GET), crear un objeto y añadirlo a la base de datos (POST), modificar un objeto (PUT) y eliminar un objeto (DELETE).
+- Los datos les llegan a estos métodos bien como parámetros variables del path que llama a la función (es decir, mediante el uso de @PathVariable para el uso de variables que no sean objetos propios de la aplicación) o bien como datos adjuntos en el body de la petición (uso de la anotación @RequestBody seguida del tipo y nombre de la variable, que seria suministrada pasando el objeto a formato Json).
+- El resultado que obtenemos de cada petición es el objeto que ha sido manipulado en esta petición, exceptuando cuando estamos usando imágenes, para las cuales se nos devuelve la imagen en si para que podamos observar que sigue siendo visible. El objeto se muestra en formato Json, y puede mostrar hasta dos niveles de profundidad con respecto a las dependencias que tienen unos objetos sobre otros:
+
+    - Answer → Muestra Answer y la Question asociada.
+    - Question → Muestra Question, la Answer asociada y el Concept al que pertenece.
+    - Concept → Muestra Concept, su lista de Items, el Topic al que pertenece y su lista de Questions asociadas.
+    - Item→ Muestra Item y el concept al que pertenece.
+    - Topic→ Muestra Topic y la lista de Concepts que contiene. 
+    - Image → Devuelve el archivo imagen asociado a ese objeto en formato jpeg.
+    - User → Nos muestra sus datos.
+	
+- Respecto a los códigos de estado, hemos incluido en la mayor parte de métodos (excepto aquellos que nos sirven para devolver todos los objetos de un mismo tipo), una comprobación para comprobar que los objetos sobre los cuales se van a ejecutar los métodos o bien existen (PUT, DELETE, GET) o bien no existen todavía (POST). En ambos casos, hemos elegido el código NOT_FOUND para expresar ese error. Si el método se ejecuta correctamente, se devuelven los códigos OK para los métodos PUT,GET,DELETE, y CREATED para el método POST.
+
+- A continuación se muestran capturas de pantalla acerca de la información en formato Json:
+
+![FormatoJson1](/Screenshots/Phase3/json1.png "Json1")
+
+Formato de salida para un Concept con Items, Questions y Topic
+
+![FormatoJson2](/Screenshots/Phase3/json2.png "Json2")
+
+Formato de entrada de un objeto Json y la respuesta del método.
+
+![FormatoJson3](/Screenshots/Phase3/json3.png "Json3")
+
+Petición a la API REST  usando @PathVariable
+
+Diagramas de clases de los Rest Controllers:
+
+ #####ITEM
+ ![DiagItem](/Screenshots/Phase3/ItemRest.jpeg "Json3")
+
+ #####CONCEPT
+ ![DiagConcept](/Screenshots/Phase3/ConceptRest.jpeg "Json3")
+
+ #####TOPIC
+ ![DiagTopic](/Screenshots/Phase3/TopicRest.jpeg "Json3")
+
+ #####ANSWER
+ ![DiagAnswer](/Screenshots/Phase3/AnswerRest.jpeg "Json3")
+
+ #####QUESTION
+ ![DiagQuestion](/Screenshots/Phase3/QuestionRest.jpeg "Json3")
+
+ #####USER
+ ![DiagUser](/Screenshots/Phase3/UserRest.jpeg "Json3")
+
+ #####IMAGE
+ ![DiagImage](/Screenshots/Phase3/ImageRest.jpeg "Json3")
+
 
 ### Instrucciones de ejecución de la aplicación dockerizada: Instrucciones de ejecución usando el docker-compose.yml.
 
@@ -259,51 +315,4 @@ La aplicación se puede seguir iniciando de manera tradicional, pero si quisiera
 - Para ejecutarla, el propio entorno de desarrollo nos da la opción de ejecutar el archivo docker-compose.yml, por lo que bastará con darle a run desde el entorno de este archivo y se ejecutará la app dockerizada.
 - Por último bastará con abrir  [este enlace](https://localhost:8080/logIn) y a ¡disfrutar de la app!
    
-###Implementación de la API REST
 
-Para comenzar, vamos a explicar el funcionamiento de la API REST que hemos implementado:
-		
-- Se ha creado una clase controller nueva por cada tipo de entidad que posee la aplicación, llama (NombreEntidad)RestController. En cada de una de estas clases, hemos implementado las 4 funcionalidades principales: pedir un objeto (GET), crear un objeto y añadirlo a la base de datos (POST), modificar un objeto (PUT) y eliminar un objeto (DELETE).
-- Los datos les llegan a estos métodos bien como parámetros variables del path que llama a la función (es decir, mediante el uso de @PathVariable para el uso de variables que no sean objetos propios de la aplicación) o bien como datos adjuntos en el body de la petición (uso de la anotación @RequestBody seguida del tipo y nombre de la variable, que seria suministrada pasando el objeto a formato Json).
-- El resultado que obtenemos de cada petición es el objeto que ha sido manipulado en esta petición, exceptuando cuando estamos usando imágenes, para las cuales se nos devuelve la imagen en si para que podamos observar que sigue siendo visible. El objeto se muestra en formato Json, y puede mostrar hasta dos niveles de profundidad con respecto a las dependencias que tienen unos objetos sobre otros:
-
-    - Answer → Muestra Answer y la Question asociada.
-    - Question → Muestra Question, la Answer asociada y el Concept al que pertenece.
-    - Concept → Muestra Concept, su lista de Items, el Topic al que pertenece y su lista de Questions asociadas.
-    - Item→ Muestra Item y el concept al que pertenece.
-    - Topic→ Muestra Topic y la lista de Concepts que contiene. 
-    - Image → Devuelve el archivo imagen asociado a ese objeto en formato jpeg.
-    - User → Nos muestra sus datos.
-	
-- Respecto a los códigos de estado, hemos incluido en la mayor parte de métodos (excepto aquellos que nos sirven para devolver todos los objetos de un mismo tipo), una comprobación para comprobar que los objetos sobre los cuales se van a ejecutar los métodos o bien existen (PUT, DELETE, GET) o bien no existen todavía (POST). En ambos casos, hemos elegido el código NOT_FOUND para expresar ese error. Si el método se ejecuta correctamente, se devuelven los códigos OK para los métodos PUT,GET,DELETE, y CREATED para el método POST.
-
-- A continuación se muestran capturas de pantalla acerca de la información en formato Json:
-
-![FormatoJson1](/Screenshots/Phase3/json1.png "Json1")
-
-Formato de salida para un Concept con Items, Questions y Topic
-
-![FormatoJson2](/Screenshots/Phase3/json2.png "Json2")
-
-Formato de entrada de un objeto Json y la respuesta del método.
-
-![FormatoJson3](/Screenshots/Phase3/json3.png "Json3")
-
-Petición a la API REST  usando @PathVariable
-
-Diagramas de clases de los Rest Controllers:
-
-#####ITEM
-![DiagItem](/Screenshots/Phase3/ItemRest.jpeg "Json3")
-#####CONCEPT
-![DiagConcept](/Screenshots/Phase3/ConceptRest.jpeg "Json3")
-#####TOPIC
-![DiagTopic](/Screenshots/Phase3/TopicRest.jpeg "Json3")
-#####ANSWER
-![DiagAnswer](/Screenshots/Phase3/AnswerRest.jpeg "Json3")
-#####QUESTION
-![DiagQuestion](/Screenshots/Phase3/QuestionRest.jpeg "Json3")
-#####USER
-![DiagUser](/Screenshots/Phase3/UserRest.jpeg "Json3")
-#####IMAGE
-![DiagImage](/Screenshots/Phase3/ImageRest.jpeg "Json3")
