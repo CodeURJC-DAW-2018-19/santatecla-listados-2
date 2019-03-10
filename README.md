@@ -306,15 +306,15 @@ Para comenzar, vamos a explicar el funcionamiento de la API REST que hemos imple
 
 - A continuación se muestran capturas de pantalla acerca de la información en formato Json:
 
-![FormatoJson1](/Screenshots/Phase3/json1.png "Json1")
+![FormatoJson1](/Screenshots/Phase3/Json1.png "Json1")
 
 Formato de salida para un Concept con Items, Questions y Topic
 
-![FormatoJson2](/Screenshots/Phase3/json2.png "Json2")
+![FormatoJson2](/Screenshots/Phase3/Json2.png "Json2")
 
 Formato de entrada de un objeto Json y la respuesta del método.
 
-![FormatoJson3](/Screenshots/Phase3/json3.png "Json3")
+![FormatoJson3](/Screenshots/Phase3/Json3.png "Json3")
 
 Petición a la API REST  usando @PathVariable
 
