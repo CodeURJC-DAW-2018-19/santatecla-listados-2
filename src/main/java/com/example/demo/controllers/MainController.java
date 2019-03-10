@@ -90,7 +90,7 @@ public class MainController {
 
     @GetMapping(path = "/MoreQuestions/{name}")
     public String moreQuestionButton(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Question> q = questionService.findByConceptAndCorrected(concept, true);
@@ -117,7 +117,7 @@ public class MainController {
 
     @GetMapping(path = "/MoreQuestionsNo/{name}")
     public String moreQuestionButtonNo(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Question> q = questionService.findByConceptAndCorrected(concept, false);
@@ -203,7 +203,7 @@ public class MainController {
 
     @GetMapping("/loadMoreItems/{name}")
     public String loadMoreItems(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Item> i = itemService.findByConceptName(name);
@@ -225,7 +225,7 @@ public class MainController {
 
     @GetMapping("/loadMoreQuestionsNC/{name}")
     public String loadMoreQuestionsNC(Model model, @PageableDefault(size = 10) Pageable pageable, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Question> q = questionService.findByConceptAndCorrected(concept, false);

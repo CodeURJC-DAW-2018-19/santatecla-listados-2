@@ -2,6 +2,8 @@ package com.example.demo.topic;
 
 import com.example.demo.concept.Concept;
 import org.hibernate.annotations.Cascade;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,23 +12,36 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="Topics")
 public class Topic {
+
+    public interface BasicInfo{}
+    public interface ConceptList{}
+
+    @JsonView(BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
     private int id;
+
     @Column(name="Name")
+    @JsonView(BasicInfo.class)
     private String name;
     @Column(name="Errors")
+    @JsonView(BasicInfo.class)
     private int errors;
     @Column(name ="Hits")
+    @JsonView(BasicInfo.class)
     private int hits;
     @Column(name="Pendings")
+    @JsonView(BasicInfo.class)
     private int pendings;
 
 
+
+
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "topic")
+    @JsonView(ConceptList.class)
     private Set<Concept> concepts;
 
     public Topic(String name,int number) {

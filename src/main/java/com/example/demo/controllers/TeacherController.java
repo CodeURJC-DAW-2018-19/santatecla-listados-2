@@ -39,10 +39,10 @@ public class TeacherController {
     private ConceptService conceptService;
     @GetMapping("/MainPage/Teacher/{name}")
     public String teacherConcept(Model model, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
-        Concept wantedConcept = conceptService.findOne(name);
+        Concept wantedConcept = conceptService.findOne(name).get();
         List<Image> imagesList = imageRepository.findByConcept(wantedConcept);
         Set<Question> q = concept.getQuestions();
         List<Item> i = itemService.findByConceptName(name);
@@ -95,7 +95,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/MainPage/deleteConcept{name}", method = RequestMethod.POST)
     public String deleteConcept(Model model, @PathVariable String name) {
-        Concept c = conceptService.findOne(name);
+        Concept c = conceptService.findOne(name).get();
         c.getTopic().removeConcept(c);
         conceptService.delete(c);
         return "redirect:/MainPage";
@@ -139,19 +139,19 @@ public class TeacherController {
             this.itemService.save(o.get());
         }else{
             Item i=new Item(text,checked);
-            Concept c=this.conceptService.findOne(conceptName);
+            Concept c=this.conceptService.findOne(conceptName).get();
             i.setConcept(c);
             this.itemService.save(i);
         }
 
         Item i=new Item(text,checked);
-        Concept c=this.conceptService.findOne(conceptName);
+        Concept c=this.conceptService.findOne(conceptName).get();
         i.setConcept(c);
         return "redirect:/MainPage/Teacher/"+conceptName;
     }
     @GetMapping ("/MainPage/Teacher/{conceptName}/{id}/{mark}")
     public String correctPendingQuestion(Model model,@PathVariable String conceptName,@PathVariable int id, @PathVariable boolean mark){
-        Concept c=conceptService.findOne(conceptName);
+        Concept c=conceptService.findOne(conceptName).get();
         Answer a=answerService.findOne(id);
         Question q = questionService.findOne(a.getQuestion().getId());
         q.setCorrected(true);

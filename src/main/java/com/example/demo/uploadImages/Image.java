@@ -2,21 +2,32 @@ package com.example.demo.uploadImages;
 
 
 import com.example.demo.concept.Concept;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 
 @Entity
 public class Image {
 
+    public interface BasicInfo{}
+    public interface ConceptObject {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
+    @JsonView (BasicInfo.class)
     private int id;
+
     @Column(name="Title")
+    @JsonView (BasicInfo.class)
     private String title;
+
     @Column (name="Base64",columnDefinition="MEDIUMBLOB")
+    @JsonView (BasicInfo.class)
     private String base64;
+
     @OneToOne
+    @JsonView (ConceptObject.class)
     private Concept concept;
 
     public Image() {

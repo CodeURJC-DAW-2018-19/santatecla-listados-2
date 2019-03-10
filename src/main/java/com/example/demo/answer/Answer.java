@@ -1,22 +1,38 @@
 package com.example.demo.answer;
 
 import com.example.demo.question.Question;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 
 @Entity
 @Table (name = "Answers")
 public class Answer {
+
+    public interface BasicInfo{}
+    public interface AnswerObject {}
+
+    @JsonView(BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
     protected int id;
+
     @Column (name = "AnswersTest")
+    @JsonIgnore
     private String answerTest;
+
     @Column (name = "OpenAnswer")
+    @JsonView(BasicInfo.class)
     private String openAnswer;
+
     @Column (name = "Marks")
+    @JsonView(BasicInfo.class)
     private boolean mark;
+
     @OneToOne
+    @JsonView(AnswerObject.class)
     private Question question;
 
     public Answer(){}

@@ -23,6 +23,7 @@ import java.util.Set;
 
 @Controller
 public class StudentController {
+
     @Autowired
     private ConceptService conceptService;
     @Autowired
@@ -31,9 +32,10 @@ public class StudentController {
     private QuestionService questionService;
     @Autowired
     private ItemService itemService;
+
     @GetMapping("/MainPage/Student/{name}")
     public String concept(Model model, @PathVariable String name) {
-        Concept concept = conceptService.findOne(name);
+        Concept concept = conceptService.findOne(name).get();
         if (concept == null)
             return null;
         List<Image> imagesList = imageRepository.findByConcept(concept);
@@ -53,9 +55,10 @@ public class StudentController {
         model.addAttribute("moreThanOne",false);
         return "StudentConcept";
     }
+
     @GetMapping (path = "/NewQuestion/{conceptName}")
     public String newQuestion(Model model, @PathVariable String conceptName){
-        Concept concept = conceptService.findOne(conceptName);
+        Concept concept = conceptService.findOne(conceptName).get();
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
         int typeQuestion =0;//(int)(Math.random() * 4);
@@ -128,6 +131,7 @@ public class StudentController {
         conceptService.save(concept);
         return "NewQuestions";
     }
+
     @GetMapping(path = "/setAnswer/{id}")
     public String addAnswer(Model model, Answer answer, @PathVariable int id) {
         System.out.println("He entrado por la pregunta 0 o 2");
@@ -195,6 +199,7 @@ public class StudentController {
 
         return "redirect:/MainPage/Student/"+questionService.findOne(id).getConcept().getName();
     }
+
     @GetMapping(path = "/sendAnswer/{question}/{correct}")
     public String sendAnswer(Model model, @PathVariable int question, @PathVariable boolean correct){
         Question question1 = questionService.findOne(question);

@@ -5,6 +5,8 @@ import com.example.demo.item.Item;
 import com.example.demo.question.Question;
 import com.example.demo.topic.Topic;
 import com.example.demo.uploadImages.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,27 +17,51 @@ import java.util.Set;
 @Entity
 @Table(name="Concepts")
 public class Concept {
+
+    public interface BasicInfo{}
+    public interface ObjectLists{}
+
+    @JsonView(BasicInfo.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id")
     private int id;
+
     @Column(name="Name")
+    @JsonView(BasicInfo.class)
     private String name;
+
     @Column(name="html")
+    @JsonView(BasicInfo.class)
     private String html;
+
     @Column(name="Errors")
+    @JsonView(BasicInfo.class)
     private int errors;
+
     @Column(name="Hits")
+    @JsonView(BasicInfo.class)
     private int hits;
+
     @Column(name = "Pendings")
+    @JsonView(BasicInfo.class)
     private int pendings;
+
     @ManyToOne
+    @JsonView(ObjectLists.class)
     private Topic topic;
+
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    @JsonView(ObjectLists.class)
     private Set<Question> questions;
+
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    @JsonView(ObjectLists.class)
     private Set<Item> items;
+
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")
+    //@JsonView(ObjectLists.class)
+    @JsonIgnore
     private List<Image> images;
 
     public Concept(){
