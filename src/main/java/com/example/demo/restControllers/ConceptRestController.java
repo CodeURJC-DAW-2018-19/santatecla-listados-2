@@ -89,8 +89,8 @@ public class ConceptRestController {
     //New Concept using URL parameters
     @PostMapping("/newConcept/{name}/{topicname}")
     public ResponseEntity<Concept> newConcreteConcept(@PathVariable String name, @PathVariable String topicname) {
-       /* if (conceptService.findoptOne(name).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+       if (conceptService.findOne(name).isPresent())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Concept concept = new Concept();
         concept.setName(name);
         concept.setTopic(topicService.findOne(topicname).get());
@@ -105,8 +105,8 @@ public class ConceptRestController {
     //Update Concept using  URL parameters
     @RequestMapping(value = "/{id}/newName/{name}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptName(@PathVariable int id, @PathVariable String name) {
-        /*if (!conceptService.findoptOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+         if (!conceptService.findOne(id).isPresent())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Concept concept = conceptService.findOne(id).get();
         concept.setName(name);
         conceptService.save(concept);
@@ -115,8 +115,8 @@ public class ConceptRestController {
 
     @RequestMapping(value = "/{id}/topic/{topic}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptTopic(@PathVariable int id, @PathVariable String topic) {
-        /*if (!conceptService.findoptOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+        if (!conceptService.findOne(id).isPresent())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Concept concept = conceptService.findOne(id).get();
         concept.setTopic(topicService.findOne(topic).get());
         conceptService.save(concept);
