@@ -360,6 +360,7 @@ Tenemos 5 archivos:
 Como pre-requisito para poder ejecutar la app de manera dockerizada tenemos que tener instalado docker compose:
 
 En linux bastaría con ejecutar el siguiente comando   
+     
      sudo apt install docker-compose
 Para otros sistemas operativos buscar en el siguiente enlace:  
 [Instalar Docker Compose](https://docs.docker.com/compose/overview/)  
@@ -367,9 +368,11 @@ Para otros sistemas operativos buscar en el siguiente enlace:
 Para ejecutar la aplicación vía terminal tendremos que hacer lo siguiente:
 1. Nos clonaremos el proyecto 
 2. Nos situaremos en la carpeta del proyecto 
-      cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
+     
+     cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
 3. Ahora ejecutaremos el docker-compose.yml de la siguiente manera:
-      docker-compose up    
+      
+     docker-compose up    
 En el caso de que no queramos el log de la aplicación añadir un -d a la instrucción anterior.
 
 
