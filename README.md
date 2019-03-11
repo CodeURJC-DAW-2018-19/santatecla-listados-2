@@ -368,11 +368,12 @@ Para otros sistemas operativos buscar en el siguiente enlace:
 Para ejecutar la aplicación vía terminal tendremos que hacer lo siguiente:
 1. Nos clonaremos el proyecto 
 2. Nos situaremos en la carpeta del proyecto 
+    
+        cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
      
-     cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
 3. Ahora ejecutaremos el docker-compose.yml de la siguiente manera:
-      
-     docker-compose up    
+                    
+        docker-compose up    
 En el caso de que no queramos el log de la aplicación añadir un -d a la instrucción anterior.
 
 
