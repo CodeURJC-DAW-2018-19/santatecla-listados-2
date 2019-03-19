@@ -58,6 +58,8 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/answer/**").hasAnyRole("STUDENT");
 
 
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/search/").permitAll();
+
 
         // Other URLs can be accessed without authentication
         http.authorizeRequests().anyRequest().permitAll();

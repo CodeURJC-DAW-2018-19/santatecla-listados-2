@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/answer")
+@RequestMapping("/api/answers")
 public class AnswerRestController {
     @Autowired
     private QuestionService questionService;
@@ -40,8 +40,7 @@ public class AnswerRestController {
     @JsonView(Answer.BasicInfo.class)
     @GetMapping(value = "/all/pag")
     public Page<Answer> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
-        Page<Answer> answers = answerService.findAll(page);
-        return answers;
+        return answerService.findAll(page);
     }
 
     @JsonView(AnswerDetails.class)
@@ -57,7 +56,7 @@ public class AnswerRestController {
     }
 
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/newAnswer", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Answer newAnswer(@RequestBody Answer answer) {
 
@@ -67,7 +66,7 @@ public class AnswerRestController {
     }
 
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/updateAnswer/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Answer> updateAnswer(@PathVariable int id, @RequestBody Answer updatedAnswer){
         Answer answer = answerService.findOne(id);
 
@@ -100,8 +99,8 @@ public class AnswerRestController {
 
     //New Answers using URL parameters
     @JsonView(AnswerDetails.class)
-    @PostMapping("/newAnswer/question{questionId}/{openAnswer}/{mark}")
-    public ResponseEntity<Answer> newConcreteAnswer(@PathVariable int questionId, @PathVariable String openAnswer, @PathVariable boolean mark){
+    @PostMapping("/{questionId}")
+    public ResponseEntity<Answer> newConcreteAnswer(@PathVariable int questionId, @RequestBody String openAnswer, @RequestBody boolean mark){
 
         Question question = questionService.findOne(questionId);
 
@@ -120,8 +119,8 @@ public class AnswerRestController {
 
     //Update Answers using  URL parameters
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/updateOpenAnswer/{id}/{openAnswer}", method = RequestMethod.PUT)
-    public ResponseEntity<Answer> updateOpenAnswer(@PathVariable int id, @PathVariable String openAnswer){
+    @RequestMapping(value = "/o/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Answer> updateOpenAnswer(@PathVariable int id,@RequestBody String openAnswer){
         Answer answer = answerService.findOne(id);
 
         if(answer != null){
@@ -134,8 +133,8 @@ public class AnswerRestController {
     }
 
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/updateAnswerMark/{id}/{mark}", method = RequestMethod.PUT)
-    public ResponseEntity<Answer> updateAnswerMark(@PathVariable int id, @PathVariable boolean mark){
+    @RequestMapping(value = "/m/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Answer> updateAnswerMark(@PathVariable int id, @RequestBody boolean mark){
         Answer answer = answerService.findOne(id);
 
         if(answer != null){

@@ -77,6 +77,7 @@ public class ConceptRestController {
         }
     }
 
+    @JsonView(ConceptDetails.class)
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Concept> deleteConcept(@PathVariable int id) {
        // if (!conceptService.findoptOne(id).isPresent())
@@ -87,6 +88,7 @@ public class ConceptRestController {
     }
 
     //New Concept using URL parameters
+    @JsonView(ConceptDetails.class)
     @PostMapping("/newConcept/{name}/{topicname}")
     public ResponseEntity<Concept> newConcreteConcept(@PathVariable String name, @PathVariable String topicname) {
        if (conceptService.findOne(name).isPresent())
@@ -103,6 +105,7 @@ public class ConceptRestController {
     }
 
     //Update Concept using  URL parameters
+    @JsonView(ConceptDetails.class)
     @RequestMapping(value = "/{id}/newName/{name}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptName(@PathVariable int id, @PathVariable String name) {
          if (!conceptService.findOne(id).isPresent())
@@ -113,6 +116,7 @@ public class ConceptRestController {
         return new ResponseEntity<>(concept,HttpStatus.OK);
     }
 
+    @JsonView(ConceptDetails.class)
     @RequestMapping(value = "/{id}/topic/{topic}", method = RequestMethod.PUT)
     public ResponseEntity<Concept> updateConceptTopic(@PathVariable int id, @PathVariable String topic) {
         if (!conceptService.findOne(id).isPresent())
