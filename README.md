@@ -239,24 +239,90 @@ Para comenzar, vamos a explicar el funcionamiento de la API REST que hemos imple
     - Topic→ Muestra Topic y la lista de Concepts que contiene. 
     - Image → Devuelve el archivo imagen asociado a ese objeto en formato jpeg.
     - User → Nos muestra sus datos.
-	
+    
+    #### URLs
+    
+    Tadas nuestras URLs comenzarán igual que las de la fase anterior, con un: https://localhost:8443
+    
+    A continuación todas nuestrar URLs relacionadas con la API REST tendrán el siguiente formato: lo primero, se pondra /api y a continuación se pondrá /(la entidad a la que se quiera acceder).
+    
+    Finalmente este es el listado de URLs que hemos incorporado:
+    
+        Answer:
+        - /api/answer/all (muestra todas las answer)
+        - /api/answer/all/pag (muestra todas las answer paginadas)
+        - /api/answer/{id} (muestra la answer indicada)
+        - /api/answer/newAnswer (crea una nueva answer)
+        - /api/answer/updateAnswer/{id} (actualiza la answer indicada)
+        - /api/answer/question{questionId}/deleteAnswer/{id} (elimina la answer indicada de la question indicada)
+        
+        Question:
+        - /api/question/all (muestra todas las question)
+        - /api/question/all/pag (muestra todas las question paginadas)
+        - /api/question/{id} (muestra la question indicada)
+        - /api/question/newQuestion (crea una nueva question)
+        - /api/question/updateQuestion/{id} (actualiza la question indicada)
+        - /api/question/delete/{id} (elimina la question indicada)
+        
+        Concept:
+        - /api/concept/all (muestra todos los concept)
+        - /api/concept/all/pag (muestra todos los concept paginados)
+        - /api/concept/{id} (muestra el concept indicado)
+        - /api/concept/newConcept (crea un nuevo concept)
+        - /api/concept/updateConcept/{id} (actualiza el concept indicado)
+        - /api/concept/delete/{id} (elimina el concept indicado)
+              
+        Item:
+        - /api/item/all (muestra todos los item)
+        - /api/item/all/pag (muestra todos los item paginados)
+        - /api/item/{id} (muestra el item indicado)
+        - /api/item/newItem (crea un nuevo item)
+        - /api/item/updateItem/{id} (actualiza el item indicado)
+        - /api/item/delete/{id} (elimina el item indicado)
+        
+        Topic:
+        - /api/topic/all (muestra todos los topic)
+        - /api/topic/all/pag (muestra todos los topic paginados)
+        - /api/topic/{id} (muestra el topic indicado)
+        - /api/topic/newTopic (crea un nuevo topic)
+        - /api/topic/updateTopic/{id} (actualiza el topic indicado)
+        - /api/topic/delete/{id} (elimina el topic indicado)
+        
+        Image:
+        - /api/image/{id} (muestra la image indicada)
+        - /api/image/newImage/{title}/{concept} (crea una nueva image)
+        - /api/image/delete/{id} (elimina la image indicada)
+        - /api/image/{id}/updateImage/{name} (actualiza la image indicada)
+        
+        User:
+        - /api/user/logIn (muestra el user que esta registrado, si no hay nínguno se indica con UNAUTHORIZED)
+        - /api/user/register/newUser (crea un nuevo user)
+        - /api/user/all (muestra todos los user)
+        - /api/user/{userName} (muestra el user indicado)
+        
+    Answer, Question, Concept, Item y Topic cuentan además con métodos adicionales de creación (POST) y de actualización (PUT) en los que el usuario puede meter/modificar los valores escribiendolos en la propia URL (con el uso de los @PathVariable anteriormente mencionados)
+        
 - Respecto a los códigos de estado, hemos incluido en la mayor parte de métodos (excepto aquellos que nos sirven para devolver todos los objetos de un mismo tipo), una comprobación para comprobar que los objetos sobre los cuales se van a ejecutar los métodos o bien existen (PUT, DELETE, GET) o bien no existen todavía (POST). En ambos casos, hemos elegido el código NOT_FOUND para expresar ese error. Si el método se ejecuta correctamente, se devuelven los códigos OK para los métodos PUT,GET,DELETE, y CREATED para el método POST.
 
 - A continuación se muestran capturas de pantalla acerca de la información en formato Json:
 
-![FormatoJson1](/Screenshots/Phase3/json1.png "Json1")
+![FormatoJson1](/Screenshots/Phase3/Json1.png "Json1")
 
 Formato de salida para un Concept con Items, Questions y Topic
 
-![FormatoJson2](/Screenshots/Phase3/json2.png "Json2")
+![FormatoJson2](/Screenshots/Phase3/Json2.png "Json2")
 
 Formato de entrada de un objeto Json y la respuesta del método.
 
-![FormatoJson3](/Screenshots/Phase3/json3.png "Json3")
+![FormatoJson3](/Screenshots/Phase3/Json3.png "Json3")
 
 Petición a la API REST  usando @PathVariable
 
-Diagramas de clases de los Rest Controllers:
+### Diagrama de Clases
+
+Aqui actualizamos nuestro diagrama de clases introduciendo los nuevos rest controllers. por motivos de claridad visual seguiremos partiendo el diagrama (uno por cada nuevo rest controller) y seguiremos utilizando el mismo código de colores para diferenciar las clases, introduciendo los ya mencionados nuevos rest controller en color naranja. Nueva leyenda del diagrama:
+
+![DiagramColors](/Screenshots/Phase3/DiagramColors.png "DiagramColors")
 
  ##### ITEM
  ![DiagItem](/Screenshots/Phase3/ItemRest.jpeg "Json3")
@@ -294,6 +360,7 @@ Tenemos 5 archivos:
 Como pre-requisito para poder ejecutar la app de manera dockerizada tenemos que tener instalado docker compose:
 
 En linux bastaría con ejecutar el siguiente comando   
+     
      sudo apt install docker-compose
 Para otros sistemas operativos buscar en el siguiente enlace:  
 [Instalar Docker Compose](https://docs.docker.com/compose/overview/)  
@@ -301,9 +368,12 @@ Para otros sistemas operativos buscar en el siguiente enlace:
 Para ejecutar la aplicación vía terminal tendremos que hacer lo siguiente:
 1. Nos clonaremos el proyecto 
 2. Nos situaremos en la carpeta del proyecto 
-      cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
+    
+        cd carpeta-que-contiene-elproyecto/santatecla-listados-2/docker
+     
 3. Ahora ejecutaremos el docker-compose.yml de la siguiente manera:
-      docker-compose up    
+                    
+        docker-compose up    
 En el caso de que no queramos el log de la aplicación añadir un -d a la instrucción anterior.
 
 

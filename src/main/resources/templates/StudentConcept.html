@@ -214,8 +214,9 @@
 </div>
 {{> Plus}}
 {{> Diagram}}
-{{#eImages}}
+
 <div id="images" style="margin-bottom: 5%; margin-top: 18% ; margin-left: 5%">
+    {{#eImages}}
     <h1>IMÁGENES</h1>
     {{#images}}
     <div style="float: left;margin-right: 2%">
@@ -224,8 +225,9 @@
             <img src='{{base64}}' style="max-height: 500px;max-width: 500px"/>
     </div>
     {{/images}}
+    {{/eImages}}
 </div>
-{{/eImages}}
+
 {{> Footer}}
 </body>
 </html>
