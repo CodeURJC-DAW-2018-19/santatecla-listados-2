@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/angular/angular.iml" filepath="$PROJECT_DIR$/angular/angular.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/santatecla-listados-2.iml" filepath="$PROJECT_DIR$/.idea/santatecla-listados-2.iml" />
     </modules>
   </component>
