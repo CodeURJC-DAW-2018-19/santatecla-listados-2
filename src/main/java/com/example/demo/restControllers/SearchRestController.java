@@ -29,11 +29,11 @@ public class SearchRestController {
     @Autowired
     private TopicService topicService;
 
-    interface TopicDetails extends Topic.BasicInfo, Topic.ConceptList, Concept.BasicInfo {}
+    interface TopicDetails extends Topic.BasicInfo, Topic.BasicInfoGuest, Topic.ConceptList, Concept.BasicInfo, Concept.BasicInfoGuest {}
 
 
     @JsonView(TopicDetails.class)
-    @GetMapping("/search")
+    @GetMapping("/")
     public ResponseEntity <Page<Topic>> getSearchResults(@RequestBody String searchString,@PageableDefault(size = 10) Pageable pageable){
         Page<Topic> topics;
         List<Concept> concepts = conceptService.findByNameContaining(searchString);

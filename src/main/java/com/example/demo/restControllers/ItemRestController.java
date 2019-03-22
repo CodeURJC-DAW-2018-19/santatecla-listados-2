@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api/items")
 public class ItemRestController {
 
     @Autowired
@@ -26,19 +26,13 @@ public class ItemRestController {
 
     private final int DEFAULT_SIZE = 10;
 
-    interface ItemDetails extends Item.BasicInfo, Item.ItemConcept, Concept.BasicInfo {}
+    interface ItemDetails extends Item.BasicInfo, Item.ItemConcept, Concept.BasicInfo, Concept.BasicInfoGuest {}
 
 
     //Region Item
 
-    @JsonView(ItemDetails.class)
-    @GetMapping("/all")
-    public ResponseEntity<List<Item>> getItems() {
-        return new ResponseEntity<>(itemService.findAll(), HttpStatus.OK);
-    }
-
     @JsonView(Item.BasicInfo.class)
-    @GetMapping(value = "/all/pag")
+    @GetMapping(value = "/")
     public Page<Item> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
         Page<Item> items = itemService.findAll(page);
         return items;
@@ -55,17 +49,19 @@ public class ItemRestController {
     }
 
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/newItem", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Item newItem(@RequestBody Item item) {
+    public ResponseEntity<Item> newItem(@RequestBody Item item) {
+        String name = item.getName();
+        if (itemService.findOne(name).isPresent())
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
 
         itemService.save(item);
-
-        return item;
+        return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
 
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/updateItem/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item updatedItem) {
 
         if (itemService.findOne(id).isPresent()) {
@@ -81,55 +77,12 @@ public class ItemRestController {
     }
 
     @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Item> deleteItem(@PathVariable int id) {
         if (!itemService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Item item = itemService.findOne(id).get();
         itemService.delete(id);
-        return new ResponseEntity<>(item, HttpStatus.OK);
-    }
-
-    //New Item using URL parameters
-    @JsonView(ItemDetails.class)
-    @PostMapping("/{conceptName}/{text}/{checked}")
-    public ResponseEntity<Item> newConcreteItem(@PathVariable String conceptName, @PathVariable String text, @PathVariable boolean checked) {
-        Item item = new Item();
-        Concept concept = conceptService.findOne(conceptName).get();
-        for (Item i :
-                concept.getItems()) {
-            if (i.getName().equals(text)) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-        item.setName(text);
-        item.setCorrect(checked);
-        item.setConcept(concept);
-        concept.setItem(item);
-        conceptService.save(concept);
-        return new ResponseEntity<>(item, HttpStatus.CREATED);
-    }
-
-    //Update Item using  URL parameters
-    @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/{id}/newName/{newName}", method = RequestMethod.PUT)
-    public ResponseEntity<Item> updateItemName(@PathVariable int id, @PathVariable String newName) {
-        if (!itemService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Item item = itemService.findOne(id).get();
-        item.setName(newName);
-        itemService.save(item);
-        return new ResponseEntity<>(item, HttpStatus.OK);
-    }
-
-    @JsonView(ItemDetails.class)
-    @RequestMapping(value = "/{id}/checked/{checked}", method = RequestMethod.PUT)
-    public ResponseEntity<Item> updateItemChecked(@PathVariable int id, @PathVariable boolean checked) {
-        if (!itemService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Item item = itemService.findOne(id).get();
-        item.setCorrect(checked);
-        itemService.save(item);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
     //endregion

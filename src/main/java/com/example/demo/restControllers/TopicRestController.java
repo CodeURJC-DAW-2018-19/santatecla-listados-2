@@ -3,6 +3,7 @@ package com.example.demo.restControllers;
 import com.example.demo.concept.Concept;
 import com.example.demo.topic.Topic;
 import com.example.demo.topic.TopicService;
+import com.example.demo.user.UserComponent;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -17,28 +19,29 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/topic")
+@RequestMapping("/api/topics")
 public class TopicRestController {
 
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private UserComponent userComponent;
 
     private final int DEFAULT_SIZE = 10;
 
-    interface TopicDetails extends Topic.BasicInfo, Topic.ConceptList, Concept.BasicInfo {}
+    interface TopicDetails extends Topic.BasicInfo, Topic.BasicInfoGuest, Topic.ConceptList, Concept.BasicInfo, Concept.BasicInfoGuest {}
+    interface TopicDetailsGuest extends Topic.BasicInfoGuest, Topic.ConceptList, Concept.BasicInfoGuest{}
 
     //Region Topic
 
-    @JsonView(TopicDetails.class)
-    @GetMapping("/all")
-    public ResponseEntity<List<Topic>> getTopics() {
-        return new ResponseEntity<>(topicService.findAll(), HttpStatus.OK);
-    }
-
-    @JsonView(Topic.BasicInfo.class)
-    @GetMapping(value = "/all/pag")
-    public Page<Topic> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
-        Page<Topic> topics = topicService.findAll(page);
+    @GetMapping(value = "/")
+    public MappingJacksonValue getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+        MappingJacksonValue topics = new MappingJacksonValue(this.topicService.findAll(page));
+        if (userComponent.isLoggedUser()){
+            topics.setSerializationView(TopicDetails.class);
+        } else {
+            topics.setSerializationView(TopicDetailsGuest.class);
+        }
         return topics;
     }
 
@@ -51,17 +54,19 @@ public class TopicRestController {
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/newTopic", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Topic newTopic(@RequestBody Topic topic) {
+    public ResponseEntity<Topic> newTopic(@RequestBody Topic topic) {
+        String name = topic.getName();
+        if (topicService.findOne(name).isPresent())
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
 
         topicService.save(topic);
-
-        return topic;
+        return new ResponseEntity<>(topic, HttpStatus.CREATED);
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/updateTopic/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Topic> updateTopic(@PathVariable int id, @RequestBody Topic updatedTopic) {
 
         Topic topic = topicService.findOne(id).get();
@@ -76,73 +81,12 @@ public class TopicRestController {
     }
 
     @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Topic> deleteTopic(@PathVariable int id) {
         if (!topicService.findOne(id).isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Topic topic = topicService.findOne(id).get();
         topicService.delete(id);
-        return new ResponseEntity<>(topic, HttpStatus.OK);
-    }
-
-    //New Topic using URL parameters
-    @JsonView(TopicDetails.class)
-    @PostMapping("/newTopic/{topicName}")
-    public ResponseEntity<Topic> newConcreteTopic(@PathVariable String topicName) {
-        if (topicService.findOne(topicName).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Topic topic = new Topic();
-        topic.setName(topicName);
-        topic.setHits(0);
-        topic.setErrors(0);
-        topic.setPendings(0);
-        topic.setConcepts(new LinkedHashSet<>());
-        topicService.save(topic);
-        return new ResponseEntity<>(topic, HttpStatus.CREATED);
-    }
-
-    //Update Topic using  URL parameters
-    @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/{id}/updateTopicName/{newName}", method = RequestMethod.PUT)
-    public ResponseEntity<Topic> updateTopicName(@PathVariable int id, @PathVariable String newName) {
-        if (!topicService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Topic topic = topicService.findOne(id).get();
-        topic.setName(newName);
-        topicService.save(topic);
-        return new ResponseEntity<>(topic, HttpStatus.OK);
-    }
-
-    @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/error/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Topic> updateErrorTopic(@PathVariable int id) {
-        if (!topicService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Topic topic = topicService.findOne(id).get();
-        topic.setErrors(topic.getErrors() + 1);
-        topicService.save(topic);
-        return new ResponseEntity<>(topic, HttpStatus.OK);
-    }
-
-    @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/hit/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Topic> updateHitTopic(@PathVariable int id) {
-        if (!topicService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Topic topic = topicService.findOne(id).get();
-        topic.setHits(topic.getHits() + 1);
-        topicService.save(topic);
-        return new ResponseEntity<>(topic, HttpStatus.OK);
-    }
-
-    @JsonView(TopicDetails.class)
-    @RequestMapping(value = "/pending/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Topic> updatePendingTopic(@PathVariable int id) {
-        if (!topicService.findOne(id).isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Topic topic = topicService.findOne(id).get();
-        topic.setPendings(topic.getPendings() + 1);
-        topicService.save(topic);
         return new ResponseEntity<>(topic, HttpStatus.OK);
     }
     //endregion

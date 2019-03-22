@@ -22,40 +22,52 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
         http.antMatcher("/api/**");
 
         // URLs that need authentication to access to it
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/logIn").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register/newUser");
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/all").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/{userName}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/logIn").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/logOut").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/register").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/{userName}").hasAnyRole("TEACHER");
 
         //topic URLs
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topic/**").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/topic/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/topic/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/topic/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topics/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topics/{id}").hasAnyRole("TEACHER", "STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/topics/").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/topics/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/topics/{id}").hasAnyRole("TEACHER");
 
         //concept URLs
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/concept/**").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/concept/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/concept/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/concept/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/concepts/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/concepts/{id}").hasAnyRole("TEACHER", "STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/concepts/").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/concepts/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/concepts/{id}").hasAnyRole("TEACHER");
 
         //item URLs
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/item/**").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/item/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/item/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/item/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/items/").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/items/{id}").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/items/").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/items/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/items/{id}").hasAnyRole("TEACHER");
 
         //question URLs
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/question/**").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/question/**").hasAnyRole("STUDENT");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/question/**").hasAnyRole("TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/question/**").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/questions/").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/questions/{id}").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/questions/").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/questions/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/questions/{id}").hasAnyRole("TEACHER");
 
         //answer URLs
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answer/**").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/answer/**").hasAnyRole("STUDENT");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/answer/**").hasAnyRole("STUDENT");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/answer/**").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answers/").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answers/{id}").hasAnyRole("STUDENT","TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/answers/").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/answers/{id}").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/answers/question{questionId}/{id}").hasAnyRole("STUDENT");
+
+        //image URLs
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/images/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/images/newImage/{title}/{concept}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/images/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/images/{id}/updateImage/{name}").hasAnyRole("TEACHER");
 
 
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/search/").permitAll();

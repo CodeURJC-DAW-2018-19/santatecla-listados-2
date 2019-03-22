@@ -15,6 +15,7 @@ import java.util.Set;
 public class Topic {
 
     public interface BasicInfo{}
+    public interface BasicInfoGuest{}
     public interface ConceptList{}
 
     @JsonView(BasicInfo.class)
@@ -24,7 +25,7 @@ public class Topic {
     private int id;
 
     @Column(name="Name")
-    @JsonView(BasicInfo.class)
+    @JsonView(BasicInfoGuest.class)
     private String name;
     @Column(name="Errors")
     @JsonView(BasicInfo.class)

@@ -19,7 +19,9 @@ import java.util.Set;
 public class Concept {
 
     public interface BasicInfo{}
+    public interface BasicInfoGuest{}
     public interface ObjectLists{}
+    public interface RelatedTopic{}
 
     @JsonView(BasicInfo.class)
     @Id
@@ -28,7 +30,7 @@ public class Concept {
     private int id;
 
     @Column(name="Name")
-    @JsonView(BasicInfo.class)
+    @JsonView(BasicInfoGuest.class)
     private String name;
 
     @Column(name="html")
@@ -48,7 +50,7 @@ public class Concept {
     private int pendings;
 
     @ManyToOne
-    @JsonView(ObjectLists.class)
+    @JsonView(RelatedTopic.class)
     private Topic topic;
 
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "concept")

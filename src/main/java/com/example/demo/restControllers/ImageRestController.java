@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
-@RequestMapping("/api/image")
+@RequestMapping("/api/images")
 public class ImageRestController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class ImageRestController {
         IOUtils.copy(stream,response.getOutputStream());
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Image> deleteImage(@PathVariable int id,HttpServletResponse response) throws IOException {
         Image image = imageRepository.findById(id).get();
         imageRepository.delete(image);

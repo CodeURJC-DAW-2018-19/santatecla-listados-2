@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserRestController {
 
     @Autowired
@@ -28,7 +28,13 @@ public class UserRestController {
         }
     }
 
-    @RequestMapping(value = "/register/newUser", method = RequestMethod.POST)
+    @GetMapping("/logOut")
+    public ResponseEntity<User> logOut(){
+        userComponent.setLoggedUser(null);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@RequestBody User newUser){
         if(newUser == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -50,7 +56,7 @@ public class UserRestController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/")
     public ResponseEntity<List<User>> getUsers(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }

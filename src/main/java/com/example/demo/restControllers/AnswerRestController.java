@@ -31,14 +31,8 @@ public class AnswerRestController {
 
     //Region Answer
 
-    @JsonView(AnswerDetails.class)
-    @GetMapping("/all")
-    public List<Answer> getAnswers(){
-        return answerService.findAll();
-    }
-
     @JsonView(Answer.BasicInfo.class)
-    @GetMapping(value = "/all/pag")
+    @GetMapping(value = "/")
     public Page<Answer> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
         return answerService.findAll(page);
     }
@@ -56,7 +50,7 @@ public class AnswerRestController {
     }
 
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Answer newAnswer(@RequestBody Answer answer) {
 
@@ -80,7 +74,7 @@ public class AnswerRestController {
     }
 
     @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/question{questionId}/deleteAnswer/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/question{questionId}/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Answer> deleteAnswer(@PathVariable int id, @PathVariable int questionId) {
         Question question = questionService.findOne(questionId);
         Answer answer = answerService.findOne(id);
@@ -92,55 +86,6 @@ public class AnswerRestController {
             }else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    //New Answers using URL parameters
-    @JsonView(AnswerDetails.class)
-    @PostMapping("/{questionId}")
-    public ResponseEntity<Answer> newConcreteAnswer(@PathVariable int questionId, @RequestBody String openAnswer, @RequestBody boolean mark){
-
-        Question question = questionService.findOne(questionId);
-
-        if (question != null) {
-            Answer answer = new Answer();
-            answer.setOpenAnswer(openAnswer);
-            answer.setMark(mark);
-            answer.setQuestion(question);
-            question.setAnswer(answer);
-            questionService.save(question);
-            return new ResponseEntity<>(answer, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    //Update Answers using  URL parameters
-    @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/o/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Answer> updateOpenAnswer(@PathVariable int id,@RequestBody String openAnswer){
-        Answer answer = answerService.findOne(id);
-
-        if(answer != null){
-            answer.setOpenAnswer(openAnswer);
-            answerService.save(answer);
-            return new ResponseEntity<>(answer, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @JsonView(AnswerDetails.class)
-    @RequestMapping(value = "/m/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Answer> updateAnswerMark(@PathVariable int id, @RequestBody boolean mark){
-        Answer answer = answerService.findOne(id);
-
-        if(answer != null){
-            answer.setMark(mark);
-            answerService.save(answer);
-            return new ResponseEntity<>(answer, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
