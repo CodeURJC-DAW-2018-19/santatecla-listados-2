@@ -29,7 +29,7 @@ public class ConceptRestController {
     @Autowired
     private UserComponent userComponent;
 
-    private final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 10;
 
     interface ConceptDetails extends Concept.BasicInfo, Concept.BasicInfoGuest, Concept.ObjectLists, Concept.RelatedTopic, Topic.BasicInfo, Topic.BasicInfoGuest, Item.BasicInfo, Question.BasicInfo{}
     interface ConceptDetailsGuest extends Concept.BasicInfoGuest, Concept.RelatedTopic, Topic.BasicInfoGuest{}
@@ -37,7 +37,7 @@ public class ConceptRestController {
     //Region Concepts
 
     @GetMapping(value = "/")
-    public MappingJacksonValue getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+    public MappingJacksonValue getConcepts(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
         MappingJacksonValue concepts = new MappingJacksonValue(this.conceptService.findAll(page));
         if (userComponent.isLoggedUser()){
             concepts.setSerializationView(ConceptDetails.class);
