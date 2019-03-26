@@ -7,6 +7,6 @@ export interface Concept{
     pendings: number;
     topic:Topic;
     questions?:Set<Question>;
-    items?:Set<Question>;
-    images?:Image[];
+    items?:Set<items>;
+    images?:Set<Image>;
 }

@@ -33,7 +33,7 @@ public class AnswerRestController {
 
     @JsonView(Answer.BasicInfo.class)
     @GetMapping(value = "/")
-    public Page<Answer> getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+    public Page<Answer> getAnswer(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
         return answerService.findAll(page);
     }
 
