@@ -15,7 +15,7 @@ export class concept {
     constructor(private router: Router, activatedRoute: ActivatedRoute, private service: ConceptService) {
         let id = activatedRoute.snapshot.params['id'];
         service.getConcept(id).subscribe(
-            concept => this.concept = concept,
+            concept => this.concept =<Concept> concept,
             error => console.error(error)
         );
     }
