@@ -4,8 +4,9 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import 'rxjs/Rx';
 
-import {Concept} from './topic.model';
+import {Topic} from './topic.model';
 import {HttpClient} from '@angular/common/http';
+import {LoginService} from '../logIn/logIn.service';
 
 const BASE_URL = 'http://127.0.0.1:8080/api/topics/';
 
@@ -24,8 +25,8 @@ export class ConceptService {
             .pipe(map(response => response.topic),catchError(error => this.handleError(error)));
     }
 
-    addTopic(topic:Topics):Observable<Topic> {
-        return this.http.post<{topic:Concept}>(BASE_URL, topic,{ withCredentials: true })
+    addTopic(topic:Topic):Observable<Topic> {
+        return this.http.post<{topic:Topic}>(BASE_URL, topic,{ withCredentials: true })
             .pipe(map(response => response.topic), catchError(error => this.handleError(error)));
     }
 

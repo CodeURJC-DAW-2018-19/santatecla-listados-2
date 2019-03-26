@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {ConceptService} from './concept.service';
 
 @Component({
-    selector: 'app-child',
+    selector: 'concept',
     template: './concept.component.ts',
 })
 

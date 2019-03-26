@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 
 import {Concept} from './concept.model';
 import {HttpClient} from '@angular/common/http';
+import {LoginService} from '../logIn/logIn.service';
 
 const BASE_URL = 'http://127.0.0.1:8080/api/concepts/';
 
