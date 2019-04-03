@@ -52,9 +52,12 @@ import {
 } from '@covalent/core';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from '@angular/router';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {LoginComponent} from "./logIn/logIn.component";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {BasicAuthInterceptor} from "./auth/auth.interceptor";
+import {ErrorInterceptor} from "./auth/error.interceptor";
 
 @NgModule({
     declarations: [AppComponent,MainStudentComponent,ConceptPageComponent, LoginComponent],
@@ -108,6 +111,9 @@ import {LoginComponent} from "./logIn/logIn.component";
         NgxChartsModule,
         routing,],
     bootstrap: [AppComponent],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService]
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,
+        {provide:LocationStrategy, useClass: HashLocationStrategy},
+        {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
+        {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]
 })
 export class AppModule { }
