@@ -26,6 +26,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/angular/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/angular/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/untitled/dist" />
       <excludeFolder url="file://$MODULE_DIR$/untitled/tmp" />

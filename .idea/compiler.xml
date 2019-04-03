@@ -18,4 +18,7 @@
       <module name="santatecla-listados-2" options="-parameters" />
     </option>
   </component>
+  <component name="TypeScriptCompiler">
+    <option name="recompileOnChanges" value="true" />
+  </component>
 </project>

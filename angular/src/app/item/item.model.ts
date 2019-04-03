@@ -1,9 +1,9 @@
-import {concept} from '../concept/concept.component';
+import {Concept} from '../concept/concept.model';
 
 export interface Item{
     id?:number;
     name:string;
     correct:boolean;
-    concept:concept;
+    concept:Concept;
 
 }

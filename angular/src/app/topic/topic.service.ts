@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import 'rxjs/Rx';
 
 import {Topic} from './topic.model';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 
-const BASE_URL = 'http://127.0.0.1:8080/api/topics/';
+const BASE_URL = '/api/topics/';
 
 @Injectable()
-export class ConceptService {
+export class TopicService {
 
     constructor(private loginService: LoginService,private http: HttpClient) { }
 
-    getTopics():Observable<Set<Topic>> {
-        return this.http.get<{topics: Set<Topic>}>(BASE_URL,{ withCredentials: true })
-            .pipe(map(response=> response.topics), catchError( error => this.handleError(error)));
+    getTopics():Observable<Topic[]> {
+        return this.http.get<any>(BASE_URL,{ withCredentials: true })
+            .pipe(map(result=> result.content), catchError( error => this.handleError(error)));
     }
 
     getTopic(id: number):Observable<Topic> {

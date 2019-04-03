@@ -5,8 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import {LoginService} from './logIn.service';
 
 @Component({
-    selector: 'logIn',
-    templateUrl: './logIn.component.html',
+    templateUrl: './login.component.html',
 })
 export class LoginComponent {
     @ViewChild('loginDialog') loginDialog: TemplateRef<any>;

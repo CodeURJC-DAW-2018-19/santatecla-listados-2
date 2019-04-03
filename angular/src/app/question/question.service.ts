@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import 'rxjs/Rx';
 
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 import {Question} from "./question.model";
-import {Concept} from "../concept/concept.model";
 
-const BASE_URL = 'http://127.0.0.1:8080/api/concepts/';
+const BASE_URL = '/api/questions/';
 
 @Injectable()
-export class ConceptService {
+export class QuestionService {
 
     constructor(private loginService: LoginService,private http: HttpClient) { }
 
