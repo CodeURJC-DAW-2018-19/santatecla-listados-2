@@ -29,8 +29,8 @@ export class ConceptService {
             .pipe(map(response => response.c), catchError(error => this.handleError(error)));
     }
 
-    removeConcept(concept: Concept):Observable<Concept> {
-        return this.http.delete<{c:Concept}>(BASE_URL +"/"+ concept.id,{ withCredentials: true })
+    removeConcept(id:number):Observable<Concept> {
+        return this.http.delete<{c:Concept}>(BASE_URL + id,{ withCredentials: true })
             .pipe(map(response => response.c), catchError(error => this.handleError(error)));
     }
 

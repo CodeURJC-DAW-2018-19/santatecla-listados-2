@@ -1,11 +1,55 @@
-
-<td-expansion-panel *ngFor="let topic of topics" label="{{ topic.name }}">
-    <div class="md-padding" >
-        <div *ngFor="let concept of topic.concepts">
-            <a [routerLink]="['/concepts',concept.id]">{{ concept.name }} <mat-icon class="tc-red-600" style="float: right" *ngIf="loginService.isAdmin">delete</mat-icon></a>
-            <br>
-            <br>
-        </div>
-        <mat-icon class="tc-red-600" *ngIf="loginService.isAdmin">add_circle</mat-icon>
+<div layout="row" *ngFor="let topic of topics" style="width: 102%">
+    <div layout="column" style="width: 100%">
+        <td-expansion-panel label="{{ topic.name }}">
+            <div class="md-padding">
+                <div *ngFor="let concept of topic.concepts">
+                    <a [routerLink]="['/concepts',concept.id]">{{ concept.name }}</a> <a
+                        (click)="removeConcept(concept.id)" *ngIf="loginService.isAdmin">
+                    <mat-icon class="tc-red-600" style="float: right">delete</mat-icon>
+                </a>
+                    <br>
+                    <br>
+                </div>
+                <a (click)="openDialogAddConcept(topic.id)" *ngIf="loginService.isAdmin">
+                <mat-icon class="tc-red-600">add_circle</mat-icon>
+                </a>
+            </div>
+        </td-expansion-panel>
     </div>
-</td-expansion-panel>
+    <div layout="column" style="position: relative;left: -89px;top: 10px;">
+        <a (click)="removeTopic(topic.id)" *ngIf="loginService.isAdmin">
+            <mat-icon class="tc-red-600" style="float: right">delete</mat-icon>
+        </a>
+    </div>
+</div>
+<a (click)="openDialog()">
+    <mat-icon class="tc-red-600" style=" padding-top: 20px; padding-left:20px;" *ngIf="loginService.isAdmin">
+        add_circle
+    </mat-icon>
+</a>
+
+<ng-template #addTopic let-dialogRef="dialogRef">
+
+    <h1 mat-dialog-title>Introduzca el nombre del tema nuevo</h1>
+    <mat-form-field>
+        <input matInput name="name" [(ngModel)]="topic.name" required placeholder="Introduzca el nombre ">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button class="text-upper" (click)="dialogRef.close()">Cerrar</button>
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveTopic()">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>
+<ng-template #addConcept let-dialogRef="dialogAC">
+
+    <h1 mat-dialog-title>Introduzca el nombre del concepto nuevo</h1>
+    <mat-form-field>
+        <input matInput name="name" [(ngModel)]="concept.name" required placeholder="Introduzca el nombre ">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button class="text-upper" (click)="dialogAC.close()">Cerrar</button>
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveConcept()">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>
+
