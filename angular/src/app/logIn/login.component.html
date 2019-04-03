@@ -29,7 +29,7 @@
             Login
         </h2>
         <mat-dialog-content flex>
-            <form #loginForm="ngForm">
+            <form #loginForm="ngForm" (keyup.enter)="logIn($event,userElement.value,passElement.value)">
                 <div layout="row">
                     <mat-form-field flex>
                         <input matInput #userElement #userControl="ngModel" placeholder="Username" type="text"

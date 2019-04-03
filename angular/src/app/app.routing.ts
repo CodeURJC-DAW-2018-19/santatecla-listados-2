@@ -9,7 +9,7 @@ const appRoutes = [
 
     { path: 'student', component: MainStudentComponent},
 
-    { path:'', redirectTo:'student', pathMatch:'full'},
+    { path:'', redirectTo:'/logIn', pathMatch:'full'},
 
     { path: 'logIn', component: LoginComponent},
 
