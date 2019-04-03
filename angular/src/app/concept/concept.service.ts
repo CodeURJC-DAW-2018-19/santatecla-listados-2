@@ -16,12 +16,12 @@ export class ConceptService {
 
     getConcepts():Observable<Set<Concept>> {
         return this.http.get<{concepts: Set<Concept>}>(BASE_URL,{ withCredentials: true })
-            .pipe(map(response=> response.concepts), catchError( error => this.handleError(error)));
+            .pipe(map(result=> result.concepts), catchError( error => this.handleError(error)));
     }
 
     getConcept(id: number):Observable<Concept> {
-        return this.http.get<{c:Concept}>(BASE_URL +"/"+ id,{ withCredentials: true })
-            .pipe(map(response => response.c),catchError(error => this.handleError(error)));
+        return this.http.get<{concept:Concept}>(BASE_URL +"/"+ id,{ withCredentials: true })
+            .pipe(map(result => result.concept),catchError(error => this.handleError(error)));
     }
 
     addConcept(concept:Concept):Observable<Concept> {

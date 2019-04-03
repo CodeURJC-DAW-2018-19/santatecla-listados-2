@@ -1,5 +1,7 @@
 import {Component } from "@angular/core";
-import {Question} from "../question/question.model";
+import {Concept} from "../concept/concept.model";
+import {Router, ActivatedRoute} from "@angular/router";
+import {ConceptService} from "../concept/concept.service";
 
 
 @Component({
@@ -8,5 +10,15 @@ import {Question} from "../question/question.model";
 })
 
 export class ConceptPageComponent {
-    Question:Set<Question>;
+        concept: Concept;
+
+        constructor (private router: Router,
+                     private activatedRoute:ActivatedRoute,
+                     private conceptService: ConceptService){
+            const id = activatedRoute.snapshot.params['id'];
+            conceptService.getConcept(id).subscribe(
+                (concept) => (this.concept=concept),
+                error => console.log(error)
+            )
+        }
 }
