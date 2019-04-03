@@ -15,14 +15,18 @@ export class LoginComponent {
 
     logIn(event: any, user: string, pass: string) {
         event.preventDefault();
-
+        console.log(user);
+        console.log(pass);
         this.loginService.logIn(user, pass).subscribe(
             (u) => {
                 this.router.navigate(['/student']);
                 console.log(u);
                 this.dialogRef.close();
             },
-            (error) => alert('Invalid user or password'),
+            (error) => {
+                console.log(error);
+                alert('Invalid user or password');
+            },
         );
     }
 
