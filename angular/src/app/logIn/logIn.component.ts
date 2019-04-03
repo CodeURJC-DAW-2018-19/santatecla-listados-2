@@ -40,4 +40,8 @@ export class LoginComponent {
             height: '50%',
         });
     }
+
+    gotoStudent(){
+        this.router.navigate(['/student'])
+    }
 }
