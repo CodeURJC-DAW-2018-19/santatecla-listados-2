@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {ConceptService} from "../concept/concept.service";
 import {Item} from "../item/item.model";
 import {Question} from "../question/question.model";
+import {QuestionService} from "../question/question.service";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class TeacherPageComponent implements OnInit{
     id:number;
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
-                private conceptService: ConceptService) {
+                private conceptService: ConceptService, private questionService:QuestionService) {
 
     }
 
@@ -32,6 +33,16 @@ export class TeacherPageComponent implements OnInit{
 
     }
 
+    updateQuestion(question:Question,t:boolean){
+        console.log(t);
+        console.log(question);
+        question.corrected = t;
+        this.questionService.updateQuestion(question).subscribe(
+            (_:Question) => {
+                this.refresh();
+            }
+        );
+    }
     private refresh() {
         this.conceptService.getConcept(this.concept.id).subscribe(
             (c: Concept) => {

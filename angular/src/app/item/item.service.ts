@@ -35,7 +35,7 @@ export class ItemService {
     }
 
     updateItem(item:Item):Observable<Item> {
-        return this.http.put<{item:Item}>(BASE_URL +"/"+ item.id, item,{ withCredentials: true })
+        return this.http.put<{item:Item}>(BASE_URL + item.id, item,{ withCredentials: true })
             .pipe(map(response => response.item),catchError(error => this.handleError(error)));
     }
 
