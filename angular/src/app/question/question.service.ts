@@ -24,8 +24,9 @@ export class QuestionService {
             .pipe(map(response => response.q),catchError(error => this.handleError(error)));
     }
 
-    getQuestionsByConcept(id:number, page:number):any{
-        return this.http.get(BASE_URL+'concept/'+id + "?page="+page,{ withCredentials: true });
+    getQuestionsByConcept(id:number, page:number):Observable<Question[]>{
+        return this.http.get<any>(BASE_URL+'concept/'+id + "?page=" + page, {withCredentials: true})
+            .pipe(map(result => result.content), catchError(error => this.handleError(error)));
     }
 
     addQuestion(id:number){
