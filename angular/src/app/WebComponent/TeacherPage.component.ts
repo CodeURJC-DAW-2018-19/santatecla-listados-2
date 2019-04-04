@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, TemplateRef, ViewChild} from "@angular/core";
 import {Concept} from "../concept/concept.model";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ConceptService} from "../concept/concept.service";
@@ -7,6 +7,7 @@ import {Question} from "../question/question.model";
 import {QuestionService} from "../question/question.service";
 import {ItemService} from "../item/item.service";
 import {TdDialogService} from "@covalent/core";
+import {MatDialog, MatDialogRef} from "@angular/material";
 
 
 @Component({
@@ -15,15 +16,19 @@ import {TdDialogService} from "@covalent/core";
 })
 
 export class TeacherPageComponent implements OnInit{
+    @ViewChild('addItem') buttonAddItemDialog: TemplateRef<any>;
+    dialogRef: MatDialogRef<any, any>;
     concept: Concept;
     items: Item[];
     questions: Question[];
+    item:Item;
     id:number;
     constructor(private _dialogService: TdDialogService,private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private conceptService: ConceptService,
                 private questionService:QuestionService,
-                private itemService: ItemService) {
+                private itemService: ItemService,
+                public dialog: MatDialog) {
 
     }
 
@@ -31,6 +36,7 @@ export class TeacherPageComponent implements OnInit{
         this.id = this.activatedRoute.snapshot.params['id'];
         this.concept = {name: '', topic: {name: ''}};
         this.concept.id=this.id;
+        this.item={name='',concept:{name:'', topic: {name: ''}},correct:false};
         this.items=[];
         this.questions=[];
         this.refresh();
@@ -74,6 +80,35 @@ export class TeacherPageComponent implements OnInit{
                 );
             }
         });
+
+    }
+    openDialog(): void {
+        this.dialogRef = this.dialog.open(this.buttonAddItemDialog, {
+            width: '400px',
+            height: '250px'
+        });
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+
+        });
+    }
+    saveItem() {
+        this.conceptService.getConcept(this.id).subscribe(
+            (res: any) => {
+                this.item.concept=res;
+                this.itemService.addItem(this.item).subscribe(
+                    (_: any) => {
+                        this.dialogRef.close();
+                        this.refresh();
+                    }, error => {
+                        console.log(error);
+                    }
+                );
+            }, error => {
+                console.log(error);
+            }
+        );
 
     }
 }

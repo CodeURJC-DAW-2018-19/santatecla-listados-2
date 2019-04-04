@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 import {Item} from './item.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 
 const BASE_URL = '/api/items/';
@@ -19,14 +19,21 @@ export class ItemService {
             .pipe(map(response=> response.items), catchError( error => this.handleError(error)));
     }
 
-    getTopic(id: number):Observable<Item> {
+    getItem(id: number):Observable<Item> {
         return this.http.get<{item:Item}>(BASE_URL +"/"+ id,{ withCredentials: true })
             .pipe(map(response => response.item),catchError(error => this.handleError(error)));
     }
 
-    addItem(item:Item):Observable<Item> {
-        return this.http.post<{item:Item}>(BASE_URL, item,{ withCredentials: true })
-            .pipe(map(response => response.item), catchError(error => this.handleError(error)));
+    addItem(item:Item): Observable<Item> {
+        const body = JSON.stringify(item);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+
+        return this.http
+            .post<Item>(BASE_URL, body, {headers})
+            .pipe(catchError((error) => this.handleError(error)));
+
     }
 
     removeItem(id:number):Observable<Item> {
