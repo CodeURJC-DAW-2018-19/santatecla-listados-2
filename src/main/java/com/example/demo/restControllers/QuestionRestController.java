@@ -45,10 +45,11 @@ public class    QuestionRestController {
     }
 
     @JsonView(Question.BasicInfo.class)
-    @GetMapping(value = "/concept/{id}")
-    public Page<Question> getQuestionsByID(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id) {
+    @GetMapping(value = "/concept/{id}/{corrected}")
+    public Page<Question> getQuestionsByID(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id,
+                                           @PathVariable boolean corrected) {
         page = PageRequest.of(page.getPageNumber(),10);
-        return questionService.findByConcept_Id(id,page);
+        return questionService.findByConcept_IdAndCorrected(id,page,corrected);
     }
 
     @JsonView(QuestionDetails.class)
