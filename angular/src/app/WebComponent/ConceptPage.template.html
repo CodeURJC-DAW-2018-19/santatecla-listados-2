@@ -1,14 +1,14 @@
 <p>ConceptPage : {{concept.name}}</p>
 <h3>Preguntas Corregidas</h3>
-<ng-container *ngFor="let question of conceptQuestions" >
-    <li *ngIf="question.corrected">
+<ng-container *ngFor="let question of conceptQuestionsCorrected" >
+    <li>
         {{question.question}}
     </li>
 </ng-container>
 <br>
 <h3>Preguntas sin corregir</h3>
-<ng-container *ngFor="let question of conceptQuestions" >
-    <li *ngIf="question.corrected == false">
+<ng-container *ngFor="let question of conceptQuestionsNotCorrected" >
+    <li>
         {{question.question}}
     </li>
 </ng-container>

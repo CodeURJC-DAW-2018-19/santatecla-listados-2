@@ -41,8 +41,8 @@ public class QuestionService {
         return repository.findAll(page);
     }
 
-    public Page<Question> findByConcept_Id(int id, Pageable page) {
-        return repository.findByConcept_Id(id,page);
+    public Page<Question> findByConcept_IdAndCorrected(int id, Pageable page, boolean corrected) {
+        return repository.findByConcept_IdAndCorrected(id,page,corrected);
     }
 
 }

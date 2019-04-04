@@ -15,8 +15,9 @@ import {connectableObservableDescriptor} from "rxjs/internal/observable/Connecta
 export class ConceptPageComponent implements OnInit {
     concept: Concept;
     id: number;
-    conceptQuestions: Question [];
+    conceptQuestionsCorrected: Question [];
     pageNumber:number;
+    conceptQuestionsNotCorrected: Question [];
 
 
     constructor(private router: Router,
@@ -41,8 +42,12 @@ export class ConceptPageComponent implements OnInit {
             },
             error => console.log(error)
         );
-        this.questionService.getQuestionsByConcept(this.id, this.pageNumber).subscribe(
-            (questions: Question[]) => this.conceptQuestions = questions,
+        this.questionService.getQuestionsByConcept(this.id, this.pageNumber,true).subscribe(
+            (questions: Question[]) => this.conceptQuestionsCorrected = questions,
+            error => console.log(error)
+        );
+        this.questionService.getQuestionsByConcept(this.id, this.pageNumber,false).subscribe(
+            (questions: Question[]) => this.conceptQuestionsNotCorrected = questions,
             error => console.log(error)
         );
     }
@@ -51,7 +56,11 @@ export class ConceptPageComponent implements OnInit {
         console.log(this.id);
         this.questionService.addQuestion(this.id).subscribe(
             (res: any) => {
-                this.conceptQuestions.push(res)
+                if((<Question>res).corrected) {
+                    this.conceptQuestionsCorrected.push(res)
+                }else {
+                    this.conceptQuestionsNotCorrected.push(res);
+                }
             },
             error => console.log(error)
         );
