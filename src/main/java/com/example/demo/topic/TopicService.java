@@ -44,4 +44,6 @@ public class TopicService {
     public void delete(Topic t) {
         repository.delete(t);
     }
+    public int getSize(){
+        return repository.findAll().size();}
 }

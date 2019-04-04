@@ -15,8 +15,8 @@ export class TopicService {
     constructor(private loginService: LoginService, private http: HttpClient) {
     }
 
-    getTopics(): Observable<Topic[]> {
-        return this.http.get<any>(BASE_URL, {withCredentials: true})
+    getTopics(pag:number): Observable<Topic[]> {
+        return this.http.get<any>(BASE_URL+"?page=" + pag, {withCredentials: true})
             .pipe(map(result => result.content), catchError(error => this.handleError(error)));
     }
 
@@ -35,7 +35,11 @@ export class TopicService {
             .pipe(catchError((error) => this.handleError(error)));
 
     }
+    getSizeTopic(){
+       return this.http.get(BASE_URL+"size");
 
+
+    }
     removeTopic(id: number): Observable<Topic> {
         return this.http.delete<{ topic: Topic }>(BASE_URL  + id, {withCredentials: true})
             .pipe(map(response => response.topic), catchError(error => this.handleError(error)));

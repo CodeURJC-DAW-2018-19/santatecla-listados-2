@@ -7,6 +7,7 @@ import com.example.demo.user.UserComponent;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ public class TopicRestController {
 
     @GetMapping(value = "/")
     public MappingJacksonValue getTopics(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
+        page = PageRequest.of(page.getPageNumber(),10);
         MappingJacksonValue topics = new MappingJacksonValue(this.topicService.findAll(page));
         if (userComponent.isLoggedUser()){
             topics.setSerializationView(TopicDetails.class);
@@ -43,6 +45,11 @@ public class TopicRestController {
             topics.setSerializationView(TopicDetailsGuest.class);
         }
         return topics;
+    }
+    @GetMapping(value = "/size")
+    public int getSizeTopic() {
+        int size =(int) Math.ceil((double)this.topicService.getSize()/10);
+        return size;
     }
 
     @JsonView(TopicDetails.class)

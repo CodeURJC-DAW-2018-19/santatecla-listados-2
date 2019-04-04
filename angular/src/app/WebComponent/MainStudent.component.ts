@@ -18,6 +18,9 @@ export class MainStudentComponent implements OnInit {
     topic: Topic;
     concept: Concept;
     idT: number;
+    pageNumber: number;
+    maxPage:number;
+    noMoreTopic:boolean;
     @ViewChild('addTopic') buttonAddTopicDialog: TemplateRef<any>;
     dialogRef: MatDialogRef<any, any>;
     @ViewChild('addConcept') buttonAddConceptDialog: TemplateRef<any>;
@@ -30,17 +33,34 @@ export class MainStudentComponent implements OnInit {
     ngOnInit(): void {
         this.concept = {name: '', topic: {name: ''}};
         this.topic = {name: ''};
-        this.refresh();
+        this.pageNumber = 0;
+        this.noMoreTopic = false;
+        this.topicService.getSizeTopic().subscribe(
+            (res:any)=>{
+                this.maxPage=res;
+                this.refresh();
+            },
+            error => console.log(error)
+
+        );
+
     }
 
     private refresh() {
-        this.topicService.getTopics().subscribe(
-            topics => this.topics = topics,
-            error => console.log(error)
-        );
+        if (this.pageNumber < this.maxPage) {
+            this.topicService.getTopics(this.pageNumber).subscribe(
+                (topics: Topic[]) => this.topics = topics,
+                error => console.log(error)
+            );
+        }else{
+            this.noMoreTopic=true;
+        }
     }
 
-
+    loadMore(){
+        this.pageNumber++;
+        this.refresh();
+    }
     openDialog(): void {
         this.dialogRef = this.dialog.open(this.buttonAddTopicDialog, {
             width: '250px',

@@ -53,14 +53,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {LoginComponent} from "./logIn/logIn.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 
 @NgModule({
-    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent, LoginComponent],
+    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent],
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule, routing, CovalentLayoutModule, CovalentMediaModule, CovalentSearchModule, MatIconModule, MatDialogModule,
         BrowserModule,
         BrowserAnimationsModule,

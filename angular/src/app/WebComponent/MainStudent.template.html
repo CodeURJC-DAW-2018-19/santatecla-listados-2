@@ -22,12 +22,20 @@
         </a>
     </div>
 </div>
+<div layout="row">
 <a (click)="openDialog()">
     <mat-icon class="tc-red-600" style=" padding-top: 20px; padding-left:20px;" *ngIf="loginService.isAdmin">
         add_circle
     </mat-icon>
 </a>
 
+<button *ngIf="!noMoreTopic" (click)="loadMore()" class="tc-red-600" style="margin-left: 45%;margin-top:1%;background: white">
+    load more
+</button>
+<span *ngIf="noMoreTopic" style="margin-left: 45%;margin-top:1%">
+    No more topics
+</span>
+</div>
 <ng-template #addTopic let-dialogRef="dialogRef">
 
     <h1 mat-dialog-title>Introduzca el nombre del tema nuevo</h1>

@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import {ConceptPageComponent} from "./WebComponent/ConceptPage.component";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
-import {LoginComponent} from "./logIn/logIn.component";
+import {AppComponent} from "./app.component";
 
 
 const appRoutes = [
@@ -9,9 +9,9 @@ const appRoutes = [
 
     { path: 'student', component: MainStudentComponent},
 
-    { path:'', redirectTo:'/logIn', pathMatch:'full'},
+    { path:'', redirectTo:'/', pathMatch:'full'},
 
-    { path: 'logIn', component: LoginComponent},
+    
 
 ];
 

@@ -1,6 +1,6 @@
-import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import {Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry, MatDialog } from '@angular/material';
+import {MatIconRegistry, MatDialog, MatDialogRef} from '@angular/material';
 import { TdMediaService, tdRotateAnimation } from '@covalent/core';
 import {LoginService} from "./logIn/logIn.service";
 import {Router} from "@angular/router";
@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
     animations: [tdRotateAnimation],
 })
 export class AppComponent implements AfterViewInit {
-
+    @ViewChild('loginDialog') loginDialog: TemplateRef<any>;
+    dialogLog: MatDialogRef<any, any>;
     constructor(
         public media: TdMediaService,
         public dialog: MatDialog,
@@ -31,7 +32,28 @@ export class AppComponent implements AfterViewInit {
         );
 
     }
-
+    logIn(event: any, user: string, pass: string) {
+        event.preventDefault();
+        console.log(user);
+        console.log(pass);
+        this.loginService.logIn(user, pass).subscribe(
+            (u) => {
+                this.router.navigate(['/student']);
+                console.log(u);
+                this.dialogLog.close();
+            },
+            (error) => {
+                console.log(error);
+                alert('Invalid user or password');
+            },
+        );
+    }
+    openLoginDialog() {
+        this.dialogLog = this.dialog.open(this.loginDialog, {
+            width: '50%',
+            height: '50%',
+        });
+    }
     logOut() {
         this.loginService.logOut().subscribe(
             (response) => {
