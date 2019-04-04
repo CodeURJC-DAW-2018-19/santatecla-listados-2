@@ -57,9 +57,10 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
+import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
 
 @NgModule({
-    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent],
+    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent ],
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule, routing, CovalentLayoutModule, CovalentMediaModule, CovalentSearchModule, MatIconModule, MatDialogModule,
         BrowserModule,
         BrowserAnimationsModule,

@@ -1,0 +1,36 @@
+<h1>Concept: {{concept.name}}</h1>
+<mat-card>
+    <mat-card-title>Items:</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-list layout="row">
+        <mat-list-item *ngFor="let item of items">
+            <h4 matLine>{{item.name}}</h4>
+            <mat-divider></mat-divider>
+            <mat-radio-group name="{{item.id}}" layout="row">
+                <mat-radio-button value="1" checked = "{{item.correct}}" disabled="{{!item.correct}}" style="margin-right:12px">Correcto</mat-radio-button>
+                <mat-radio-button value="2" disabled = "{{item.correct}}" checked = "{{!item.correct}}">Incorrecto</mat-radio-button>
+            </mat-radio-group>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+    </mat-list>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Questions:</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-list layout="row">
+        <div *ngFor="let question of questions">
+        <mat-list-item  *ngIf="!question.corrected">
+
+            <h4 matLine>{{question.question}}</h4>
+                <mat-divider></mat-divider>
+            <mat-radio-group name="{{question.id}}" layout="row">
+                <mat-radio-button value="1" style="margin-right:12px">Correcto</mat-radio-button>
+                <mat-radio-button value="2" >Incorrecto</mat-radio-button>
+            </mat-radio-group>
+                <mat-divider></mat-divider>
+
+        </mat-list-item>
+        </div>
+    </mat-list>
+</mat-card>
