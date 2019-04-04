@@ -66,6 +66,7 @@ export class MainStudentComponent implements OnInit {
         console.log(this.idT);
         this.topicService.getTopic(this.idT).subscribe(
             (res: any) => {
+                console.log(res);
                 this.concept.topic=res;
                 this.conceptService.addConcept(this.concept).subscribe(
                     (_: any) => {
