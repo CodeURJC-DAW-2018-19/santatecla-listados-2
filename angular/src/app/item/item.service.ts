@@ -7,7 +7,7 @@ import {Item} from './item.model';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 
-const BASE_URL = '/api/item/';
+const BASE_URL = '/api/items/';
 
 @Injectable()
 export class ItemService {
@@ -29,8 +29,8 @@ export class ItemService {
             .pipe(map(response => response.item), catchError(error => this.handleError(error)));
     }
 
-    removeItem(item: Item):Observable<Item> {
-        return this.http.delete<{item:Item}>(BASE_URL +"/"+ item.id,{ withCredentials: true })
+    removeItem(id:number):Observable<Item> {
+        return this.http.delete<{item:Item}>(BASE_URL + id,{ withCredentials: true })
             .pipe(map(response => response.item), catchError(error => this.handleError(error)));
     }
 
