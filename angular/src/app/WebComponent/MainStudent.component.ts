@@ -63,10 +63,8 @@ export class MainStudentComponent implements OnInit {
     }
 
     saveConcept() {
-        console.log(this.idT);
         this.topicService.getTopic(this.idT).subscribe(
             (res: any) => {
-                console.log(res);
                 this.concept.topic=res;
                 this.conceptService.addConcept(this.concept).subscribe(
                     (_: any) => {
@@ -86,7 +84,7 @@ export class MainStudentComponent implements OnInit {
     saveTopic() {
         this.topicService.addTopic(this.topic).subscribe(
             (res: any) => {
-                this.topic = res;
+                this.topics.push(res);
                 this.dialogRef.close();
                 this.refresh();
             }, error => {
