@@ -1,8 +1,11 @@
+import {Concept} from "../concept/concept.model";
+import {Answer} from "../answer/answer.model";
+
 export interface Question {
     question:string,
-    id?:number,
+    id:number,
     corrected:boolean,
-    type:string;
-    //Concept: concept;
-    //Answer: answer;
+    type:number;
+    Concept: Concept;
+    Answer: Answer;
 }

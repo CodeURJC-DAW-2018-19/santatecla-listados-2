@@ -52,9 +52,10 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
         //question URLs
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/questions/").hasAnyRole("STUDENT","TEACHER");
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/questions/{id}").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/questions/").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/questions/{id}").hasAnyRole("STUDENT");
         http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/questions/{id}").hasAnyRole("TEACHER");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/questions/{id}").hasAnyRole("TEACHER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/questions/concept/{id}").hasAnyRole("STUDENT","TEACHER");
 
         //answer URLs
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answers/").hasAnyRole("STUDENT","TEACHER");

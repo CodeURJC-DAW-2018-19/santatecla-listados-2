@@ -40,4 +40,9 @@ public class QuestionService {
     public Page<Question> findAll(Pageable page) {
         return repository.findAll(page);
     }
+
+    public Page<Question> findByConcept_Id(int id, Pageable page) {
+        return repository.findByConcept_Id(id,page);
+    }
+
 }

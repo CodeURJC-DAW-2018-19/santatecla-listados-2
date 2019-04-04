@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 import {Question} from "./question.model";
 
@@ -24,9 +24,12 @@ export class QuestionService {
             .pipe(map(response => response.q),catchError(error => this.handleError(error)));
     }
 
-    addQuestion(question:Question):Observable<Question> {
-        return this.http.post<{q:Question}>(BASE_URL, question,{ withCredentials: true })
-            .pipe(map(response => response.q), catchError(error => this.handleError(error)));
+    getQuestionsByConcept(id:number, page:number):any{
+        return this.http.get(BASE_URL+'concept/'+id + "?page="+page,{ withCredentials: true });
+    }
+
+    addQuestion(id:number){
+        return this.http.post(BASE_URL+ id, {withCredentials:true})
     }
 
     removeQuestion(question: Question):Observable<Question> {
@@ -43,4 +46,10 @@ export class QuestionService {
         console.error(error);
         return throwError("Server error (" + error.status + "): " + error.text());
     }
+
+    /*addQuestion(question:Question):Observable<Question> {
+    return this.http.post<{q:Question}>(BASE_URL, question,{ withCredentials: true })
+        .pipe(map(response => response.q), catchError(error => this.handleError(error)));
+}*/
+
 }

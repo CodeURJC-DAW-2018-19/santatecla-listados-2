@@ -36,6 +36,7 @@ public class ConceptRestController {
 
     //Region Concepts
 
+    @JsonView(ConceptDetails.class)
     @GetMapping(value = "/")
     public MappingJacksonValue getConcepts(@PageableDefault(size = DEFAULT_SIZE) Pageable page) {
         MappingJacksonValue concepts = new MappingJacksonValue(this.conceptService.findAll(page));
@@ -47,6 +48,7 @@ public class ConceptRestController {
         return concepts;
     }
 
+    @JsonView(ConceptDetails.class)
     @GetMapping("/{id}")
     public ResponseEntity<Concept> getConcept(@PathVariable int id) {
         if (!conceptService.findOne(id).isPresent())

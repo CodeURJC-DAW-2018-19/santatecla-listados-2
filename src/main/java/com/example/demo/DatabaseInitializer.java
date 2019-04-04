@@ -48,7 +48,7 @@ public class DatabaseInitializer {
 		Concept c6 = new Concept("Árboles Binarios", "StudentConcept.html");
 		Concept c7 = new Concept("Doble Hashing", "StudentConcept.html");
 		Concept c8 = new Concept("Prueba Lineal", "StudentConcept.html");
-		Concept c9 = new Concept("Prueba Cuadrátic", "StudentConcept.html");
+		Concept c9 = new Concept("Prueba Cuadrática", "StudentConcept.html");
 		Question q1 = new Question("¿Que es un tipo generico?", "PType0", false);
 		Question q2 = new Question("¿Donde hay que usar los tipos genericos?", "PType3", true);
 		Answer a1 = new Answer("Verdadero ", false);

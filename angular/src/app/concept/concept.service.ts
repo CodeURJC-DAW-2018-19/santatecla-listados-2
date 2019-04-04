@@ -19,9 +19,8 @@ export class ConceptService {
             .pipe(map(result=> result.concepts), catchError( error => this.handleError(error)));
     }
 
-    getConcept(id: number):Observable<Concept> {
-        return this.http.get<{concept:Concept}>(BASE_URL +"/"+ id,{ withCredentials: true })
-            .pipe(map(result => result.concept),catchError(error => this.handleError(error)));
+    getConcept(id: number){
+        return this.http.get(BASE_URL+ id, {withCredentials:true})
     }
 
     addConcept(concept:Concept):Observable<Concept> {
