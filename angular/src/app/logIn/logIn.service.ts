@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-const URL = '/api';
-
 export interface User {
     id?: number;
     name: string;
@@ -51,7 +49,7 @@ export class LoginService {
 
     logOut() {
 
-        return this.http.get(URL + '/logOut').pipe(
+        return this.http.get('api/users/logOut').pipe(
             map(response => {
                 this.removeCurrentUser();
                 return response;

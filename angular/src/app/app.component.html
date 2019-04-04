@@ -8,6 +8,7 @@
             <td-search-box hide-xs flex #searchBox
                 [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-grey-50 tc-black': searchBox.searchVisible }"
                 placeholder="search"></td-search-box>
+            <button mat-button (click)='logOut()'>logOut</button>
         </div>
 
         <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
