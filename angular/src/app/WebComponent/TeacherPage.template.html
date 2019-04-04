@@ -7,8 +7,9 @@
             <h4 matLine>{{item.name}}</h4>
             <mat-divider></mat-divider>
             <mat-radio-group name="{{item.id}}" layout="row">
-                <mat-radio-button value="1" checked = "{{item.correct}}" disabled="{{!item.correct}}" style="margin-right:12px">Correcto</mat-radio-button>
-                <mat-radio-button value="2" disabled = "{{item.correct}}" checked = "{{!item.correct}}">Incorrecto</mat-radio-button>
+                <mat-radio-button value="1" checked = "{{item.correct}}" disabled="{{!item.correct}}" style="margin-right:24px">Correcto</mat-radio-button>
+                <mat-radio-button value="2" disabled = "{{item.correct}}" checked = "{{!item.correct}}" style="margin-right:12px">Incorrecto</mat-radio-button>
+                <a (click)="deleteItem(item.id)"><mat-icon class="tc-red-600" style="float: right">delete</mat-icon></a>
             </mat-radio-group>
             <mat-divider></mat-divider>
         </mat-list-item>

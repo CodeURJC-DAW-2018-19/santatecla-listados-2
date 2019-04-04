@@ -5,6 +5,8 @@ import {ConceptService} from "../concept/concept.service";
 import {Item} from "../item/item.model";
 import {Question} from "../question/question.model";
 import {QuestionService} from "../question/question.service";
+import {ItemService} from "../item/item.service";
+import {TdDialogService} from "@covalent/core";
 
 
 @Component({
@@ -17,9 +19,11 @@ export class TeacherPageComponent implements OnInit{
     items: Item[];
     questions: Question[];
     id:number;
-    constructor(private router: Router,
+    constructor(private _dialogService: TdDialogService,private router: Router,
                 private activatedRoute: ActivatedRoute,
-                private conceptService: ConceptService, private questionService:QuestionService) {
+                private conceptService: ConceptService,
+                private questionService:QuestionService,
+                private itemService: ItemService) {
 
     }
 
@@ -52,5 +56,24 @@ export class TeacherPageComponent implements OnInit{
             },
             error => console.log(error)
         );
+    }
+    deleteItem(id: number) {
+        this._dialogService.openConfirm({
+            message: '¿Estás seguro de eliminar este item?',
+            title: 'Confirmar eliminación',
+            width: '500px',
+            height: '175px'
+        }).afterClosed().subscribe((accept: boolean) => {
+            if (accept) {
+                this.itemService.removeItem(id).subscribe(
+                    (_: any) => {
+                        this.refresh();
+                    }, error => {
+                        console.log(error);
+                    }
+                );
+            }
+        });
+
     }
 }
