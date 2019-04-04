@@ -11,7 +11,7 @@ import java.util.Optional;
 public  interface  TopicRepository extends JpaRepository<Topic,Integer> {
     Optional<Topic> findByName(String name);
     List<Topic> findByNameContaining(String name);
-
     Page<Topic> findAll(Pageable page);
+    List<Topic> findAll();
 }
 
