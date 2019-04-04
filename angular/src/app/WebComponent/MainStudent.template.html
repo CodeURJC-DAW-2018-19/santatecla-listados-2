@@ -3,7 +3,7 @@
         <td-expansion-panel label="{{ topic.name }}">
             <div class="md-padding">
                 <div *ngFor="let concept of topic.concepts">
-                    <a [routerLink]="['/concepts',concept.id]">{{ concept.name }}</a> <a
+                    <a [routerLink]="['/concept',concept.id]">{{ concept.name }}</a> <a
                         (click)="removeConcept(concept.id)" *ngIf="loginService.isAdmin">
                     <mat-icon class="tc-red-600" style="float: right">delete</mat-icon>
                 </a>

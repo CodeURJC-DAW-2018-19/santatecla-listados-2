@@ -25,7 +25,8 @@ export class QuestionService {
     }
 
     getQuestionsByConcept(id:number, page:number):any{
-        return this.http.get(BASE_URL+'concept/'+id + "?page="+page,{ withCredentials: true });
+        return this.http.get(BASE_URL+'concept/'+id + "?page="+page,{ withCredentials: true })
+            .pipe(map(result => result.content), catchError(err => this.handleError(err)));
     }
 
     addQuestion(id:number){
@@ -44,7 +45,7 @@ export class QuestionService {
 
     private handleError(error: any) {
         console.error(error);
-        return throwError("Server error (" + error.status + "): " + error.text());
+        return throwError("Server error (" + error.status    + "): " + error.text());
     }
 
     /*addQuestion(question:Question):Observable<Question> {
