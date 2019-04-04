@@ -20,9 +20,8 @@ export class TopicService {
             .pipe(map(result => result.content), catchError(error => this.handleError(error)));
     }
 
-    getTopic(id: number): Observable<Topic> {
-        return this.http.get<{ topic: Topic }>(BASE_URL  + id, {withCredentials: true})
-            .pipe(map(response => response.topic), catchError(error => this.handleError(error)));
+    getTopic(id: number) {
+        return this.http.get(BASE_URL+id,{withCredentials:true});
     }
 
     addTopic(topic: Topic): Observable<Topic> {
