@@ -50,6 +50,8 @@ export class TeacherPageComponent implements OnInit{
         this.questionService.getSizeQuestion(this.id).subscribe(
             (res:any)=>{
                 this.maxPageQuestion=res;
+                console.log(res);
+                console.log(this.questions);
                 this.refreshQuestion();
             },
             error => console.log(error)
@@ -84,6 +86,7 @@ export class TeacherPageComponent implements OnInit{
                     (c:Concept) => {
                         this.concept=c;
                         this.refreshQuestion();
+                        this.refreshItem();
                     },error => console.error(error)
                 );
 
@@ -91,11 +94,11 @@ export class TeacherPageComponent implements OnInit{
         );
     }
     private refreshQuestion() {
-        this.conceptService.getConcept(this.concept.id).subscribe(
+        this.conceptService.getConcept(this.id).subscribe(
             (c: Concept) => {
                 this.concept = c;
                 if (this.pageNumberQuestion < this.maxPageQuestion) {
-                    this.questionService.getQuestionByConceptIdAndNotCorrected(this.concept.id,this.pageNumberQuestion).subscribe(
+                    this.questionService.getQuestionByConceptIdAndNotCorrected(this.id,this.pageNumberQuestion).subscribe(
                         (questions: Question[]) =>
                         {
                             this.questions = questions
@@ -110,11 +113,11 @@ export class TeacherPageComponent implements OnInit{
         );
     }
     private refreshItem() {
-        this.conceptService.getConcept(this.concept.id).subscribe(
+        this.conceptService.getConcept(this.id).subscribe(
             (c: Concept) => {
                 this.concept = c;
                 if (this.pageNumberItem < this.maxPageItem) {
-                    this.itemService.getItemByConceptId(this.concept.id,this.pageNumberItem).subscribe(
+                    this.itemService.getItemByConceptId(this.id,this.pageNumberItem).subscribe(
                         (item: any) =>
                         {
                             this.items = item
