@@ -70,7 +70,7 @@ export class TeacherPageComponent implements OnInit{
 
 
     }
-   
+
     deleteItem(id: number) {
         this._dialogService.openConfirm({
             message: '¿Estás seguro de eliminar este item?',
