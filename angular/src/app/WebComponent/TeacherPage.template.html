@@ -21,6 +21,11 @@
         </mat-list-item>
     </mat-list>
 </mat-card>
+<a (click)="openDialog()">
+    <mat-icon class="tc-red-600" style=" padding-top: 20px; padding-left:20px;">
+        add_circle
+    </mat-icon>
+</a>
 <button *ngIf="!noMoreItem" (click)="loadMoreItem()" class="tc-red-600"
         style="margin-left: 45%;margin-top:1%;background: white">
     load more
@@ -28,7 +33,6 @@
 <span *ngIf="noMoreItem" style="margin-left: 45%;margin-top:1%">
         No more item
     </span>
-
 <mat-card>
     <mat-card-title>Questions:</mat-card-title>
     <mat-divider></mat-divider>
@@ -39,16 +43,38 @@
                 <h4 matLine>{{question.question}}</h4>
                 <mat-divider></mat-divider>
                 <mat-radio-group name="{{question.id}}" layout="row">
-                    <mat-radio-button (change)="updateQuestion(question,true)" value="1" style="margin-right:12px">
-                        Correcto
+                    <mat-radio-button (change)="updateQuestion(question,true)" (click)="updateQuestion(question,true)"
+                                      value="1" style="margin-right:12px">Correcto
                     </mat-radio-button>
-                    <mat-radio-button (change)="updateQuestion(question,false)" value="2">Incorrecto</mat-radio-button>
+                    <mat-radio-button (change)="updateQuestion(question,false)" (click)="updateQuestion(question,false)"
+                                      value="2">Incorrecto
+                    </mat-radio-button>
                 </mat-radio-group>
                 <mat-divider></mat-divider>
             </mat-list-item>
         </div>
     </mat-list>
 </mat-card>
+<ng-template #addItem let-dialogRef="dialogRef">
+    <h1 mat-dialog-title>Introduzca el nombre del item nuevo</h1>
+    <mat-form-field>
+        <input matInput name="name" [(ngModel)]="item.name" required placeholder="Introduzca el nombre ">
+
+    </mat-form-field>
+
+    <mat-radio-group name="newItem" layout="row">
+        <mat-radio-button value="1" (change)="item.correct=true" style="margin-right:12px">Correcto
+        </mat-radio-button>
+        <mat-radio-button value="2" (change)="item.correct=false">Incorrecto</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button class="text-upper" (click)="dialogRef.close()">Cerrar</button>
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveItem()">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>
+
 <button *ngIf="!noMoreQuestion" (click)="loadMoreQuestion()" class="tc-red-600"
         style="margin-left: 45%;margin-top:1%;background: white">
     load more

@@ -42,7 +42,7 @@ export class QuestionService {
     }
 
     updateQuestion(question:Question):Observable<Question> {
-        return this.http.put<{q:Question}>(BASE_URL +"/"+ question.id, question,{ withCredentials: true })
+        return this.http.put<{q:Question}>(BASE_URL + question.id, question,{ withCredentials: true })
             .pipe(map(response => response.q),catchError(error => this.handleError(error)));
     }
 
