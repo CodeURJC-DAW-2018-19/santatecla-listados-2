@@ -13,4 +13,7 @@ public  interface  ItemRepository extends JpaRepository<Item,Integer> {
     Optional<Item> findById(int id);
 
     Page<Item> findAll(Pageable page);
+    Page<Item> findAllByConceptId(int id,Pageable page);
+    List<Item> findAllByConceptId(int id);
+
 }

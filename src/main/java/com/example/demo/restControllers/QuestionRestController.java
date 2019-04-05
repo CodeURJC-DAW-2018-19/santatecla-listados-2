@@ -51,7 +51,17 @@ public class    QuestionRestController {
         page = PageRequest.of(page.getPageNumber(),10);
         return questionService.findByConcept_IdAndCorrected(id,page,corrected);
     }
-
+    @JsonView(Question.BasicInfo.class)
+    @GetMapping(value = "/concept/{id}/getPage")
+    public Page<Question> getQuestionsByConceptIdAndNotCorrected(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id) {
+        page = PageRequest.of(page.getPageNumber(),10);
+        return questionService.findByConcept_IdAndNotCorrected(id,page);
+    }
+    @GetMapping(value = "/sizeQuestion/{id}")
+    public int getSizeQuestion(@PathVariable int id) {
+        int size =(int) Math.ceil((double)this.questionService.getSizeNotCorrectedQuestionbyId(id)/10);
+        return size;
+    }
     @JsonView(QuestionDetails.class)
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestion(@PathVariable int id) {

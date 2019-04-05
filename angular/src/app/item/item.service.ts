@@ -43,4 +43,11 @@ export class ItemService {
         console.error(error);
         return throwError("Server error (" + error.status + "): " + error.text());
     }
+    getItemByConceptId(id:number,page:number):Observable<Item>{
+        return this.http.get<any>(BASE_URL+'concept/'+id +"/getPage"+"?page=" + page, {withCredentials: true})
+            .pipe(map(result => result.content), catchError(error => this.handleError(error)));
+    }
+    getSizeItem(id:number){
+        return this.http.get(BASE_URL + "sizeItem/" + id);
+    }
 }

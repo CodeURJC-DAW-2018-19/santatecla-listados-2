@@ -19,6 +19,12 @@ export class TeacherPageComponent implements OnInit{
     items: Item[];
     questions: Question[];
     id:number;
+    pageNumberQuestion: number;
+    noMoreQuestion: boolean;
+    maxPageQuestion: number;
+    pageNumberItem: number;
+    noMoreItem: boolean;
+    maxPageItem: number;
     constructor(private _dialogService: TdDialogService,private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private conceptService: ConceptService,
@@ -32,9 +38,26 @@ export class TeacherPageComponent implements OnInit{
         this.concept = {name: '', topic: {name: ''}};
         this.concept.id=this.id;
         this.items=[];
+        this.pageNumberQuestion = 0;
+        this.noMoreQuestion = false;
         this.questions=[];
-        this.refresh();
-
+        this.questionService.getSizeQuestion(this.id).subscribe(
+            (res:any)=>{
+                this.maxPageQuestion=res;
+                this.refreshQuestion();
+            },
+            error => console.log(error)
+        );
+        this.pageNumberItem = 0;
+        this.noMoreItem = false;
+        this.items=[];
+        this.itemService.getSizeItem(this.id).subscribe(
+            (res:any)=>{
+                this.maxPageItem=res;
+                this.refreshItem();
+            },
+            error => console.log(error)
+        );
     }
 
     updateQuestion(question:Question,t:boolean){
@@ -43,20 +66,57 @@ export class TeacherPageComponent implements OnInit{
         question.corrected = t;
         this.questionService.updateQuestion(question).subscribe(
             (_:Question) => {
-                this.refresh();
+                this.refreshQuestion();
             }
         );
     }
-    private refresh() {
+    private refreshQuestion() {
         this.conceptService.getConcept(this.concept.id).subscribe(
             (c: Concept) => {
                 this.concept = c;
-                this.items = Array.from(c.items);
-                this.questions = Array.from(c.questions);
+                if (this.pageNumberQuestion < this.maxPageQuestion) {
+                    this.questionService.getQuestionByConceptIdAndNotCorrected(this.concept.id,this.pageNumberQuestion).subscribe(
+                        (questions: Question[]) =>
+                        {
+                            this.questions = questions
+                        },
+                        error => console.log(error)
+                    );
+                }else{
+                    this.noMoreQuestion=true;
+                }
             },
             error => console.log(error)
         );
     }
+    private refreshItem() {
+        this.conceptService.getConcept(this.concept.id).subscribe(
+            (c: Concept) => {
+                this.concept = c;
+                if (this.pageNumberItem < this.maxPageItem) {
+                    this.itemService.getItemByConceptId(this.concept.id,this.pageNumberItem).subscribe(
+                        (item: any) =>
+                        {
+                            this.items = item
+                        },
+                        error => console.log(error)
+                    );
+                }else{
+                    this.noMoreItem=true;
+                }
+            },
+            error => console.log(error)
+        );
+    }
+    loadMoreQuestion(){
+        this.pageNumberQuestion++;
+        this.refreshQuestion();
+    }
+    loadMoreItem(){
+        this.pageNumberItem++;
+        this.refreshItem();
+    }
+
     deleteItem(id: number) {
         this._dialogService.openConfirm({
             message: '¿Estás seguro de eliminar este item?',
@@ -67,7 +127,7 @@ export class TeacherPageComponent implements OnInit{
             if (accept) {
                 this.itemService.removeItem(id).subscribe(
                     (_: any) => {
-                        this.refresh();
+                        this.refreshItem();
                     }, error => {
                         console.log(error);
                     }

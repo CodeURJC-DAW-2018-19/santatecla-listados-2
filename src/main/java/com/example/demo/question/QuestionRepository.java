@@ -13,6 +13,7 @@ public  interface  QuestionRepository extends JpaRepository<Question,Integer> {
     Question findById(int id);
 
     Page<Question> findAll(Pageable page);
-    Page<Question> findByConcept_IdAndCorrected(int id,Pageable page, boolean corrected);
-
+    Page<Question> findAllByConceptIdAndCorrectedFalse(int id,Pageable page);
+    Page<Question> findByConceptIdAndCorrected(int id,Pageable page, boolean corrected);
+    List<Question> findAllByConceptIdAndCorrectedFalse(int id);
 }

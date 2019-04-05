@@ -44,4 +44,11 @@ public class ItemService {
         return repository.findAll(page);
     }
 
+    public Page<Item> findAllByConceptId(int id,Pageable page) {
+        return repository.findAllByConceptId(id,page);
+    }
+    public int getSizeConceptId(int id) {
+        return repository.findAllByConceptId(id).size();
+    }
+
 }

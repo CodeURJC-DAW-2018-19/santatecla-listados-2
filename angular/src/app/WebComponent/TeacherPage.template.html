@@ -7,30 +7,52 @@
             <h4 matLine>{{item.name}}</h4>
             <mat-divider></mat-divider>
             <mat-radio-group name="{{item.id}}" layout="row">
-                <mat-radio-button value="1" checked = "{{item.correct}}" disabled="{{!item.correct}}" style="margin-right:24px">Correcto</mat-radio-button>
-                <mat-radio-button value="2" disabled = "{{item.correct}}" checked = "{{!item.correct}}" style="margin-right:12px">Incorrecto</mat-radio-button>
-                <a (click)="deleteItem(item.id)"><mat-icon class="tc-red-600" style="float: right">delete</mat-icon></a>
+                <mat-radio-button value="1" checked="{{item.correct}}" disabled="{{!item.correct}}"
+                                  style="margin-right:24px">Correcto
+                </mat-radio-button>
+                <mat-radio-button value="2" disabled="{{item.correct}}" checked="{{!item.correct}}"
+                                  style="margin-right:12px">Incorrecto
+                </mat-radio-button>
+                <a (click)="deleteItem(item.id)">
+                    <mat-icon class="tc-red-600" style="float: right">delete</mat-icon>
+                </a>
             </mat-radio-group>
             <mat-divider></mat-divider>
         </mat-list-item>
     </mat-list>
 </mat-card>
+<button *ngIf="!noMoreItem" (click)="loadMoreItem()" class="tc-red-600"
+        style="margin-left: 45%;margin-top:1%;background: white">
+    load more
+</button>
+<span *ngIf="noMoreItem" style="margin-left: 45%;margin-top:1%">
+        No more item
+    </span>
 
 <mat-card>
     <mat-card-title>Questions:</mat-card-title>
     <mat-divider></mat-divider>
     <mat-list layout="row">
         <div *ngFor="let question of questions">
-        <mat-list-item  *ngIf="!question.corrected">
+            <mat-list-item *ngIf="!question.corrected">
 
-            <h4 matLine>{{question.question}}</h4>
+                <h4 matLine>{{question.question}}</h4>
                 <mat-divider></mat-divider>
-            <mat-radio-group name="{{question.id}}" layout="row">
-                <mat-radio-button (change)="updateQuestion(question,true)" (click)="updateQuestion(question,true)"  value="1" style="margin-right:12px">Correcto</mat-radio-button>
-                <mat-radio-button (change)="updateQuestion(question,false)" (click)="updateQuestion(question,false)"  value="2" >Incorrecto</mat-radio-button>
-            </mat-radio-group>
+                <mat-radio-group name="{{question.id}}" layout="row">
+                    <mat-radio-button (change)="updateQuestion(question,true)" value="1" style="margin-right:12px">
+                        Correcto
+                    </mat-radio-button>
+                    <mat-radio-button (change)="updateQuestion(question,false)" value="2">Incorrecto</mat-radio-button>
+                </mat-radio-group>
                 <mat-divider></mat-divider>
-        </mat-list-item>
+            </mat-list-item>
         </div>
     </mat-list>
 </mat-card>
+<button *ngIf="!noMoreQuestion" (click)="loadMoreQuestion()" class="tc-red-600"
+        style="margin-left: 45%;margin-top:1%;background: white">
+    load more
+</button>
+<span *ngIf="noMoreQuestion" style="margin-left: 45%;margin-top:1%">
+        No more questions
+    </span>
