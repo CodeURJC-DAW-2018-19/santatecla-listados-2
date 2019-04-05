@@ -6,6 +6,7 @@ import {catchError, map} from 'rxjs/operators';
 import {Concept} from './concept.model';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
+import {Question} from "../question/question.model";
 
 const BASE_URL = '/api/concepts/';
 

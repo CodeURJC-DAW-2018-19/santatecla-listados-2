@@ -46,31 +46,18 @@ export class TeacherPageComponent implements OnInit{
     updateQuestion(question:Question,t:boolean){
         console.log(question);
         question.corrected = t;
-        if (t){
-            this.concept.hits+=1;
-            this.concept.pendings-=1;
-        }else{
-            this.concept.errors+=1;
-            this.concept.pendings-=1;
-        }
         console.log(this.concept);
         this.questionService.updateQuestion(question).subscribe(
             (_:Question) => {
-                this.conceptService.updateConcept(this.concept).subscribe(
-                    (c:Concept) => {
-                        this.concept=c;
+
                         this.refreshQuestion();
                     },error => console.error(error)
-                );
-
-            },error=> console.error(error)
         );
 
 
 
 
     }
-
     deleteItem(id: number) {
         this._dialogService.openConfirm({
             message: '¿Estás seguro de eliminar este item?',
