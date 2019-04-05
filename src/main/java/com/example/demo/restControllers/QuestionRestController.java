@@ -144,7 +144,17 @@ public class    QuestionRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Question> updateQuestion(@PathVariable int id, @RequestBody Question updatedQuestion) {
         Question question = questionService.findOne(id);
-
+        if (question.isCorrected()){
+            question.getConcept().setHits(question.getConcept().getHits()+1);
+            question.getConcept().setPendings(question.getConcept().getPendings()-1);
+            question.getConcept().getTopic().setHits(question.getConcept().getTopic().getHits()+1);
+            question.getConcept().getTopic().setPendings(question.getConcept().getTopic().getPendings()-1);
+        }else{
+            question.getConcept().setErrors(question.getConcept().getErrors()+1);
+            question.getConcept().setPendings(question.getConcept().getPendings()-1);
+            question.getConcept().getTopic().setErrors(question.getConcept().getTopic().getErrors()+1);
+            question.getConcept().getTopic().setPendings(question.getConcept().getTopic().getPendings()-1);
+        }
         if (question != null) {
             updatedQuestion.setId(id);
             questionService.save(updatedQuestion);
