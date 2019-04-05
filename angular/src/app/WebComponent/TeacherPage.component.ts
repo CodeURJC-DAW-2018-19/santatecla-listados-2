@@ -44,25 +44,33 @@ export class TeacherPageComponent implements OnInit{
     }
 
     updateQuestion(question:Question,t:boolean){
-        console.log(t);
         console.log(question);
         question.corrected = t;
+        if (t){
+            this.concept.hits+=1;
+            this.concept.pendings-=1;
+        }else{
+            this.concept.errors+=1;
+            this.concept.pendings-=1;
+        }
+        console.log(this.concept);
         this.questionService.updateQuestion(question).subscribe(
             (_:Question) => {
-                this.refresh();
-            }
+                this.conceptService.updateConcept(this.concept).subscribe(
+                    (c:Concept) => {
+                        this.concept=c;
+                        this.refreshQuestion();
+                    },error => console.error(error)
+                );
+
+            },error=> console.error(error)
         );
+
+
+
+
     }
-    private refresh() {
-        this.conceptService.getConcept(this.concept.id).subscribe(
-            (c: Concept) => {
-                this.concept = c;
-                this.items = Array.from(c.items);
-                this.questions = Array.from(c.questions);
-            },
-            error => console.log(error)
-        );
-    }
+   
     deleteItem(id: number) {
         this._dialogService.openConfirm({
             message: '¿Estás seguro de eliminar este item?',
@@ -73,7 +81,7 @@ export class TeacherPageComponent implements OnInit{
             if (accept) {
                 this.itemService.removeItem(id).subscribe(
                     (_: any) => {
-                        this.refresh();
+                        this.refreshItem();
                     }, error => {
                         console.log(error);
                     }
@@ -100,7 +108,7 @@ export class TeacherPageComponent implements OnInit{
                 this.itemService.addItem(this.item).subscribe(
                     (_: any) => {
                         this.dialogRef.close();
-                        this.refresh();
+                        this.refreshItem();
                     }, error => {
                         console.log(error);
                     }
