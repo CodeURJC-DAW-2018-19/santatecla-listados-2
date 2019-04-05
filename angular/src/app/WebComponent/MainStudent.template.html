@@ -60,4 +60,10 @@
         <button type="button" mat-button color="accent" class="text-upper" (click)="saveConcept()">Aceptar</button>
     </mat-dialog-actions>
 </ng-template>
-
+<br>
+<br>
+<div *ngIf="loginService.isAdmin" align="center">
+<button mat-raised-button color="primary" class="align-center" (click)="showDiagram()">
+    Diagrama
+</button>
+</div>

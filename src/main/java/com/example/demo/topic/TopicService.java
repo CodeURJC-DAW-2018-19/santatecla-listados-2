@@ -1,11 +1,14 @@
 package com.example.demo.topic;
 
+import com.example.demo.diagram.DiagramInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +47,21 @@ public class TopicService {
     public void delete(Topic t) {
         repository.delete(t);
     }
-    public int getSize(){
-        return repository.findAll().size();}
+    public int getSize(){ return repository.findAll().size();}
+
+
+    //new methods to build the diagram in angular
+
+    public List<DiagramInfo> generateDiagramInfo(){
+        List<DiagramInfo> diagramInfo = new ArrayList<>();
+        for (Topic t: this.findAll()){
+            diagramInfo.add(new DiagramInfo(t.getName(), t.getErrors(), t.getHits(), t.getPendings()));
+        }
+        return diagramInfo;
+    }
+
+    public Page<DiagramInfo> generateDiagramInfoPage(Pageable page){
+        return new PageImpl<>(generateDiagramInfo());
+    }
+
 }
