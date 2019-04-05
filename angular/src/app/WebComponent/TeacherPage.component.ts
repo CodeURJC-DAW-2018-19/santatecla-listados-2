@@ -36,7 +36,7 @@ export class TeacherPageComponent implements OnInit{
         this.id = this.activatedRoute.snapshot.params['id'];
         this.concept = {name: '', topic: {name: ''}};
         this.concept.id=this.id;
-        this.item={name='',concept:{name:'', topic: {name: ''}},correct:false};
+        this.item={name:'',concept:{name:'', topic: {name: ''}},correct:false};
         this.items=[];
         this.questions=[];
         this.refresh();
