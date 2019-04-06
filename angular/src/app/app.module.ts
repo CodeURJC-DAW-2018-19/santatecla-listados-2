@@ -125,4 +125,5 @@ import {ImageService} from "./image/image.service";
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]
 })
+
 export class AppModule { }
