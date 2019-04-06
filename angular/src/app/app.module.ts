@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 
+
 import { AppComponent } from './app.component';
 import { routing }  from './app.routing';
 import {TopicService} from "./topic/topic.service";
@@ -58,9 +59,12 @@ import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
+import {DiagramComponent} from "./diagram/diagram.component";
+import {DiagramService} from "./diagram/diagram.service";
+import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEchartsModule} from "@covalent/echarts";
 
 @NgModule({
-    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent ],
+    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent ],
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule, routing, CovalentLayoutModule, CovalentMediaModule, CovalentSearchModule, MatIconModule, MatDialogModule,
         BrowserModule,
         BrowserAnimationsModule,
@@ -107,11 +111,14 @@ import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
         CovalentMenuModule,
         CovalentDataTableModule,
         CovalentMessageModule,
+        CovalentTooltipEchartsModule,
+        CovalentBaseEchartsModule,
+        CovalentBarEchartsModule,
         /** Additional **/
         NgxChartsModule,
         routing,],
-    bootstrap: [AppComponent],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,
+    bootstrap: [AppComponent, DiagramComponent, ],
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]

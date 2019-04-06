@@ -1,0 +1,19 @@
+import { Injectable} from "@angular/core";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { Diagram } from "./diagram.model";
+import {LoginService} from "../logIn/logIn.service";
+import {Page} from "../pages/page.model";
+
+
+const BASE_URL = '/api';
+
+@Injectable()
+export class DiagramService {
+
+    constructor(private http: HttpClient, public loginService: LoginService){}
+
+    getDiagram(){
+        return this.http.get<Page<Diagram>>(BASE_URL + "/diagramInfo", {withCredentials: false} );
+    }
+
+}

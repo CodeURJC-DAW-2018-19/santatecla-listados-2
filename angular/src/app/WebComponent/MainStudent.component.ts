@@ -7,6 +7,8 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 import {ConceptService} from "../concept/concept.service";
 import {Concept} from "../concept/concept.model";
 import {TdDialogService} from '@covalent/core';
+import {DiagramComponent} from "../diagram/diagram.component";
+import {Diagram} from "../diagram/diagram.model";
 
 @Component({
     templateUrl: 'MainStudent.template.html'
@@ -27,7 +29,7 @@ export class MainStudentComponent implements OnInit {
     dialogAC: MatDialogRef<any, any>;
 
 
-    constructor(private _dialogService: TdDialogService, private topicService: TopicService, private conceptService: ConceptService, private router: Router, private loginService: LoginService, public dialog: MatDialog) {
+    constructor(private _dialogService: TdDialogService, private topicService: TopicService, private conceptService: ConceptService, private router: Router, private loginService: LoginService, public dialog: MatDialog, public diagramDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -115,7 +117,7 @@ export class MainStudentComponent implements OnInit {
 
     removeConcept(id: number) {
         this._dialogService.openConfirm({
-            message: '¿Estás seguro de eliminar este concepto??',
+            message: '¿Estás seguro de eliminar este concepto?',
             title: 'Confirmar eliminación',
             width: '500px',
             height: '175px'
@@ -135,7 +137,7 @@ export class MainStudentComponent implements OnInit {
 
     removeTopic(id: number) {
         this._dialogService.openConfirm({
-            message: '¿Estás seguro de eliminar este tema??',
+            message: '¿Estás seguro de eliminar este tema?',
             title: 'Confirmar eliminación',
             width: '500px',
             height: '175px'
@@ -151,6 +153,12 @@ export class MainStudentComponent implements OnInit {
             }
         });
 
+    }
+    showDiagram() {
+        this.diagramDialog.open(DiagramComponent, {
+            height: "625px",
+            width: "825px"
+        });
     }
 }
 
