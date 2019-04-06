@@ -1,4 +1,25 @@
 <h1>Concept: {{concept.name}}</h1>
+<h4>Images:
+</h4>
+<input matInput name="name" [(ngModel)]="imageTitle" required placeholder="Introduzca el titulo ">
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <div>
+        <input type="file" name="profile" (change)="onFileSelect($event)" required/>
+    </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
+</form>
+<mat-grid-list cols="4" rowHeight="300px">
+    <mat-grid-tile *ngFor="let image of images">
+        <mat-grid-tile-header>
+        <p>{{image.title}}</p>
+        </mat-grid-tile-header>
+    <img alt="image" src='{{image.base64}}' style=" width:300px;  height: 300px;"/>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
 <mat-card>
     <mat-card-title>Items:</mat-card-title>
     <mat-divider></mat-divider>

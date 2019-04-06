@@ -8,6 +8,9 @@ import {QuestionService} from "../question/question.service";
 import {ItemService} from "../item/item.service";
 import {TdDialogService} from "@covalent/core";
 import {MatDialog, MatDialogRef} from "@angular/material";
+import {ImageService} from "../image/image.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {Image} from "../image/image.model";
 
 
 @Component({
@@ -15,41 +18,47 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 
 })
 
-export class TeacherPageComponent implements OnInit{
+export class TeacherPageComponent implements OnInit {
     @ViewChild('addItem') buttonAddItemDialog: TemplateRef<any>;
     dialogRef: MatDialogRef<any, any>;
     concept: Concept;
     items: Item[];
+    images: Image[];
     questions: Question[];
-    item:Item;
-    id:number;
+    item: Item;
+    id: number;
     pageNumberQuestion: number;
     noMoreQuestion: boolean;
     maxPageQuestion: number;
     pageNumberItem: number;
     noMoreItem: boolean;
     maxPageItem: number;
-    constructor(private _dialogService: TdDialogService,private router: Router,
+    imageTitle: string;
+    uploadForm: FormGroup;
+
+    constructor(private _dialogService: TdDialogService, private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private conceptService: ConceptService,
-                private questionService:QuestionService,
+                private questionService: QuestionService,
                 private itemService: ItemService,
-                public dialog: MatDialog) {
+                public dialog: MatDialog,
+                private imageService: ImageService,
+                private formBuilder: FormBuilder) {
 
     }
 
     ngOnInit(): void {
         this.id = this.activatedRoute.snapshot.params['id'];
         this.concept = {name: '', topic: {name: ''}};
-        this.concept.id=this.id;
-        this.item={name:'',concept:{name:'', topic: {name: ''}},correct:false};
-        this.items=[];
+        this.concept.id = this.id;
+        this.item = {name: '', concept: {name: '', topic: {name: ''}}, correct: false};
+        this.items = [];
         this.pageNumberQuestion = 0;
         this.noMoreQuestion = false;
-        this.questions=[];
+        this.questions = [];
         this.questionService.getSizeQuestion(this.id).subscribe(
-            (res:any)=>{
-                this.maxPageQuestion=res;
+            (res: any) => {
+                this.maxPageQuestion = res;
                 console.log(res);
                 console.log(this.questions);
                 this.refreshQuestion();
@@ -58,88 +67,105 @@ export class TeacherPageComponent implements OnInit{
         );
         this.pageNumberItem = 0;
         this.noMoreItem = false;
-        this.items=[];
+        this.items = [];
         this.itemService.getSizeItem(this.id).subscribe(
-            (res:any)=>{
-                this.maxPageItem=res;
+            (res: any) => {
+                this.maxPageItem = res;
                 this.refreshItem();
             },
             error => console.log(error)
         );
+        this.uploadForm = this.formBuilder.group({
+            profile: ['']
+        });
+        this.images = [];
+        this.refreshImage();
 
     }
 
-    updateQuestion(question:Question,t:boolean){
-        console.log(t);
-        console.log(question);
+    updateQuestion(question: Question, t: boolean) {
         question.corrected = t;
-        if (t){
-            this.concept.hits+=1;
-            this.concept.pendings-=1;
-        }else{
-            this.concept.errors+=1;
-            this.concept.pendings-=1;
+        if (t) {
+            this.concept.hits += 1;
+            this.concept.pendings -= 1;
+        } else {
+            this.concept.errors += 1;
+            this.concept.pendings -= 1;
         }
-        console.log(this.concept);
         this.questionService.updateQuestion(question).subscribe(
-            (_:Question) => {
+            (_: Question) => {
                 this.conceptService.updateConcept(this.concept).subscribe(
-                    (c:Concept) => {
-                        this.concept=c;
+                    (c: Concept) => {
+                        this.concept = c;
                         this.refreshQuestion();
                         this.refreshItem();
-                    },error => console.error(error)
+                    }, error => console.error(error)
                 );
 
-            },error=> console.error(error)
+            }, error => console.error(error)
         );
     }
+
     private refreshQuestion() {
         this.conceptService.getConcept(this.id).subscribe(
             (c: Concept) => {
                 this.concept = c;
                 if (this.pageNumberQuestion < this.maxPageQuestion) {
-                    this.questionService.getQuestionByConceptIdAndNotCorrected(this.id,this.pageNumberQuestion).subscribe(
-                        (questions: Question[]) =>
-                        {
+                    this.questionService.getQuestionByConceptIdAndNotCorrected(this.id, this.pageNumberQuestion).subscribe(
+                        (questions: Question[]) => {
                             this.questions = questions
                         },
                         error => console.log(error)
                     );
-                }else{
-                    this.noMoreQuestion=true;
+                } else {
+                    this.noMoreQuestion = true;
                 }
             },
             error => console.log(error)
         );
     }
+
     private refreshItem() {
         this.conceptService.getConcept(this.id).subscribe(
             (c: Concept) => {
                 this.concept = c;
                 if (this.pageNumberItem < this.maxPageItem) {
-                    this.itemService.getItemByConceptId(this.id,this.pageNumberItem).subscribe(
-                        (item: any) =>
-                        {
+                    this.itemService.getItemByConceptId(this.id, this.pageNumberItem).subscribe(
+                        (item: any) => {
                             this.items = item
                         },
                         error => console.log(error)
                     );
-                }else{
-                    this.noMoreItem=true;
+                } else {
+                    this.noMoreItem = true;
                 }
             },
             error => console.log(error)
         );
     }
-    loadMoreQuestion(){
+
+    private refreshImage() {
+
+        this.imageService.getImagesById(this.id).subscribe(
+            (images: any) => {
+                this.images = images;
+            },
+            error => console.log(error)
+        );
+
+
+    }
+
+    loadMoreQuestion() {
         this.pageNumberQuestion++;
         this.refreshQuestion();
     }
-    loadMoreItem(){
+
+    loadMoreItem() {
         this.pageNumberItem++;
         this.refreshItem();
     }
+
     deleteItem(id: number) {
         this._dialogService.openConfirm({
             message: '¿Estás seguro de eliminar este item?',
@@ -159,6 +185,7 @@ export class TeacherPageComponent implements OnInit{
         });
 
     }
+
     openDialog(): void {
         this.dialogRef = this.dialog.open(this.buttonAddItemDialog, {
             width: '400px',
@@ -170,10 +197,11 @@ export class TeacherPageComponent implements OnInit{
 
         });
     }
+
     saveItem() {
         this.conceptService.getConcept(this.id).subscribe(
             (res: any) => {
-                this.item.concept=res;
+                this.item.concept = res;
                 this.itemService.addItem(this.item).subscribe(
                     (_: any) => {
                         this.dialogRef.close();
@@ -188,5 +216,23 @@ export class TeacherPageComponent implements OnInit{
         );
 
     }
+
+    onFileSelect(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('profile').setValue(file);
+        }
+    }
+
+    onSubmit() {
+        const formData = new FormData();
+        formData.append('file', this.uploadForm.get('profile').value);
+        this.imageService.addImage(this.imageTitle, this.concept.name, formData).subscribe(
+            (i: any) => {
+                this.refreshImage();
+            }, error1 => console.log(error1)
+        );
+    }
+
 
 }

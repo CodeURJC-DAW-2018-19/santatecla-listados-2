@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -62,6 +62,7 @@ import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
 import {DiagramComponent} from "./diagram/diagram.component";
 import {DiagramService} from "./diagram/diagram.service";
 import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEchartsModule} from "@covalent/echarts";
+import {ImageService} from "./image/image.service";
 
 @NgModule({
     declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent ],
@@ -69,6 +70,7 @@ import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEcha
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([]),
         HttpClientModule,
         JsonpModule,
@@ -118,7 +120,7 @@ import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEcha
         NgxChartsModule,
         routing,],
     bootstrap: [AppComponent, DiagramComponent ],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]
