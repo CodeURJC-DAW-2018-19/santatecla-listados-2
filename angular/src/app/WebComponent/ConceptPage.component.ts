@@ -5,6 +5,9 @@ import {ConceptService} from "../concept/concept.service";
 import {QuestionService} from "../question/question.service";
 import {Question} from "../question/question.model";
 import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
+import {ConceptDiagramComponent} from "../diagram/conceptDiagram.component";
+import {MatDialog} from "@angular/material";
+
 
 
 // @ts-ignore
@@ -23,11 +26,15 @@ export class ConceptPageComponent implements OnInit {
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private conceptService: ConceptService,
-                private questionService: QuestionService) {
+                private questionService: QuestionService,
+                private diagramDialog: MatDialog,
+        ) {
         this.activatedRoute.params.subscribe(params => {
             this.id = params['id'];
         })
     }
+
+
 
     ngOnInit(): void {
         this.pageNumber = 0;
@@ -65,4 +72,14 @@ export class ConceptPageComponent implements OnInit {
             error => console.log(error)
         );
     }
+
+    showConceptDiagram() {
+        this.diagramDialog.open(ConceptDiagramComponent, {
+            height: "625px",
+            width: "825px",
+            data: this.id
+        });
+    }
+
+
 }

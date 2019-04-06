@@ -16,4 +16,8 @@ export class DiagramService {
         return this.http.get<Page<Diagram>>(BASE_URL + "/diagramInfo", {withCredentials: false} );
     }
 
+    getConceptDiagram(id: number){
+        return this.http.get<Diagram>(BASE_URL + "/conceptDiagramInfo/" + id, {withCredentials: false});
+    }
+
 }
