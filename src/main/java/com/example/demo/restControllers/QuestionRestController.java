@@ -93,7 +93,7 @@ public class    QuestionRestController {
         Concept concept = conceptService.findOne(id).get();
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
-        int typeQuestion =3;//m  (int)(Math.random() * 4);
+        int typeQuestion =(int)(Math.random() * 4);
         Question question;
         String questionName = "";
         if (typeQuestion == 0) {
