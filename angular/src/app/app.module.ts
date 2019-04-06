@@ -123,7 +123,7 @@ import {RegisterService} from "./logIn/register.service";
         NgxChartsModule,
         routing,],
     bootstrap: [AppComponent, DiagramComponent, ConceptDiagramComponent ],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,RegisterService,
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,RegisterService, AnswerService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}
