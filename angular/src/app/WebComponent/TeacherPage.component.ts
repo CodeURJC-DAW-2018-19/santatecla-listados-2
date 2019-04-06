@@ -66,6 +66,7 @@ export class TeacherPageComponent implements OnInit{
             },
             error => console.log(error)
         );
+
     }
 
     updateQuestion(question:Question,t:boolean){

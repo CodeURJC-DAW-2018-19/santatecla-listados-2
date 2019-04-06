@@ -62,6 +62,10 @@ export class AppComponent implements AfterViewInit {
             (error) => console.log('Error when trying to log out: ' + error),
         );
     }
+    guest() {
+        this.loginService.isGuest=true;
+        this.router.navigate(['/student']);
+    }
     ngAfterViewInit(): void {
         // broadcast to all listener observables when loading the page
         this.media.broadcast();

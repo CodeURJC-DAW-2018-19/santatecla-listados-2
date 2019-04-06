@@ -8,7 +8,7 @@
             <td-search-box hide-xs flex #searchBox
                 [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-grey-50 tc-black': searchBox.searchVisible }"
                 placeholder="search"></td-search-box>
-
+            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='guest()'>Guest</button>
             <button *ngIf="loginService.isLogged" mat-button (click)='logOut()'>logOut</button>
             <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()'>logIn</button>
         </div>
