@@ -13,7 +13,7 @@ export class DiagramService {
     constructor(private http: HttpClient, public loginService: LoginService){}
 
     getDiagram(){
-        return this.http.get<Page<Diagram>>(BASE_URL + "/diagramInfo", {withCredentials: false} );
+        return this.http.get<Page<Diagram>>(BASE_URL + "/diagramInfo", {withCredentials: true} );
     }
 
     getConceptDiagram(id: number){

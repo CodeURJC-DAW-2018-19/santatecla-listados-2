@@ -85,23 +85,9 @@ export class TeacherPageComponent implements OnInit {
 
     updateQuestion(question: Question, t: boolean) {
         question.corrected = t;
-        if (t) {
-            this.concept.hits += 1;
-            this.concept.pendings -= 1;
-        } else {
-            this.concept.errors += 1;
-            this.concept.pendings -= 1;
-        }
         this.questionService.updateQuestion(question).subscribe(
             (_: Question) => {
-                this.conceptService.updateConcept(this.concept).subscribe(
-                    (c: Concept) => {
-                        this.concept = c;
-                        this.refreshQuestion();
-                        this.refreshItem();
-                    }, error => console.error(error)
-                );
-
+                this.refreshQuestion();
             }, error => console.error(error)
         );
     }

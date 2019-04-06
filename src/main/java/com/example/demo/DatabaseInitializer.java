@@ -147,17 +147,17 @@ public class DatabaseInitializer {
 		q2.setConcept(c1);
 
 		q1.setAnswer(a1);
-		q13.setAnswer(a1);
-		q3.setAnswer(a1);
-		q4.setAnswer(a1);
-		q5.setAnswer(a1);
-		q6.setAnswer(a1);
-		q7.setAnswer(a1);
-		q8.setAnswer(a1);
-		q9.setAnswer(a1);
-		q10.setAnswer(a1);
-		q11.setAnswer(a1);
-		q12.setAnswer(a1);
+		q13.setAnswer(a13);
+		q3.setAnswer(a3);
+		q4.setAnswer(a4);
+		q5.setAnswer(a5);
+		q6.setAnswer(a6);
+		q7.setAnswer(a7);
+		q8.setAnswer(a8);
+		q9.setAnswer(a9);
+		q10.setAnswer(a10);
+		q11.setAnswer(a11);
+		q12.setAnswer(a12);
 		q2.setAnswer(a2);
 		a1.setQuestion(q1);
 		a13.setQuestion(q13);
@@ -197,9 +197,9 @@ public class DatabaseInitializer {
 		i10.setConcept(c1);
 		i11.setConcept(c1);
 		i12.setConcept(c1);
-		c1.setPendings(c1.getPendings()+1);
+		c1.setPendings(c1.getPendings()+12);
 		c1.setHits(c1.getHits()+1);
-		c1.getTopic().setPendings(c1.getTopic().getPendings()+1);
+		c1.getTopic().setPendings(c1.getTopic().getPendings()+12);
 		c1.getTopic().setHits(c1.getTopic().getHits()+1);
 
 		topicRepository.save(t1);
