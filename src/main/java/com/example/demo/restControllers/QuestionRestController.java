@@ -51,7 +51,17 @@ public class    QuestionRestController {
         page = PageRequest.of(page.getPageNumber(),10);
         return questionService.findByConcept_IdAndCorrected(id,page,corrected);
     }
-
+    @JsonView(Question.BasicInfo.class)
+    @GetMapping(value = "/concept/{id}/getPage")
+    public Page<Question> getQuestionsByConceptIdAndNotCorrected(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id) {
+        page = PageRequest.of(page.getPageNumber(),10);
+        return questionService.findByConcept_IdAndNotCorrected(id,page);
+    }
+    @GetMapping(value = "/sizeQuestion/{id}")
+    public int getSizeQuestion(@PathVariable int id) {
+        int size =(int) Math.ceil((double)this.questionService.getSizeNotCorrectedQuestionbyId(id)/10);
+        return size;
+    }
     @JsonView(QuestionDetails.class)
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestion(@PathVariable int id) {
@@ -134,7 +144,17 @@ public class    QuestionRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Question> updateQuestion(@PathVariable int id, @RequestBody Question updatedQuestion) {
         Question question = questionService.findOne(id);
-
+        if (updatedQuestion.isCorrected()){
+            question.getConcept().setHits(question.getConcept().getHits()+1);
+            question.getConcept().setPendings(question.getConcept().getPendings()-1);
+            question.getConcept().getTopic().setHits(question.getConcept().getTopic().getHits()+1);
+            question.getConcept().getTopic().setPendings(question.getConcept().getTopic().getPendings()-1);
+        }else{
+            question.getConcept().setErrors(question.getConcept().getErrors()+1);
+            question.getConcept().setPendings(question.getConcept().getPendings()-1);
+            question.getConcept().getTopic().setErrors(question.getConcept().getTopic().getErrors()+1);
+            question.getConcept().getTopic().setPendings(question.getConcept().getTopic().getPendings()-1);
+        }
         if (question != null) {
             updatedQuestion.setId(id);
             questionService.save(updatedQuestion);

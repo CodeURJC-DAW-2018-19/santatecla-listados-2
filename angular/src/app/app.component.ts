@@ -4,6 +4,8 @@ import {MatIconRegistry, MatDialog, MatDialogRef} from '@angular/material';
 import { TdMediaService, tdRotateAnimation } from '@covalent/core';
 import {LoginService} from "./logIn/logIn.service";
 import {Router} from "@angular/router";
+import {User} from "./logIn/user.model";
+import {RegisterService} from "./logIn/register.service";
 
 @Component({
     selector: 'my-app',
@@ -13,6 +15,9 @@ import {Router} from "@angular/router";
 export class AppComponent implements AfterViewInit {
     @ViewChild('loginDialog') loginDialog: TemplateRef<any>;
     dialogLog: MatDialogRef<any, any>;
+    @ViewChild('registerDialog') registerDialog: TemplateRef<any>;
+    diaLog: MatDialogRef<any, any>;
+    user:User;
     constructor(
         public media: TdMediaService,
         public dialog: MatDialog,
@@ -20,7 +25,8 @@ export class AppComponent implements AfterViewInit {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private loginService: LoginService,
-        public router: Router
+        public router: Router,
+        private registerService:RegisterService
     )
     {
         this._iconRegistry.addSvgIconInNamespace(
@@ -54,6 +60,12 @@ export class AppComponent implements AfterViewInit {
             height: '50%',
         });
     }
+    openRegisterDialog() {
+        this.diaLog = this.dialog.open(this.registerDialog, {
+            width: '50%',
+            height: '50%',
+        });
+    }
     logOut() {
         this.loginService.logOut().subscribe(
             (response) => {
@@ -62,10 +74,24 @@ export class AppComponent implements AfterViewInit {
             (error) => console.log('Error when trying to log out: ' + error),
         );
     }
+    guest() {
+        this.loginService.isGuest=true;
+        this.router.navigate(['/student']);
+    }
     ngAfterViewInit(): void {
         // broadcast to all listener observables when loading the page
         this.media.broadcast();
         this._changeDetectorRef.detectChanges();
+    }
+    register(event: any, userName: string, pass: string,name:string,surname:string){
+        event.preventDefault();
+        this.user={username:userName,surName:surname,name:name,password:pass,rol:"ROLE_STUDENT"};
+        this.registerService.register(this.user).subscribe(
+            (u:User)=>{
+                console.log(u);
+                this.diaLog.close();
+            },error1 => console.log(error1)
+        )
     }
 
 }

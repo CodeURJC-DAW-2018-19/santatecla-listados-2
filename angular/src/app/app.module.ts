@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
+
 
 import { AppComponent } from './app.component';
 import { routing }  from './app.routing';
@@ -35,7 +36,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSliderModule,
-    MatAutocompleteModule,
+    MatAutocompleteModule, MatDialogRef, MAT_DIALOG_DATA,
 } from '@angular/material';
 import {
     CovalentCommonModule,
@@ -59,13 +60,20 @@ import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
 import {AnswerService} from "./answer/answer.service";
+import {DiagramComponent} from "./diagram/diagram.component";
+import {DiagramService} from "./diagram/diagram.service";
+import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEchartsModule} from "@covalent/echarts";
+import {ImageService} from "./image/image.service";
+import {ConceptDiagramComponent} from "./diagram/conceptDiagram.component";
+import {RegisterService} from "./logIn/register.service";
 
 @NgModule({
-    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent ],
+    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent, ConceptDiagramComponent ],
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule, routing, CovalentLayoutModule, CovalentMediaModule, CovalentSearchModule, MatIconModule, MatDialogModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([]),
         HttpClientModule,
         JsonpModule,
@@ -108,13 +116,18 @@ import {AnswerService} from "./answer/answer.service";
         CovalentMenuModule,
         CovalentDataTableModule,
         CovalentMessageModule,
+        CovalentTooltipEchartsModule,
+        CovalentBaseEchartsModule,
+        CovalentBarEchartsModule,
         /** Additional **/
         NgxChartsModule,
         routing,],
-    bootstrap: [AppComponent],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,AnswerService,
+    bootstrap: [AppComponent, DiagramComponent, ConceptDiagramComponent ],
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,RegisterService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
-        {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]
+        {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}
+        ]
 })
+
 export class AppModule { }

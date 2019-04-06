@@ -38,8 +38,6 @@ export class TopicService {
 
     getSizeTopic(){
        return this.http.get(BASE_URL+"size");
-
-
     }
     removeTopic(id: number): Observable<Topic> {
         return this.http.delete<{ topic: Topic }>(BASE_URL  + id, {withCredentials: true})
@@ -55,4 +53,5 @@ export class TopicService {
         console.error(error);
         return throwError("Server error (" + error.status + "): " + error.text());
     }
+
 }

@@ -7,6 +7,7 @@ import com.example.demo.item.ItemService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -75,6 +76,21 @@ public class ItemRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @JsonView(ItemDetails.class)
+    @GetMapping(value = "/concept/{id}/getPage")
+    public Page<Item> getQuestionsByConceptIdAndNotCorrected(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id) {
+        page = PageRequest.of(page.getPageNumber(),10);
+        return itemService.findAllByConceptId(id,page);
+    }
+
+    @GetMapping(value = "/sizeItem/{id}")
+    public int getSizeItem(@PathVariable int id) {
+        int size =(int) Math.ceil((double)this.itemService.getSizeConceptId(id)/10);
+        return size;
+    }
+
 
     @JsonView(ItemDetails.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

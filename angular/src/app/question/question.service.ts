@@ -28,7 +28,10 @@ export class QuestionService {
         return this.http.get<any>(BASE_URL+'concept/'+id +'/'+corrected+ "?page=" + page, {withCredentials: true})
             .pipe(map(result => result.content), catchError(error => this.handleError(error)));
     }
-
+    getQuestionByConceptIdAndNotCorrected(id:number,page:number):Observable<Question[]>{
+        return this.http.get<any>(BASE_URL+'concept/'+id +"/getPage"+"?page=" + page, {withCredentials: true})
+            .pipe(map(result => result.content), catchError(error => this.handleError(error)));
+    }
     addQuestion(id:number){
         return this.http.post(BASE_URL+ id, {withCredentials:true})
     }
@@ -47,7 +50,9 @@ export class QuestionService {
         console.error(error);
         return throwError("Server error (" + error.status + "): " + error.text());
     }
-
+    getSizeQuestion(id: number){
+        return this.http.get(BASE_URL + "sizeQuestion/" + id);
+    }
     /*addQuestion(question:Question):Observable<Question> {
     return this.http.post<{q:Question}>(BASE_URL, question,{ withCredentials: true })
         .pipe(map(response => response.q), catchError(error => this.handleError(error)));

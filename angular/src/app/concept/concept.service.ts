@@ -6,6 +6,7 @@ import {catchError, map} from 'rxjs/operators';
 import {Concept} from './concept.model';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
+import {Question} from "../question/question.model";
 
 const BASE_URL = '/api/concepts/';
 
@@ -34,7 +35,7 @@ export class ConceptService {
     }
 
     updateConcept(concept:Concept):Observable<Concept> {
-        return this.http.put<{c:Concept}>(BASE_URL +"/"+ concept.id, concept,{ withCredentials: true })
+        return this.http.put<{c:Concept}>(BASE_URL + concept.id, concept,{ withCredentials: true })
             .pipe(map(response => response.c),catchError(error => this.handleError(error)));
     }
 

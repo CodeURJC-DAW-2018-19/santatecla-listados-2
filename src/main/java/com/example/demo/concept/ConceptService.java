@@ -1,5 +1,6 @@
 package com.example.demo.concept;
 
+import com.example.demo.diagram.DiagramInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,4 +54,5 @@ public class ConceptService {
     public Page<Concept> findAll(Pageable page) {
         return repository.findAll(page);
     }
+
 }

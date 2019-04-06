@@ -1,14 +1,15 @@
 <td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
     [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'">
 
-    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/">
+    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/student">
 
         <div td-toolbar-content layout="row" layout-align="start center" flex>
             <span flex *ngIf="!searchBox.searchVisible"></span>
             <td-search-box hide-xs flex #searchBox
                 [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-grey-50 tc-black': searchBox.searchVisible }"
                 placeholder="search"></td-search-box>
-
+            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='openRegisterDialog()'>Register</button>
+            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='guest()'>Guest</button>
             <button *ngIf="loginService.isLogged" mat-button (click)='logOut()'>logOut</button>
             <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()'>logIn</button>
         </div>
@@ -73,5 +74,62 @@
     </div>
 
 </ng-template>
+<ng-template #registerDialog let-dialogRef="dialogRef">
 
+    <div layout="column" layout-fill>
+        <h2 mat-dialog-title>
+            Register
+        </h2>
+        <mat-dialog-content flex>
+            <form #registerForm="ngForm" (keyup.enter)="register($event,userElement.value,passElement.value,nameElement.value,surnameElement)">
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput #userElement  placeholder="Username" type="text"
+                               maxlength="30" name="username" required>
+                        <span matPrefix>
+							<mat-icon>person</mat-icon>
+						</span>
+                        <mat-hint align="end">{{userElement.value.length}} / 30</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput #passElement placeholder="Password" type="password"
+                               name="password" required>
+                        <span matPrefix>
+							<mat-icon>lock</mat-icon>
+						</span>
+                        <mat-hint align="end">Something hard to guess</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput #nameElement  placeholder="Name" type="text"
+                               name="text" required>
+                        <span matPrefix>
+							<mat-icon>lock</mat-icon>
+						</span>
+                        <mat-hint align="end">Introduce your name</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div layout="row">
+                    <mat-form-field flex>
+                        <input matInput #surnameElement  placeholder="Surname" type="text"
+                               name="text" required>
+                        <span matPrefix>
+							<mat-icon>lock</mat-icon>
+						</span>
+                        <mat-hint align="end">Introduce your surnames</mat-hint>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-divider></mat-divider>
+        <mat-dialog-actions align="end">
+            <button type="button" mat-button class="text-upper" (click)="dialogRef.close()">Close</button>
+            <button type="button" mat-button color="accent" class="text-upper" (click)="register($event,userElement.value,passElement.value,nameElement.value,surnameElement.value)">Register</button>
+        </mat-dialog-actions>
+    </div>
+
+</ng-template>
 

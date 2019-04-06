@@ -5,10 +5,14 @@ import {ConceptService} from "../concept/concept.service";
 import {QuestionService} from "../question/question.service";
 import {Question} from "../question/question.model";
 import {TdDialogService} from '@covalent/core';
-import {MatDialog, MatDialogRef} from "@angular/material";
+import {MatDialogRef} from "@angular/material";
 import {Answer} from "../answer/answer.model";
 import {AnswerService} from "../answer/answer.service";
 import {error} from "@angular/compiler/src/util";
+import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
+import {ConceptDiagramComponent} from "../diagram/conceptDiagram.component";
+import {MatDialog} from "@angular/material";
+
 
 
 // @ts-ignore
@@ -44,6 +48,7 @@ export class ConceptPageComponent implements OnInit {
                 private activatedRoute: ActivatedRoute,
                 private conceptService: ConceptService,
                 private questionService: QuestionService,
+                private diagramDialog: MatDialog,
                 private _dialogService: TdDialogService,
                 public dialog: MatDialog,
                 private answerService: AnswerService
@@ -52,6 +57,8 @@ export class ConceptPageComponent implements OnInit {
             this.id = params['id'];
         })
     }
+
+
 
     ngOnInit(): void {
         this.pageNumber = 0;
@@ -186,5 +193,15 @@ export class ConceptPageComponent implements OnInit {
         this.answerString += string;
         this.answerString += "add";
     }
+
+
+    showConceptDiagram() {
+        this.diagramDialog.open(ConceptDiagramComponent, {
+            height: "625px",
+            width: "825px",
+            data: this.id
+        });
+    }
+
 
 }
