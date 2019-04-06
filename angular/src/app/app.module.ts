@@ -117,7 +117,7 @@ import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEcha
         /** Additional **/
         NgxChartsModule,
         routing,],
-    bootstrap: [AppComponent, DiagramComponent, ],
+    bootstrap: [AppComponent, DiagramComponent ],
     providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},

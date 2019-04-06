@@ -65,8 +65,8 @@
 </ng-template>
 <br>
 <br>
-<div *ngIf="loginService.isAdmin" align="center">
-<button mat-raised-button color="primary" class="align-center" (click)="showDiagram()">
+<div *ngIf="loginService.isAdmin||loginService.isStudent" align="center">
+<button mat-raised-button color="red" class="align-center" (click)="showDiagram()">
     Diagrama
 </button>
 </div>
