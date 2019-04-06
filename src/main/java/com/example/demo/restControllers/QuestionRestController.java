@@ -44,7 +44,7 @@ public class    QuestionRestController {
         return questions;
     }
 
-    @JsonView(Question.BasicInfo.class)
+    @JsonView(QuestionDetails.class)
     @GetMapping(value = "/concept/{id}/{corrected}")
     public Page<Question> getQuestionsByID(@PageableDefault(size = DEFAULT_SIZE) Pageable page,@PathVariable int id,
                                            @PathVariable boolean corrected) {
@@ -83,16 +83,16 @@ public class    QuestionRestController {
         Concept concept = conceptService.findOne(id).get();
         int typeItem = 0;
         List<Item> list = new ArrayList<>();
-        int typeQuestion = (int)(Math.random() * 4);
+        int typeQuestion =3;//m  (int)(Math.random() * 4);
         Question question;
         String questionName = "";
         if (typeQuestion == 0) {
-            questionName = "¿Cuáles son " + concept.getName() + " ?";
+            questionName = "¿Cuáles son " + concept.getName() + "?";
 
         } else if (typeQuestion == 1) {
             List<Item> itemsList = itemService.findByConceptName(concept.getName());
             typeItem = (int) (Math.random() * itemsList.size() - 1);
-            questionName = "¿" + itemsList.get(typeItem).getName() + " es un elemento de " + concept.getName() + " ?";
+            questionName = "¿" + itemsList.get(typeItem).getName() + " es un elemento de " + concept.getName() + "?";
 
         } else if (typeQuestion == 2) {
             List<Item> itemsList = itemService.findCorrect(true);
@@ -102,7 +102,7 @@ public class    QuestionRestController {
             for (Item i : itemsList) {
                 otherItems += i.getName() + ", ";
             }
-            questionName = "¿Qué elemento falta en " + otherItems + " para completar la lista de " + concept.getName() + " ?";
+            questionName = "¿Qué elemento falta en " + otherItems + " para completar la lista de " + concept.getName() + "?";
 
         } else if (typeQuestion == 3) {
             List<Item> itemsList = itemService.findByConceptName(concept.getName());
@@ -116,12 +116,12 @@ public class    QuestionRestController {
                 string += itemsList.get(typeItem).getName() + ", ";
                 itemsList.remove(typeItem);
             }
-            questionName = "¿Qué elementos de " + string + " no son parte de " + concept.getName() + " ?";
+            questionName = "¿Qué elementos de " + string + " no son parte de " + concept.getName() + "?";
         }
         if (typeQuestion == 0. || typeQuestion == 2) {
-            question = new Question(questionName, "" + typeQuestion, false);
+            question = new Question(questionName, typeQuestion, false);
         } else {
-            question = new Question(questionName, "" + typeQuestion, true);
+            question = new Question(questionName, typeQuestion, true);
         }
 
         concept.setQuestion(question);

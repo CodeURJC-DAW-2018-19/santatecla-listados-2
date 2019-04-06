@@ -58,6 +58,7 @@ import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
+import {AnswerService} from "./answer/answer.service";
 
 @NgModule({
     declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent ],
@@ -111,7 +112,7 @@ import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
         NgxChartsModule,
         routing,],
     bootstrap: [AppComponent],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,AnswerService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]

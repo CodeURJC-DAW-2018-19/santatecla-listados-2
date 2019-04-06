@@ -4,10 +4,10 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import 'rxjs/Rx';
 import {Answer} from './answer.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from "../logIn/logIn.service";
 
-const BASE_URL = 'http://127.0.0.1:8080/api/answer/';
+const BASE_URL = '/api/answers/';
 
 @Injectable()
 export class AnswerService {
@@ -24,9 +24,13 @@ export class AnswerService {
             .pipe(map(response => response.a),catchError(error => this.handleError(error)));
     }
 
-    addAnswer(answer:Answer):Observable<Answer> {
-        return this.http.post<{a:Answer}>(BASE_URL, answer,{ withCredentials: true })
-            .pipe(map(response => response.a), catchError(error => this.handleError(error)));
+    addAnswer(id:number,answer:string):Observable<Answer> {
+        const body = JSON.stringify(answer);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post<Answer>(BASE_URL+id, body,{ withCredentials: true , headers})
+            .pipe(catchError(error => this.handleError(error)));
     }
 
     removeAnswer(answer: Answer):Observable<Answer> {

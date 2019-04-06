@@ -35,6 +35,7 @@ export class TopicService {
             .pipe(catchError((error) => this.handleError(error)));
 
     }
+
     getSizeTopic(){
        return this.http.get(BASE_URL+"size");
 

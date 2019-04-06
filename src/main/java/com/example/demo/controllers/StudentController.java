@@ -118,9 +118,9 @@ public class StudentController {
         }
 
         if (typeQuestion ==0. || typeQuestion == 2){
-            question = new Question(questionName, "" +typeQuestion, false );
+            question = new Question(questionName, typeQuestion, false );
         }else{
-            question = new Question(questionName, "" +typeQuestion, true );
+            question = new Question(questionName, typeQuestion, true );
         }
         model.addAttribute(modalType, true);
         model.addAttribute("questions", list);

@@ -28,18 +28,15 @@ public class ImageRestController {
     private ConceptRepository conceptRepository;
 
     @GetMapping("/{id}")
-    public void getImage(@PathVariable int id, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Image> getImage(@PathVariable int id, HttpServletResponse response) throws IOException {
         Image image = imageRepository.findById(id).get();
 
-        String imageDataBytes = image.getBase64().substring(image.getBase64().indexOf(",") + 1);
-        InputStream stream = new ByteArrayInputStream(Base64.decodeBase64(imageDataBytes.getBytes()));
-        response.addHeader("Content-Type", "image/jpeg");
-        IOUtils.copy(stream, response.getOutputStream());
+        return new ResponseEntity<>(image,HttpStatus.OK);
     }
 
 
     @PostMapping("/newImage/{title}/{concept}")
-    public void postImage (@PathVariable String title,@PathVariable String concept, @RequestBody MultipartFile file,
+    public ResponseEntity<Image> postImage (@PathVariable String title,@PathVariable String concept, @RequestBody MultipartFile file,
                            HttpServletResponse response) throws IOException {
         Image i = new Image(title, "data:image/png;base64,"+ java.util.Base64.getEncoder().encodeToString(file.getBytes()));
         i.setConcept(conceptRepository.findByName(concept).get());
@@ -47,10 +44,7 @@ public class ImageRestController {
 
         imageRepository.save(i);
 
-        String imageDataBytes = i.getBase64().substring(i.getBase64().indexOf(",")+1);
-        InputStream stream = new ByteArrayInputStream(Base64.decodeBase64(imageDataBytes.getBytes()));
-        response.addHeader("Content-Type","image/jpeg");
-        IOUtils.copy(stream,response.getOutputStream());
+        return new ResponseEntity<>(i,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
