@@ -6,8 +6,9 @@ import 'rxjs/Rx';
 import {Answer} from './answer.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from "../logIn/logIn.service";
+import {environment} from "../../environments/environment";
 
-const BASE_URL = '/api/answers/';
+const BASE_URL = environment.apiEndpoint + "/answers/";
 
 @Injectable()
 export class AnswerService {

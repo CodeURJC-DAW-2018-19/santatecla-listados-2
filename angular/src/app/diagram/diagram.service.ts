@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { Diagram } from "./diagram.model";
 import {LoginService} from "../logIn/logIn.service";
 import {Page} from "../pages/page.model";
+import {environment} from "../../environments/environment";
 
 
-const BASE_URL = '/api';
+const BASE_URL = environment.apiEndpoint;
 
 @Injectable()
 export class DiagramService {

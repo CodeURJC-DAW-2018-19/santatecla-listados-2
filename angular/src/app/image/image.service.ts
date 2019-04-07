@@ -6,8 +6,9 @@ import {catchError, map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 import {Image} from "./image.model";
+import {environment} from "../../environments/environment";
 
-const BASE_URL = '/api/images';
+const BASE_URL = environment.apiEndpoint + "/images";
 
 @Injectable()
 export class ImageService {

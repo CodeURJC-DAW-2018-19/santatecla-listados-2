@@ -6,8 +6,9 @@ import {catchError, map} from 'rxjs/operators';
 import {Item} from './item.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
+import {environment} from "../../environments/environment";
 
-const BASE_URL = '/api/items/';
+const BASE_URL = environment.apiEndpoint + "/items/";
 
 @Injectable()
 export class ItemService {

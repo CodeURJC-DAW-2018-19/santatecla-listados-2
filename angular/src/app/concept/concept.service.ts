@@ -7,8 +7,9 @@ import {Concept} from './concept.model';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
 import {Question} from "../question/question.model";
+import {environment} from "../../environments/environment";
 
-const BASE_URL = '/api/concepts/';
+const BASE_URL = environment.apiEndpoint + "/concepts/";
 
 @Injectable()
 export class ConceptService {

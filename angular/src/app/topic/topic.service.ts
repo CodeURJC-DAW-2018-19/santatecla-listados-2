@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
-
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-
 import {Topic} from './topic.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from '../logIn/logIn.service';
+import {environment} from "../../environments/environment";
 
-const BASE_URL = '/api/topics/';
+const BASE_URL = environment.apiEndpoint + "/topics/";
 
 @Injectable()
 export class TopicService {
