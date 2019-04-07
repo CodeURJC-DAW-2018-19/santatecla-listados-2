@@ -12,6 +12,8 @@ import {error} from "@angular/compiler/src/util";
 import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 import {ConceptDiagramComponent} from "../diagram/conceptDiagram.component";
 import {MatDialog} from "@angular/material";
+import {Image} from "../image/image.model";
+import {ImageService} from "../image/image.service";
 
 
 
@@ -30,6 +32,7 @@ export class ConceptPageComponent implements OnInit {
     newAnswer: Answer;
     answerString: string = "";
     answerBoolean:string;
+    images:Image[];
 
     @ViewChild('FirstModal') buttonFirstModalDialog: TemplateRef<any>;
     dialogFirstModal: MatDialogRef<any, any>;
@@ -51,7 +54,8 @@ export class ConceptPageComponent implements OnInit {
                 private diagramDialog: MatDialog,
                 private _dialogService: TdDialogService,
                 public dialog: MatDialog,
-                private answerService: AnswerService
+                private answerService: AnswerService,
+                private imageService: ImageService
     ) {
         this.activatedRoute.params.subscribe(params => {
             this.id = params['id'];
@@ -82,6 +86,10 @@ export class ConceptPageComponent implements OnInit {
             (questions: Question[]) => this.conceptQuestionsNotCorrected = questions,
             error => console.log(error)
         );
+        this.imageService.getImagesById(this.id).subscribe(
+            (images: Image[]) => this.images = images,
+            error =>console.log(error)
+        )
     }
 
     private newQuestion() {

@@ -29,6 +29,22 @@
 </button>
 
 
+<div id="images">
+    <h1>IMÁGENES</h1>
+    <div *ngFor="let image of images"  style="float: left;margin-right: 2%">
+        <p>{{image.title}}</p>
+        <p>
+            <img src='{{image.base64}}' style="max-height: 500px;max-width: 500px"/>
+    </div>
+</div>
+
+<div align="center" style="position: fixed;bottom: 70px; left: 45%;">
+    <button mat-raised-button color="red" class="align-center" (click)="showConceptDiagram()">
+        Diagrama 2
+    </button>
+</div>
+
+
 <ng-template #FirstModal let-dialogRef="dialogFirstModal">
 
     <h1 mat-dialog-title>{{createdquestion.question}}</h1>
@@ -85,9 +101,3 @@
         <button type="button" mat-button class="text-upper" (click)="dialogFourthModal.close()">Cerrar</button>
     </mat-dialog-actions>
 </ng-template>
-<br>
-<div align="center">
-    <button mat-raised-button color="red" class="align-center" (click)="showConceptDiagram()">
-        Diagrama 2
-    </button>
-</div>
