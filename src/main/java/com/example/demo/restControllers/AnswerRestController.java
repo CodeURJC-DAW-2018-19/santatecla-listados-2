@@ -65,14 +65,12 @@ public class AnswerRestController {
         Answer answer1 = new Answer();
         answer1.setQuestion(question);
         answer1.setOpenAnswer(answer);
-        if (question.getType() == 0 || question.getType() == 2) {
-
-        } else if (question.getType() == 1) {
+        if (question.getType() == 1) {
             boolean correct;
-            if (answer.equals("VERDADERO")){
+            if (answer.equals("\"VERDADERO\"")) {
                 correct = true;
-            }else{
-                correct =false;
+            } else {
+                correct = false;
             }
             question.setCorrected(true);
             Concept c = question.getConcept();
@@ -85,7 +83,7 @@ public class AnswerRestController {
                     selected = item;
                 }
             }
-            if (selected.isCorrect() && correct) {
+            if (selected.isCorrect() && correct ||!selected.isCorrect() && !correct ) {
                 answer1.setMark(true);
                 c.setHits(c.getHits() + 1);
                 topic.setHits(topic.getHits() + 1);
@@ -98,9 +96,9 @@ public class AnswerRestController {
         } else if (question.getType() == 3) {
             question.setCorrected(true);
             String[] items = answer.split("add");
-            ArrayList<String> items1= new ArrayList<>(Arrays.asList(items));
+            ArrayList<String> items1 = new ArrayList<>(Arrays.asList(items));
             StringBuilder respuesta = new StringBuilder();
-            for (String s : items1){
+            for (String s : items1) {
                 respuesta.append(s).append(", ");
             }
             String realanswer = respuesta.toString();
@@ -109,19 +107,19 @@ public class AnswerRestController {
             Topic topic = c.getTopic();
             int result = 0;
 
-            for (String s: items1) {
-                for (Item i: question.getConcept().getItems()) {
-                    if(i.getName().equals(s) && i.isCorrect()){
+            for (String s : items1) {
+                for (Item i : question.getConcept().getItems()) {
+                    if (i.getName().equals(s) && i.isCorrect()) {
                         result++;
                     }
                 }
             }
 
-            if(result==c.getItems().size()){
+            if (result == c.getItems().size()) {
                 answer1.setMark(true);
-                c.setHits(c.getHits()+1);
-                topic.setHits(topic.getHits()+1);
-            }else {
+                c.setHits(c.getHits() + 1);
+                topic.setHits(topic.getHits() + 1);
+            } else {
                 answer1.setMark(false);
                 c.setErrors(c.getErrors() + 1);
                 topic.setErrors(topic.getErrors() + 1);

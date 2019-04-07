@@ -122,7 +122,7 @@ public class DatabaseInitializer {
 		c1.setQuestion(q1);
 		c1.setQuestion(q13);
 		c1.setQuestion(q3);
-		c1.setQuestion(q4);
+		/*c1.setQuestion(q4);
 		c1.setQuestion(q5);
 		c1.setQuestion(q6);
 		c1.setQuestion(q7);
@@ -131,11 +131,11 @@ public class DatabaseInitializer {
 		c1.setQuestion(q10);
 		c1.setQuestion(q11);
 		c1.setQuestion(q12);
-		c1.setQuestion(q2);
+		c1.setQuestion(q2);*/
 		q1.setConcept(c1);
 		q13.setConcept(c1);
 		q3.setConcept(c1);
-		q4.setConcept(c1);
+		/*q4.setConcept(c1);
 		q5.setConcept(c1);
 		q6.setConcept(c1);
 		q7.setConcept(c1);
@@ -144,7 +144,7 @@ public class DatabaseInitializer {
 		q10.setConcept(c1);
 		q11.setConcept(c1);
 		q12.setConcept(c1);
-		q2.setConcept(c1);
+		q2.setConcept(c1);*/
 
 		q1.setAnswer(a1);
 		q13.setAnswer(a13);

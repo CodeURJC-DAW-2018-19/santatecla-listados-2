@@ -3,9 +3,10 @@
 <ng-container *ngFor="let question of conceptQuestionsCorrected">
     <li>
         {{question.question}} : <p *ngIf="question.answer != null">{{question.answer.openAnswer}}</p>
-        <mat-icon *ngIf="question.answer.mark == true " class="tc-red-600">check</mat-icon>
-        <mat-icon *ngIf="question.answer.mark == false" class="tc-red-600">cancel</mat-icon>
-
+        <div *ngIf="question.answer != null">
+            <mat-icon *ngIf="question.answer.mark == true " class="tc-red-600">check</mat-icon>
+            <mat-icon *ngIf="question.answer.mark == false" class="tc-red-600">cancel</mat-icon>
+        </div>
     </li>
 </ng-container>
 <br>
