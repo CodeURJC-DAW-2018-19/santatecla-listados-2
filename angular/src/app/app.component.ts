@@ -2,10 +2,9 @@ import {Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef} fro
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatIconRegistry, MatDialog, MatDialogRef} from '@angular/material';
 import { TdMediaService, tdRotateAnimation } from '@covalent/core';
-import {LoginService} from "./logIn/logIn.service";
+import {LoginService, User} from "./logIn/logIn.service";
 import {Router} from "@angular/router";
-import {User} from "./logIn/user.model";
-import {RegisterService} from "./logIn/register.service";
+import {UserR} from "./logIn/user.model";
 
 @Component({
     selector: 'my-app',
@@ -17,7 +16,7 @@ export class AppComponent implements AfterViewInit {
     dialogLog: MatDialogRef<any, any>;
     @ViewChild('registerDialog') registerDialog: TemplateRef<any>;
     diaLog: MatDialogRef<any, any>;
-    user:User;
+    user:UserR;
     constructor(
         public media: TdMediaService,
         public dialog: MatDialog,
@@ -26,7 +25,6 @@ export class AppComponent implements AfterViewInit {
         private _domSanitizer: DomSanitizer,
         private loginService: LoginService,
         public router: Router,
-        private registerService:RegisterService
     )
     {
         this._iconRegistry.addSvgIconInNamespace(
@@ -36,6 +34,7 @@ export class AppComponent implements AfterViewInit {
                 'https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg',
             ),
         );
+        this.user={name:"",surName:"",password:"",username:"",rol:""}
 
     }
     logIn(event: any, user: string, pass: string) {
@@ -83,11 +82,11 @@ export class AppComponent implements AfterViewInit {
         this.media.broadcast();
         this._changeDetectorRef.detectChanges();
     }
-    register(event: any, userName: string, pass: string,name:string,surname:string){
-        event.preventDefault();
-        this.user={username:userName,surName:surname,name:name,password:pass,rol:"ROLE_STUDENT"};
-        this.registerService.register(this.user).subscribe(
-            (u:User)=>{
+    register(){
+        this.user.rol="ROLE_STUDENT";
+        console.log(this.user);
+        this.loginService.register(this.user).subscribe(
+            (u:UserR)=>{
                 console.log(u);
                 this.diaLog.close();
             },error1 => console.log(error1)
