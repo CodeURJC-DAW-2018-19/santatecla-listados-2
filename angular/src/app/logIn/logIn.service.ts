@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {UserR} from "./user.model";
+import {Observable, throwError} from "rxjs";
 
 export interface User {
     id?: number;
@@ -70,5 +72,21 @@ export class LoginService {
         this.isAdmin = false;
         this.isStudent = false;
         this.isGuest=false;
+    }
+    register(user: UserR):Observable<UserR> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        const body = JSON.stringify(user);
+        return this.http.post<any>("api/users/register",body,{headers})
+            .pipe(
+                map(response => response),
+                catchError(error => this.handleError(error))
+            );
+    }
+
+    private handleError(error: any) {
+        console.error(error);
+        return throwError("Server error (" + error.status + "): " + error.text());
     }
 }

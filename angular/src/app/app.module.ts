@@ -65,7 +65,6 @@ import {DiagramService} from "./diagram/diagram.service";
 import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEchartsModule} from "@covalent/echarts";
 import {ImageService} from "./image/image.service";
 import {ConceptDiagramComponent} from "./diagram/conceptDiagram.component";
-import {RegisterService} from "./logIn/register.service";
 
 @NgModule({
     declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent, ConceptDiagramComponent ],
@@ -123,7 +122,7 @@ import {RegisterService} from "./logIn/register.service";
         NgxChartsModule,
         routing,],
     bootstrap: [AppComponent, DiagramComponent, ConceptDiagramComponent ],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,RegisterService, AnswerService,
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,AnswerService,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
         {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}
