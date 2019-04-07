@@ -10,6 +10,9 @@
 
     </li>
 </ng-container>
+
+<button *ngIf="!noMoreCorrected" style="margin-left: 50%" (click)="loadMoreCorrected()">loadMore</button>
+<span *ngIf="noMoreCorrected" style="margin-left: 50%">No more corrected Question</span>
 <br>
 
 
@@ -22,6 +25,8 @@
         </p>
     </li>
 </ng-container>
+<button *ngIf="!noMoreNotCorrected" style="margin-left: 50%" (click)="loadMoreNotCorrected()">loadMore</button>
+<span *ngIf="noMoreNotCorrected" style="margin-left: 50%">No more not corrected Question</span>
 <br>
 
 <button mat-button (click)='newQuestion()'>

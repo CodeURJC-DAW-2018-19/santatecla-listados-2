@@ -4,10 +4,10 @@
     <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/">
 
         <div td-toolbar-content layout="row" layout-align="start center" flex>
-            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='openRegisterDialog()'>Register</button>
-            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='guest()'>Guest</button>
-            <button *ngIf="loginService.isLogged" mat-button (click)='logOut()' style="left: 96%">logOut</button>
-            <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()'>logIn</button>
+            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='openRegisterDialog()' style=" left: 90%">Register</button>
+            <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='guest()' style=" left: 89%">Guest</button>
+            <button *ngIf="loginService.isLogged" mat-button (click)='logOut()' style=" left: 96%">logOut</button>
+            <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()' style=" left: 88%">logIn</button>
         </div>
 
         <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
@@ -23,7 +23,7 @@
             </div>
         </td-layout-footer>
     </td-layout-nav>
-</td-layout>
+
 <ng-template #loginDialog let-dialogRef="dialogRef">
 
     <div layout="column" layout-fill>

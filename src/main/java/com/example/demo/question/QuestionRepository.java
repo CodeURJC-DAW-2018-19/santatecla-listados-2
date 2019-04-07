@@ -16,4 +16,5 @@ public  interface  QuestionRepository extends JpaRepository<Question,Integer> {
     Page<Question> findAllByConceptIdAndCorrectedFalse(int id,Pageable page);
     Page<Question> findByConceptIdAndCorrected(int id,Pageable page, boolean corrected);
     List<Question> findAllByConceptIdAndCorrectedFalse(int id);
+    List<Question> findAllByConceptIdAndCorrected(int id,boolean b);
 }

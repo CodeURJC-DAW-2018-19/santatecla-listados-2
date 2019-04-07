@@ -53,6 +53,9 @@ export class QuestionService {
     getSizeQuestion(id: number){
         return this.http.get(BASE_URL + "sizeQuestion/" + id);
     }
+    getSizeQuestionCorrected(id: number){
+        return this.http.get(BASE_URL + "sizeQuestion/Corrected/" + id);
+    }
     /*addQuestion(question:Question):Observable<Question> {
     return this.http.post<{q:Question}>(BASE_URL, question,{ withCredentials: true })
         .pipe(map(response => response.q), catchError(error => this.handleError(error)));

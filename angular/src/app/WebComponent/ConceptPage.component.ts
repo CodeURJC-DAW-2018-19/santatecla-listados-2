@@ -16,7 +16,6 @@ import {Image} from "../image/image.model";
 import {ImageService} from "../image/image.service";
 
 
-
 // @ts-ignore
 @Component({
     templateUrl: 'ConceptPage.template.html'
@@ -26,13 +25,18 @@ export class ConceptPageComponent implements OnInit {
     concept: Concept;
     id: number;
     conceptQuestionsCorrected: Question [];
-    pageNumber: number;
+    pageNumberTrue: number;
+    pageNumberFalse: number;
+    maxPageTrue: number;
+    maxPageFalse: number;
+    noMoreCorrected: boolean;
+    noMoreNotCorrected: boolean;
     conceptQuestionsNotCorrected: Question [];
     createdquestion: Question;
     newAnswer: Answer;
     answerString: string = "";
-    answerBoolean:string;
-    images:Image[];
+    answerBoolean: string;
+    images: Image[];
 
     @ViewChild('FirstModal') buttonFirstModalDialog: TemplateRef<any>;
     dialogFirstModal: MatDialogRef<any, any>;
@@ -63,32 +67,39 @@ export class ConceptPageComponent implements OnInit {
     }
 
 
-
     ngOnInit(): void {
-        this.pageNumber = 0;
-        this.newAnswer = {openAnswer: ''};
+        this.pageNumberTrue = 0;
+        this.pageNumberFalse = 0;
+        this.noMoreCorrected = false;
+        this.noMoreNotCorrected = false;
         this.refresh();
+        this.questionService.getSizeQuestionCorrected(this.id).subscribe(
+            (res: any) => {
+                this.maxPageTrue = res;
+                console.log(this.maxPageTrue);
+                this.refreshCorrected();
+            },error => console.log(error)
+        );
+        this.questionService.getSizeQuestion(this.id).subscribe(
+            (res: any) => {
+                this.maxPageFalse = res;
+                this.refreshNotCorrected();
+            },
+            error => console.log(error)
+        );
+        this.newAnswer = {openAnswer: ''};
     }
 
     private refresh() {
         this.conceptService.getConcept(this.id).subscribe(
             (res: any) => {
-                console.log(res);
                 this.concept = res;
             },
             error => console.log(error)
         );
-        this.questionService.getQuestionsByConcept(this.id, this.pageNumber, true).subscribe(
-            (questions: Question[]) => this.conceptQuestionsCorrected = questions,
-            error => console.log(error)
-        );
-        this.questionService.getQuestionsByConcept(this.id, this.pageNumber, false).subscribe(
-            (questions: Question[]) => this.conceptQuestionsNotCorrected = questions,
-            error => console.log(error)
-        );
         this.imageService.getImagesById(this.id).subscribe(
             (images: Image[]) => this.images = images,
-            error =>console.log(error)
+            error => console.log(error)
         )
     }
 
@@ -143,27 +154,28 @@ export class ConceptPageComponent implements OnInit {
     loadNewQuestionModal() {
         console.log(this.createdquestion.type);
         if (this.createdquestion.type == 0) {
-            this.answerString  = "";
+            this.answerString = "";
             this.openDialogFirstModal();
         } else if (this.createdquestion.type == 1) {
-            this.answerBoolean  = "";
+            this.answerBoolean = "";
             this.openDialogSecondModal();
         } else if (this.createdquestion.type == 2) {
-            this.answerString  = "";
+            this.answerString = "";
             this.openDialogFirstModal();
         } else if (this.createdquestion.type == 3) {
-            this.answerString  = "";
+            this.answerString = "";
             this.openDialogFourthModal();
         }
     }
 
     saveAnswerFirst() {
         this.answerService.addAnswer(this.createdquestion.id, this.answerString).subscribe(
-            (res:any) =>{
+            (res: any) => {
                 this.createdquestion.answer = res;
                 console.log((<Answer>res).openAnswer);
                 this.dialogFirstModal.close();
-                this.refresh();
+                this.refreshCorrected();
+                this.refreshNotCorrected();
             }, error1 => {
                 console.log(error1);
             }
@@ -172,11 +184,12 @@ export class ConceptPageComponent implements OnInit {
 
     saveAnswerSecond() {
         this.answerService.addAnswer(this.createdquestion.id, this.answerBoolean).subscribe(
-            (res:any) =>{
+            (res: any) => {
                 this.createdquestion.answer = res;
                 console.log((<Answer>res).openAnswer);
                 this.dialogSecondModal.close();
-                this.refresh();
+                this.refreshCorrected();
+                this.refreshNotCorrected();
             }, error1 => {
                 console.log(error1);
             }
@@ -185,18 +198,19 @@ export class ConceptPageComponent implements OnInit {
 
     saveAnswerFourth() {
         this.answerService.addAnswer(this.createdquestion.id, this.answerString).subscribe(
-            (res:any) =>{
+            (res: any) => {
                 this.createdquestion.answer = res;
                 console.log((<Answer>res).openAnswer);
                 this.dialogFourthModal.close();
-                this.refresh();
+                this.refreshCorrected();
+                this.refreshNotCorrected();
             }, error1 => {
                 console.log(error1);
             }
         )
     }
 
-    addText(string: string){
+    addText(string: string) {
         console.log(this.answerString);
         this.answerString += string;
         this.answerString += "add";
@@ -209,6 +223,43 @@ export class ConceptPageComponent implements OnInit {
             width: "825px",
             data: this.id
         });
+    }
+
+    private refreshCorrected() {
+        if (this.pageNumberTrue < this.maxPageTrue) {
+            this.questionService.getQuestionsByConcept(this.id, this.pageNumberTrue, true).subscribe(
+                (questions: Question[]) => {
+                    this.conceptQuestionsCorrected = questions;
+                    console.log(this.conceptQuestionsCorrected)
+                },
+                error => console.log(error)
+            );
+        } else {
+            this.noMoreCorrected = true;
+        }
+    }
+
+    private refreshNotCorrected() {
+        if (this.pageNumberFalse < this.maxPageFalse) {
+            this.questionService.getQuestionsByConcept(this.id, this.pageNumberFalse, false).subscribe(
+                (questions: Question[]) => {
+                    this.conceptQuestionsNotCorrected = questions;
+                },
+                error => console.log(error)
+            );
+        } else {
+            this.noMoreNotCorrected = true;
+        }
+    }
+
+    loadMoreCorrected() {
+        this.pageNumberTrue++;
+        this.refreshCorrected();
+    }
+
+    loadMoreNotCorrected() {
+        this.pageNumberFalse++;
+        this.refreshNotCorrected();
     }
 
 

@@ -59,8 +59,6 @@ export class TeacherPageComponent implements OnInit {
         this.questionService.getSizeQuestion(this.id).subscribe(
             (res: any) => {
                 this.maxPageQuestion = res;
-                console.log(res);
-                console.log(this.questions);
                 this.refreshQuestion();
             },
             error => console.log(error)

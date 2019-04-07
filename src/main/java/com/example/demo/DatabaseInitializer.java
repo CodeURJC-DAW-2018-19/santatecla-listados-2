@@ -76,7 +76,7 @@ public class DatabaseInitializer {
 		Answer a10 = new Answer("Verdadero ", false);
 		Answer a11 = new Answer("Verdadero ", false);
 		Answer a12 = new Answer("Verdadero ", false);
-		Answer a2 = new Answer("Falseo ", true);
+		Answer a2 = new Answer("Falso ", true);
 
 		Item i1 = new Item("item1",false);
 		Item i2 = new Item ("item2",true);
@@ -133,6 +133,7 @@ public class DatabaseInitializer {
 		c1.setQuestion(q12);
 		c1.setQuestion(q2);*/
 		q1.setConcept(c1);
+		q2.setConcept(c1);
 		q13.setConcept(c1);
 		q3.setConcept(c1);
 		/*q4.setConcept(c1);
