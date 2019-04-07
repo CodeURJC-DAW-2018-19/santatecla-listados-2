@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {TopicService} from "./topic/topic.service";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 
+import {UserR} from "./logIn/user.model";
 
 @Component({
     selector: 'my-app',
@@ -16,6 +17,9 @@ import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 export class AppComponent implements AfterViewInit {
     @ViewChild('loginDialog') loginDialog: TemplateRef<any>;
     dialogLog: MatDialogRef<any, any>;
+    @ViewChild('registerDialog') registerDialog: TemplateRef<any>;
+    diaLog: MatDialogRef<any, any>;
+    user:UserR;
     constructor(
         public media: TdMediaService,
         public dialog: MatDialog,
@@ -35,10 +39,13 @@ export class AppComponent implements AfterViewInit {
                 'https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg',
             ),
         );
+        this.user={name:"",surName:"",password:"",username:"",rol:""}
 
     }
     logIn(event: any, user: string, pass: string) {
         event.preventDefault();
+        console.log(user);
+        console.log(pass);
         this.loginService.logIn(user, pass).subscribe(
             (u) => {
                 this.router.navigate(['/student']);
@@ -51,9 +58,14 @@ export class AppComponent implements AfterViewInit {
             },
         );
     }
-
     openLoginDialog() {
         this.dialogLog = this.dialog.open(this.loginDialog, {
+            width: '50%',
+            height: '50%',
+        });
+    }
+    openRegisterDialog() {
+        this.diaLog = this.dialog.open(this.registerDialog, {
             width: '50%',
             height: '50%',
         });
@@ -66,10 +78,25 @@ export class AppComponent implements AfterViewInit {
             (error) => console.log('Error when trying to log out: ' + error),
         );
     }
+    guest() {
+        this.loginService.isGuest=true;
+        this.router.navigate(['/student']);
+    }
     ngAfterViewInit(): void {
         // broadcast to all listener observables when loading the page
         this.media.broadcast();
         this._changeDetectorRef.detectChanges();
+    }
+    register(){
+        this.user.rol="ROLE_STUDENT";
+        console.log(this.user);
+        this.loginService.register(this.user).subscribe(
+            (u:UserR)=>{
+                console.log(u);
+                alert("Cuenta creada satisfactoriamente");
+                this.diaLog.close();
+            },error1 => console.log(error1)
+        )
     }
 
 }

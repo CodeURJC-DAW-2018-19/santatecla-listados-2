@@ -6,6 +6,7 @@ import com.example.demo.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,6 +55,7 @@ public class UserRestController {
         user.setPassword(newUser.getPassword());
         userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+
     }
 
     @GetMapping(value = "/")
@@ -70,4 +72,5 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

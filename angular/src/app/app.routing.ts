@@ -4,6 +4,7 @@ import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
 
 
+
 const appRoutes = [
     { path: 'concept/:id', component: ConceptPageComponent},
 

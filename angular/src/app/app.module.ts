@@ -59,16 +59,20 @@ import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import {ErrorInterceptor} from "./auth/error.interceptor";
 import {MainStudentComponent} from "./WebComponent/MainStudent.component";
 import {TeacherPageComponent} from "./WebComponent/TeacherPage.component";
+import {AnswerService} from "./answer/answer.service";
 import {DiagramComponent} from "./diagram/diagram.component";
 import {DiagramService} from "./diagram/diagram.service";
 import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEchartsModule} from "@covalent/echarts";
+import {ImageService} from "./image/image.service";
+import {ConceptDiagramComponent} from "./diagram/conceptDiagram.component";
 
 @NgModule({
-    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent ],
+    declarations: [AppComponent,MainStudentComponent,ConceptPageComponent,TeacherPageComponent,DiagramComponent, ConceptDiagramComponent ],
     imports: [BrowserModule, FormsModule, HttpModule, JsonpModule, routing, CovalentLayoutModule, CovalentMediaModule, CovalentSearchModule, MatIconModule, MatDialogModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([]),
         HttpClientModule,
         JsonpModule,
@@ -117,10 +121,11 @@ import {CovalentBarEchartsModule, CovalentBaseEchartsModule, CovalentTooltipEcha
         /** Additional **/
         NgxChartsModule,
         routing,],
-    bootstrap: [AppComponent, DiagramComponent, ],
-    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,MainStudentComponent,
+    bootstrap: [AppComponent, DiagramComponent, ConceptDiagramComponent ],
+    providers: [TopicService,ConceptService,ItemService,LoginService,QuestionService,DiagramService,ImageService,AnswerService,MainStudentComponent,
         {provide:LocationStrategy, useClass: HashLocationStrategy},
         {provide:HTTP_INTERCEPTORS,useClass: BasicAuthInterceptor,multi:true},
-        {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}]
+        {provide:HTTP_INTERCEPTORS,useClass: ErrorInterceptor,multi:true}
+        ]
 })
 export class AppModule { }

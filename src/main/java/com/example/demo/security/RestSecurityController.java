@@ -28,7 +28,12 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/").hasAnyRole("TEACHER");
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/{userName}").hasAnyRole("TEACHER");
 
+        //diagram URLs
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/diagramInfo").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/conceptDiagramInfo/{id}").permitAll();
+
         //topic URLs
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topics/size").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topics/").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/topics/{id}").hasAnyRole("TEACHER", "STUDENT");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/topics/").hasAnyRole("TEACHER");
@@ -60,7 +65,7 @@ public class RestSecurityController extends WebSecurityConfigurerAdapter {
         //answer URLs
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answers/").hasAnyRole("STUDENT","TEACHER");
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/answers/{id}").hasAnyRole("STUDENT","TEACHER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/answers/").hasAnyRole("STUDENT");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/answers/{id}").hasAnyRole("STUDENT");
         http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/answers/{id}").hasAnyRole("STUDENT");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/answers/question{questionId}/{id}").hasAnyRole("STUDENT");
 

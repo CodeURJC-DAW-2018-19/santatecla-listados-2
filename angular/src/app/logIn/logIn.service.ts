@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {UserR} from "./user.model";
+import {Observable, throwError} from "rxjs";
 
 export interface User {
     id?: number;
@@ -14,6 +16,8 @@ export class LoginService {
 
     isLogged = false;
     isAdmin = false;
+    isStudent=false;
+    isGuest=false;
     user: User;
     auth: string;
 
@@ -26,7 +30,6 @@ export class LoginService {
     }
 
     logIn(user: string, pass: string) {
-
         let auth = window.btoa(user + ':' + pass);
 
         const headers = new HttpHeaders({
@@ -36,13 +39,11 @@ export class LoginService {
 
         return this.http.get<User>('api/users/logIn', { headers })
             .pipe(map(user => {
-                console.log(user);
                 if (user) {
                     this.setCurrentUser(user);
                     user.authdata = auth;
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
-                console.log(user);
                 return user;
             }));
     }
@@ -61,11 +62,31 @@ export class LoginService {
         this.isLogged = true;
         this.user = user;
         this.isAdmin = (this.user.rol === 'ROLE_TEACHER');
+        this.isStudent  = (this.user.rol === 'ROLE_STUDENT');
+        this.isGuest=!this.isStudent && !this.isAdmin;
     }
 
     removeCurrentUser() {
         localStorage.removeItem('currentUser');
         this.isLogged = false;
         this.isAdmin = false;
+        this.isStudent = false;
+        this.isGuest=false;
+    }
+    register(user: UserR):Observable<UserR> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        const body = JSON.stringify(user);
+        return this.http.post<UserR>("api/users/register",body,{headers})
+            .pipe(
+                map(response => response),
+                catchError(error => this.handleError(error))
+            );
+    }
+
+    private handleError(error: any) {
+        console.error(error);
+        return throwError("Server error (" + error.status + "): " + error.text());
     }
 }

@@ -25,7 +25,7 @@ public class Question {
 
     @Column(name = "Type")
     @JsonView (BasicInfo.class)
-    private String type;
+    private int type;
 
     @Column(name = "Corrected")
     @JsonView (BasicInfo.class)
@@ -41,7 +41,7 @@ public class Question {
 
     public Question(){}
 
-    public Question(String question, String type, boolean corrected) {
+    public Question(String question, int type, boolean corrected) {
         this.question = question;
         this.type = type;
         this.corrected = corrected;
@@ -79,11 +79,11 @@ public class Question {
         this.answer = answer;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

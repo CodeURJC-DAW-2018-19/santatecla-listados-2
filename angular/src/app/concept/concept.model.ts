@@ -1,6 +1,7 @@
 import {Topic} from '../topic/topic.model';
 import {Question} from "../question/question.model";
 import {Item} from "../item/item.model";
+import {Image} from "../image/image.model";
 
 export interface Concept{
     id?: number;
@@ -12,5 +13,5 @@ export interface Concept{
     topic:Topic;
     questions?:Set<Question>;
     items?:Set<Item>;
-    //images?:Set<Image>;
+    images?:Set<Image>;
 }

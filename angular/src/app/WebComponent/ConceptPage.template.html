@@ -1,18 +1,103 @@
 <p>ConceptPage : {{concept.name}}</p>
 <h3>Preguntas Corregidas</h3>
-<ng-container *ngFor="let question of conceptQuestionsCorrected" >
+<ng-container *ngFor="let question of conceptQuestionsCorrected">
     <li>
-        {{question.question}}
+        {{question.question}}:
+        <p *ngIf="question.answer != null" style="position: relative;left: 3%"> {{question.answer.openAnswer}}
+            <mat-icon *ngIf="question.answer.mark == true " class="tc-red-600">check</mat-icon>
+            <mat-icon *ngIf="question.answer.mark == false" class="tc-red-600">cancel</mat-icon>
+        </p>
+
     </li>
 </ng-container>
 <br>
+
+
 <h3>Preguntas sin corregir</h3>
-<ng-container *ngFor="let question of conceptQuestionsNotCorrected" >
+<ng-container *ngFor="let question of conceptQuestionsNotCorrected">
     <li>
-        {{question.question}}
+        {{question.question}} :
+        <p *ngIf="question.answer != null" style="position: relative;left: 3%">
+            {{question.answer.openAnswer}}
+        </p>
     </li>
 </ng-container>
 <br>
+
 <button mat-button (click)='newQuestion()'>
     Nueva pregunta
 </button>
+
+
+<div id="images">
+    <h1>IMÁGENES</h1>
+    <div *ngFor="let image of images"  style="float: left;margin-right: 2%">
+        <p>{{image.title}}</p>
+        <p>
+            <img src='{{image.base64}}' style="max-height: 500px;max-width: 500px"/>
+    </div>
+</div>
+
+<div align="center" style="position: fixed;bottom: 70px; left: 45%;">
+    <button mat-raised-button color="red" class="align-center" (click)="showConceptDiagram()">
+        Diagrama
+    </button>
+</div>
+
+
+<ng-template #FirstModal let-dialogRef="dialogFirstModal">
+
+    <h1 mat-dialog-title>{{createdquestion.question}}</h1>
+    <mat-form-field>
+        <input matInput name="name" [(ngModel)]="answerString" required placeholder="Introduzca el nombre ">
+    </mat-form-field>
+
+    <br>
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveAnswerFirst()">Aceptar</button>
+        <button type="button" mat-button class="text-upper" (click)="dialogFirstModal.close()">Cerrar</button>
+    </mat-dialog-actions>
+
+</ng-template>
+
+
+<ng-template #SecondModal let-dialogRef="dialogSecondModal">
+    <h1 mat-dialog-title>{{createdquestion.question}}</h1>
+    <mat-radio-group [(ngModel)]="answerBoolean">
+        <mat-radio-button class="example-margin" value="VERDADERO">VERDADERO</mat-radio-button>
+        <br>
+        <br>
+        <mat-radio-button class="example-margin" value="FALSO">FALSO</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveAnswerSecond()">Aceptar</button>
+        <button type="button" mat-button class="text-upper" (click)="dialogSecondModal.close()">Cerrar</button>
+    </mat-dialog-actions>
+</ng-template>
+
+
+<ng-template #ThirdModal let-dialogRef="dialogThirdModal">
+    <h1 mat-dialog-title>{{createdquestion.question}}</h1>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button class="text-upper" (click)="dialogThirdModal.close()">Cerrar</button>
+    </mat-dialog-actions>
+</ng-template>
+
+
+<ng-template #FourthModal let-dialogRef="dialogFourthModal">
+    <h1 mat-dialog-title>{{createdquestion.question}}</h1>
+    <ng-container *ngFor="let item of concept.items">
+        <button type="button" mat-button class="text-upper" (click)="addText(item.name)">{{item.name}}</button>
+    </ng-container>
+    <br>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button color="accent" class="text-upper" (click)="saveAnswerFourth()">Aceptar</button>
+        <button type="button" mat-button class="text-upper" (click)="dialogFourthModal.close()">Cerrar</button>
+    </mat-dialog-actions>
+</ng-template>

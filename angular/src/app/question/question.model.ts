@@ -7,5 +7,5 @@ export interface Question {
     corrected:boolean,
     type:number;
     Concept: Concept;
-    Answer: Answer;
+    answer: Answer;
 }
