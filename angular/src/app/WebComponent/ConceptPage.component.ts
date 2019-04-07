@@ -104,29 +104,29 @@ export class ConceptPageComponent implements OnInit {
 
     openDialogFirstModal() {
         this.dialogFirstModal = this.dialog.open(this.buttonFirstModalDialog, {
-            width: '250px',
-            height: '250px'
+            width: '500px',
+            height: '220px'
         });
     }
 
     openDialogSecondModal() {
         this.dialogSecondModal = this.dialog.open(this.buttonSecondModalDialog, {
-            width: '250px',
-            height: '250px'
+            width: '500px',
+            height: '220px'
         });
     }
 
     openDialogThirdModal() {
         this.dialogThirdModal = this.dialog.open(this.buttonThirdModalDialog, {
-            width: '250px',
-            height: '250px'
+            width: '500px',
+            height: '450px'
         });
 
     }
 
     openDialogFourthModal() {
         this.dialogFourthModal = this.dialog.open(this.buttonFourthModalDialog, {
-            width: '250px',
+            width: '600px',
             height: '250px'
         });
 

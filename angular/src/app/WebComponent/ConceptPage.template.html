@@ -2,11 +2,12 @@
 <h3>Preguntas Corregidas</h3>
 <ng-container *ngFor="let question of conceptQuestionsCorrected">
     <li>
-        {{question.question}} : <p *ngIf="question.answer != null">{{question.answer.openAnswer}}</p>
-        <div *ngIf="question.answer != null">
+        {{question.question}}:
+        <p *ngIf="question.answer != null" style="position: relative;left: 3%"> {{question.answer.openAnswer}}
             <mat-icon *ngIf="question.answer.mark == true " class="tc-red-600">check</mat-icon>
             <mat-icon *ngIf="question.answer.mark == false" class="tc-red-600">cancel</mat-icon>
-        </div>
+        </p>
+
     </li>
 </ng-container>
 <br>
@@ -15,7 +16,10 @@
 <h3>Preguntas sin corregir</h3>
 <ng-container *ngFor="let question of conceptQuestionsNotCorrected">
     <li>
-        {{question.question}} : <p *ngIf="question.answer != null">{{question.answer.openAnswer}}</p>
+        {{question.question}} :
+        <p *ngIf="question.answer != null" style="position: relative;left: 3%">
+            {{question.answer.openAnswer}}
+        </p>
     </li>
 </ng-container>
 <br>
@@ -32,6 +36,7 @@
         <input matInput name="name" [(ngModel)]="answerString" required placeholder="Introduzca el nombre ">
     </mat-form-field>
 
+    <br>
     <mat-divider></mat-divider>
 
     <mat-dialog-actions align="end">
@@ -46,8 +51,11 @@
     <h1 mat-dialog-title>{{createdquestion.question}}</h1>
     <mat-radio-group [(ngModel)]="answerBoolean">
         <mat-radio-button class="example-margin" value="VERDADERO">VERDADERO</mat-radio-button>
+        <br>
+        <br>
         <mat-radio-button class="example-margin" value="FALSO">FALSO</mat-radio-button>
     </mat-radio-group>
+    <br>
     <mat-divider></mat-divider>
     <mat-dialog-actions align="end">
         <button type="button" mat-button color="accent" class="text-upper" (click)="saveAnswerSecond()">Aceptar</button>
@@ -70,6 +78,7 @@
     <ng-container *ngFor="let item of concept.items">
         <button type="button" mat-button class="text-upper" (click)="addText(item.name)">{{item.name}}</button>
     </ng-container>
+    <br>
     <mat-divider></mat-divider>
     <mat-dialog-actions align="end">
         <button type="button" mat-button color="accent" class="text-upper" (click)="saveAnswerFourth()">Aceptar</button>
