@@ -90,8 +90,8 @@ export class MainStudentComponent implements OnInit {
                 this.concept.topic=res;
                 this.conceptService.addConcept(this.concept).subscribe(
                     (_: any) => {
-                        this.dialogAC.close();
                         this.refresh();
+                        this.dialogAC.close();
                     }, error => {
                         console.log(error);
                     }

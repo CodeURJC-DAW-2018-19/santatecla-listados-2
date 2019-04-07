@@ -5,7 +5,7 @@
                 <div *ngFor="let concept of topic.concepts">
                     <a *ngIf="loginService.isStudent" [routerLink]="['/concept',concept.id]">{{ concept.name }}</a>
                     <a *ngIf="loginService.isAdmin" [routerLink]="['/teacher',concept.id]">{{ concept.name }}</a>
-                    <a href="#" (click)="removeConcept(concept.id)" *ngIf="loginService.isAdmin">
+                    <a (click)="removeConcept(concept.id)" *ngIf="loginService.isAdmin">
                     <mat-icon class="tc-red-600" style="float: right">delete</mat-icon>
 
                 </a>
