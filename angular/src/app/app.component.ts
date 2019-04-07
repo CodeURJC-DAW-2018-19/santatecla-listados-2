@@ -88,6 +88,7 @@ export class AppComponent implements AfterViewInit {
         this.loginService.register(this.user).subscribe(
             (u:UserR)=>{
                 console.log(u);
+                alert("Cuenta creada satisfactoriamente");
                 this.diaLog.close();
             },error1 => console.log(error1)
         )

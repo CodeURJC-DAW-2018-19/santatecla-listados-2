@@ -78,7 +78,7 @@ export class LoginService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(user);
-        return this.http.post<any>("api/users/register",body,{headers})
+        return this.http.post<UserR>("api/users/register",body,{headers})
             .pipe(
                 map(response => response),
                 catchError(error => this.handleError(error))

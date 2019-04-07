@@ -215,6 +215,7 @@ export class TeacherPageComponent implements OnInit {
         formData.append('file', this.uploadForm.get('profile').value);
         this.imageService.addImage(this.imageTitle, this.concept.name, formData).subscribe(
             (i: any) => {
+                alert("Foto subida satisfactoriamente");
                 this.refreshImage();
             }, error1 => console.log(error1)
         );

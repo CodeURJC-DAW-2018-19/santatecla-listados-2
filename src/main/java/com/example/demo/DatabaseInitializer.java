@@ -197,9 +197,9 @@ public class DatabaseInitializer {
 		i10.setConcept(c1);
 		i11.setConcept(c1);
 		i12.setConcept(c1);
-		c1.setPendings(c1.getPendings()+12);
+		c1.setPendings(c1.getPendings()+11);
 		c1.setHits(c1.getHits()+1);
-		c1.getTopic().setPendings(c1.getTopic().getPendings()+12);
+		c1.getTopic().setPendings(c1.getTopic().getPendings()+11);
 		c1.getTopic().setHits(c1.getTopic().getHits()+1);
 
 		topicRepository.save(t1);
