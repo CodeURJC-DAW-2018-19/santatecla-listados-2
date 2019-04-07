@@ -25,7 +25,7 @@ public class UserRestController {
         if (userComponent.getLoggedUser() != null){
             return new ResponseEntity<>(userComponent.getLoggedUser(), HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -47,12 +47,15 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
-        User user = new User();
-        user.setName(newUser.getName());
-        user.setUsername(newUser.getUsername());
-        user.setSurname(newUser.getSurname());
-        user.setRol(newUser.getRol());
-        user.setPassword(newUser.getPassword());
+        System.out.println("hola");
+        System.out.println(newUser.getPassword());
+
+        User user = new User(newUser.getName(), newUser.getPassword(), newUser.getUsername(), newUser.getRol());
+        //user.setName(newUser.getName());
+        //user.setUsername(newUser.getUsername());
+        //user.setSurname(newUser.getSurname());
+        //user.setRol(newUser.getRol());
+        //user.setPassword(newUser.getPassword());
         userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
 
