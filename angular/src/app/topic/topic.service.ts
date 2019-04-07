@@ -35,6 +35,9 @@ export class TopicService {
             .pipe(catchError((error) => this.handleError(error)));
 
     }
+    getSizeTopicSearch(search){
+        return this.http.get("/api/search/size/" + search);
+    }
     getSizeTopic(){
        return this.http.get(BASE_URL+"size");
     }
@@ -51,6 +54,10 @@ export class TopicService {
     private handleError(error: any) {
         console.error(error);
         return throwError("Server error (" + error.status + "): " + error.text());
+    }
+    getSearch(search: string,pageNumber:number): Observable<Topic[]> {
+        return this.http.get<any>("/api/search/"+ search + "?page=" + pageNumber, {withCredentials: true})
+            .pipe(map(result => result.content), catchError(error => this.handleError(error)));
     }
 
 }

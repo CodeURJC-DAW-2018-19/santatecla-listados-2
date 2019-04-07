@@ -4,6 +4,9 @@ import {MatIconRegistry, MatDialog, MatDialogRef} from '@angular/material';
 import { TdMediaService, tdRotateAnimation } from '@covalent/core';
 import {LoginService} from "./logIn/logIn.service";
 import {Router} from "@angular/router";
+import {TopicService} from "./topic/topic.service";
+import {MainStudentComponent} from "./WebComponent/MainStudent.component";
+
 
 @Component({
     selector: 'my-app',
@@ -20,6 +23,8 @@ export class AppComponent implements AfterViewInit {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private loginService: LoginService,
+        private topicService: TopicService,
+        private mainComponent: MainStudentComponent,
         public router: Router
     )
     {
@@ -34,8 +39,6 @@ export class AppComponent implements AfterViewInit {
     }
     logIn(event: any, user: string, pass: string) {
         event.preventDefault();
-        console.log(user);
-        console.log(pass);
         this.loginService.logIn(user, pass).subscribe(
             (u) => {
                 this.router.navigate(['/student']);
@@ -48,6 +51,7 @@ export class AppComponent implements AfterViewInit {
             },
         );
     }
+
     openLoginDialog() {
         this.dialogLog = this.dialog.open(this.loginDialog, {
             width: '50%',

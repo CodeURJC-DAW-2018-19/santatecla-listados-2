@@ -1,3 +1,9 @@
+<div align="center" style="margin-top: 1%;margin-bottom: 1%" (keyup.enter)="search($event,searchBox.value)">
+    <div layout="row">
+        <input matInput #searchBox style="width: 50%;height: 4%">
+        <a (click)="search($event,searchBox.value)"><mat-icon class="tc-red-600"style="margin-left: 1%" >search</mat-icon></a>
+    </div>
+</div>
 <div layout="row" *ngFor="let topic of topics">
     <div layout="column" style="width: 100%">
         <td-expansion-panel label="{{ topic.name }}">
@@ -11,7 +17,7 @@
                     <br>
                 </div>
                 <a (click)="openDialogAddConcept(topic.id)" *ngIf="loginService.isAdmin">
-                <mat-icon class="tc-red-600">add_circle</mat-icon>
+                    <mat-icon class="tc-red-600">add_circle</mat-icon>
                 </a>
             </div>
         </td-expansion-panel>
@@ -23,16 +29,21 @@
     </div>
 </div>
 <div layout="row">
-<a (click)="openDialog()">
-    <mat-icon class="tc-red-600" style=" padding-top: 20px; padding-left:20px;" *ngIf="loginService.isAdmin">
-        add_circle
-    </mat-icon>
-</a>
+    <a (click)="openDialog()">
+        <mat-icon class="tc-red-600" style=" padding-top: 20px; padding-left:20px;" *ngIf="loginService.isAdmin">
+            add_circle
+        </mat-icon>
+    </a>
 
-<button *ngIf="!noMoreTopic" (click)="loadMore()" class="tc-red-600" style="margin-left: 45%;margin-top:1%;background: white">
-    load more
-</button>
-<span *ngIf="noMoreTopic" style="margin-left: 45%;margin-top:1%">
+    <button *ngIf="!noMoreTopic && moreButtonOpcion" (click)="loadMore()" class="tc-red-600"
+            style="margin-left: 45%;margin-top:1%;background: white">
+        load more
+    </button>
+    <button *ngIf="!noMoreTopic && !moreButtonOpcion" (click)="loadMore()" class="tc-red-600"
+            style="margin-left: 45%;margin-top:1%;background: white">
+        load more
+    </button>
+    <span *ngIf="noMoreTopic" style="margin-left: 45%;margin-top:1%">
     No more topics
 </span>
 </div>
@@ -63,7 +74,7 @@
 <br>
 <br>
 <div *ngIf="loginService.isAdmin" align="center">
-<button mat-raised-button color="primary" class="align-center" (click)="showDiagram()">
-    Diagrama
-</button>
+    <button mat-raised-button color="primary" class="align-center" (click)="showDiagram()">
+        Diagrama
+    </button>
 </div>

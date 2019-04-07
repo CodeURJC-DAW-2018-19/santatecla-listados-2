@@ -12,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -56,4 +58,45 @@ public class SearchRestController {
         }
         return new ResponseEntity<>(topics, HttpStatus.OK);
      }
+    @JsonView(TopicDetails.class)
+    @GetMapping("/{search}")
+    public MappingJacksonValue getSearchResultsDirection(@PathVariable String search,@PageableDefault(size = 10) Pageable pageable){
+        Page<Topic> topics;
+        List<Concept> concepts = conceptService.findByNameContaining(search);
+        List<Topic> topicList = topicService.findByNameContaining(search);
+        List<Topic> t = new ArrayList<>();
+        for (Concept c : concepts) {
+            if (!t.contains(c.getTopic()))
+                t.add(c.getTopic());
+        }
+        for (Topic topic : topicList) {
+            if (!t.contains(topic))
+                t.add(topic);
+        }
+        long start = pageable.getOffset();
+        long end = (start + pageable.getPageSize()) > t.size() ? t.size() : (start + pageable.getPageSize());
+        if (end < start) {
+            topics= new PageImpl<>(new ArrayList<>());
+        } else {
+            topics = new PageImpl<>(t.subList((int) start, (int) end), pageable, t.size());
+        }
+        MappingJacksonValue topicsP = new MappingJacksonValue(topics);
+        return topicsP;
+    }
+    @GetMapping(value = "/size/{search}")
+    public int getSizeTopicSearch(@PathVariable String search) {
+        List<Concept> concepts = conceptService.findByNameContaining(search);
+        List<Topic> topicList = topicService.findByNameContaining(search);
+        List<Topic> t = new ArrayList<>();
+        for (Concept c : concepts) {
+            if (!t.contains(c.getTopic()))
+                t.add(c.getTopic());
+        }
+        for (Topic topic : topicList) {
+            if (!t.contains(topic))
+                t.add(topic);
+        }
+        int size =(int) Math.ceil((double)t.size()/10);
+        return size;
+    }
 }

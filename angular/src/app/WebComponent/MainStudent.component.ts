@@ -21,8 +21,10 @@ export class MainStudentComponent implements OnInit {
     concept: Concept;
     idT: number;
     pageNumber: number;
-    maxPage:number;
-    noMoreTopic:boolean;
+    maxPage: number;
+    noMoreTopic: boolean;
+    searchS: string;
+    moreButtonOpcion: boolean;
     @ViewChild('addTopic') buttonAddTopicDialog: TemplateRef<any>;
     dialogRef: MatDialogRef<any, any>;
     @ViewChild('addConcept') buttonAddConceptDialog: TemplateRef<any>;
@@ -36,14 +38,14 @@ export class MainStudentComponent implements OnInit {
         this.concept = {name: '', topic: {name: ''}};
         this.topic = {name: ''};
         this.pageNumber = 0;
+        this.moreButtonOpcion = true;
         this.noMoreTopic = false;
         this.topicService.getSizeTopic().subscribe(
-            (res:any)=>{
-                this.maxPage=res;
+            (res: any) => {
+                this.maxPage = res;
                 this.refresh();
             },
             error => console.log(error)
-
         );
 
     }
@@ -51,18 +53,65 @@ export class MainStudentComponent implements OnInit {
     private refresh() {
         if (this.pageNumber < this.maxPage) {
             this.topicService.getTopics(this.pageNumber).subscribe(
-                (topics: Topic[]) => this.topics = topics,
+                (topics: Topic[]) => {
+                    this.topics = topics,
+                        console.log(this.topics)
+                },
                 error => console.log(error)
             );
-        }else{
-            this.noMoreTopic=true;
+        } else {
+            this.noMoreTopic = true;
         }
     }
 
-    loadMore(){
+    search(event: Event, search: string) {
+        this.moreButtonOpcion = false;
+        this.pageNumber = 0;
+        this.noMoreTopic = false;
+        this.searchS = search;
+        console.log(this.topics);
+        this.topics = [];
+        this.topicService.getSizeTopicSearch(search).subscribe(
+            (res: any) => {
+                this.maxPage = res;
+                if (this.pageNumber < this.maxPage) {
+                    this.topicService.getSearch(this.searchS, this.pageNumber).subscribe(
+                        (topics: Topic[]) => {
+                            this.topics = topics;
+                        },
+                        error => console.log(error)
+                    );
+                } else {
+                    this.noMoreTopic = true;
+                }
+            },
+            error => console.log(error)
+        );
+    }
+
+    refreshSearch() {
+        if (this.pageNumber < this.maxPage) {
+            this.topicService.getSearch(this.searchS, this.pageNumber).subscribe(
+                (topics: Topic[]) => {
+                    this.topics = topics;
+                },
+                error => console.log(error)
+            );
+        } else {
+            this.noMoreTopic = true;
+        }
+    }
+
+    loadMoreSearch() {
+        this.pageNumber++;
+        this.refreshSearch();
+    }
+
+    loadMore() {
         this.pageNumber++;
         this.refresh();
     }
+
     openDialog(): void {
         this.dialogRef = this.dialog.open(this.buttonAddTopicDialog, {
             width: '250px',
@@ -87,7 +136,7 @@ export class MainStudentComponent implements OnInit {
     saveConcept() {
         this.topicService.getTopic(this.idT).subscribe(
             (res: any) => {
-                this.concept.topic=res;
+                this.concept.topic = res;
                 this.conceptService.addConcept(this.concept).subscribe(
                     (_: any) => {
                         this.dialogAC.close();
@@ -154,6 +203,7 @@ export class MainStudentComponent implements OnInit {
         });
 
     }
+
     showDiagram() {
         this.diagramDialog.open(DiagramComponent, {
             height: "625px",
