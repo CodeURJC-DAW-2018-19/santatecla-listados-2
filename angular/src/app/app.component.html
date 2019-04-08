@@ -1,7 +1,7 @@
 <td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
     [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'">
 
-    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/">
+    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/student">
 
         <div td-toolbar-content layout="row" layout-align="start center" flex>
             <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='openRegisterDialog()' style=" left: 90%">Register</button>

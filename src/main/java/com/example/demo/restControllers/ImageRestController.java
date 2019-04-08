@@ -40,7 +40,6 @@ public class ImageRestController {
     @GetMapping("/All/{id}")
     public ResponseEntity<List<Image>> getImages(@PathVariable int id, HttpServletResponse response) throws IOException { ;
         List<Image> image = imageRepository.findAllByConceptId(id);
-        System.out.println(image.size()+"Tamaño de las imagenes");
         return new ResponseEntity<>(image,HttpStatus.OK);
     }
     @JsonView(ImageDetails.class)

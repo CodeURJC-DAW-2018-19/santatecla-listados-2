@@ -57,7 +57,6 @@ public class QuestionService {
         return repository.findAllByConceptIdAndCorrectedFalse(id).size();
     }
     public int getSizeCorrectedQuestionbyId(int id) {
-        System.out.println(repository.findAllByConceptIdAndCorrected(id,true).size() + " Estoy aqui");
         return repository.findAllByConceptIdAndCorrected(id,true).size();
     }
 
