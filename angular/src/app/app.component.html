@@ -9,7 +9,7 @@
             <button *ngIf="loginService.isLogged" mat-button (click)='logOut()' style=" left: 96%">logOut</button>
             <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()' style=" left: 88%">logIn</button>
         </div>
-
+<br>
         <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
 
             <div flex-gt-sm="100">
@@ -23,6 +23,7 @@
             </div>
         </td-layout-footer>
     </td-layout-nav>
+
 
 <ng-template #loginDialog let-dialogRef="dialogRef">
 

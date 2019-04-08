@@ -386,3 +386,20 @@ La aplicación se puede seguir iniciando de manera tradicional, pero si quisiera
 - Por último bastará con abrir  [este enlace](https://localhost:8080/logIn) y a ¡disfrutar de la app!
    
 
+## Phase 4
+
+### Preparación del entorno de desarrollo:
+
+A continuación explicamos como configurar el entorno para utilizar nuestra aplicación Angular de forma correcta.
+
+Lo primero antes de nada, será instalar Node.js. Esto podremos hacerlo accediendo al siguiente sitio web:
+
+- https://nodejs.org/es/
+
+Nosotros hemos utilizado Intellij para desarrollar la aplicación. Lo siguiente que debemos hacer es abrir el proyecto en Intellij y, en la parte inferior a la izquierda, buscar la pestaña “Terminal” y acceder a ella. Una vez abierta la terminal tendremos que ejecutar los siguientes comandos en orden:
+ 
+- **cd angular** (comando para acceder a la carpeta angular).
+
+- **npm install** (comando con el cual se descarga la carpeta node_modules con las librerias necesarias).
+
+- **npm start** (comando para iniciar la aplicación Angular).
