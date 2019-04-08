@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit {
         private _changeDetectorRef: ChangeDetectorRef,
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
-        private loginService: LoginService,
+        public loginService: LoginService,
         private topicService: TopicService,
         private mainComponent: MainStudentComponent,
         public router: Router

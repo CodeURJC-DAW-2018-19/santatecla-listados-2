@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import {UserR} from "./user.model";
 import {Observable, throwError} from "rxjs";
+import {environment} from "../../environments/environment";
+
+const BASE_URL = environment.apiEndpoint + "/users/";
 
 export interface User {
     id?: number;
@@ -37,7 +40,7 @@ export class LoginService {
             'X-Requested-With': 'XMLHttpRequest',
         });
 
-        return this.http.get<User>('api/users/logIn', { headers })
+        return this.http.get<User>(BASE_URL+'logIn', { headers })
             .pipe(map(user => {
                 if (user) {
                     this.setCurrentUser(user);
@@ -50,7 +53,7 @@ export class LoginService {
 
     logOut() {
 
-        return this.http.get('api/users/logOut').pipe(
+        return this.http.get(BASE_URL+'logOut').pipe(
             map(response => {
                 this.removeCurrentUser();
                 return response;
@@ -78,7 +81,7 @@ export class LoginService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(user);
-        return this.http.post<UserR>("api/users/register",body,{headers})
+        return this.http.post<UserR>(BASE_URL+"register",body,{headers})
             .pipe(
                 map(response => response),
                 catchError(error => this.handleError(error))
