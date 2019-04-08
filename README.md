@@ -390,7 +390,7 @@ La aplicación se puede seguir iniciando de manera tradicional, pero si quisiera
 
 En esta fase para mostrar las principales funcionalidades de la web se ha grabado un video en el cual se explican y muestran dichas funcionalidades. El video se ha subido a nuestro canal de YouTube: Grupo10 DAW, y puede verse pulsando en el siguiente link:
 
-- **https://www.youtube.com/watch?v=4eWiRXBQfZc&t=75s** 
+- **https://www.youtube.com/watch?v=4eWiRXBQfZc** 
 
 ##
 
