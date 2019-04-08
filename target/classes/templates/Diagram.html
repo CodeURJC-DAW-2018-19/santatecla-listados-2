@@ -1,0 +1,94 @@
+
+<button type="button" class="btn btn-primary dg" data-toggle="modal" data-target="#exampleModal" style="z-index: 7">
+    DIAGRAMA
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card card-plain" align="center">
+                <div class="modal-header card-header card-header-primary">
+                    <h4 class="card-title">Diagrama</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- prepare a DOM container with width and height -->
+                <div id="main" style="width: 468px;height:360px;"></div>
+                <script type="text/javascript">
+                    var myChart = echarts.init(document.getElementById("main"));
+                    option = {
+                        tooltip: {
+                            trigger: "axis",
+                            axisPointer: {
+                                type: "shadow" // by default is line, optional：'line' | 'shadow'
+                            }
+                        },
+                        legend: {
+                            data: ["Aciertos", "Sin contestar", "Fallos"]
+                        },
+                        grid: {
+                            left: "3%",
+                            right: "4%",
+                            bottom: "3%",
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: "value"
+                        },
+                        yAxis: {
+                            type: "category",
+                            data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{name}}"{{/topics}}]
+                        },
+                        series: [
+                            {
+                                name: "Aciertos",
+                                type: "bar",
+                                stack: "default",
+                                color: "#329B49",
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "insideRight"
+                                    }
+                                },
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{hits}}"{{/topics}}]
+                            },
+                            {
+                                name: "Fallos",
+                                type: "bar",
+                                stack: "default",
+                                color: "#DC3522",
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "insideRight"
+                                    }
+                                },
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{errors}}"{{/topics}}]
+
+                            },
+                            {
+                                name: "Sin contestar",
+                                type: "bar",
+                                stack: "default",
+                                color: "#95928E",
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "insideRight"
+                                    }
+                                },
+                                data: [{{#topics}}{{#moreThanOne}}{{^-first}},{{/-first}}{{/moreThanOne}}"{{pendings}}"{{/topics}}]
+                            }
+                        ]
+                    };
+
+                    // use configuration item and data specified to show chart
+                    myChart.setOption(option);
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

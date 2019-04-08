@@ -1,0 +1,70 @@
+/* Temary settings */
+.bodyP.card {
+    width: 50%;
+    background: lightgray;
+}
+
+.card .card-body {
+    padding: 0.9375rem 20px;
+    position: relative;
+    left: 10%;
+}
+
+.card .card-body .card-body-concept {
+    float: right;
+    position: relative;
+    right: -38%;
+    top: 7px;
+}
+
+.btn.btn-primary.dg {
+    position: relative;
+    left: 85%;
+    top: -70px;
+}
+
+.btn.btn-primary2.dg {
+    position: relative;
+    background: #9c27b0;
+    font-size: 20px;
+}
+
+/* Searching box settings */
+
+.search_box_padding {
+    padding: 0 20px 0 20px; /* Padding for other horizontal elements */
+}
+
+.search_box {
+    max-width: 50%;
+    overflow: hidden;
+    background: transparent;
+}
+
+.search_box--form {
+    overflow: hidden;
+    position: relative;
+}
+
+.search_box_icon--submit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    margin-right: 15px; 
+	margin-bottom: 10px;
+    background: transparent;
+    color: #888;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 40px;  /* icon size */
+}
+
+.search_box_icon--submit:hover {
+    color: #333;
+    cursor: pointer;
+}
+
+

@@ -1,0 +1,31 @@
+#contained {
+    padding-bottom: 20%;
+    text-align: center;
+}
+
+#tobeseen {
+    text-align: left;
+    width: 30%;
+    margin-left: 10%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    float: left;
+}
+
+#answered {
+    width: 30%;
+    text-align: left;
+    float: left;
+}
+
+.btn.btn-primary.dg {
+    position: relative;
+    top: 140px;
+    right: 214px;
+}
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

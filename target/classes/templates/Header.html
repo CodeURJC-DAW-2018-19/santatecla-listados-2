@@ -1,0 +1,49 @@
+<a class="navbar-brand mr-0 mr-md-2" href="#" target="_blank">
+    URJC
+</a>
+{{^login}}
+<div class="navbar-nav-scroll ml-md-left ">
+    <ul id="conceptList" class="navbar-nav bd-navbar-nav flex-row">
+
+        {{#conceptHeader}}
+            <li id="id" class="nav-item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="nav-link" {{#student}}href="/MainPage/Student/{{name}}"{{/student}}{{#teacher}}href="/MainPage/Teacher/{{name}}"{{/teacher}}>{{name}}</a>
+                    </div>
+                    <div class="col-md-3" style="position:relative ; top: 23%; margin-left:-7%">
+                        <a href="/MainPage" onclick="deleteConcept('{{name}}')"><i id="delete"+id class="material-icons" style="color:white; position: relative; top: 23%; left:13% ">clear</i></a>
+                        <script>
+                            function deleteConcept(name){
+                                $.ajax({
+                                    url : "/MainPage/DeleteHeaderConcept/"+name
+                                })
+                            }
+                        </script>
+                        <div class="ripple-container"></div>
+                    </div>
+                </div>
+            </li>
+        {{/conceptHeader}}
+    </ul>
+</div>
+{{/login}}
+
+<div class="navbar-nav-scroll ml-md-auto ">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+        <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="material-icons">today</i>NEXT EVENT</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" {{^login}}href="/MainPage"{{/login}}><i class="material-icons">home</i>HOME</a>
+        </li>
+        {{#logIn}}
+            <li class="nav-item">
+                <a class="btn btn-secondary my-2 my-sm-0" href="{{urlLog}}" rel="noopener"> Log {{inOut}}</a>
+            </li>
+        {{/logIn}}
+        <li class="nav-item">
+            <a class="nav-link" href="#" rel="noopener"></a>
+        </li>
+    </ul>
+</div>
