@@ -40,16 +40,6 @@ public class DatabaseInitializer {
 		Topic t1 = new Topic("Introducción",numTopic++);
 		Topic t2 = new Topic("Árboles",numTopic++);
 		Topic t3 = new Topic("Mapas",numTopic++);
-		Topic t4 = new Topic("Angular", numTopic++);
-		Topic t5 = new Topic("Spring", numTopic++);
-		Topic t6 = new Topic("Maven", numTopic++);
-		Topic t7 = new Topic("Bootstrap", numTopic++);
-		Topic t8 = new Topic("Covalent", numTopic++);
-		Topic t9 = new Topic("Grafos", numTopic++);
-		Topic t10 = new Topic("Estructuras de Datos", numTopic++);
-		Topic t11 = new Topic("Algoritmos", numTopic++);
-
-
 		Concept c1 = new Concept("Generics", "StudentConcept.html");
 		Concept c2 = new Concept("Iteradores", "StudentConcept.html");
 		Concept c3 = new Concept("JUNIT", "StudentConcept.html");
@@ -216,15 +206,6 @@ public class DatabaseInitializer {
 		topicRepository.save(t1);
 		topicRepository.save(t2);
 		topicRepository.save(t3);
-		topicRepository.save(t4);
-		topicRepository.save(t5);
-		topicRepository.save(t6);
-		topicRepository.save(t7);
-		topicRepository.save(t8);
-
-
-
-
 		conceptRepository.save(c1);
 		conceptRepository.save(c2);
 		conceptRepository.save(c3);

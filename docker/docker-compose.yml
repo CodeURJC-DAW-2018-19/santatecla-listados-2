@@ -10,7 +10,7 @@ services:
       - MYSQL_PASSWORD=DAWGrupo10
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
   santatecla-listados-2:    
-    image: saal4/santatecla-listados-2
+    image: saal4/santatecla-listados-2:latest
     expose: 
       - 8443
     ports:

@@ -65,6 +65,7 @@ public class    QuestionRestController {
     @GetMapping(value = "/sizeQuestion/Corrected/{id}")
     public int getSizeQuestionCorrected(@PathVariable int id) {
         int size =(int) Math.ceil((double)this.questionService.getSizeCorrectedQuestionbyId(id)/10);
+        System.out.println(size + "aqui");
         return size;
     }
     @JsonView(QuestionDetails.class)

@@ -1,7 +1,7 @@
 <td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
     [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'">
 
-    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/student">
+    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'URJC' : ''" navigationRoute="/">
 
         <div td-toolbar-content layout="row" layout-align="start center" flex>
             <button *ngIf="!loginService.isLogged && !loginService.isGuest" mat-button (click)='openRegisterDialog()' style=" left: 90%">Register</button>
@@ -9,7 +9,7 @@
             <button *ngIf="loginService.isLogged" mat-button (click)='logOut()' style=" left: 96%">logOut</button>
             <button *ngIf="!loginService.isLogged" mat-button (click)='openLoginDialog()' style=" left: 88%">logIn</button>
         </div>
-<br>
+
         <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
 
             <div flex-gt-sm="100">
@@ -20,11 +20,10 @@
         <td-layout-footer>
             <div layout="row" layout-align="start center">
                 <span style="margin-left: 98%" class="mat-caption"><a>@URJC</a></span>
+                <span style="margin-left: 98%" class="mat-caption"><a>BBBB</a></span>
             </div>
         </td-layout-footer>
     </td-layout-nav>
-
-
 <ng-template #loginDialog let-dialogRef="dialogRef">
 
     <div layout="column" layout-fill>

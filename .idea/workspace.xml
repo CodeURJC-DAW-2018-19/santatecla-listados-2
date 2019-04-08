@@ -8,6 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fa1ad184-0827-4dc1-8ed4-c7c1951dc6a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular/dist/my-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular/dist/my-app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular/dist/my-app/main.eb82ab892d1591fd74e6.js" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,56 +96,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular/src/app/app.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#98#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular/src/app/WebComponent/MainStudent.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#72#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular/src/app/WebComponent/ConceptPage.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1515">
-              <caret line="116" column="48" selection-start-line="116" selection-start-column="48" selection-end-line="116" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#72#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker/create_image.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="59" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/angular/src/app/logIn/logIn.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1230">
-              <caret line="87" column="14" selection-start-line="87" selection-start-column="14" selection-end-line="87" selection-end-column="14" />
+            <state relative-caret-position="142">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -151,11 +108,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/angular/src/app/app.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="-225">
+              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/QuestionRestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="124" column="19" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ImageRestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="41" column="67" selection-start-line="41" selection-start-column="67" selection-end-line="41" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/question/Question.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/question/QuestionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
@@ -213,6 +209,7 @@
       <find>console</find>
       <find>dialogRef</find>
       <find>User</find>
+      <find>sys</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -221,7 +218,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/target/classes/application.properties" />
         <option value="64d2999b-8604-40ac-9b77-86ccc9aa2cc9/schema/DAWGrupo10/table/concepts.sql" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
@@ -252,10 +248,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/demo/uploadImages/ImageRepository.java" />
         <option value="$PROJECT_DIR$/angular/src/app/image/image.model.ts" />
         <option value="$PROJECT_DIR$/angular/src/app/image/image.service.ts" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ImageRestController.java" />
         <option value="$PROJECT_DIR$/angular/src/app/WebComponent/TeacherPage.template.html" />
         <option value="$PROJECT_DIR$/angular/src/app/diagram/diagram.service.ts" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/QuestionRestController.java" />
         <option value="$PROJECT_DIR$/angular/src/app/question/question.model.ts" />
         <option value="$PROJECT_DIR$/angular/src/app/logIn/user.model.ts" />
         <option value="$PROJECT_DIR$/angular/src/app/logIn/register.service.ts" />
@@ -271,6 +265,9 @@
         <option value="$PROJECT_DIR$/angular/src/app/WebComponent/ConceptPage.component.ts" />
         <option value="$PROJECT_DIR$/docker/create_image.sh" />
         <option value="$PROJECT_DIR$/angular/src/app/logIn/logIn.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/QuestionRestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ImageRestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/demo/question/QuestionService.java" />
         <option value="$PROJECT_DIR$/angular/src/app/app.component.html" />
       </list>
     </option>
@@ -317,6 +314,76 @@
             <path>
               <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
               <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="angular" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="logIn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="question" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="santatecla-listados-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="santatecla-listados-2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="restControllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -514,7 +581,7 @@
       <workItem from="1554543142358" duration="27065000" />
       <workItem from="1554628991878" duration="92000" />
       <workItem from="1554629100857" duration="19387000" />
-      <workItem from="1554712741171" duration="565000" />
+      <workItem from="1554712741171" duration="1899000" />
     </task>
     <task id="LOCAL-00001" summary="Applied style rules to Packages and fixed a problem with tabs which state appears in several users at the same">
       <created>1551376722588</created>
@@ -740,11 +807,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554682856163</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fixed several errors">
+      <created>1554713587163</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1554713587163</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203009000" />
+    <option name="totallyTimeSpent" value="204343000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -775,7 +849,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
       <window_info anchor="bottom" id="Spring" order="7" sideWeight="0.49848485" weight="0.3289256" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.56969696" visible="true" weight="0.43305784" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.56969696" visible="true" weight="0.5206612" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.43030304" side_tool="true" weight="0.3586777" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49924242" weight="0.35041323" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.3289256" />
@@ -901,29 +975,15 @@
     <MESSAGE value="little changes in Apu rest of question" />
     <MESSAGE value="Guest page is working properly now" />
     <MESSAGE value="Added &quot;upload images&quot; functionality" />
-    <MESSAGE value="fixed several errors" />
     <MESSAGE value="register function (non complete)" />
     <MESSAGE value="register function (non complete yet...)" />
     <MESSAGE value="fixed several bugs" />
     <MESSAGE value="added little details" />
     <MESSAGE value="updated create_image.sh to adapt angular version" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated create_image.sh to adapt angular version" />
+    <MESSAGE value="fixed several errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed several errors" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/angular/src/app/image/image.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ItemRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="29" column="48" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/uploadImages/Image.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-165">
@@ -963,16 +1023,6 @@
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#p#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ImageRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1068,13 +1118,6 @@
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/QuestionRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="148" column="4" lean-forward="true" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1261,16 +1304,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular/src/app/logIn/logIn.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="87" column="14" selection-start-line="87" selection-start-column="14" selection-end-line="87" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular/src/app/answer/answer.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1290,10 +1323,51 @@
     <entry file="file://$PROJECT_DIR$/docker/initApp.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/QuestionRestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="124" column="19" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/restControllers/ImageRestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="41" column="67" selection-start-line="41" selection-start-column="67" selection-end-line="41" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/question/Question.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/demo/question/QuestionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/angular/src/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="-225">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/src/app/logIn/logIn.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
