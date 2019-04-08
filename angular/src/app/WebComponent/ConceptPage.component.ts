@@ -103,7 +103,7 @@ export class ConceptPageComponent implements OnInit {
         )
     }
 
-    private newQuestion() {
+     newQuestion() {
         console.log(this.id);
         this.questionService.addQuestion(this.id).subscribe(
             (res: any) => {

@@ -31,7 +31,7 @@ export class MainStudentComponent implements OnInit {
     dialogAC: MatDialogRef<any, any>;
 
 
-    constructor(private _dialogService: TdDialogService, private topicService: TopicService, private conceptService: ConceptService, private router: Router, private loginService: LoginService, public dialog: MatDialog, public diagramDialog: MatDialog) {
+    constructor(private _dialogService: TdDialogService, private topicService: TopicService, private conceptService: ConceptService, private router: Router, public loginService: LoginService, public dialog: MatDialog, public diagramDialog: MatDialog) {
     }
 
     ngOnInit(): void {
