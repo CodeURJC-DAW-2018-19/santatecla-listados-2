@@ -403,3 +403,15 @@ Nosotros hemos utilizado Intellij para desarrollar la aplicación. Lo siguiente 
 - **npm install** (comando con el cual se descarga la carpeta node_modules con las librerias necesarias).
 
 - **npm start** (comando para iniciar la aplicación Angular).
+
+### Diagrama de clases y templates
+
+A continuación se muestra el diagrama de clases y templates de esta fase implementando la web anterior con arquitectura SPA (con Angular):
+
+##### Diagrama de clases
+ ![DiagImage](/Screenshots/Phase4/AngularDiagram.png "AngularDiagram")
+ 
+##### Leyenda del diagrama de clases
+ ![DiagImage](/Screenshots/Phase4/AngularDiagramMapKey.png "AngularDiagramMapKey")
+ 
+ 
