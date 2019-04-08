@@ -388,6 +388,12 @@ La aplicación se puede seguir iniciando de manera tradicional, pero si quisiera
 
 ## Phase 4
 
+En esta fase para mostrar las principales funcionalidades de la web se ha grabado un video en el cual se explican y muestran dichas funcionalidades. El video se ha subido a nuestro canal de YouTube: Grupo10 DAW, y puede verse pulsando en el siguiente link:
+
+- **https://www.youtube.com/watch?v=4eWiRXBQfZc&t=75s** 
+
+##
+
 ### Preparación del entorno de desarrollo:
 
 A continuación explicamos como configurar el entorno para utilizar nuestra aplicación Angular de forma correcta.
@@ -403,6 +409,9 @@ Nosotros hemos utilizado Intellij para desarrollar la aplicación. Lo siguiente 
 - **npm install** (comando con el cual se descarga la carpeta node_modules con las librerias necesarias).
 
 - **npm start** (comando para iniciar la aplicación Angular).
+
+##
+
 
 ### Diagrama de clases y templates
 
